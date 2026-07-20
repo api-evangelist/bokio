@@ -1,0 +1,36 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/bokio-company-api-openapi.yml, openapi/bokio-general-api-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - authorizationCode
+  - clientCredentials
+schemes:
+- name: tokenAuth
+  type: http
+  scheme: bearer
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+  - openapi/bokio-general-api-openapi.yml
+- name: access_token
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /token
+    scopes: 0
+  - flow: authorizationCode
+    authorizationUrl: /authorize
+    tokenUrl: /token
+    scopes: 24
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+  - openapi/bokio-general-api-openapi.yml
+- name: client_auth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+  - openapi/bokio-general-api-openapi.yml
