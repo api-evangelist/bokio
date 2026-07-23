@@ -1,0 +1,1267 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization journal-entries API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: journal-entries
+  description: Operations for managing accounting journal entries
+paths:
+  /companies/{companyId}/journal-entries:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    post:
+      tags:
+      - journal-entries
+      summary: Create a journal entry
+      description: 'Creates a journal entry for the company.
+
+
+        **Handling validation errors:**
+
+
+        If this operations returns a 400 status code, inspect the response body''s api error object for more information. There will be additional information in the innerCode if the code=validation-error.
+
+
+        **Scope:** `journal-entries:write`
+
+        '
+      operationId: post-journalentry
+      requestBody:
+        description: Post the necessary fields for the API to create a new journal entry.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/journalEntry'
+            examples:
+              New journal:
+                value:
+                  title: invoice 1234
+                  date: 2024-10-10
+                  items:
+                  - debit: 200
+                    credit: 0
+                    account: 1930
+                  - debit: 0
+                    credit: 40
+                    account: 3011
+                  - debit: 0
+                    credit: 160
+                    account: 2611
+              New journal with verification-level tags:
+                value:
+                  title: invoice 1234
+                  date: 2024-10-10
+                  items:
+                  - debit: 200
+                    credit: 0
+                    account: 1930
+                  - debit: 0
+                    credit: 40
+                    account: 3011
+                  - debit: 0
+                    credit: 160
+                    account: 2611
+                  tags:
+                  - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                    weight: 1
+      responses:
+        '200':
+          description: Journal entry created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntry'
+              examples:
+                Journal entry created:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    title: invoice 1234
+                    journalEntryNumber: V342
+                    date: 2024-10-10
+                    items:
+                    - id: 1
+                      debit: 200
+                      credit: 0
+                      account: 1930
+                      tags: []
+                    - id: 2
+                      debit: 0
+                      credit: 40
+                      account: 3011
+                      tags: []
+                    - id: 3
+                      debit: 0
+                      credit: 160
+                      account: 2611
+                      tags: []
+                    tags: []
+                Journal entry created with tags:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    title: invoice 1234
+                    journalEntryNumber: V342
+                    date: 2024-10-10
+                    items:
+                    - id: 1
+                      debit: 200
+                      credit: 0
+                      account: 1930
+                      tags: []
+                    - id: 2
+                      debit: 0
+                      credit: 40
+                      account: 3011
+                      tags: []
+                    - id: 3
+                      debit: 0
+                      credit: 160
+                      account: 2611
+                      tags: []
+                    tags:
+                    - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      tagName: Project Alpha
+                      tagGroupName: Project
+                      weight: 1
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 2 errors
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/title'
+                      message: The title field is required
+                    - field: '#/items/1/account'
+                      message: The account field is required
+      security:
+      - tokenAuth: []
+    get:
+      tags:
+      - journal-entries
+      summary: Get journal entries
+      description: 'Get journal entries for the company. Use the query parameters to filter and navigate through the results.
+
+        **Scope:** `journal-entries:read`'
+      operationId: get-journalentry
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                     | Type        |
+
+          | ------------------------- | ----------- |
+
+          | title                     | string      |
+
+          | journalEntryNumber        | string      |
+
+          | date                      | date        |
+
+          | reversingJournalEntryId   | string      |
+
+          | reversedByJournalEntryId  | string      |
+
+          '
+        schema:
+          type: string
+        example: title~invoice 1234
+      - name: tagId
+        in: query
+        required: false
+        description: '[Preview] Filter journal entries by tag. Returns only journal entries that have the specified tag applied, either at the journal entry level or at the line item level.
+
+
+          Requires the Tags feature to be enabled in the company''s price plan.
+
+          '
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Journal entries found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/journalEntry'
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/journal-entries/{journalEntryId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: journalEntryId
+      in: path
+      required: true
+      description: Unique identifier of the journal entry
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    get:
+      tags:
+      - journal-entries
+      summary: Get a journal entry
+      description: 'Retrieve the information of the journal with the matching journalEntryId.
+
+
+        **Scope:** `journal-entries:read`
+
+        '
+      operationId: get-journalentries-journalId
+      responses:
+        '200':
+          description: Journal entry found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntry'
+              examples:
+                Journal entry:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    title: invoice 1234
+                    journalEntryNumber: V342
+                    date: 2024-10-10
+                    items:
+                    - id: 1
+                      debit: 200
+                      credit: 0
+                      account: 1930
+                      tags: []
+                    - id: 2
+                      debit: 0
+                      credit: 40
+                      account: 3011
+                      tags: []
+                    - id: 3
+                      debit: 0
+                      credit: 160
+                      account: 2611
+                      tags: []
+                    tags: []
+        '404':
+          description: Journal entry not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: journal entry not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/journal-entries/{journalEntryId}/reverse:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: journalEntryId
+      in: path
+      required: true
+      description: Unique identifier of the journal entry
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - journal-entries
+      summary: Reverse a journal entry
+      description: 'Reverse a journal entry for the company.
+
+
+        ### Journal entries possible to reverse
+
+
+        - It''s possible to reverse journal entries that have been created through the API. Journal entries that have been created through the Bokio UI can''t be reversed through the API.
+
+        - Journal entries that belong to a Bokio invoice or similar cannot be reversed using this endpoint.
+
+        - Journal entries that have been reversed can not be reversed again.
+
+
+        ### Handling validation errors:
+
+
+        If this operation returns a 400 status code, inspect the response body''s apiError object for more information. There will be additional information in the innerCode if the code=validation-error.
+
+
+        **Scope:** `journal-entries:write`
+
+        '
+      operationId: reverse-journalentry
+      responses:
+        '200':
+          description: Journal entry reversed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntry'
+              examples:
+                Reversed journal entry:
+                  value:
+                    id: 835ba700-b306-4bd9-8447-59207b6b0002
+                    title: invoice 1234
+                    journalEntryNumber: V342
+                    date: 2024-10-10
+                    items:
+                    - id: 1
+                      debit: 0
+                      credit: 200
+                      account: 1930
+                      tags: []
+                    - id: 2
+                      debit: 40
+                      credit: 0
+                      account: 3011
+                      tags: []
+                    - id: 3
+                      debit: 160
+                      credit: 0
+                      account: 2611
+                      tags: []
+                    tags: []
+                    reversingJournalEntryId: a419cf69-db6f-4de9-992c-b1a60942a443
+        '400':
+          description: Not allowed to reverse journal entry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: No changes can be made in a closed fiscal year.
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: journal entry not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: journal entry not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/journal-entries/{journalEntryId}/tags:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: journalEntryId
+      in: path
+      required: true
+      description: Unique identifier of the journal entry
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    put:
+      tags:
+      - journal-entries
+      summary: '[Preview] Update journal entry tags'
+      description: 'Replaces all tags on a journal entry with the provided tags.
+
+
+        Either set verification-level tags (using `tags`) or transaction-level tags (using `items[*].tags`), not both on the same journal entry.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `journal-entries:write`
+
+        '
+      operationId: put-journalentry-tags
+      requestBody:
+        description: The tags to apply to the journal entry (replaces all existing tags).
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/journalEntryTags'
+            examples:
+              Verification-level tags:
+                value:
+                  tags:
+                  - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                    weight: 0.6
+                  - tagId: c3d4e5f6-a7b8-9012-cdef-123456789012
+                    weight: 0.4
+                  items: []
+              Transaction-level tags:
+                value:
+                  tags: []
+                  items:
+                  - id: 1
+                    tags:
+                    - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      weight: 1
+                  - id: 2
+                    tags:
+                    - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      weight: 1
+              Remove all tags:
+                value:
+                  tags: []
+                  items: []
+      responses:
+        '200':
+          description: Tags updated, returns the updated journal entry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntry'
+              examples:
+                Verification-level tags applied:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    title: invoice 1234
+                    journalEntryNumber: V342
+                    date: 2024-10-10
+                    items:
+                    - id: 1
+                      debit: 200
+                      credit: 0
+                      account: 1930
+                      tags: []
+                    - id: 2
+                      debit: 0
+                      credit: 40
+                      account: 3011
+                      tags: []
+                    - id: 3
+                      debit: 0
+                      credit: 160
+                      account: 2611
+                      tags: []
+                    tags:
+                    - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      tagName: Project Alpha
+                      tagGroupName: Project
+                      weight: 0.6
+                    - tagId: c3d4e5f6-a7b8-9012-cdef-123456789012
+                      tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      tagName: Project Beta
+                      tagGroupName: Project
+                      weight: 0.4
+                Transaction-level tags applied:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    title: invoice 1234
+                    journalEntryNumber: V342
+                    date: 2024-10-10
+                    items:
+                    - id: 1
+                      debit: 200
+                      credit: 0
+                      account: 1930
+                      tags:
+                      - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        tagName: Project Alpha
+                        tagGroupName: Project
+                        weight: 1
+                    - id: 2
+                      debit: 0
+                      credit: 40
+                      account: 3011
+                      tags:
+                      - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                        tagName: Project Alpha
+                        tagGroupName: Project
+                        weight: 1
+                    - id: 3
+                      debit: 0
+                      credit: 160
+                      account: 2611
+                      tags: []
+                    tags: []
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Mutual exclusion violation:
+                  value:
+                    code: validation-error
+                    message: The tags field must be applied at either the verification level or the transaction level, not both
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include the Tags feature, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires the Tags add-on
+                    details:
+                      requiredFeature: Tags
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+        '404':
+          description: Journal entry not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: journal entry not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/journal-entries/{journalEntryId}/comments:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: journalEntryId
+      in: path
+      required: true
+      description: Unique identifier of the journal entry
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - journal-entries
+      summary: Add a comment to a journal entry
+      description: 'Adds a comment to a journal entry that was created through the API.
+
+
+        Comments are plain text only. Rich text, markdown, and HTML are not supported.
+
+
+        The author name will be set to the integration name of the API user.
+
+
+        **Scope:** `journal-entries:write`
+
+        '
+      operationId: post-journal-entry-comment
+      requestBody:
+        description: The comment content to add to the journal entry.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/journalEntryCommentWrite'
+            examples:
+              Add a comment:
+                value:
+                  content: 'Synced from external system. Invoice reference: INV-2024-001.'
+      responses:
+        '200':
+          description: Comment created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntryComment'
+              examples:
+                Comment created:
+                  value:
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    content: 'Synced from external system. Invoice reference: INV-2024-001.'
+                    authorName: My Integration App
+                    createdDatetime: 2024-10-15 08:30:00+00:00
+                    updatedDatetime: 2024-10-15 08:30:00+00:00
+        '400':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Content too long:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 1 error
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/content'
+                      message: The content field is required
+                Not created through API:
+                  value:
+                    code: operation-not-allowed
+                    message: Bokio API only supports adding comments to journal entries that have been added through the API.
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Journal entry not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: journal entry not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    get:
+      tags:
+      - journal-entries
+      summary: List comments on a journal entry
+      description: 'Returns all comments on a journal entry.
+
+
+        Comments are returned in chronological order (oldest first).
+
+
+        **Scope:** `journal-entries:read`
+
+        '
+      operationId: get-journal-entry-comments
+      responses:
+        '200':
+          description: Comments retrieved
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/journalEntryComment'
+              examples:
+                Comments list:
+                  value:
+                  - id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    content: 'Synced from external system. Invoice reference: INV-2024-001.'
+                    authorName: My Integration App
+                    createdDatetime: 2024-10-15 08:30:00+00:00
+                    updatedDatetime: 2024-10-15 08:30:00+00:00
+                  - id: 7ca85f64-5717-4562-b3fc-2c963f66afa7
+                    content: Updated amount to match revised invoice.
+                    authorName: My Integration App
+                    createdDatetime: 2024-10-16 10:15:00+00:00
+                    updatedDatetime: 2024-10-16 10:15:00+00:00
+        '404':
+          description: Journal entry not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: journal entry not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/journal-entries/{journalEntryId}/comments/{commentId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: journalEntryId
+      in: path
+      required: true
+      description: Unique identifier of the journal entry
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: commentId
+      in: path
+      required: true
+      description: Unique identifier of the comment
+      schema:
+        type: string
+        format: uuid
+      example: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+    get:
+      tags:
+      - journal-entries
+      summary: Get a comment on a journal entry
+      description: 'Retrieve a single comment by its ID on a journal entry.
+
+
+        **Scope:** `journal-entries:read`
+
+        '
+      operationId: get-journal-entry-comment
+      responses:
+        '200':
+          description: Comment found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntryComment'
+              examples:
+                Comment:
+                  value:
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    content: 'Synced from external system. Invoice reference: INV-2024-001.'
+                    authorName: My Integration App
+                    createdDatetime: 2024-10-15 08:30:00+00:00
+                    updatedDatetime: 2024-10-15 08:30:00+00:00
+        '404':
+          description: Journal entry or comment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: comment not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    put:
+      tags:
+      - journal-entries
+      summary: Update a comment on a journal entry
+      description: 'Updates a comment on a journal entry. Only comments created by the same integration can be updated.
+
+
+        Comments are plain text only. Rich text, markdown, and HTML are not supported.
+
+
+        **Scope:** `journal-entries:write`
+
+        '
+      operationId: put-journal-entry-comment
+      requestBody:
+        description: The updated comment content.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/journalEntryCommentWrite'
+            examples:
+              Update comment:
+                value:
+                  content: 'Synced from external system. Invoice reference: INV-2024-001 (corrected).'
+      responses:
+        '200':
+          description: Comment updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/journalEntryComment'
+              examples:
+                Comment updated:
+                  value:
+                    id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                    content: 'Synced from external system. Invoice reference: INV-2024-001 (corrected).'
+                    authorName: My Integration App
+                    createdDatetime: 2024-10-15 08:30:00+00:00
+                    updatedDatetime: 2024-10-16 14:20:00+00:00
+        '400':
+          description: Validation error or operation not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Content too long:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 1 error
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/content'
+                      message: The content field is required
+                Not owned by integration:
+                  value:
+                    code: operation-not-allowed
+                    message: Bokio API only supports updating comments that have been added through the API by the same integration.
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Journal entry or comment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: comment not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    delete:
+      tags:
+      - journal-entries
+      summary: Delete a comment on a journal entry
+      description: 'Deletes a comment on a journal entry. Only comments created by the same integration can be deleted.
+
+
+        **Scope:** `journal-entries:write`
+
+        '
+      operationId: delete-journal-entry-comment
+      responses:
+        '204':
+          description: Comment deleted
+        '400':
+          description: Operation not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Not owned by integration:
+                  value:
+                    code: operation-not-allowed
+                    message: Bokio API only supports deleting comments that have been added through the API by the same integration.
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+components:
+  schemas:
+    journalEntryTags:
+      type: object
+      title: journalEntryTags
+      description: 'Model for replacing all tags on a journal entry.
+
+        Either set verification-level tags (using `tags`) or transaction-level tags (using `items[*].tags`), not both.
+
+        To remove all tags, send empty arrays for both fields.
+
+        '
+      properties:
+        tags:
+          type: array
+          description: 'Verification-level tags to apply to the entire journal entry.
+
+            Must be empty if `items` contains entries with tags.
+
+            '
+          items:
+            $ref: '#/components/schemas/journalEntryTag'
+        items:
+          type: array
+          description: 'Transaction-level tags to apply to individual line items.
+
+            Must be empty (or not include any items with tags) if `tags` is non-empty.
+
+            '
+          items:
+            type: object
+            title: journalEntryItemTags
+            description: Tags to apply to a specific line item of a journal entry.
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: ID of the journal entry line item (transaction)
+                example: 1
+              tags:
+                type: array
+                description: Tags to apply to this line item.
+                items:
+                  $ref: '#/components/schemas/journalEntryTag'
+            required:
+            - id
+            - tags
+      example:
+        tags:
+        - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+          weight: 1
+        items: []
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    journalEntryComment:
+      type: object
+      title: journalEntryComment
+      description: A comment on a journal entry.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the comment
+        content:
+          type: string
+          description: The plain text content of the comment
+        authorName:
+          type: string
+          readOnly: true
+          description: Display name of the comment author (integration name or user name)
+        createdDatetime:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the comment was created (UTC)
+        updatedDatetime:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the comment was last updated (UTC)
+      example:
+        id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        content: 'Synced from external system. Invoice reference: INV-2024-001.'
+        authorName: My Integration App
+        createdDatetime: 2024-10-15 08:30:00+00:00
+        updatedDatetime: 2024-10-15 08:30:00+00:00
+    journalEntryCommentWrite:
+      type: object
+      title: journalEntryCommentWrite
+      description: Request body for creating or updating a comment on a journal entry.
+      properties:
+        content:
+          type: string
+          description: The plain text content of the comment. Rich text, markdown, and HTML are not supported.
+          minLength: 1
+          example: 'Synced from external system. Invoice reference: INV-2024-001.'
+      required:
+      - content
+    journalEntryTag:
+      type: object
+      title: journalEntryTag
+      description: 'A tag applied to a journal entry or transaction.
+
+        References a tag value (AllowedTagTypeValue) within a tag group (TagType).
+
+        '
+      properties:
+        tagId:
+          type: string
+          format: uuid
+          description: Unique identifier of the tag (value) within the tag group
+          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        tagGroupId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the tag group this tag belongs to
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        tagName:
+          type: string
+          readOnly: true
+          description: Display name of the tag
+          example: Project Alpha
+        tagGroupName:
+          type: string
+          readOnly: true
+          description: Display name of the tag group
+          example: Project
+        weight:
+          type: number
+          format: double
+          description: 'Allocation weight between 0 (exclusive) and 1 (inclusive).
+
+            Controls how costs/revenues are split in reports.
+
+            Within a tag group, weights on the same journal entry or transaction must sum to at most 1.
+
+            '
+          minimum: 0
+          exclusiveMinimum: true
+          maximum: 1
+          default: 1
+          example: 0.5
+      required:
+      - tagId
+      - weight
+      example:
+        tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        tagName: Project Alpha
+        tagGroupName: Project
+        weight: 1
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    journalEntry:
+      type: object
+      title: journalEntry
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        title:
+          type: string
+        journalEntryNumber:
+          type: string
+          readOnly: true
+        date:
+          type: string
+          format: date
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/journalEntryItem'
+        tags:
+          type: array
+          description: 'Verification-level tags applied to the entire journal entry.
+
+            Tags must be applied either at the verification level (on the journal entry) or at the transaction level (on individual line items), but not both on the same journal entry.
+
+            Within a tag group, weights on the same journal entry must sum to at most 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/journalEntryTag'
+        reversingJournalEntryId:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+        reversedByJournalEntryId:
+          type: string
+          format: uuid
+          readOnly: true
+          nullable: true
+      required:
+      - items
+      example:
+        id: a419cf69-db6f-4de9-992c-b1a60942a443
+        title: invoice 1234
+        journalEntryNumber: V342
+        date: 2024-10-10
+        items:
+        - id: 1
+          debit: 200
+          credit: 0
+          account: 1930
+          tags: []
+        - id: 2
+          debit: 0
+          credit: 40
+          account: 3011
+          tags: []
+        - id: 3
+          debit: 0
+          credit: 160
+          account: 2611
+          tags: []
+        tags: []
+    journalEntryItem:
+      type: object
+      title: journalEntryItem
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        debit:
+          type: number
+          format: double
+        credit:
+          type: number
+          format: double
+        account:
+          type: integer
+          format: int32
+          example: 1930
+        tags:
+          type: array
+          description: 'Transaction-level tags applied to this specific line item.
+
+            Tags must be applied either at the transaction level (on individual line items) or at the verification level (on the journal entry), but not both on the same journal entry.
+
+            Within a tag group, weights on the same transaction must sum to at most 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/journalEntryTag'
+      example:
+        id: 1
+        credit: 0
+        debit: 200
+        account: 1930
+        tags: []
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

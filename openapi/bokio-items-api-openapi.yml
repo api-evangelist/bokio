@@ -1,0 +1,511 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization items API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: items
+  description: Operations for managing inventory items
+paths:
+  /companies/{companyId}/items:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    post:
+      tags:
+      - items
+      summary: Create an item
+      description: 'Creates a new item for the company.
+
+
+        **Scope:** `items:write`
+
+        '
+      operationId: post-item
+      requestBody:
+        description: Post the necessary fields for the API to create a new item.
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/item'
+            examples:
+              New item:
+                value:
+                  description: Description of product 1
+                  itemType: salesItem
+                  productType: goods
+                  unitType: piece
+                  unitPrice: 100
+                  taxRate: 25
+                  bookkeepingAccountNumber: 3920
+      responses:
+        '200':
+          description: Item created
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/item'
+              examples:
+                Item created:
+                  value:
+                    id: 835ba700-b306-4bd9-8447-59207b6b0002
+                    description: Description of product 1
+                    itemType: salesItem
+                    productType: goods
+                    unitType: piece
+                    unitPrice: 100
+                    taxRate: 25
+                    bookkeepingAccountNumber: 3920
+        '400':
+          description: Missing Required Information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 3 errors
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/description'
+                      message: The description field is required
+                    - field: '#/itemType'
+                      message: The item type field is required
+                    - field: '#/unitPrice'
+                      message: The unit price field is required
+      security:
+      - tokenAuth: []
+    get:
+      tags:
+      - items
+      summary: Get items
+      description: 'Get all items for the company. Use the query parameters to filter and navigate through the results.
+
+
+        **Scope:** `items:read`
+
+        '
+      operationId: get-items
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                | Type        |
+
+          | -------------------- | ----------- |
+
+          | description          | string      |
+
+          | itemType             | string      |
+
+          | productType          | string      |
+
+          | unitType             | string      |
+
+          | unitPrice            | number      |
+
+          | taxRate              | number      |
+
+          '
+        schema:
+          type: string
+        example: description~Product 1
+      responses:
+        '200':
+          description: Items found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        oneOf:
+                        - $ref: '#/components/schemas/item'
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/items/{itemId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: itemId
+      in: path
+      required: true
+      description: Unique identifier of the item
+      schema:
+        type: string
+        format: uuid
+      example: 83e3d68a-cfbc-46e4-9fe6-f0fc6d739672
+    get:
+      tags:
+      - items
+      summary: Get an item
+      description: 'Retrieve the information of the item with the matching itemId.
+
+
+        **Scope:** `items:read`
+
+        '
+      operationId: get-items-itemId
+      responses:
+        '200':
+          description: Item found
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/item'
+              examples:
+                Item found:
+                  value:
+                    id: 835ba700-b306-4bd9-8447-59207b6b0002
+                    description: Description of product 1
+                    itemType: salesItem
+                    productType: goods
+                    unitType: piece
+                    unitPrice: 100
+                    taxRate: 25
+                    bookkeepingAccountNumber: 3920
+        '404':
+          description: Item Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Item not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    put:
+      tags:
+      - items
+      summary: Update an item
+      description: 'Update an existing item for the company.
+
+
+        **Scope:** `items:write`
+
+        '
+      operationId: put-item
+      requestBody:
+        description: Post the necessary fields for the API to update an Item.
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/item'
+            examples:
+              Update item:
+                value:
+                  id: 835ba700-b306-4bd9-8447-59207b6b0002
+                  description: Description of product 1
+                  itemType: salesItem
+                  productType: goods
+                  unitType: piece
+                  unitPrice: 100
+                  taxRate: 25
+                  bookkeepingAccountNumber: 3920
+      responses:
+        '200':
+          description: Item updated
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/item'
+              examples:
+                Update item:
+                  value:
+                    id: 835ba700-b306-4bd9-8447-59207b6b0002
+                    description: Description of product 1
+                    itemType: salesItem
+                    productType: goods
+                    unitType: piece
+                    unitPrice: 100
+                    taxRate: 25
+                    bookkeepingAccountNumber: 3920
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 3 errors
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/description'
+                      message: The description field is required
+                    - field: '#/unitPrice'
+                      message: The unit price field is required
+                    - field: '#/taxRate'
+                      message: 'Invalid tax rate. The tax rate must be one of the following values: 0%, 6%, 12%, or 25%'
+      security:
+      - tokenAuth: []
+    delete:
+      tags:
+      - items
+      summary: Delete an item
+      description: 'Delete an existing item for the company.
+
+
+        **Scope:** `items:write`
+
+        '
+      operationId: delete-item
+      responses:
+        '204':
+          description: Item deleted
+      security:
+      - tokenAuth: []
+components:
+  schemas:
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    item:
+      type: object
+      title: item
+      oneOf:
+      - $ref: '#/components/schemas/salesItem'
+      - $ref: '#/components/schemas/descriptionOnlyItem'
+    salesItem:
+      type: object
+      title: salesItem
+      required:
+      - description
+      - itemType
+      - productType
+      - unitType
+      - unitPrice
+      - taxRate
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Should not be set for new items
+        description:
+          type: string
+          minLength: 1
+          maxLength: 500
+        itemType:
+          type: string
+          enum:
+          - salesItem
+        productType:
+          type: string
+          enum:
+          - goods
+          - services
+        unitType:
+          type: string
+          enum:
+          - unspecified
+          - piece
+          - hour
+          - day
+          - month
+          - kilogram
+          - gram
+          - liter
+          - meter
+          - centimeter
+          - millimeter
+          - meterSquared
+          - meterCubic
+          - mile
+          - kilometer
+          - gigabyte
+          - hectar
+          - words
+          - year
+          - week
+          - minute
+          - megabyte
+          - ton
+        unitPrice:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          type: integer
+          format: int32
+          nullable: true
+          description: The bookkeeping account number for this item. If not set, the account will be automatically selected based on the item productType, taxRate, customer and company settings.
+      example:
+        id: fc967153-1f8a-48d0-b773-fe3e61978263
+        description: Product 1
+        itemType: salesItem
+        productType: goods
+        unitType: piece
+        unitPrice: 100
+        taxRate: 25
+        bookkeepingAccountNumber: 3920
+    descriptionOnlyItem:
+      type: object
+      title: descriptionOnlyItem
+      required:
+      - description
+      - itemType
+      properties:
+        id:
+          type: string
+          format: uuid
+          nullable: true
+          description: Should not be set for new items
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - descriptionOnlyItem
+      example:
+        id: bd34bd41-d13b-434d-858e-092231d6228a
+        description: Custom description line
+        itemType: descriptionOnlyItem
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

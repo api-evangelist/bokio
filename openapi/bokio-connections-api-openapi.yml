@@ -1,0 +1,242 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization connections API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: connections
+  description: Connections operations
+paths:
+  /connections:
+    get:
+      tags:
+      - connections
+      summary: Get connections
+      description: Retrieve a list of connections for the authenticated client. Use the tenantId query parameter to filter connections for a specific tenant.
+      operationId: get-connections
+      parameters:
+      - name: page
+        description: Page number (starting from 1)
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          default: 1
+      - name: pageSize
+        description: Number of items per page (max 100)
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: tenantId
+        description: Filter connections by tenant ID. When provided, returns only the connection for the specified tenant.
+        in: query
+        required: false
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Connections found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/connection'
+      security:
+      - tokenAuth: []
+      - access_token: []
+  /connections/{connectionId}:
+    get:
+      tags:
+      - connections
+      summary: Get connection by ID
+      description: Retrieve a specific connection by its ID
+      operationId: get-connection-by-id
+      parameters:
+      - name: connectionId
+        description: The unique identifier of the connection
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: Connection found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/connection'
+        '404':
+          description: Connection not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token: []
+    delete:
+      tags:
+      - connections
+      summary: Delete connection by ID
+      description: Delete a specific connection and its associated data. Associated data refers to tokens and company permissions that were allowed. However, it will not delete any data created through the integration.
+      operationId: delete-connection-by-id
+      parameters:
+      - name: connectionId
+        description: The unique identifier of the connection
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '204':
+          description: Connection deleted successfully
+        '403':
+          description: Forbidden - not allowed to delete this connection
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+        '404':
+          description: Connection not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token: []
+components:
+  schemas:
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    connection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenantId:
+          type: string
+          format: uuid
+        tenantName:
+          type: string
+          description: The name of the tenant (company)
+        type:
+          type: string
+          enum:
+          - company
+          description: The type of connection (e.g., company)
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

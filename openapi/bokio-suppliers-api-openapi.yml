@@ -1,0 +1,625 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization suppliers API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: suppliers
+  description: Operations for managing suppliers
+paths:
+  /companies/{companyId}/suppliers:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    post:
+      tags:
+      - suppliers
+      summary: '[Preview] Create a supplier'
+      description: 'Creates a new supplier for the company.
+
+
+        **Scope:** `suppliers:write`
+
+        '
+      operationId: post-supplier
+      requestBody:
+        description: Post the necessary fields for the API to create a supplier.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/supplier'
+            examples:
+              New supplier:
+                value:
+                  name: Supplier ABC
+                  orgNumber: 556677-8899
+                  vatNumber: SE123456789001
+                  address:
+                    line1: Älvsborgsvägen 10
+                    line2: c/o Test
+                    city: Gothenburg
+                    postalCode: 123 45
+                    country: SE
+                  paymentDetails:
+                    type: bankgiro
+                    bankgiroNumber: 1234-5678
+      responses:
+        '200':
+          description: Supplier created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/supplier'
+              examples:
+                Supplier created:
+                  value:
+                    id: 12345678-abcd-1234-abcd-1234567890ab
+                    name: Supplier ABC
+                    orgNumber: 556677-8899
+                    vatNumber: SE123456789001
+                    currency: SEK
+                    address:
+                      line1: Älvsborgsvägen 10
+                      line2: c/o Test
+                      city: Gothenburg
+                      postalCode: 123 45
+                      country: SE
+                    paymentDetails:
+                      type: bankgiro
+                      bankgiroNumber: 1234-5678
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 1 error
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/name'
+                      message: The name field is required
+      security:
+      - tokenAuth: []
+    get:
+      tags:
+      - suppliers
+      summary: '[Preview] Get suppliers'
+      description: 'Get all suppliers for the company. Use the query parameters to filter and navigate through the results.
+
+
+        **Scope:** `suppliers:read`
+
+        '
+      operationId: get-suppliers
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                | Type        |
+
+          | -------------------- | ----------- |
+
+          | name                 | string      |
+
+          | vatNumber            | string      |
+
+          | orgNumber            | string      |
+
+          '
+        schema:
+          type: string
+        example: name==Supplier ABC
+      responses:
+        '200':
+          description: Suppliers found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/supplier'
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/suppliers/{supplierId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: supplierId
+      in: path
+      required: true
+      description: Unique identifier of the supplier
+      schema:
+        type: string
+        format: uuid
+      example: 12345678-abcd-1234-abcd-1234567890ab
+    get:
+      tags:
+      - suppliers
+      summary: '[Preview] Get a supplier'
+      description: 'Retrieve the information of the supplier with the matching supplierId.
+
+
+        **Scope:** `suppliers:read`
+
+        '
+      operationId: get-supplier-by-id
+      responses:
+        '200':
+          description: Supplier found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/supplier'
+              examples:
+                Supplier found:
+                  value:
+                    id: 12345678-abcd-1234-abcd-1234567890ab
+                    name: Example Supplier
+                    orgNumber: 556677-8899
+                    vatNumber: SE123456789001
+                    currency: SEK
+                    address:
+                      line1: Älvsborgsvägen 10
+                      line2: c/o Test
+                      city: Gothenburg
+                      postalCode: 123 45
+                      country: SE
+                    paymentDetails:
+                      type: bankgiro
+                      bankgiroNumber: 5174-8895
+        '404':
+          description: Supplier not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Supplier not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    put:
+      tags:
+      - suppliers
+      summary: '[Preview] Update a supplier'
+      description: 'Update an existing supplier for the company.
+
+
+        **Scope:** `suppliers:write`
+
+        '
+      operationId: put-supplier
+      requestBody:
+        description: Post the necessary fields for the API to update a supplier.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/supplier'
+            examples:
+              Update supplier:
+                value:
+                  name: Updated Supplier ABC
+                  orgNumber: 556677-8899
+                  vatNumber: SE123456789001
+                  currency: SEK
+                  address:
+                    line1: Älvsborgsvägen 10
+                    line2: c/o Test
+                    city: Gothenburg
+                    postalCode: 123 45
+                    country: SE
+                  paymentDetails:
+                    type: internationalPayment
+                    iban: SE1234567890123456789012
+                    bic: SWEDSESS
+      responses:
+        '200':
+          description: Supplier updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/supplier'
+              examples:
+                Supplier updated:
+                  value:
+                    id: 12345678-abcd-1234-abcd-1234567890ab
+                    name: Updated Supplier ABC
+                    orgNumber: 556677-8899
+                    vatNumber: SE123456789001
+                    currency: SEK
+                    address:
+                      line1: Älvsborgsvägen 10
+                      line2: c/o Test
+                      city: Gothenburg
+                      postalCode: 123 45
+                      country: SE
+                    paymentDetails:
+                      type: internationalPayment
+                      iban: SE1234567890123456789012
+                      bic: SWEDSESS
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 1 error
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/name'
+                      message: The name field is required
+        '404':
+          description: Supplier not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Supplier not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    delete:
+      tags:
+      - suppliers
+      summary: '[Preview] Delete a supplier'
+      description: 'Delete an existing supplier for the company.
+
+
+        NOTE: Currently only supports deleting suppliers that have been added through the API.
+
+
+        **Scope:** `suppliers:write`
+
+        '
+      operationId: delete-supplier
+      responses:
+        '204':
+          description: Supplier deleted
+        '400':
+          description: Operation not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Not created by integration:
+                  value:
+                    code: operation-not-allowed
+                    message: Bokio API only supports deleting suppliers that have been added through the API by the same integration.
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                Supplier has active invoices:
+                  value:
+                    code: operation-not-allowed
+                    message: Cannot delete supplier with active invoices.
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+components:
+  schemas:
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    bankgiroPaymentDetails:
+      type: object
+      title: bankgiroPaymentDetails
+      required:
+      - type
+      - bankgiroNumber
+      properties:
+        type:
+          type: string
+          enum:
+          - bankgiro
+        bankgiroNumber:
+          type: string
+          description: The bankgiro number for the supplier
+      example:
+        type: bankgiro
+        bankgiroNumber: 1234-5678
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    transferPaymentDetails:
+      type: object
+      title: transferPaymentDetails
+      required:
+      - type
+      - clearingNumber
+      - accountNumber
+      properties:
+        type:
+          type: string
+          enum:
+          - transfer
+        clearingNumber:
+          type: string
+          description: Bank clearing number
+        accountNumber:
+          type: string
+          description: Bank account number
+      example:
+        type: transfer
+        clearingNumber: '1234'
+        accountNumber: '1234567890'
+    internationalPaymentDetails:
+      type: object
+      title: internationalPaymentDetails
+      required:
+      - type
+      - iban
+      - bic
+      properties:
+        type:
+          type: string
+          enum:
+          - internationalPayment
+        iban:
+          type: string
+          description: International Bank Account Number
+        bic:
+          type: string
+          description: Bank Identifier Code (SWIFT code)
+      example:
+        type: internationalPayment
+        iban: SE1234567890123456789012
+        bic: SWEDSESS
+    plusgiroPaymentDetails:
+      type: object
+      title: plusgiroPaymentDetails
+      required:
+      - type
+      - plusgiroNumber
+      properties:
+        type:
+          type: string
+          enum:
+          - plusgiro
+        plusgiroNumber:
+          type: string
+          description: The plusgiro number for the supplier
+      example:
+        type: plusgiro
+        plusgiroNumber: 12345-6
+    supplier:
+      type: object
+      title: supplier
+      required:
+      - name
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        name:
+          type: string
+        orgNumber:
+          type: string
+        vatNumber:
+          type: string
+        currency:
+          type: string
+          description: 'ISO 4217 currency code. Defaults to SEK if not provided.
+
+
+            Sets the currency for the supplier, which determines the currency used when creating supplier invoices. When a non-SEK currency is set, exchange rates are automatically calculated to determine the correct SEK amount — no manual exchange rate lookup is needed.
+
+
+            Allowed values depend on whether the company has a Bokio Business Account (BBA):
+
+
+            **With Bokio Business Account:** `SEK`, `EUR`, `NOK`, `USD`, `DKK`, `GBP`, `PLN`, `RON`, `CZK`, `HUF`, `ISK`, `CHF`
+
+
+            Note: For companies with a Bokio Business Account, only currencies supported by BBA are available. For supplier invoices that cannot be paid via BBA, the currency must be set to `SEK` and exchange rates must be handled manually.
+
+
+            **Without Bokio Business Account:** `SEK`, `GBP`, `EUR`, `USD`, `NOK`, `DKK`, `AUD`, `BRL`, `CAD`, `CHF`, `CNY`, `CZK`, `HKD`, `HUF`, `IDR`, `INR`, `ISK`, `JPY`, `KRW`, `MAD`, `MXN`, `NZD`, `PLN`, `RUB`, `SAR`, `SGD`, `THB`, `TRY`, `ZAR`
+
+            '
+          default: SEK
+        address:
+          $ref: '#/components/schemas/supplierAddress'
+        paymentDetails:
+          $ref: '#/components/schemas/paymentDetails'
+      example:
+        id: 12345678-abcd-1234-abcd-1234567890ab
+        name: Example Supplier
+        orgNumber: 556677-8899
+        vatNumber: SE123456789001
+        currency: SEK
+        address:
+          line1: Älvsborgsvägen 10
+          line2: c/o Test
+          city: Gothenburg
+          postalCode: 123 45
+          country: SE
+        paymentDetails:
+          type: bankgiro
+          bankgiroNumber: 1234-5678
+    paymentDetails:
+      type: object
+      title: paymentDetails
+      required:
+      - type
+      discriminator:
+        propertyName: type
+        mapping:
+          bankgiro: '#/components/schemas/bankgiroPaymentDetails'
+          plusgiro: '#/components/schemas/plusgiroPaymentDetails'
+          transfer: '#/components/schemas/transferPaymentDetails'
+          internationalPayment: '#/components/schemas/internationalPaymentDetails'
+      oneOf:
+      - $ref: '#/components/schemas/bankgiroPaymentDetails'
+      - $ref: '#/components/schemas/plusgiroPaymentDetails'
+      - $ref: '#/components/schemas/transferPaymentDetails'
+      - $ref: '#/components/schemas/internationalPaymentDetails'
+    supplierAddress:
+      type: object
+      title: supplierAddress
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code. Defaults to SE if not provided.
+          type: string
+          format: country
+          default: SE
+      example:
+        line1: Älvsborgsvägen 10
+        line2: c/o Test
+        city: Gothenburg
+        postalCode: 123 45
+        country: SE
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

@@ -1,0 +1,1029 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization tag-groups API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: tag-groups
+  description: Operations for managing tag groups and tags
+paths:
+  /companies/{companyId}/tag-groups:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    post:
+      tags:
+      - tag-groups
+      summary: '[Preview] Create a tag group'
+      description: 'Creates a new tag group for the company.
+
+
+        A tag group represents a category or dimension used to classify journal entries,
+
+        such as "Project", "Cost center", or "Department".
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:write`
+
+        '
+      operationId: post-tag-group
+      requestBody:
+        description: The tag group to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tagGroupWrite'
+            examples:
+              New tag group:
+                value:
+                  name: Project
+                  alias: '@'
+                  dimensionNumber: 6
+      responses:
+        '200':
+          description: Tag group created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tagGroup'
+              examples:
+                Tag group created:
+                  value:
+                    id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    name: Project
+                    alias: '@'
+                    dimensionNumber: 6
+                    tags: []
+        '400':
+          description: 'Validation error. Possible reasons:
+
+            - Missing required fields
+
+            - Duplicate alias (must be unique per company)
+
+            - Duplicate dimension number (must be unique per company)
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Missing required information
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+      security:
+      - tokenAuth: []
+    get:
+      tags:
+      - tag-groups
+      summary: '[Preview] Get all tag groups'
+      description: 'Retrieve all tag groups for the company, including their tags.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:read`
+
+        '
+      operationId: get-tag-groups
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of items per page for pagination
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 20
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        schema:
+          type: string
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                | Type        |
+
+          | -------------------- | ----------- |
+
+          | name                 | string      |
+
+          | dimensionNumber      | integer     |
+
+          '
+      responses:
+        '200':
+          description: Tag groups found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/tagGroup'
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/tag-groups/{tagGroupId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: tagGroupId
+      in: path
+      required: true
+      description: Unique identifier of the tag group
+      schema:
+        type: string
+        format: uuid
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    get:
+      tags:
+      - tag-groups
+      summary: '[Preview] Get a tag group by ID'
+      description: 'Retrieve a specific tag group by its ID, including all its tags.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:read`
+
+        '
+      operationId: get-tag-group-by-id
+      responses:
+        '200':
+          description: Tag group found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tagGroup'
+              examples:
+                Tag group found:
+                  value:
+                    id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    name: Project
+                    alias: '@'
+                    dimensionNumber: 6
+                    tags:
+                    - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      name: Project Alpha
+                    - id: c3d4e5f6-a7b8-9012-cdef-123456789012
+                      name: Project Beta
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+        '404':
+          description: Tag group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Tag group not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    put:
+      tags:
+      - tag-groups
+      summary: '[Preview] Update a tag group'
+      description: 'Update the details of an existing tag group.
+
+
+        This only updates the tag group metadata (name, alias).
+
+        The `dimensionNumber` is set at creation and cannot be changed.
+
+        To manage tags within the group, use the tag sub-resource endpoints.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:write`
+
+        '
+      operationId: put-tag-group
+      requestBody:
+        description: The tag group fields to update.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tagGroupUpdate'
+            examples:
+              Updated tag group:
+                value:
+                  name: Updated Project
+                  alias: '#'
+      responses:
+        '200':
+          description: Tag group updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tagGroup'
+              examples:
+                Tag group updated:
+                  value:
+                    id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    name: Updated Project
+                    alias: '#'
+                    dimensionNumber: 6
+                    tags:
+                    - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                      name: Project Alpha
+        '400':
+          description: 'Validation error. Possible reasons:
+
+            - Missing required fields
+
+            - Duplicate alias (must be unique per company)
+
+            - Duplicate dimension number (must be unique per company)
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Missing required information
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+        '404':
+          description: Tag group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Tag group not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    delete:
+      tags:
+      - tag-groups
+      summary: '[Preview] Delete a tag group'
+      description: 'Delete a tag group and all its tags.
+
+
+        Deletion will fail if any tags in the group are currently in use on journal entries.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:write`
+
+        '
+      operationId: delete-tag-group
+      responses:
+        '204':
+          description: Tag group deleted successfully
+        '400':
+          description: Tag group cannot be deleted because it or its tags are in use.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Cannot delete tag group because it has tags in use
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+        '404':
+          description: Tag group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Tag group not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/tag-groups/{tagGroupId}/tags:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: tagGroupId
+      in: path
+      required: true
+      description: Unique identifier of the tag group
+      schema:
+        type: string
+        format: uuid
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    post:
+      tags:
+      - tag-groups
+      summary: '[Preview] Create a tag in a tag group'
+      description: 'Creates a new tag (value) within the specified tag group.
+
+
+        Tag names must be unique within the tag group.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:write`
+
+        '
+      operationId: post-tag-group-tag
+      requestBody:
+        description: The tag to create.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tagValueWrite'
+            examples:
+              New tag:
+                value:
+                  name: Project Alpha
+      responses:
+        '200':
+          description: Tag created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tagValue'
+              examples:
+                Tag created:
+                  value:
+                    id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                    name: Project Alpha
+        '400':
+          description: 'Validation error. Possible reasons:
+
+            - Missing required fields
+
+            - Duplicate tag name within the tag group
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: A tag with this name already exists in the tag group
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+        '404':
+          description: Tag group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Tag group not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+  /companies/{companyId}/tag-groups/{tagGroupId}/tags/{tagId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: tagGroupId
+      in: path
+      required: true
+      description: Unique identifier of the tag group
+      schema:
+        type: string
+        format: uuid
+      example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+    - name: tagId
+      in: path
+      required: true
+      description: Unique identifier of the tag
+      schema:
+        type: string
+        format: uuid
+      example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+    put:
+      tags:
+      - tag-groups
+      summary: '[Preview] Update a tag in a tag group'
+      description: 'Update the name of an existing tag within a tag group.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:write`
+
+        '
+      operationId: put-tag-group-tag
+      requestBody:
+        description: The tag fields to update.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/tagValueWrite'
+            examples:
+              Updated tag:
+                value:
+                  name: Project Alpha (Renamed)
+      responses:
+        '200':
+          description: Tag updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tagValue'
+              examples:
+                Tag updated:
+                  value:
+                    id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+                    name: Project Alpha (Renamed)
+        '400':
+          description: 'Validation error. Possible reasons:
+
+            - Missing required fields
+
+            - Duplicate tag name within the tag group
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: A tag with this name already exists in the tag group
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+        '404':
+          description: Tag or tag group not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: Tag not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+    delete:
+      tags:
+      - tag-groups
+      summary: '[Preview] Delete a tag from a tag group'
+      description: 'Delete a specific tag from a tag group.
+
+
+        Deletion will fail if the tag is currently in use on any journal entries.
+
+
+        The company must have the Tags feature enabled in their price plan.
+
+
+        **Preview:** This endpoint is in preview and may change or be removed before general availability.
+
+        [Read the full preview policy](/reference/versioning#preview)
+
+
+        **Scope:** `tags:write`
+
+        '
+      operationId: delete-tag-group-tag
+      responses:
+        '204':
+          description: Tag deleted successfully
+        '400':
+          description: Tag cannot be deleted because it is in use on journal entries.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Cannot delete tag because it is in use
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '403':
+          description: 'Forbidden. The company''s price plan does not include API access, or the integration does not have the required scope.
+
+
+            See [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.
+
+            '
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Price plan restriction:
+                  value:
+                    error: price_plan_feature_required
+                    message: This feature requires Integrations (API) or a Plus plan
+                    details:
+                      requiredFeature: PublicApi
+                      availableIn:
+                      - Plus
+                      - Business
+                      availableAsAddonIn:
+                      - Premium
+                      isAvailableInTrial: true
+                      isInTrial: false
+      security:
+      - tokenAuth: []
+components:
+  schemas:
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    tagValue:
+      type: object
+      title: tagValue
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the tag
+          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        name:
+          type: string
+          description: Name of the tag
+          example: Project Alpha
+      example:
+        id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        name: Project Alpha
+    tagGroupWrite:
+      type: object
+      title: tagGroupWrite
+      required:
+      - name
+      - alias
+      properties:
+        name:
+          type: string
+          description: Name of the tag group
+          example: Project
+        alias:
+          type: string
+          description: Short alias for quick tagging (max 3 characters, unique per company)
+          maxLength: 3
+          example: '@'
+        dimensionNumber:
+          type: integer
+          format: int32
+          nullable: true
+          description: 'Dimension number for SIE file export/import compatibility.
+
+
+            Reserved numbers per SIE file format:
+
+            1 = Cost center, 2 = Cost carrier, 6 = Project, 7 = Employee,
+
+            8 = Customer, 9 = Supplier, 10 = Invoice, 20+ = Freely available.
+
+            '
+          example: 6
+    tagGroupUpdate:
+      type: object
+      title: tagGroupUpdate
+      required:
+      - name
+      - alias
+      properties:
+        name:
+          type: string
+          description: Name of the tag group
+          example: Updated Project
+        alias:
+          type: string
+          description: Short alias for quick tagging (max 3 characters, unique per company)
+          maxLength: 3
+          example: '#'
+    tagValueWrite:
+      type: object
+      title: tagValueWrite
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Name of the tag (must be unique within the tag group)
+          example: Project Alpha
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    tagGroup:
+      type: object
+      title: tagGroup
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the tag group
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name:
+          type: string
+          description: Name of the tag group
+          example: Project
+        alias:
+          type: string
+          description: Short alias for quick tagging (max 3 characters, unique per company)
+          example: '@'
+        dimensionNumber:
+          type: integer
+          format: int32
+          nullable: true
+          description: 'Dimension number for SIE file export/import compatibility.
+
+
+            Reserved numbers per SIE file format:
+
+            1 = Cost center, 2 = Cost carrier, 6 = Project, 7 = Employee,
+
+            8 = Customer, 9 = Supplier, 10 = Invoice, 20+ = Freely available.
+
+            '
+          example: 6
+        tags:
+          type: array
+          readOnly: true
+          description: The tags (values) within this tag group
+          items:
+            $ref: '#/components/schemas/tagValue'
+      example:
+        id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        name: Project
+        alias: '@'
+        dimensionNumber: 6
+        tags:
+        - id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+          name: Project Alpha
+        - id: c3d4e5f6-a7b8-9012-cdef-123456789012
+          name: Project Beta
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

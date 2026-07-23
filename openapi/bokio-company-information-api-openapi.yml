@@ -1,0 +1,214 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization company-information API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: company-information
+  description: Operations for managing company information
+paths:
+  /companies/{companyId}/company-information:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: The unique identifier for the company
+      schema:
+        type: string
+        format: uuid
+        example: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+    get:
+      tags:
+      - company-information
+      summary: Retrieve company information
+      description: 'Retrieve the information of the company.
+
+
+        **Scope:** `company-information:read`
+
+        '
+      operationId: get-company-information-with-id
+      responses:
+        '200':
+          description: Company information
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  companyInformation:
+                    $ref: '#/components/schemas/companyInformation'
+        '404':
+          description: Company not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              example:
+                code: not-found
+                message: The requested resource with value 9b408943-7a1e-47ac-85a7-ac52b2c210d3 was not found
+                bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+components:
+  schemas:
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    companyInformation:
+      title: companyInformation
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier for the company
+        companyType:
+          type: string
+          enum:
+          - proprietorship
+          - limitedCompany
+          - limitedPartnership
+          - partnership
+          - cooperative
+          - nonProfitAssociation
+          - communityAssociation
+          - religiousCommunity
+          - notSet
+          description: Company type of the company
+        name:
+          type: string
+          description: Name of the company
+        organizationNumber:
+          type: string
+          description: Organization number of the company
+        phone:
+          type: string
+          description: Phone number of the contact person
+        email:
+          type: string
+          description: Email address of the contact person
+        hasBBA:
+          type: boolean
+          description: Indicates whether the company has a business bank account
+        address:
+          oneOf:
+          - $ref: '#/components/schemas/address'
+      example:
+        id: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        companyType: limitedCompany
+        name: Company AB
+        organizationNumber: 556677-8899
+        phone: '+46123456789'
+        email: info@example.com
+        hasBBA: true
+        address:
+          line1: Älvsborgsvägen 10
+          line2: null
+          city: Göteborg
+          postalCode: 123 45
+          country: SE
+    address:
+      type: object
+      title: address
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+      example:
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

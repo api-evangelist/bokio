@@ -1,0 +1,3337 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization invoices API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: invoices
+  description: Operations for managing invoices
+paths:
+  /companies/{companyId}/invoices:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    post:
+      tags:
+      - invoices
+      summary: Create an invoice
+      description: 'Creates a new draft invoice for the company.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoice
+      requestBody:
+        description: Post the necessary fields for the API to create a new invoice.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoice'
+            examples:
+              New invoice:
+                value:
+                  type: invoice
+                  customerRef:
+                    id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                    name: customer 1
+                  contactDetailRef:
+                    id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                  invoiceNumber: '1234'
+                  orderNumberReference: ORD-5678
+                  projectReference: PROJ-001
+                  buyerReference: BUYER-123
+                  contractReference: CONTRACT-456
+                  currency: SEK
+                  currencyRate: 1
+                  totalAmount: 10000
+                  totalTax: 2500
+                  paidAmount: 0
+                  invoiceDate: 2024-10-10
+                  dueDate: 2024-10-10
+                  lineItems:
+                  - description: Product 1
+                    itemRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                    itemType: salesItem
+                    productType: goods
+                    unitType: piece
+                    quantity: 1
+                    unitPrice: 5000
+                    taxRate: 25
+                  - description: Installation work
+                    itemType: salesItem
+                    productType: services
+                    unitType: hour
+                    quantity: 10
+                    unitPrice: 500
+                    taxRate: 25
+                    taxReduction:
+                      taxReductionType: rot
+                      jobType: rotConstruction
+                  - description: A description line
+                    itemType: descriptionOnlyItem
+                  deliveryAddress:
+                    line1: Delivery Street 15
+                    line2: Floor 2
+                    city: Stockholm
+                    postalCode: 111 11
+                    country: SE
+                  taxReduction:
+                    type: rot
+                    description: Bathroom renovation
+                    propertyType: realEstate
+                    realEstateNumber: STOCKHOLM SÖDER 1:2
+                    deductionPeople:
+                    - personalNumber: 19850101-1234
+                      deductionAmount: 1500
+                  metadata:
+                    project: Website Redesign
+                    department: IT
+                    externalId: EXT-INV-2024-001
+      responses:
+        '200':
+          description: Invoice created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoice'
+              examples:
+                invoice created:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    type: invoice
+                    customerRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      name: customer 1
+                    contactDetailRef:
+                      id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                      email: contact@customer1.com
+                      phone: '+46701234567'
+                    invoiceNumber: '1234'
+                    paymentReference: null
+                    orderNumberReference: ORD-5678
+                    projectReference: PROJ-001
+                    buyerReference: BUYER-123
+                    contractReference: CONTRACT-456
+                    currency: SEK
+                    currencyRate: 1
+                    totalAmount: 10000
+                    totalTax: 2500
+                    paidAmount: 0
+                    status: draft
+                    invoiceDate: 2024-10-10
+                    dueDate: 2024-10-10
+                    lineItems:
+                    - id: 1
+                      itemRef:
+                        id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                        description: Product 1
+                      description: Product 1
+                      itemType: salesItem
+                      productType: goods
+                      unitType: piece
+                      quantity: 1
+                      unitPrice: 5000
+                      taxRate: 25
+                    - id: 2
+                      description: Installation work
+                      itemType: salesItem
+                      productType: services
+                      unitType: hour
+                      quantity: 10
+                      unitPrice: 500
+                      taxRate: 25
+                      taxReduction:
+                        taxReductionType: rot
+                        jobType: rotConstruction
+                    - id: 3
+                      description: A description line
+                      itemType: descriptionOnlyItem
+                    billingAddress:
+                      line1: Älvsborgsvägen 10
+                      line2: null
+                      city: Göteborg
+                      postalCode: 123 45
+                      country: SE
+                    deliveryAddress:
+                      line1: Delivery Street 15
+                      line2: Floor 2
+                      city: Stockholm
+                      postalCode: 111 11
+                      country: SE
+                    taxReduction:
+                      type: rot
+                      description: Bathroom renovation
+                      propertyType: realEstate
+                      realEstateNumber: STOCKHOLM SÖDER 1:2
+                      deductionAmount: 1500
+                      status: draft
+                      deductionPeople:
+                      - personalNumber: 19850101-1234
+                        deductionAmount: 1500
+                    attachmentRefs:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      fileName: myfile.pdf
+                    - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+                      fileName: myfile2.pdf
+                    metadata:
+                      project: Website Redesign
+                      department: IT
+                      externalId: EXT-INV-2024-001
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 2 errors
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/invoiceDate'
+                      message: The invoice date field is required
+                    - field: '#/lineItems/0/taxRate'
+                      message: The tax rate field is required
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+    get:
+      tags:
+      - invoices
+      summary: Get invoices
+      description: 'Get all invoices for the company. Use the query parameters to filter and navigate through the results.
+
+
+        **Tax reduction:** Personal numbers in `taxReduction.deductionPeople` have the last 4 digits masked when the invoice was created by a different integration. Masked values are returned as `YYYYMMDD-XXXX`.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+          View documentation for filtering on metadata [here](metadata).
+
+
+          | Field                | Type        |
+
+          | -------------------- | ----------- |
+
+          | type                 | string      |
+
+          | customerRef          | string      |
+
+          | orderNumberReference | string      |
+
+          | projectReference     | string      |
+
+          | buyerReference       | string      |
+
+          | contractReference    | string      |
+
+          | currency             | string      |
+
+          | totalAmount          | number      |
+
+          | status               | string      |
+
+          | invoiceDate          | date        |
+
+          | dueDate              | date        |
+
+          | metadata             | string      |
+
+          '
+        schema:
+          type: string
+        example: dueDate==2024-10-10&&currency==SEK
+      responses:
+        '200':
+          description: Invoices found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/invoice'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+  /companies/{companyId}/invoices/{invoiceId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    get:
+      tags:
+      - invoices
+      summary: Get an invoice
+      description: 'Retrieve the information of the invoice with the matching invoiceId.
+
+
+        **Tax reduction:** Personal numbers in `taxReduction.deductionPeople` have the last 4 digits masked when the invoice was created by a different integration. Masked values are returned as `YYYYMMDD-XXXX`.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoices-invoiceId
+      responses:
+        '200':
+          description: Invoice found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoice'
+              examples:
+                Update invoice:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    type: invoice
+                    customerRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      name: customer 1
+                    contactDetailRef:
+                      id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                      email: contact@customer1.com
+                      phone: '+46701234567'
+                    invoiceNumber: '1234'
+                    paymentReference: null
+                    orderNumberReference: ORD-5678
+                    projectReference: PROJ-001
+                    buyerReference: BUYER-123
+                    contractReference: CONTRACT-456
+                    currency: SEK
+                    currencyRate: 1
+                    totalAmount: 10000
+                    totalTax: 2500
+                    paidAmount: 0
+                    status: draft
+                    invoiceDate: 2024-10-10
+                    dueDate: 2024-10-10
+                    lineItems:
+                    - id: 1
+                      itemRef:
+                        id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      description: Product 1
+                      itemType: salesItem
+                      productType: goods
+                      unitType: piece
+                      quantity: 1
+                      unitPrice: 5000
+                      taxRate: 25
+                    - id: 2
+                      description: Installation work
+                      itemType: salesItem
+                      productType: services
+                      unitType: hour
+                      quantity: 10
+                      unitPrice: 500
+                      taxRate: 25
+                      taxReduction:
+                        taxReductionType: rot
+                        jobType: rotConstruction
+                    - id: 3
+                      description: A description line
+                      itemType: descriptionOnlyItem
+                    billingAddress:
+                      line1: Älvsborgsvägen 10
+                      line2: null
+                      city: Göteborg
+                      postalCode: 123 45
+                      country: SE
+                    deliveryAddress:
+                      line1: Delivery Street 15
+                      line2: Floor 2
+                      city: Stockholm
+                      postalCode: 111 11
+                      country: SE
+                    taxReduction:
+                      type: rot
+                      description: Bathroom renovation
+                      propertyType: realEstate
+                      realEstateNumber: STOCKHOLM SÖDER 1:2
+                      deductionAmount: 1500
+                      status: draft
+                      deductionPeople:
+                      - personalNumber: 19850101-1234
+                        deductionAmount: 1500
+                    attachmentRefs:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      fileName: myfile.pdf
+                    - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+                      fileName: myfile2.pdf
+                    journalEntryRef:
+                      id: e7f8a972-5a21-411b-aed2-f224d1b6fd68
+                    metadata:
+                      project: Website Redesign
+                      department: IT
+                      externalId: EXT-INV-2024-001
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: invoice not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+    put:
+      tags:
+      - invoices
+      summary: Update an invoice
+      description: 'Update an existing invoice draft for the company.
+
+
+        This operation will update all fields of the invoice. It''s recommended that you perform a GET request
+
+        to the invoice first to get the current state of the invoice and then update the fields you want to change.
+
+
+        **NOTE:** It''s only possible to update invoices that are in draft status.
+
+
+        **Tax reduction:** Only the integration that created the invoice can modify tax reduction data. If a different integration includes `taxReduction` changes in the request, the changes will be silently ignored and the existing tax reduction data will be preserved.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: put-invoice
+      requestBody:
+        description: Post the necessary fields for the API to update an invoice.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoice'
+            examples:
+              Update invoice:
+                value:
+                  id: a419cf69-db6f-4de9-992c-b1a60942a443
+                  type: invoice
+                  customerRef:
+                    id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                    name: customer 1
+                  contactDetailRef:
+                    id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                  invoiceNumber: '1234'
+                  orderNumberReference: ORD-5678
+                  projectReference: PROJ-001
+                  buyerReference: BUYER-123
+                  contractReference: CONTRACT-456
+                  currency: SEK
+                  currencyRate: 1
+                  totalAmount: 10000
+                  totalTax: 2500
+                  paidAmount: 0
+                  invoiceDate: 2024-10-10
+                  dueDate: 2024-10-10
+                  lineItems:
+                  - id: 1
+                    description: Product 1
+                    itemType: salesItem
+                    productType: goods
+                    unitType: piece
+                    quantity: 1
+                    unitPrice: 5000
+                    taxRate: 25
+                  - id: 2
+                    description: Installation work
+                    itemType: salesItem
+                    productType: services
+                    unitType: hour
+                    quantity: 10
+                    unitPrice: 500
+                    taxRate: 25
+                    taxReduction:
+                      taxReductionType: rot
+                      jobType: rotConstruction
+                  - id: 3
+                    itemRef:
+                      id: e964435e-50ef-4524-a439-05ff87794952
+                    description: A description line
+                    itemType: descriptionOnlyItem
+                  deliveryAddress:
+                    line1: Delivery Street 15
+                    line2: Floor 2
+                    city: Stockholm
+                    postalCode: 111 11
+                    country: SE
+                  taxReduction:
+                    type: rot
+                    description: Bathroom renovation
+                    propertyType: realEstate
+                    realEstateNumber: STOCKHOLM SÖDER 1:2
+                    deductionPeople:
+                    - personalNumber: 19850101-1234
+                      deductionAmount: 1500
+                  metadata:
+                    project: Website Redesign
+                    department: IT
+                    externalId: EXT-INV-2024-001
+      responses:
+        '200':
+          description: Invoice updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoice'
+              examples:
+                Update invoice:
+                  value:
+                    id: a419cf69-db6f-4de9-992c-b1a60942a443
+                    type: invoice
+                    customerRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      name: customer 1
+                    contactDetailRef:
+                      id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                      email: contact@customer1.com
+                      phone: '+46701234567'
+                    status: draft
+                    invoiceNumber: '1234'
+                    paymentReference: null
+                    orderNumberReference: ORD-5678
+                    projectReference: PROJ-001
+                    buyerReference: BUYER-123
+                    contractReference: CONTRACT-456
+                    currency: SEK
+                    currencyRate: 1
+                    totalAmount: 10000
+                    totalTax: 2500
+                    paidAmount: 0
+                    invoiceDate: 2024-10-10
+                    dueDate: 2024-10-10
+                    lineItems:
+                    - id: 1
+                      description: Product 1
+                      itemType: salesItem
+                      productType: goods
+                      unitType: piece
+                      quantity: 1
+                      unitPrice: 5000
+                      taxRate: 25
+                    - id: 2
+                      description: Installation work
+                      itemType: salesItem
+                      productType: services
+                      unitType: hour
+                      quantity: 10
+                      unitPrice: 500
+                      taxRate: 25
+                      taxReduction:
+                        taxReductionType: rot
+                        jobType: rotConstruction
+                    - id: 3
+                      itemRef:
+                        id: e964435e-50ef-4524-a439-05ff87794952
+                        description: A description line
+                      description: A description line
+                      itemType: descriptionOnlyItem
+                    billingAddress:
+                      line1: Älvsborgsvägen 10
+                      line2: null
+                      city: Göteborg
+                      postalCode: 123 45
+                      country: SE
+                    deliveryAddress:
+                      line1: Delivery Street 15
+                      line2: Floor 2
+                      city: Stockholm
+                      postalCode: 111 11
+                      country: SE
+                    taxReduction:
+                      type: rot
+                      description: Bathroom renovation
+                      propertyType: realEstate
+                      realEstateNumber: STOCKHOLM SÖDER 1:2
+                      deductionAmount: 1500
+                      status: draft
+                      deductionPeople:
+                      - personalNumber: 19850101-1234
+                        deductionAmount: 1500
+                    attachmentRefs:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      fileName: myfile.pdf
+                    - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+                      fileName: myfile2.pdf
+                    metadata:
+                      project: Website Redesign
+                      department: IT
+                      externalId: EXT-INV-2024-001
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 2 errors
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/invoiceDate'
+                      message: The invoice date field is required
+                    - field: '#/lineItems/0/taxRate'
+                      message: The tax rate field is required
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+    delete:
+      tags:
+      - invoices
+      summary: Delete an invoice
+      description: 'Deletes the specified invoice. Only invoices in draft status can be deleted.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: delete-invoice-with-id
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+      responses:
+        '204':
+          description: Invoice deleted successfully
+        '400':
+          description: Invalid request or invoice cannot be deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvalidRequest:
+                  value:
+                    code: operation-not-allowed
+                    message: Invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 cannot be deleted as it is not in draft status
+                    bokioErrorId: 4d408943-7a1e-47ac-85a7-ac52b2c210d3
+  /companies/{companyId}/invoices/{invoiceId}/attachments:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Add an attachment to an invoice
+      description: 'Adds an attachment to an existing draft invoice. The attachment will be added last in the list of attachments on the invoice.
+
+        Attached files will appear as additional pages in the final invoice
+
+
+        Supported file types: jpeg, png and pdf
+
+
+        Show example of multipart MIME as we do for uploads
+
+
+        **NOTE:** The invoice must be in draft status.
+
+        Maximum file size is 4 MB and all files can''t exceed 10 MB.
+
+        Dimensions must be less than height of 7016 and width of 4960 in pixels
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoice-attachment
+      parameters:
+      - name: Content-Type
+        in: header
+        required: true
+        description: Content type of the request
+        schema:
+          type: string
+        example: multipart/form-data;boundary=JLQPFBPUP0
+      requestBody:
+        description: Post the necessary fields for the API to add an attachment to an invoice.
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: The file to attach to invoice
+              required:
+              - file
+      responses:
+        '200':
+          description: Attachment added to invoice
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/invoiceAttachment'
+              examples:
+                Attachment:
+                  value:
+                    id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                    invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+                    fileName: myfile.pdf
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Missing required information
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                AttachmentNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource attachment with value 240a4af0-edfd-47b1-b4ab-f30450eaac19 was not found
+                    bokioErrorId: 8d408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+    get:
+      tags:
+      - invoices
+      summary: Get attachments
+      description: 'Retrieve the information of the attachments for the invoice. Use the query parameters to filter and navigate through the results.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice-attachments
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                     | Type        |
+
+          | ------------------------- | ----------- |
+
+          | fileName                  | string      |
+
+          '
+        schema:
+          type: string
+        example: fileName~faktura
+      responses:
+        '200':
+          description: Attachments found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/invoiceAttachment'
+              examples:
+                Attachments:
+                  value:
+                    totalItems: 2
+                    totalPages: 1
+                    currentPage: 1
+                    items:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+                      fileName: myfile.pdf
+                    - id: 390a4af0-edfd-47b1-b4ab-f30450eaac19
+                      invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+                      fileName: myfile2.pdf
+        '404':
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+  /companies/{companyId}/invoices/{invoiceId}/attachments/{attachmentId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: attachmentId
+      in: path
+      required: true
+      description: Unique identifier of the attachment
+      schema:
+        type: string
+        format: uuid
+      example: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+    get:
+      tags:
+      - invoices
+      summary: Get an attachment
+      description: 'Retrieve the information of the attachment with the matching attachmentId.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice-attachment
+      responses:
+        '200':
+          description: Attachment found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceAttachment'
+              examples:
+                Attachment:
+                  value:
+                    id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                    invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+                    fileName: myfile.pdf
+        '404':
+          description: Attachment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                AttachmentNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource attachment with value 240a4af0-edfd-47b1-b4ab-f30450eaac19 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 869a69a3-632b-4a09-899e-9dc03342b5dc
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+    delete:
+      tags:
+      - invoices
+      summary: Delete an attachment from an invoice
+      description: 'Deletes an attachment from an existing draft invoice.
+
+
+        **NOTE:** The invoice must be in draft status.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: delete-invoice-attachment
+      responses:
+        '204':
+          description: Attachment deleted from invoice
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+  /companies/{companyId}/invoices/{invoiceId}/attachments/{attachmentId}/download:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: attachmentId
+      in: path
+      required: true
+      description: Unique identifier of the attachment
+      schema:
+        type: string
+        format: uuid
+      example: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+    get:
+      tags:
+      - invoices
+      summary: Download an attachment from an invoice
+      description: 'Download the attachment with the matching attachmentId.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: download-invoice-attachment
+      responses:
+        '200':
+          description: Attachment found and downloaded successfully.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Attachment found and downloaded successfully.:
+                  value: fileName.pdf
+        '404':
+          description: Attachment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                AttachmentNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource attachment with value 240a4af0-edfd-47b1-b4ab-f30450eaac19 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 869a69a3-632b-4a09-899e-9dc03342b5dc
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+  /companies/{companyId}/invoices/{invoiceId}/credit:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Create a credit note
+      description: 'Creates a draft credit note for the specified invoice and returns the created credit note draft.
+
+
+        - Use `PUT /credit-notes/{id}` in case the invoice should be partially credited, e.g 3 out of a quantity of 4 for a line item.
+
+        - Use `POST /credit-notes/{id}/publish` to publish the created credit note.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoices-invoiceId-credit
+      responses:
+        '200':
+          description: Credit note created successfully, returns the updated invoice with creditNoteRef
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/creditNote'
+              examples:
+                createdCreditNote:
+                  summary: Credit note created successfully
+                  value:
+                    id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+                    status: draft
+                    invoiceNumber: null
+                    invoiceRef:
+                      id: a419cf69-db6f-4de9-992c-b1a60942a443
+                      invoiceNumber: IN-2024-001
+                    customerRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      name: customer 1
+                    contactDetailRef:
+                      id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                      email: contact@customer1.com
+                      phone: '+46701234567'
+                    currency: SEK
+                    currencyRate: 1
+                    totalAmount: 200
+                    totalTax: 50
+                    paidAmount: 0
+                    creditDate: 2024-10-15
+                    dueDate: 2024-11-15
+                    publishedDateTime: null
+                    lineItems:
+                    - id: 1
+                      itemRef:
+                        id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                        description: Product 1
+                      description: Product 1
+                      itemType: salesItem
+                      productType: goods
+                      quantity: 2
+                      unitPrice: 100
+                      taxRate: 25
+                    billingAddress:
+                      line1: Älvsborgsvägen 10
+                      line2: null
+                      city: Göteborg
+                      postalCode: 123 45
+                      country: SE
+                    deliveryAddress:
+                      line1: Delivery Street 15
+                      line2: Floor 2
+                      city: Stockholm
+                      postalCode: 111 11
+                      country: SE
+                    attachmentRefs:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      fileName: myfile.pdf
+                    - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+                      fileName: myfile2.pdf
+                    metadata:
+                      project: Website Redesign
+                      department: IT
+                      externalId: EXT-INV-2024-001
+        '400':
+          description: Invalid request or credit note cannot be created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+  /companies/{companyId}/invoices/{invoiceId}/download:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    get:
+      tags:
+      - invoices
+      summary: Download an invoice
+      description: 'Download the invoice PDF with the matching invoiceId.
+
+
+        **NOTE:** The invoice must be in published status.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: download-invoice
+      responses:
+        '200':
+          description: Invoice found and downloaded successfully.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Invoice found and downloaded successfully.:
+                  value: invoice.pdf
+        '400':
+          description: Invoice is not in a published status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotPublished:
+                  value:
+                    code: operation-not-allowed
+                    message: The invoice must be in a published status to download
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+  /companies/{companyId}/invoices/{invoiceId}/line-items:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Add a line item to an invoice
+      description: 'Adds a line item to an existing draft invoice. The item will be added last in the list of line items on the invoice.
+
+
+        **NOTE:** The invoice must be in draft status.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoice-lineItem
+      requestBody:
+        description: Post the necessary fields for the API to add a line item to an invoice.
+        content:
+          application/json:
+            schema:
+              oneOf:
+              - $ref: '#/components/schemas/invoiceItem'
+            examples:
+              New line item:
+                value:
+                  id: 1
+                  description: Product 2
+                  itemType: salesItem
+                  productType: goods
+                  unitType: piece
+                  quantity: 1
+                  unitPrice: 100
+                  taxRate: 25
+              Full line item:
+                value:
+                  id: 1
+                  itemRef:
+                    id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                  description: Product 1
+                  itemType: salesItem
+                  productType: goods
+                  unitType: piece
+                  quantity: 1
+                  unitPrice: 100
+                  taxRate: 25
+      responses:
+        '200':
+          description: Line item added
+          content:
+            application/json:
+              schema:
+                oneOf:
+                - $ref: '#/components/schemas/invoiceItem'
+              examples:
+                Line item:
+                  value:
+                    id: 1
+                    itemRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      description: Product 1
+                    description: Product 1
+                    itemType: salesItem
+                    productType: goods
+                    unitType: piece
+                    quantity: 1
+                    unitPrice: 100
+                    taxRate: 25
+        '400':
+          description: Missing required information
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: validation-error
+                    message: Validation failed with 1 error
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                    errors:
+                    - field: '#/taxRate'
+                      message: The tax rate field is required
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                Error:
+                  value:
+                    code: not-found
+                    message: invoice not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+  /companies/{companyId}/invoices/{invoiceId}/payments:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Create an invoice payment
+      description: 'Creates a new payment record for the specified invoice. Use the bookkeepingAccountNumber field to specify an accounting account other than the default account (1930).
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoice-payment
+      requestBody:
+        description: Payment information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoicePayment'
+            examples:
+              New payment:
+                value:
+                  date: 2024-10-15
+                  sumBaseCurrency: 200
+                  bookkeepingAccountNumber: 1930
+      responses:
+        '200':
+          description: Payment created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoicePayment'
+        '400':
+          description: Invalid payment data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+    get:
+      tags:
+      - invoices
+      summary: Get invoice payments
+      description: 'Retrieves all payment records for the specified invoice.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice-payments
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                     | Type        |
+
+          | ------------------------- | ----------- |
+
+          | date                      | date        |
+
+          | sumBaseCurrency           | decimal     |
+
+          '
+        schema:
+          type: string
+        example: date>2025-01-01
+      responses:
+        '200':
+          description: Payments found
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/invoicePayment'
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+  /companies/{companyId}/invoices/{invoiceId}/payments/{paymentId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: paymentId
+      in: path
+      required: true
+      description: Unique identifier of the payment
+      schema:
+        type: string
+        format: uuid
+      example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+    get:
+      tags:
+      - invoices
+      summary: Get an invoice payment
+      description: 'Retrieves a specific payment record for the invoice.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice-payment
+      responses:
+        '200':
+          description: Payment found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoicePayment'
+        '404':
+          description: Invoice or payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+    delete:
+      tags:
+      - invoices
+      summary: Delete an invoice payment
+      description: 'Deletes a payment record for the invoice.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: delete-invoice-payment
+      responses:
+        '204':
+          description: Payment deleted successfully
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+  /companies/{companyId}/invoices/{invoiceId}/payments/{paymentId}/record:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: paymentId
+      in: path
+      required: true
+      description: Unique identifier of the invoice payment
+      schema:
+        type: string
+        format: uuid
+      example: f319cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Record an invoice payment
+      description: 'Record an invoice payment.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: record-invoice-payment-with-id
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+      responses:
+        '200':
+          description: Invoice payment recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoicePayment'
+              examples:
+                recoredInvoicePayment:
+                  summary: Invoice payment recorded successfully
+                  value:
+                    id: f319cf69-db6f-4de9-992c-b1a60942a443
+                    date: 2024-10-15
+                    sumBaseCurrency: 200
+                    bookkeepingAccountNumber: 1930
+                    journalEntryRef:
+                      id: 5471645c-a52a-4859-b642-dbca253419e9
+        '400':
+          description: Invalid request or invoice payment cannot be recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvalidRequest:
+                  value:
+                    code: validation-error
+                    message: Action cannot be performed on invoice payment with value f319cf69-db6f-4de9-992c-b1a60942a443
+                    bokioErrorId: 4d408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Invoice payment not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoicePaymentNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice payment with value f319cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+  /companies/{companyId}/invoices/{invoiceId}/publish:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Publish an invoice
+      description: 'Publishes a draft invoice, making it official and ready to be sent to the customer.
+
+        Note that invoice will not be automatically emailed to the customer when published through the API.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoices-invoiceId-publish
+      responses:
+        '200':
+          description: Invoice published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoice'
+        '400':
+          description: Invalid request or invoice cannot be published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+  /companies/{companyId}/invoices/{invoiceId}/record:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Record an invoice
+      description: 'Record an invoice.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: record-invoice-with-id
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+      responses:
+        '200':
+          description: Invoice recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoice'
+              examples:
+                recoredInvoice:
+                  summary: Invoice recorded successfully
+                  value:
+                    id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+                    status: published
+                    invoiceNumber: IN-2024-001
+                    paymentReference: '1234567890'
+                    customerRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      name: customer 1
+                    contactDetailRef:
+                      id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                      email: contact@customer1.com
+                      phone: '+46701234567'
+                    currency: SEK
+                    currencyRate: 1
+                    totalAmount: 10000
+                    totalTax: 2500
+                    paidAmount: 0
+                    invoiceDate: 2024-10-15
+                    dueDate: 2024-11-15
+                    publishedDateTime: 2024-10-15 12:00:00+00:00
+                    lineItems:
+                    - id: 1
+                      itemRef:
+                        id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                        description: Product 1
+                      description: Product 1
+                      itemType: salesItem
+                      productType: goods
+                      unitType: piece
+                      quantity: 1
+                      unitPrice: 5000
+                      taxRate: 25
+                    - id: 2
+                      description: Installation work
+                      itemType: salesItem
+                      productType: services
+                      unitType: hour
+                      quantity: 10
+                      unitPrice: 500
+                      taxRate: 25
+                      taxReduction:
+                        taxReductionType: rot
+                        jobType: rotConstruction
+                    billingAddress:
+                      line1: Älvsborgsvägen 10
+                      line2: null
+                      city: Göteborg
+                      postalCode: 123 45
+                      country: SE
+                    deliveryAddress:
+                      line1: Delivery Street 15
+                      line2: Floor 2
+                      city: Stockholm
+                      postalCode: 111 11
+                      country: SE
+                    taxReduction:
+                      type: rot
+                      description: Bathroom renovation
+                      propertyType: realEstate
+                      realEstateNumber: STOCKHOLM SÖDER 1:2
+                      deductionAmount: 1500
+                      status: draft
+                      deductionPeople:
+                      - personalNumber: 19850101-1234
+                        deductionAmount: 1500
+                    attachmentRefs:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      fileName: myfile.pdf
+                    - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+                      fileName: myfile2.pdf
+                    journalEntryRef:
+                      id: 89c9566a-9f7a-4894-aedd-4f382006f687
+                    metadata:
+                      project: Website Redesign
+                      department: IT
+                      externalId: EXT-INV-2024-001
+        '400':
+          description: Invalid request or invoice cannot be recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvalidRequest:
+                  value:
+                    code: validation-error
+                    message: Action cannot be performed on invoice with value a419cf69-db6f-4de9-992c-b1a60942a443
+                    bokioErrorId: 4d408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+  /companies/{companyId}/invoices/{invoiceId}/settlements:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    post:
+      tags:
+      - invoices
+      summary: Create an invoice settlement
+      description: 'Create a settlement for the invoice that will reduce the outstanding amount of the invoice. A negative amount will increase the outstanding amount. For example, in the case of a currency gain.
+
+
+        > 📘 Settlement types that can be created in Bokio API
+
+        > - `currency`
+
+        > - `bankFee`
+
+        > - `paymentServiceFee`
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: post-invoice-settlement
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/invoiceSettlementWrite'
+            examples:
+              New settlement:
+                value:
+                  type: bankFee
+                  invoiceSettlementDetails:
+                    date: 2024-10-15
+                    sumBaseCurrency: 100
+              Payment service fee settlement:
+                value:
+                  type: paymentServiceFee
+                  invoiceSettlementDetails:
+                    date: 2024-10-15
+                    sumBaseCurrency: 25
+                    vatScheme: eu
+      responses:
+        '200':
+          description: Settlement created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceSettlementRead'
+              examples:
+                Settlement created:
+                  value:
+                    id: c529df79-eb7f-5ef0-a8dc-c2b71f953554
+                    invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+                    type: bankFee
+                    invoiceSettlementDetails:
+                      date: 2024-10-15
+                      sumBaseCurrency: 100
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+        '404':
+          description: Invoice not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+    get:
+      tags:
+      - invoices
+      summary: Get invoice settlements
+      description: 'Get all settlements for the invoice. Use the query parameters to filter and navigate through the results.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice-settlements
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+      parameters:
+      - name: page
+        in: query
+        required: false
+        description: Page number
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: pageSize
+        in: query
+        required: false
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          default: 25
+          maximum: 100
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+
+          | Field                     | Type        |
+
+          | ------------------------- | ----------- |
+
+          | date                      | date        |
+
+          | sumBaseCurrency           | decimal     |
+
+          '
+        schema:
+          type: string
+        example: date>2025-01-01
+      responses:
+        '200':
+          description: List of settlements
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/invoiceSettlementRead'
+        '404':
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+  /companies/{companyId}/invoices/{invoiceId}/settlements/{settlementId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: settlementId
+      in: path
+      required: true
+      description: Unique identifier of the settlement
+      schema:
+        type: string
+        format: uuid
+      example: c529df79-eb7f-5ef0-a8dc-c2b71f953554
+    get:
+      tags:
+      - invoices
+      summary: Get an invoice settlement
+      description: 'Retrieve the information of the specific settlement with the matching settlementId.
+
+
+        **Scope:** `invoices:read`
+
+        '
+      operationId: get-invoice-settlement
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:read
+      responses:
+        '200':
+          description: Settlement
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceSettlementRead'
+        '404':
+          description: The requested resource was not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice with value a419cf69-db6f-4de9-992c-b1a60942a443 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+                SettlementNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource settlement with value c529df79-eb7f-5ef0-a8dc-c2b71f953554 was not found
+                    bokioErrorId: 8d408943-7a1e-47ac-85a7-ac52b2c210d3
+    delete:
+      tags:
+      - invoices
+      summary: Delete an invoice settlement
+      description: 'Delete an existing settlement.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: delete-invoice-settlement
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+      responses:
+        '204':
+          description: Settlement deleted successfully
+  /companies/{companyId}/invoices/{invoiceId}/settlements/{settlementId}/record:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: invoiceId
+      in: path
+      required: true
+      description: Unique identifier of the invoice
+      schema:
+        type: string
+        format: uuid
+      example: a419cf69-db6f-4de9-992c-b1a60942a443
+    - name: settlementId
+      in: path
+      required: true
+      description: Unique identifier of the invoice settlement
+      schema:
+        type: string
+        format: uuid
+      example: b329df79-eb7f-5ef0-a8dc-c2b71f953554
+    post:
+      tags:
+      - invoices
+      summary: Record an invoice settlement
+      description: 'Record an invoice settlement.
+
+
+        **Scope:** `invoices:write`
+
+        '
+      operationId: record-invoice-settlement-with-id
+      security:
+      - tokenAuth: []
+      - access_token:
+        - invoices:write
+      responses:
+        '200':
+          description: Invoice settlement recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/invoiceSettlementRead'
+              examples:
+                recoredInvoiceSettlement:
+                  summary: Invoice settlement recorded successfully
+                  value:
+                    id: c529df79-eb7f-5ef0-a8dc-c2b71f953554
+                    invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+                    type: bankFee
+                    settlementDetails:
+                      date: 2024-10-15
+                      sumBaseCurrency: 15.5
+                    journalEntryRef:
+                      id: 1c605758-32f5-4594-8afd-f56816d95cde
+        '400':
+          description: Invalid request or invoice settlement cannot be recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvalidRequest:
+                  value:
+                    code: validation-error
+                    message: Action cannot be performed on invoice settlement with value b329df79-eb7f-5ef0-a8dc-c2b71f953554
+                    bokioErrorId: 4d408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Invoice settlement not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvoiceSettlementNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource invoice settlement with value b329df79-eb7f-5ef0-a8dc-c2b71f953554 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+components:
+  schemas:
+    invoice:
+      type: object
+      title: invoice
+      required:
+      - invoiceDate
+      - lineItems
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        type:
+          type: string
+          default: invoice
+          enum:
+          - invoice
+          - cashInvoice
+          description: The type of the invoice can be invoice or cashInvoice. Can only be set to invoice when creating a new invoice and will default to invoice if not set.
+        customerRef:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            name:
+              type: string
+              readOnly: true
+        contactDetailRef:
+          type: object
+          nullable: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              nullable: true
+            email:
+              type: string
+              readOnly: true
+              nullable: true
+            phone:
+              type: string
+              readOnly: true
+              nullable: true
+        invoiceNumber:
+          type: string
+          readOnly: true
+          nullable: true
+          description: The invoice number will be generated at the time of publishing the invoice.
+        paymentReference:
+          type: string
+          readOnly: true
+          nullable: true
+          description: The payment reference (OCR number) for the invoice. Populated when the invoice is published, null for drafts.
+        orderNumberReference:
+          type: string
+          nullable: true
+          description: The order number associated with the invoice.
+        projectReference:
+          type: string
+          nullable: true
+          description: The project reference associated with the invoice.
+        buyerReference:
+          type: string
+          nullable: true
+          description: The buyer reference associated with the invoice.
+        contractReference:
+          type: string
+          nullable: true
+          description: The contract reference associated with the invoice.
+        currency:
+          description: ISO 4217 currency code
+          type: string
+          default: SEK
+        currencyRate:
+          type: number
+          format: double
+          default: 1
+        totalAmount:
+          type: number
+          format: double
+          readOnly: true
+        totalTax:
+          type: number
+          format: double
+          readOnly: true
+        paidAmount:
+          type: number
+          format: double
+          readOnly: true
+        status:
+          type: string
+          enum:
+          - draft
+          - published
+          - paid
+          - overPaid
+          - underPaid
+          - overdue
+          - credited
+          - credit
+          default: draft
+          readOnly: true
+        invoiceDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+          description: 'The due date for the invoice. Optional — when omitted, it is automatically calculated using the fallback chain: customer payment terms → company payment terms → 30 days from the invoice date.'
+        publishedDateTime:
+          type: string
+          format: date-time
+          description: The date when the credit note was published (null for draft)
+          nullable: true
+        lineItems:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/invoiceItem'
+        billingAddress:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/addressWithCountrySubdivision'
+        deliveryAddress:
+          oneOf:
+          - $ref: '#/components/schemas/address'
+        taxReduction:
+          type: object
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/invoiceTaxReduction'
+        attachmentRefs:
+          type: array
+          readOnly: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                readOnly: true
+              name:
+                type: string
+                readOnly: true
+        journalEntryRef:
+          type: object
+          readOnly: true
+          nullable: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+        creditNoteRefs:
+          type: array
+          readOnly: true
+          nullable: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                readOnly: true
+        metadata:
+          type: object
+          description: 'Metadata fields for the invoice as string key-value pairs. These fields can be used for filtering.All metadata keys must
+
+            start with a letter or underscore and contain only alphanumeric characters and underscores.
+
+            '
+          maxProperties: 10
+          additionalProperties:
+            type: string
+          example:
+            project: Website Redesign
+            department: IT
+            externalId: EXT-INV-2024-001
+      example:
+        id: a419cf69-db6f-4de9-992c-b1a60942a443
+        type: invoice
+        customerRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          name: customer 1
+        contactDetailRef:
+          id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+          email: contact@customer1.com
+          phone: '+46701234567'
+        invoiceNumber: '1234'
+        paymentReference: null
+        orderNumberReference: ORD-5678
+        projectReference: PROJ-001
+        buyerReference: BUYER-123
+        contractReference: CONTRACT-456
+        currency: SEK
+        currencyRate: 1
+        totalAmount: 10000
+        totalTax: 2500
+        paidAmount: 0
+        status: draft
+        invoiceDate: 2024-10-10
+        dueDate: 2024-10-10
+        lineItems:
+        - id: 1
+          itemRef:
+            id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description: Product 1
+          description: Product 1
+          itemType: salesItem
+          productType: goods
+          unitType: piece
+          quantity: 1
+          unitPrice: 5000
+          taxRate: 25
+        - id: 2
+          description: Installation work
+          itemType: salesItem
+          productType: services
+          unitType: hour
+          quantity: 10
+          unitPrice: 500
+          taxRate: 25
+          taxReduction:
+            taxReductionType: rot
+            jobType: rotConstruction
+        - id: 3
+          itemRef:
+            id: e964435e-50ef-4524-a439-05ff87794952
+            description: A description line
+          description: A description line
+          itemType: descriptionOnlyItem
+        billingAddress:
+          line1: Älvsborgsvägen 10
+          line2: null
+          city: Göteborg
+          postalCode: 123 45
+          country: SE
+        deliveryAddress:
+          line1: Delivery Street 15
+          line2: Floor 2
+          city: Stockholm
+          postalCode: 111 11
+          country: SE
+        taxReduction:
+          type: rot
+          description: Bathroom renovation
+          propertyType: realEstate
+          realEstateNumber: STOCKHOLM SÖDER 1:2
+          deductionAmount: 1500
+          status: draft
+          deductionPeople:
+          - personalNumber: 19850101-1234
+            deductionAmount: 1500
+        attachmentRefs:
+        - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+          fileName: myfile.pdf
+        - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+          fileName: myfile2.pdf
+        journalEntryRef:
+          id: f329df79-eb7f-5ef0-a8dc-c2b71f953554
+        metadata:
+          project: Website Redesign
+          department: IT
+          externalId: EXT-INV-2024-001
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    addressWithCountrySubdivision:
+      type: object
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type: string
+          nullable: true
+      example:
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
+    invoiceSettlementRead:
+      type: object
+      readOnly: true
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the settlement
+          readOnly: true
+        invoiceId:
+          type: string
+          format: uuid
+          description: The unique identifier of the invoice this settlement belongs to
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+          enum:
+          - currency
+          - bankFee
+          - badDebt
+          - balanceAdjustment
+          - paymentServiceFee
+          description: 'The type of the settlement.
+
+
+            - Currency adjustments are for changes in exchange rates. Currency gain or currency loss is reflected in `sumBaseCurrency` being positive or negative respectively.
+
+
+            - Bank fees are for charges from banks or payment providers.
+
+
+            - Bad debts are for uncollectible invoices.
+
+
+            - Balance adjustments are for correcting discrepancies on invoices without affecting bookkeeping.
+
+
+            - Payment service fees are for charges from payment service providers (e.g. Stripe). Available for Swedish companies only. Supports different VAT schemes for domestic, EU, non-EU, and VAT-exempt transactions.
+
+            '
+        invoiceSettlementDetails:
+          oneOf:
+          - $ref: '#/components/schemas/standardSettlementDetails'
+          - $ref: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          discriminator:
+            propertyName: reason
+            mapping:
+              currency: '#/components/schemas/standardSettlementDetails'
+              bankFee: '#/components/schemas/standardSettlementDetails'
+              badDebt: '#/components/schemas/standardSettlementDetails'
+              balanceAdjustment: '#/components/schemas/standardSettlementDetails'
+              paymentServiceFee: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          description: The settlement details specific to the settlement type
+        journalEntryRef:
+          type: object
+          nullable: true
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+      example:
+        id: c529df79-eb7f-5ef0-a8dc-c2b71f953554
+        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+        type: bankFee
+        invoiceSettlementDetails:
+          date: 2024-10-15
+          sumBaseCurrency: 15.5
+        journalEntryRef:
+          id: 55c899c5-82b2-4a09-899e-9dc03342b5dc
+    paymentServiceFeeSettlementDetails:
+      type: object
+      required:
+      - date
+      - sumBaseCurrency
+      - vatScheme
+      properties:
+        date:
+          type: string
+          format: date
+          description: The date of the settlement
+        sumBaseCurrency:
+          type: number
+          format: decimal
+          description: The settlement amount in base currency. Must be greater than zero.
+        vatScheme:
+          type: string
+          enum:
+          - domestic
+          - eu
+          - nonEu
+          - vatExempt
+          description: 'The VAT scheme for the payment service fee. Determines how VAT is handled in the bookkeeping.
+
+
+            - `domestic` — No reverse charge VAT. The fee is booked as a domestic expense.
+
+
+            - `eu` — EU reverse charge. The fee is booked with reverse charge VAT (output VAT on account 2645, input VAT on account 2614).
+
+
+            - `nonEu` — Non-EU reverse charge. Same VAT treatment as EU but booked to a different expense account.
+
+
+            - `vatExempt` — VAT exempt. The fee is booked as a general administrative expense with no VAT.
+
+            '
+      example:
+        date: 2024-10-15
+        sumBaseCurrency: 25
+        vatScheme: eu
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    invoiceSettlementWrite:
+      type: object
+      required:
+      - type
+      - invoiceSettlementDetails
+      properties:
+        type:
+          type: string
+          enum:
+          - currency
+          - bankFee
+          - paymentServiceFee
+          description: 'The type of the settlement.
+
+
+            - Currency adjustments are for changes in exchange rates. Currency gain or currency loss is reflected in `sumBaseCurrency` being positive or negative respectively.
+
+
+            - Bank fees are for charges from banks or payment providers.
+
+
+            - Payment service fees are for charges from payment service providers (e.g. Stripe). Available for Swedish companies only. Requires `vatScheme` in the settlement details.
+
+            '
+        invoiceSettlementDetails:
+          oneOf:
+          - $ref: '#/components/schemas/standardSettlementDetails'
+          - $ref: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          discriminator:
+            propertyName: reason
+            mapping:
+              currency: '#/components/schemas/standardSettlementDetails'
+              bankFee: '#/components/schemas/standardSettlementDetails'
+              paymentServiceFee: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          description: The settlement details specific to the settlement type
+      example:
+        type: bankFee
+        invoiceSettlementDetails:
+          date: 2024-10-15
+          sumBaseCurrency: 15.5
+    salesInvoiceItem:
+      type: object
+      title: salesItem
+      required:
+      - description
+      - itemType
+      - productType
+      - quantity
+      - unitPrice
+      - taxRate
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+          description: Should not be set for new items
+        itemRef:
+          type: object
+          title: itemRef
+          nullable: true
+          description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
+
+            '
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Reference to existing salesItem id
+              example: 869a69a3-632b-4a09-899e-9dc03342b5dc
+            description:
+              type: string
+              nullable: true
+              readOnly: true
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - salesItem
+        productType:
+          type: string
+          enum:
+          - goods
+          - services
+        unitType:
+          type: string
+          default: unspecified
+          enum:
+          - unspecified
+          - piece
+          - hour
+          - day
+          - month
+          - kilogram
+          - gram
+          - liter
+          - meter
+          - centimeter
+          - millimeter
+          - meterSquared
+          - meterCubic
+          - mile
+          - kilometer
+          - gigabyte
+          - hectar
+          - words
+          - year
+          - week
+          - minute
+          - megabyte
+          - ton
+        quantity:
+          type: number
+          format: double
+          default: 1
+        unitPrice:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          type: integer
+          nullable: true
+          format: int32
+          description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
+        taxReduction:
+          type: object
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/lineItemTaxReduction'
+          description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
+      example:
+        id: 1
+        itemRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          description: Installation work
+        description: Installation work
+        itemType: salesItem
+        productType: services
+        unitType: hour
+        quantity: 10
+        unitPrice: 500
+        taxRate: 25
+        bookkeepingAccountNumber: 3389
+        taxReduction:
+          taxReductionType: rot
+          jobType: rotConstruction
+    lineItemTaxReduction:
+      type: object
+      nullable: true
+      title: lineItemTaxReduction
+      description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
+
+        '
+      required:
+      - taxReductionType
+      - jobType
+      properties:
+        taxReductionType:
+          type: string
+          enum:
+          - rot
+          - rut
+          description: The tax reduction type for this line item. Must match the invoice-level taxReduction type.
+        jobType:
+          type: string
+          enum:
+          - rotConstruction
+          - rotElectricity
+          - rotGlassPlate
+          - rotSoilWork
+          - rotSweeping
+          - rotPainting
+          - rotPlumbing
+          - rutChildServices
+          - rutDataITServices
+          - rutRemovalServices
+          - rutClothingCare
+          - rutPersonalHelpCare
+          - rutRepair
+          - rutSnow
+          - rutCleaning
+          - rutGardening
+          - rutWaterWashingOfTextiles
+          - rutFurnishing
+          - rutTransportOfHouseholdGoods
+          - rutHousingSupervision
+          description: 'The job type categorizing the work. The prefix must match the tax reduction type:
+
+            - ROT types: rotConstruction, rotElectricity, rotGlassPlate, rotSoilWork, rotSweeping, rotPainting, rotPlumbing
+
+            - RUT types: rutChildServices, rutDataITServices, rutRemovalServices, rutClothingCare, rutPersonalHelpCare, rutRepair, rutSnow, rutCleaning, rutGardening, rutWaterWashingOfTextiles, rutFurnishing, rutTransportOfHouseholdGoods, rutHousingSupervision
+
+            '
+      example:
+        taxReductionType: rot
+        jobType: rotConstruction
+    creditNote:
+      type: object
+      required:
+      - id
+      - currency
+      - creditDate
+      - dueDate
+      - lineItems
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the credit note
+        invoiceRef:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: The unique identifier of the original invoice
+            invoiceNumber:
+              type: string
+              readOnly: true
+              description: The invoice number of the original invoice
+          description: Reference to the original invoice being credited
+        customerRef:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+            name:
+              type: string
+              readOnly: true
+        contactDetailRef:
+          type: object
+          nullable: true
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+              nullable: true
+            email:
+              type: string
+              readOnly: true
+              nullable: true
+            phone:
+              type: string
+              readOnly: true
+              nullable: true
+        invoiceNumber:
+          type: string
+          readOnly: true
+          nullable: true
+          description: The credit note number
+        orderNumberReference:
+          type: string
+          nullable: true
+          description: The order number associated with the invoice.
+        projectReference:
+          type: string
+          nullable: true
+          description: The project reference associated with the credit note.
+        buyerReference:
+          type: string
+          nullable: true
+          description: The buyer reference associated with the credit note.
+        contractReference:
+          type: string
+          nullable: true
+          description: The contract reference associated with the credit note.
+        currency:
+          description: ISO 4217 currency code
+          type: string
+          default: SEK
+        currencyRate:
+          type: number
+          format: double
+          default: 1
+        totalAmount:
+          type: number
+          format: double
+          readOnly: true
+        totalTax:
+          type: number
+          format: double
+          readOnly: true
+        paidAmount:
+          type: number
+          format: double
+          readOnly: true
+        status:
+          type: string
+          enum:
+          - draft
+          - published
+          description: The status of the credit note
+          readOnly: true
+        creditDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        publishedDateTime:
+          type: string
+          nullable: true
+          format: date-time
+          description: The date when the credit note was published (null for draft)
+          readOnly: true
+        lineItems:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/invoiceItem'
+        billingAddress:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/addressWithCountrySubdivision'
+        deliveryAddress:
+          oneOf:
+          - $ref: '#/components/schemas/address'
+        attachmentRefs:
+          type: array
+          readOnly: true
+          nullable: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                readOnly: true
+              name:
+                type: string
+                readOnly: true
+        journalEntryRef:
+          type: object
+          readOnly: true
+          nullable: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+        metadata:
+          type: object
+          nullable: true
+          description: 'Metadata fields for the invoice as string key-value pairs. These fields can be used for filtering.All metadata keys must
+
+            start with a letter or underscore and contain only alphanumeric characters and underscores.
+
+            '
+          maxProperties: 10
+          additionalProperties:
+            type: string
+          example:
+            project: Website Redesign
+            department: IT
+            externalId: EXT-INV-2024-001
+      example:
+        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+        status: published
+        invoiceNumber: CN-2024-001
+        invoiceRef:
+          id: a419cf69-db6f-4de9-992c-b1a60942a443
+          invoiceNumber: IN-2024-001
+        customerRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          name: customer 1
+        contactDetailRef:
+          id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+          email: contact@customer1.com
+          phone: '+46701234567'
+        currency: SEK
+        currencyRate: 1
+        totalAmount: 200
+        totalTax: 50
+        paidAmount: 0
+        creditDate: 2024-10-15
+        dueDate: 2024-11-15
+        publishedDateTime: 2024-10-15 12:00:00
+        projectReference: PROJ-001
+        buyerReference: BUYER-123
+        contractReference: CONTRACT-456
+        lineItems:
+        - id: 1
+          itemRef:
+            id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description: Product 1
+          description: Product 1
+          itemType: salesItem
+          productType: goods
+          quantity: 2
+          unitPrice: 100
+          taxRate: 25
+        billingAddress:
+          line1: Älvsborgsvägen 10
+          line2: null
+          city: Göteborg
+          postalCode: 123 45
+          country: SE
+        deliveryAddress:
+          line1: Delivery Street 15
+          line2: Floor 2
+          city: Stockholm
+          postalCode: 111 11
+          country: SE
+        attachmentRefs:
+        - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+          fileName: myfile.pdf
+        - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+          fileName: myfile2.pdf
+        journalEntryRef:
+          id: 340a4af0-edfd-47b1-b4ab-f30450eaac19
+        metadata:
+          project: Website Redesign
+          department: IT
+          externalId: EXT-INV-2024-001
+    descriptionOnlyInvoiceItem:
+      type: object
+      title: descriptionOnlyItem
+      required:
+      - description
+      - itemType
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+          description: Should not be set for new items
+        itemRef:
+          type: object
+          nullable: true
+          description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
+
+            '
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Reference to existing descriptionOnlyItem id
+              example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description:
+              type: string
+              nullable: true
+              readOnly: true
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - descriptionOnlyItem
+      example:
+        id: 2
+        itemRef:
+          id: e964435e-50ef-4524-a439-05ff87794952
+          description: Custom description line
+        description: Custom description line
+        itemType: descriptionOnlyItem
+    address:
+      type: object
+      title: address
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+      example:
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
+    invoicePayment:
+      type: object
+      title: invoicePayment
+      required:
+      - date
+      - sumBaseCurrency
+      - bookkeepingAccountNumber
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        invoiceId:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date
+        sumBaseCurrency:
+          description: The amount of the payment in the base currency. Currently the base currency is always SEK.
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          description: The bookkeeping number of the payment account. The value must match a chart of accounts account number that has a payment account details.
+          type: integer
+          format: int32
+        journalEntryRef:
+          type: object
+          nullable: true
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+      example:
+        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+        date: 2024-10-15
+        sumBaseCurrency: 200
+        bookkeepingAccountNumber: 1930
+        journalEntryRef:
+          id: 55c899c5-82b2-4a09-899e-9dc03342b5dc
+    invoiceAttachment:
+      type: object
+      title: invoiceAttachment
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        invoiceId:
+          type: string
+          format: uuid
+          readOnly: true
+        fileName:
+          type: string
+          readOnly: true
+      example:
+        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+        fileName: myfile.pdf
+    standardSettlementDetails:
+      type: object
+      additionalProperties: false
+      required:
+      - date
+      - sumBaseCurrency
+      properties:
+        date:
+          type: string
+          format: date
+          description: The date of the settlement
+        sumBaseCurrency:
+          type: number
+          format: decimal
+          description: The settlement amount in base currency
+      example:
+        date: 2024-10-15
+        sumBaseCurrency: 15.5
+    invoiceItem:
+      type: object
+      title: lineItem
+      oneOf:
+      - $ref: '#/components/schemas/salesInvoiceItem'
+      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
+    invoiceTaxReduction:
+      type: object
+      nullable: true
+      title: invoiceTaxReduction
+      description: 'Tax reduction details for the invoice.
+
+
+        **Ownership restriction:** Only the integration that created the invoice can manage tax reduction data. Other integrations can read tax reduction data, but personal numbers will be masked (see `personalNumber`).
+
+        '
+      required:
+      - type
+      - description
+      - deductionPeople
+      properties:
+        type:
+          type: string
+          enum:
+          - rot
+          - rut
+          description: The tax reduction type.
+        description:
+          type: string
+          description: Description of the tax reduction work performed.
+        propertyType:
+          type: string
+          nullable: true
+          enum:
+          - realEstate
+          - housingDesignation
+          description: Required when type is `rot`. The type of property where the work is performed.
+        realEstateNumber:
+          type: string
+          nullable: true
+          description: Required when propertyType is `realEstate`. The real estate designation number.
+        tenantOrgNumber:
+          type: string
+          nullable: true
+          description: Required when propertyType is `housingDesignation`. The organisational number of the housing association (BRF).
+        apartmentNumber:
+          type: string
+          nullable: true
+          description: Required when propertyType is `housingDesignation`. The apartment number within the housing association.
+        deductionAmount:
+          type: number
+          format: double
+          readOnly: true
+          description: The total deduction amount calculated from all deduction people.
+        status:
+          type: string
+          readOnly: true
+          enum:
+          - draft
+          - awaitingPayment
+          - readyToSubmit
+          - submitted
+          - removed
+          - completed
+          description: The current status of the tax reduction.
+        deductionPeople:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/invoiceTaxReductionDeductionPerson'
+          description: The people eligible for the tax deduction. At least one person is required.
+      example:
+        type: rot
+        description: Bathroom renovation
+        propertyType: housingDesignation
+        tenantOrgNumber: '7164009068'
+        apartmentNumber: '1001'
+        deductionAmount: 1500
+        status: draft
+        deductionPeople:
+        - personalNumber: 19850101-1234
+          deductionAmount: 1500
+    invoiceTaxReductionDeductionPerson:
+      type: object
+      title: invoiceTaxReductionDeductionPerson
+      required:
+      - personalNumber
+      - deductionAmount
+      properties:
+        personalNumber:
+          type: string
+          pattern: ^\d{8}-\d{4}$
+          description: 'Swedish personal number in format YYYYMMDD-XXXX.
+
+
+            When the invoice was created by a different integration, the value is fully masked and returned as `YYYYMMDD-XXXX`.
+
+            '
+        deductionAmount:
+          type: number
+          format: double
+          minimum: 0
+          description: The deduction amount for this person. Must be zero or greater.
+      example:
+        personalNumber: 19850101-1234
+        deductionAmount: 1500
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java

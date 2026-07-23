@@ -1,0 +1,1104 @@
+openapi: 3.0.3
+info:
+  version: '1.0'
+  title: Company authorization credit-notes API
+  description: The Bokio Company API containing all resources for company tenant.
+  termsOfService: https://docs.bokio.se/page/terms/
+  contact:
+    name: Bokio
+    url: https://docs.bokio.se
+    email: support@bokio.se
+servers:
+- url: https://api.bokio.se/v1
+  description: Bokio API
+  x-bokio-api: true
+security:
+- tokenAuth: []
+tags:
+- name: credit-notes
+  description: Operations for managing credit notes
+paths:
+  /companies/{companyId}/credit-notes:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    get:
+      tags:
+      - credit-notes
+      summary: List credit notes
+      description: 'Returns a list of credit notes for the company.
+
+
+        **Scope:** `credit-notes:read`
+
+        '
+      operationId: list-credit-notes-v1
+      parameters:
+      - name: page
+        in: query
+        description: Page number for pagination
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          default: 1
+      - name: pageSize
+        in: query
+        description: Number of items per page
+        schema:
+          type: integer
+          format: int32
+          minimum: 1
+          maximum: 100
+          default: 20
+      - name: query
+        in: query
+        required: false
+        description: 'Optional query to filter the data set with supported fields listed below and [available operations](filtering).
+
+          View documentation for filtering on metatdata [here](metadata).
+
+
+          | Field                | Type        |
+
+          | -------------------- | ----------- |
+
+          | type                 | string      |
+
+          | customerRef          | string      |
+
+          | orderNumberReference | string      |
+
+          | projectReference     | string      |
+
+          | buyerReference       | string      |
+
+          | contractReference    | string      |
+
+          | currency             | string      |
+
+          | totalAmount          | number      |
+
+          | status               | string      |
+
+          | invoiceDate          | date        |
+
+          | dueDate              | date        |
+
+          | metadata             | string      |
+
+          '
+        schema:
+          type: string
+        example: dueDate==2024-10-10&&currency==SEK
+      responses:
+        '200':
+          description: List of credit notes
+          content:
+            application/json:
+              schema:
+                allOf:
+                - $ref: '#/components/schemas/pagedResponse'
+                - type: object
+                  properties:
+                    items:
+                      type: array
+                      items:
+                        $ref: '#/components/schemas/creditNote'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:read
+  /companies/{companyId}/credit-notes/{creditNoteId}:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: creditNoteId
+      in: path
+      required: true
+      description: Unique identifier of the credit note
+      schema:
+        type: string
+        format: uuid
+      example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+    get:
+      tags:
+      - credit-notes
+      summary: Get a credit note
+      description: 'Retrieves a specific credit note by its ID.
+
+
+        **Scope:** `credit-notes:read`
+
+        '
+      operationId: get-credit-note-v1
+      responses:
+        '200':
+          description: Credit note found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/creditNote'
+        '404':
+          description: Credit note not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                notFound:
+                  summary: Credit note not found
+                  value:
+                    code: not-found
+                    message: Credit note not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:read
+    put:
+      tags:
+      - credit-notes
+      summary: Update a credit note
+      description: 'Updates an existing credit note. Only draft credit notes can be updated.
+
+
+        **Scope:** `credit-notes:write`
+
+        '
+      operationId: update-credit-note-v1
+      requestBody:
+        description: Updated credit note information
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/creditNote'
+            examples:
+              creditNote:
+                summary: Example credit note update
+                value:
+                  id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+                  orderNumberReference: ORD-5678
+                  projectReference: PROJ-001
+                  buyerReference: BUYER-123
+                  contractReference: CONTRACT-456
+                  currency: SEK
+                  currencyRate: 1
+                  creditDate: 2024-10-15
+                  dueDate: 2024-11-15
+                  lineItems:
+                  - id: 1
+                    itemRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      description: Product 1
+                    description: Product 1 (Updated)
+                    itemType: salesItem
+                    productType: goods
+                    quantity: 3
+                    unitPrice: 100
+                    taxRate: 25
+                  deliveryAddress:
+                    line1: Delivery Street 15
+                    line2: Floor 2
+                    city: Stockholm
+                    postalCode: 111 11
+                    country: SE
+      responses:
+        '200':
+          description: Credit note updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/creditNote'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                validationError:
+                  summary: Validation error
+                  value:
+                    code: validation-error
+                    message: One or more validation errors occurred
+                    errors:
+                    - field: '#/creditDate'
+                      message: The credit date field is required
+        '404':
+          description: Credit note not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:write
+    delete:
+      tags:
+      - credit-notes
+      summary: Delete a credit note
+      description: 'Deletes a draft credit note. Only draft credit notes can be deleted.
+
+
+        **Scope:** `credit-notes:write`
+
+        '
+      operationId: delete-credit-note-with-id
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:write
+      responses:
+        '204':
+          description: Credit note deleted successfully
+        '400':
+          description: Credit note cannot be deleted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                CreditNoteCannotBeDeleted:
+                  value:
+                    code: operation-not-allowed
+                    message: Credit note with value b529df79-eb7f-5ef0-a8dc-c2b71f953554 cannot be deleted as it is not in draft status
+                    bokioErrorId: 4d408943-7a1e-47ac-85a7-ac52b2c210d3
+  /companies/{companyId}/credit-notes/{creditNoteId}/publish:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: creditNoteId
+      in: path
+      required: true
+      description: Unique identifier of the credit note
+      schema:
+        type: string
+        format: uuid
+      example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+    post:
+      tags:
+      - credit-notes
+      summary: Publish a credit note
+      description: 'Publishes a draft credit note, making it official and immutable.
+
+
+        **Scope:** `credit-notes:write`
+
+        '
+      operationId: publish-credit-note-v1
+      responses:
+        '200':
+          description: Credit note published successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/creditNote'
+        '400':
+          description: Credit note cannot be published
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+        '404':
+          description: Credit note not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:write
+  /companies/{companyId}/credit-notes/{creditNoteId}/record:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: creditNoteId
+      in: path
+      required: true
+      description: Unique identifier of the credit note
+      schema:
+        type: string
+        format: uuid
+      example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+    post:
+      tags:
+      - credit-notes
+      summary: Record credit note
+      description: 'Record a credit note.
+
+
+        **Scope:** `credit-notes:write`
+
+        '
+      operationId: record-credit-note-with-id
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:write
+      responses:
+        '200':
+          description: Credit note recorded successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/creditNote'
+              examples:
+                creditNoteRecorded:
+                  summary: Credit note recorded successfully
+                  value:
+                    id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+                    status: published
+                    invoiceNumber: CN-2024-001
+                    invoiceRef:
+                      id: a419cf69-db6f-4de9-992c-b1a60942a443
+                      invoiceNumber: IN-2024-001
+                    customerRef:
+                      id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                      name: customer 1
+                    contactDetailRef:
+                      id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+                      email: contact@customer1.com
+                      phone: '+46701234567'
+                    currency: SEK
+                    currencyRate: 1
+                    totalAmount: 200
+                    totalTax: 50
+                    paidAmount: 0
+                    creditDate: 2024-10-15
+                    dueDate: 2024-11-15
+                    publishedDateTime: 2024-10-15 12:00:00+00:00
+                    projectReference: PROJ-001
+                    buyerReference: BUYER-123
+                    contractReference: CONTRACT-456
+                    lineItems:
+                    - id: 1
+                      itemRef:
+                        id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+                        description: Product 1
+                      description: Product 1
+                      itemType: salesItem
+                      productType: goods
+                      quantity: 2
+                      unitPrice: 100
+                      taxRate: 25
+                    billingAddress:
+                      line1: Älvsborgsvägen 10
+                      line2: null
+                      city: Göteborg
+                      postalCode: 123 45
+                      country: SE
+                    deliveryAddress:
+                      line1: Delivery Street 15
+                      line2: Floor 2
+                      city: Stockholm
+                      postalCode: 111 11
+                      country: SE
+                    attachmentRefs:
+                    - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+                      fileName: myfile.pdf
+                    - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+                      fileName: myfile2.pdf
+                    journalEntryRef:
+                      id: 89c9566a-9f7a-4894-aedd-4f382006f687
+                    metadata:
+                      project: Website Redesign
+                      department: IT
+                      externalId: EXT-INV-2024-001
+        '400':
+          description: Invalid request or invoice payment cannot be recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                InvalidRequest:
+                  value:
+                    code: validation-error
+                    message: Action cannot be performed on credit note with value b529df79-eb7f-5ef0-a8dc-c2b71f953554
+                    bokioErrorId: 4d408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Credit note not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                CreditNoteNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource credit note with value b529df79-eb7f-5ef0-a8dc-c2b71f953554 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+  /companies/{companyId}/credit-notes/{creditNoteId}/download:
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      description: Unique identifier of the company
+      schema:
+        type: string
+        format: uuid
+      example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
+    - name: creditNoteId
+      in: path
+      required: true
+      description: Unique identifier of the credit note
+      schema:
+        type: string
+        format: uuid
+      example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+    get:
+      tags:
+      - credit-notes
+      summary: Download a credit note
+      description: 'Download the credit note PDF with the matching creditNoteId.
+
+
+        **NOTE:** The credit note must be in published status.
+
+
+        **Scope:** `credit-notes:read`
+
+        '
+      operationId: download-credit-note
+      responses:
+        '200':
+          description: Credit note found and downloaded successfully.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+              examples:
+                Credit note found and downloaded successfully.:
+                  value: credit-note.pdf
+        '400':
+          description: Credit note is not in published status
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                CreditNoteNotPublished:
+                  value:
+                    code: operation-not-allowed
+                    message: The credit note must be in published status to download
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+        '404':
+          description: Credit note not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/apiError'
+              examples:
+                CreditNoteNotFound:
+                  value:
+                    code: not-found
+                    message: The requested resource credit note with value b529df79-eb7f-5ef0-a8dc-c2b71f953554 was not found
+                    bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
+      security:
+      - tokenAuth: []
+      - access_token:
+        - credit-notes:read
+components:
+  schemas:
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    addressWithCountrySubdivision:
+      type: object
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type: string
+          nullable: true
+      example:
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    salesInvoiceItem:
+      type: object
+      title: salesItem
+      required:
+      - description
+      - itemType
+      - productType
+      - quantity
+      - unitPrice
+      - taxRate
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+          description: Should not be set for new items
+        itemRef:
+          type: object
+          title: itemRef
+          nullable: true
+          description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
+
+            '
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Reference to existing salesItem id
+              example: 869a69a3-632b-4a09-899e-9dc03342b5dc
+            description:
+              type: string
+              nullable: true
+              readOnly: true
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - salesItem
+        productType:
+          type: string
+          enum:
+          - goods
+          - services
+        unitType:
+          type: string
+          default: unspecified
+          enum:
+          - unspecified
+          - piece
+          - hour
+          - day
+          - month
+          - kilogram
+          - gram
+          - liter
+          - meter
+          - centimeter
+          - millimeter
+          - meterSquared
+          - meterCubic
+          - mile
+          - kilometer
+          - gigabyte
+          - hectar
+          - words
+          - year
+          - week
+          - minute
+          - megabyte
+          - ton
+        quantity:
+          type: number
+          format: double
+          default: 1
+        unitPrice:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          type: integer
+          nullable: true
+          format: int32
+          description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
+        taxReduction:
+          type: object
+          nullable: true
+          allOf:
+          - $ref: '#/components/schemas/lineItemTaxReduction'
+          description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
+      example:
+        id: 1
+        itemRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          description: Installation work
+        description: Installation work
+        itemType: salesItem
+        productType: services
+        unitType: hour
+        quantity: 10
+        unitPrice: 500
+        taxRate: 25
+        bookkeepingAccountNumber: 3389
+        taxReduction:
+          taxReductionType: rot
+          jobType: rotConstruction
+    creditNote:
+      type: object
+      required:
+      - id
+      - currency
+      - creditDate
+      - dueDate
+      - lineItems
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the credit note
+        invoiceRef:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: The unique identifier of the original invoice
+            invoiceNumber:
+              type: string
+              readOnly: true
+              description: The invoice number of the original invoice
+          description: Reference to the original invoice being credited
+        customerRef:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+            name:
+              type: string
+              readOnly: true
+        contactDetailRef:
+          type: object
+          nullable: true
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+              nullable: true
+            email:
+              type: string
+              readOnly: true
+              nullable: true
+            phone:
+              type: string
+              readOnly: true
+              nullable: true
+        invoiceNumber:
+          type: string
+          readOnly: true
+          nullable: true
+          description: The credit note number
+        orderNumberReference:
+          type: string
+          nullable: true
+          description: The order number associated with the invoice.
+        projectReference:
+          type: string
+          nullable: true
+          description: The project reference associated with the credit note.
+        buyerReference:
+          type: string
+          nullable: true
+          description: The buyer reference associated with the credit note.
+        contractReference:
+          type: string
+          nullable: true
+          description: The contract reference associated with the credit note.
+        currency:
+          description: ISO 4217 currency code
+          type: string
+          default: SEK
+        currencyRate:
+          type: number
+          format: double
+          default: 1
+        totalAmount:
+          type: number
+          format: double
+          readOnly: true
+        totalTax:
+          type: number
+          format: double
+          readOnly: true
+        paidAmount:
+          type: number
+          format: double
+          readOnly: true
+        status:
+          type: string
+          enum:
+          - draft
+          - published
+          description: The status of the credit note
+          readOnly: true
+        creditDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        publishedDateTime:
+          type: string
+          nullable: true
+          format: date-time
+          description: The date when the credit note was published (null for draft)
+          readOnly: true
+        lineItems:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/invoiceItem'
+        billingAddress:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/addressWithCountrySubdivision'
+        deliveryAddress:
+          oneOf:
+          - $ref: '#/components/schemas/address'
+        attachmentRefs:
+          type: array
+          readOnly: true
+          nullable: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                readOnly: true
+              name:
+                type: string
+                readOnly: true
+        journalEntryRef:
+          type: object
+          readOnly: true
+          nullable: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+        metadata:
+          type: object
+          nullable: true
+          description: 'Metadata fields for the invoice as string key-value pairs. These fields can be used for filtering.All metadata keys must
+
+            start with a letter or underscore and contain only alphanumeric characters and underscores.
+
+            '
+          maxProperties: 10
+          additionalProperties:
+            type: string
+          example:
+            project: Website Redesign
+            department: IT
+            externalId: EXT-INV-2024-001
+      example:
+        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+        status: published
+        invoiceNumber: CN-2024-001
+        invoiceRef:
+          id: a419cf69-db6f-4de9-992c-b1a60942a443
+          invoiceNumber: IN-2024-001
+        customerRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          name: customer 1
+        contactDetailRef:
+          id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+          email: contact@customer1.com
+          phone: '+46701234567'
+        currency: SEK
+        currencyRate: 1
+        totalAmount: 200
+        totalTax: 50
+        paidAmount: 0
+        creditDate: 2024-10-15
+        dueDate: 2024-11-15
+        publishedDateTime: 2024-10-15 12:00:00
+        projectReference: PROJ-001
+        buyerReference: BUYER-123
+        contractReference: CONTRACT-456
+        lineItems:
+        - id: 1
+          itemRef:
+            id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description: Product 1
+          description: Product 1
+          itemType: salesItem
+          productType: goods
+          quantity: 2
+          unitPrice: 100
+          taxRate: 25
+        billingAddress:
+          line1: Älvsborgsvägen 10
+          line2: null
+          city: Göteborg
+          postalCode: 123 45
+          country: SE
+        deliveryAddress:
+          line1: Delivery Street 15
+          line2: Floor 2
+          city: Stockholm
+          postalCode: 111 11
+          country: SE
+        attachmentRefs:
+        - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+          fileName: myfile.pdf
+        - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+          fileName: myfile2.pdf
+        journalEntryRef:
+          id: 340a4af0-edfd-47b1-b4ab-f30450eaac19
+        metadata:
+          project: Website Redesign
+          department: IT
+          externalId: EXT-INV-2024-001
+    lineItemTaxReduction:
+      type: object
+      nullable: true
+      title: lineItemTaxReduction
+      description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
+
+        '
+      required:
+      - taxReductionType
+      - jobType
+      properties:
+        taxReductionType:
+          type: string
+          enum:
+          - rot
+          - rut
+          description: The tax reduction type for this line item. Must match the invoice-level taxReduction type.
+        jobType:
+          type: string
+          enum:
+          - rotConstruction
+          - rotElectricity
+          - rotGlassPlate
+          - rotSoilWork
+          - rotSweeping
+          - rotPainting
+          - rotPlumbing
+          - rutChildServices
+          - rutDataITServices
+          - rutRemovalServices
+          - rutClothingCare
+          - rutPersonalHelpCare
+          - rutRepair
+          - rutSnow
+          - rutCleaning
+          - rutGardening
+          - rutWaterWashingOfTextiles
+          - rutFurnishing
+          - rutTransportOfHouseholdGoods
+          - rutHousingSupervision
+          description: 'The job type categorizing the work. The prefix must match the tax reduction type:
+
+            - ROT types: rotConstruction, rotElectricity, rotGlassPlate, rotSoilWork, rotSweeping, rotPainting, rotPlumbing
+
+            - RUT types: rutChildServices, rutDataITServices, rutRemovalServices, rutClothingCare, rutPersonalHelpCare, rutRepair, rutSnow, rutCleaning, rutGardening, rutWaterWashingOfTextiles, rutFurnishing, rutTransportOfHouseholdGoods, rutHousingSupervision
+
+            '
+      example:
+        taxReductionType: rot
+        jobType: rotConstruction
+    descriptionOnlyInvoiceItem:
+      type: object
+      title: descriptionOnlyItem
+      required:
+      - description
+      - itemType
+      properties:
+        id:
+          type: integer
+          format: int64
+          nullable: true
+          description: Should not be set for new items
+        itemRef:
+          type: object
+          nullable: true
+          description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
+
+            '
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Reference to existing descriptionOnlyItem id
+              example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description:
+              type: string
+              nullable: true
+              readOnly: true
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - descriptionOnlyItem
+      example:
+        id: 2
+        itemRef:
+          id: e964435e-50ef-4524-a439-05ff87794952
+          description: Custom description line
+        description: Custom description line
+        itemType: descriptionOnlyItem
+    address:
+      type: object
+      title: address
+      properties:
+        line1:
+          type: string
+        line2:
+          type: string
+          nullable: true
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+      example:
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
+    invoiceItem:
+      type: object
+      title: lineItem
+      oneOf:
+      - $ref: '#/components/schemas/salesInvoiceItem'
+      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
+  securitySchemes:
+    tokenAuth:
+      type: http
+      scheme: bearer
+    access_token:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: /token
+          scopes: {}
+        authorizationCode:
+          authorizationUrl: /authorize
+          tokenUrl: /token
+          scopes:
+            bank-payments:read-limited: Read access to bank payments created by the integration
+            bank-payments:write: Write access to bank payments
+            chart-of-accounts:read: Read access to chart of accounts
+            company-information:read: Read access to company information
+            credit-notes:read: Read access to credit notes
+            credit-notes:write: Write access to credit notes
+            customers:read: Read access to customers
+            customers:write: Write access to customers
+            fiscal-years:read: Read access to fiscal years
+            invoices:read: Read access to invoices
+            invoices:write: Write access to invoices
+            items:read: Read access to items
+            items:write: Write access to items
+            journal-entries:read: Read access to journal entries
+            journal-entries:write: Write access to journal entries
+            sie:read: Read access to SIE files
+            supplier-invoices:read: Read access to supplier invoices
+            supplier-invoices:write: Write access to supplier invoices
+            suppliers:read: Read access to suppliers
+            suppliers:write: Write access to suppliers
+            tags:read: Read access to tag groups and tags
+            tags:write: Write access to tag groups and tags
+            uploads:read: Read access to uploads
+            uploads:write: Write access to uploads
+    client_auth:
+      type: http
+      scheme: basic
+externalDocs:
+  url: https://docs.bokio.se
+  description: Read the API Documentation
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: false
+  samples-languages:
+  - shell
+  - http
+  - node
+  - csharp
+  - java
