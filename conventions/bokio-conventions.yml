@@ -1,0 +1,53 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bokio.se/reference/ (authentication, scopes, pagination, metadata, rate-limits, versioning, errors, date-and-time)
+authentication:
+  style: >-
+    Bearer access token (Authorization: Bearer <token>). Public integrations use
+    OAuth 2.0 Authorization Code grant (Company API) or Client Credentials
+    (General API); private integrations use company-scoped API tokens. Token
+    endpoint uses HTTP Basic (client_id:client_secret) for client auth.
+  scopes: scopes/bokio-scopes.yml
+  detail: authentication/bokio-authentication.yml
+idempotency:
+  supported: false
+  notes: >-
+    Bokio does not expose an idempotency-key header. Instead it enforces
+    per-resource concurrency limits: concurrent writes to the same URL path
+    (e.g. POST companies/{companyId}/journal-entries) are rejected with 429.
+    Clients should serialize writes to the same resource rather than issuing
+    them in parallel.
+pagination:
+  style: page-number
+  params:
+    page: Page number, default 1.
+    pageSize: Items per page, default 25, max 100.
+  response_fields:
+    result: Array of items for the page.
+    totalItems: Total number of items available.
+    totalPages: Total number of pages available.
+    currentPage: Current page number.
+  docs: https://docs.bokio.se/reference/pagination
+filtering:
+  docs: https://docs.bokio.se/reference/filtering
+  notes: Per-operation query parameters filter and navigate result sets.
+metadata:
+  docs: https://docs.bokio.se/reference/metadata
+date_time:
+  docs: https://docs.bokio.se/reference/date-and-time
+versioning:
+  style: uri-path-major
+  current: v1
+  detail: lifecycle/bokio-lifecycle.yml
+error_envelope:
+  shape: '{ "error": { "code", "innerCode", "message", "bokioErrorId" } }'
+  detail: errors/bokio-problem-types.yml
+rate_limit_signaling:
+  limit: 200 requests per 60s rolling window per bearer token.
+  concurrency: Per-resource concurrency limit on writes.
+  headers:
+  - Bokio-RateLimit-Limit
+  - Bokio-RateLimit-Remaining
+  - Bokio-RateLimit-RetryAfter
+  exceeded_status: 429
+  docs: https://docs.bokio.se/reference/rate-limits

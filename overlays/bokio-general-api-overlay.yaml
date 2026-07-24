@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bokio General API
+  version: 1.0.0
+extends: openapi/bokio-general-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bokio
+    x-apievangelist-parent-company: Visma
+    x-apievangelist-surface: >-
+      General API — public-integration OAuth 2.0 surface: token issuance
+      (/token), authorization (/authorize) and connection management for
+      multi-tenant access to Bokio companies.
+    x-apievangelist-docs: https://docs.bokio.se/reference/introduction-to-general-api

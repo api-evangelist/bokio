@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bokio.se/docs/testing-your-integration
+model: test-company
+notes: >-
+  Bokio has no separate sandbox host or synthetic test-key prefix. Instead you
+  create a Test Company inside a real Bokio account and exercise the live API
+  against it, keeping real financial records safe. The same production base URL
+  (https://api.bokio.se/v1) is used for both test companies and real companies.
+setup:
+  create_test_company: >-
+    In the Bokio app, click the company name (top-left) then "Create a test
+    company" and complete the details.
+  private_integration_keys: >-
+    Generate API tokens under Settings > API tokens; these are scoped to the
+    (test) company for private integrations.
+  public_integration: >-
+    Public (OAuth) integrations can connect to a test company using the same
+    Authorization Code flow as for a real company.
+test_values: none published
+help: https://www.bokio.se/hjalp/komma-igang/skapa-ett-konto/skapa-testbolag/

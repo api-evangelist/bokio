@@ -1,0 +1,109 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  openapi/bokio-company-api-openapi.yml (paths + components.schemas $ref and
+  id-reference fields)
+notes: >-
+  Entity graph derived from the Company API path hierarchy and schema id-fields.
+  All resources are scoped to a company (companies/{companyId}/...). Ids are
+  UUIDs unless noted.
+entities:
+- name: company
+  key: companyId
+  description: Tenant root; every other resource is nested under a company.
+- name: journalEntry
+  key: journalEntryId
+  human_number: journalEntryNumber
+  description: Double-entry accounting verification with line items and optional tags.
+- name: journalEntryComment
+  key: commentId
+  description: Plain-text comment attached to an API-created journal entry.
+- name: upload
+  key: uploadId
+  description: Uploaded receipt/document image or PDF, optionally linked to a journal entry.
+- name: customer
+  key: customerId
+  description: Invoice customer; carries vatNumber and orgNumber.
+- name: invoice
+  key: invoiceId
+  human_number: invoiceNumber
+  description: Sales invoice with line items, attachments, payments and settlements.
+- name: creditNote
+  key: creditNoteId
+  human_number: invoiceNumber
+  description: Credit note issued against an invoice.
+- name: item
+  key: itemId
+  description: Reusable invoice line item / product.
+- name: supplier
+  key: supplierId
+  description: Supplier record (preview).
+- name: supplierInvoice
+  key: supplierInvoiceId
+  description: Supplier (purchase) invoice (preview).
+- name: fiscalYear
+  key: fiscalYearId
+  description: Accounting fiscal year; source of SIE file export.
+- name: account
+  key: accountNumber
+  description: Chart-of-accounts account merged with money-account details.
+- name: bankPayment
+  key: bankPaymentId
+  description: Outbound bank payment created via API, signed with BankID in-app.
+- name: tagGroup
+  key: tagGroupId
+  description: Dimension used to classify journal entries (preview); contains tags.
+relationships:
+- from: journalEntry
+  to: company
+  type: belongs_to
+  via: companyId
+- from: journalEntry
+  to: journalEntry
+  type: has_one
+  via: reversingJournalEntryId
+  role: reversal
+- from: upload
+  to: journalEntry
+  type: belongs_to
+  via: journalEntryId
+- from: invoice
+  to: customer
+  type: belongs_to
+  via: customer
+- from: invoice
+  to: invoiceItem
+  type: has_many
+  via: lineItems
+- from: invoiceAttachment
+  to: invoice
+  type: belongs_to
+  via: invoiceId
+- from: invoicePayment
+  to: invoice
+  type: belongs_to
+  via: invoiceId
+- from: invoicePayment
+  to: account
+  type: has_one
+  via: bookkeepingAccountNumber
+- from: invoiceSettlement
+  to: invoice
+  type: belongs_to
+  via: invoiceId
+- from: creditNote
+  to: invoice
+  type: belongs_to
+  via: invoiceId
+- from: supplierInvoice
+  to: supplier
+  type: belongs_to
+  via: supplierId
+- from: journalEntry
+  to: tagGroup
+  type: has_many
+  via: tags
+- from: fiscalYear
+  to: company
+  type: belongs_to
+  via: companyId

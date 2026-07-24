@@ -1,0 +1,172 @@
+generated: '2026-07-18'
+method: searched
+source: openapi/bokio-company-api-openapi.yml, openapi/bokio-general-api-openapi.yml
+docs: https://docs.bokio.se/reference/scopes
+notes: >-
+  Scopes follow a {resource}:{action} naming pattern and are combined as a
+  space-delimited string in the OAuth authorization request. Elevated scopes
+  (e.g. bank-payments:write) are available only to public integrations under a
+  partnership contract and security review, and must be approved by Bokio's API
+  team before use.
+schemes:
+- name: access_token
+  source: openapi/bokio-company-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /token
+  - flow: authorizationCode
+    authorizationUrl: /authorize
+    tokenUrl: /token
+- name: access_token
+  source: openapi/bokio-general-api-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: /token
+  - flow: authorizationCode
+    authorizationUrl: /authorize
+    tokenUrl: /token
+scopes:
+- scope: bank-payments:read-limited
+  description: Read access to bank payments created by the integration
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: bank-payments:write
+  description: Write access to bank payments
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: chart-of-accounts:read
+  description: Read access to chart of accounts
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: company-information:read
+  description: Read access to company information
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: credit-notes:read
+  description: Read access to credit notes
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: credit-notes:write
+  description: Write access to credit notes
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: customers:read
+  description: Read access to customers
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: customers:write
+  description: Write access to customers
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: fiscal-years:read
+  description: Read access to fiscal years
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: invoices:read
+  description: Read access to invoices
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: invoices:write
+  description: Write access to invoices
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: items:read
+  description: Read access to items
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: items:write
+  description: Write access to items
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: journal-entries:read
+  description: Read access to journal entries
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: journal-entries:write
+  description: Write access to journal entries
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: sie:read
+  description: Read access to SIE files
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: supplier-invoices:read
+  description: Read access to supplier invoices
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: supplier-invoices:write
+  description: Write access to supplier invoices
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: suppliers:read
+  description: Read access to suppliers
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: suppliers:write
+  description: Write access to suppliers
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: tags:read
+  description: Read access to tag groups and tags
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: tags:write
+  description: Write access to tag groups and tags
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: uploads:read
+  description: Read access to uploads
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml
+- scope: uploads:write
+  description: Write access to uploads
+  flows:
+  - authorizationCode
+  sources:
+  - openapi/bokio-company-api-openapi.yml

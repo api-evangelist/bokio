@@ -1,0 +1,22 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Bokio Company API
+  version: 1.0.0
+extends: openapi/bokio-company-api-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: bokio
+    x-apievangelist-parent-company: Visma
+    x-apievangelist-country: SE
+    x-apievangelist-category: accounting-bookkeeping
+    x-apievangelist-rating-notes: >-
+      OAuth 2.0 (authorization code + client credentials) with 24 fine-grained
+      resource:action scopes; page/pageSize pagination; custom JSON error
+      envelope ({error:{code,innerCode,message,bokioErrorId}}); URI-path
+      versioning (v1) with RFC-8594-style deprecation, brownouts and sunset.
+- target: $.info
+  update:
+    x-apievangelist-docs: https://docs.bokio.se/
+    x-apievangelist-changelog: https://docs.bokio.se/changelog
+    x-apievangelist-status: no dedicated status page found (2026-07-18)

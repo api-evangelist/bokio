@@ -1,0 +1,34 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bokio.se/changelog
+scheme: dated
+current_version: v1
+entries:
+- date: '2026-06-15'
+  additions: true
+  breaking: false
+  highlights: >-
+    Supplier and supplier-invoice management (preview); ROT & RUT tax reduction
+    on invoices; paymentServiceFee settlement improvements.
+- date: '2026-05-26'
+  additions: true
+  breaking: false
+  highlights: Comments on journal entries (add/list/fetch/update/delete).
+- date: '2026-05-13'
+  additions: true
+  breaking: false
+  highlights: >-
+    Tag groups and tag management with journal-entry tagging (preview); new
+    reference fields on invoices and credit notes.
+- date: '2026-05-04'
+  additions: true
+  breaking: false
+  highlights: >-
+    PDF downloads for invoices and credit notes; invoice deletion; invoice /
+    credit-note / journal-entry enhancements.
+- date: '2026-03-10'
+  additions: true
+  breaking: false
+  highlights: >-
+    Contact details supported when creating/updating invoices and returned when
+    fetching invoices and credit notes.

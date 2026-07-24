@@ -1,0 +1,40 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.bokio.se/reference/versioning
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.bokio.se/reference/versioning
+  notes: >-
+    URL path segment corresponds to the MAJOR semantic version. Non-breaking
+    changes (new fields/operations/enum values) never change the URL version.
+  headers:
+  - Bokio-Api-Supported-Versions
+  - Bokio-Api-Deprecated-Versions
+  history:
+  - version: Beta
+    release_date: '2024-11-19'
+    deprecation_date: '2025-08-19'
+    sunset_date: '2025-10-01'
+  - version: v1
+    release_date: '2025-08-19'
+    status: latest
+deprecation:
+  policy_url: https://docs.bokio.se/reference/versioning
+  sunset_header: true
+  minimum_deprecation_window: 3 months
+  brownout:
+    mechanism: >-
+      As a version nears its sunset date, scheduled brownouts intermittently
+      return 410 Gone (e.g. every other hour) so integrations surface the
+      deprecated dependency before permanent shutdown.
+    error_code: version_sunset_brownout
+  preview_endpoints: >-
+    Endpoints suffixed [Preview] are exempt from stability guarantees and may
+    change or be removed before GA (see suppliers, tags endpoints).
+sla: null
+status_page: null
+status_page_notes: >-
+  No dedicated Bokio API status page found as of 2026-07-18. Parent company
+  Visma operates a trust centre but no per-product API status page was located.
+deprecated_operations: []

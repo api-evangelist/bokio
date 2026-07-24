@@ -1,0 +1,43 @@
+generated: '2026-07-18'
+method: derived
+source: >-
+  openapi/bokio-company-api-openapi.yml, openapi/bokio-general-api-openapi.yml,
+  https://docs.bokio.se/reference/
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    OpenAPI securityScheme type oauth2 with authorizationCode and
+    clientCredentials flows; /authorize + /token endpoints documented.
+- id: oauth2-authorization-code
+  conforms: true
+  evidence: >-
+    Authorization Code grant for Company API; requires state parameter (CSRF
+    protection); auth code TTL 5 min, access token TTL 1 hour.
+- id: oidc
+  conforms: false
+  evidence: No openid-configuration discovery document; no id_token / OIDC scopes.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    Errors use a custom JSON envelope {error:{code,innerCode,message,bokioErrorId}},
+    not application/problem+json.
+- id: rfc8594-deprecation-sunset
+  conforms: true
+  evidence: >-
+    Documented deprecation dates, brownout periods returning 410 Gone, and a
+    hard sunset date per version; Bokio-Api-Supported-Versions and
+    Bokio-Api-Deprecated-Versions response headers.
+- id: pagination
+  conforms: true
+  evidence: page/pageSize query params; totalItems/totalPages/currentPage in body.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No idempotency-key mechanism; concurrency is instead managed via
+    per-resource concurrency limits (429 on concurrent writes).
+- id: sie
+  conforms: true
+  evidence: >-
+    SIE (Standard Import Export) file export for Swedish accounting via
+    GET fiscal-years SIE download endpoint.

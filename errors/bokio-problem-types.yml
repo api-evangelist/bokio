@@ -1,0 +1,70 @@
+generated: '2026-07-18'
+method: searched
+source: >-
+  openapi/bokio-company-api-openapi.yml (4xx responses),
+  https://docs.bokio.se/reference/errors
+format: custom-json
+envelope:
+  shape: '{ "error": { "code": "string", "innerCode": "string", "message": "string", "bokioErrorId": "string" } }'
+  fields:
+    code: Machine-readable error code (see codes below).
+    innerCode: >-
+      Additional machine-readable detail; for code=validation-error carries the
+      specific validation failure classification.
+    message: Human-readable error message.
+    bokioErrorId: Correlation id to quote to Bokio support for assistance.
+  validation_errors_extra: >-
+    Validation errors additionally return an errors[] array of {field, message}
+    with JSON-pointer field paths (e.g. #/lineItems/0/taxRate).
+http_status_codes:
+- status: 400
+  name: Bad Request
+  description: The request was invalid or could not be understood by the server.
+- status: 401
+  name: Unauthorized
+  description: The request requires authentication but the caller is not authenticated.
+- status: 403
+  name: Forbidden
+  description: The server understood the request but refuses to authorize it.
+- status: 404
+  name: Not Found
+  description: The requested resource could not be found.
+- status: 426
+  name: Upgrade Required
+  description: >-
+    Endpoint version is nearing its sunset date; scheduled brownouts nudge the
+    integration to upgrade.
+- status: 429
+  name: Too Many Requests
+  description: >-
+    Rate limit (200 req / 60s rolling window per bearer token) or per-resource
+    concurrency limit exceeded.
+- status: 500
+  name: Internal Server Error
+  description: An unexpected error occurred on the server.
+codes:
+- code: not-found
+  status: 404
+  message: The requested resource was not found.
+- code: validation-error
+  status: 400
+  message: Validation failed with N error(s).
+  remediation: >-
+    Inspect innerCode and the errors[] array for the failing field(s) and fix
+    the request payload.
+- code: internal-server-error
+  status: 500
+  message: An unexpected error occurred.
+- code: operation-not-allowed
+  status: 400
+  message: >-
+    The operation is not permitted in the resource's current state (e.g.
+    updating an invoice that is not in draft).
+- code: limit-exceeded
+  status: 400
+  message: A size/quantity limit was exceeded (e.g. file size too large).
+- code: version_sunset_brownout
+  status: 410
+  message: >-
+    Returned intermittently during a version brownout window as the API version
+    approaches its sunset date.

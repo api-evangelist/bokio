@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/bokio-company-api-openapi.yml, openapi/bokio-general-api-openapi.yml
+skills:
+- file: bokio-create-and-send-invoice.md
+  name: Create and publish a Bokio invoice
+  api: openapi/bokio-company-api-openapi.yml
+  operations: [post-customer, post-invoice, post-invoice-lineItem, post-invoices-invoiceId-publish, download-invoice]
+- file: bokio-record-journal-entry.md
+  name: Record and reconcile a Bokio journal entry
+  api: openapi/bokio-company-api-openapi.yml
+  operations: [post-journalentry, add-upload, get-journalentries-journalId, reverse-journalentry, post-journal-entry-comment]
+- file: bokio-connect-public-integration.md
+  name: Connect a Bokio company via OAuth (public integration)
+  api: openapi/bokio-general-api-openapi.yml
+  operations: [authorize, request-token, get-connections, delete-connection-by-id]

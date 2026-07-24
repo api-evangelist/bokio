@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: searched
+probe: true
+source: https://www.bokio.se/.well-known/security.txt
+parent_company: Visma
+url: https://www.visma.com/trust-centre/
+programs:
+- name: Visma Responsible Disclosure & Bug Bounty
+  platform: Intigriti
+  url: https://app.intigriti.com/programs/visma/visma/detail
+  hall_of_fame: https://www.visma.com/trust-centre/security/products-and-services/bug-bounty-and-responsible-disclosure/hall-of-fame/
+contact:
+- security@visma.com
+certifications: []
+certifications_note: >-
+  Bokio is a Visma company and inherits Visma's group security/trust programme
+  (Intigriti bug bounty, responsible disclosure, PGP-encrypted reporting). No
+  named product-level certifications (SOC 2 / ISO 27001 / PCI DSS) were verified
+  on the public trust-centre pages probed on 2026-07-18, so none are asserted
+  here.
+evidence:
+- source: https://www.bokio.se/.well-known/security.txt
+  keywords: [visma trust centre, bug bounty, responsible disclosure, intigriti]

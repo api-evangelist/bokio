@@ -1,0 +1,10 @@
+﻿Contact: mailto:security@visma.com
+Contact: https://app.intigriti.com/programs/visma/visma/detail
+
+Policy: https://www.visma.com/trust-centre/security/products-and-services/bug-bounty-and-responsible-disclosure/
+Policy: https://app.intigriti.com/programs/visma/visma/detail
+
+Acknowledgments: https://www.visma.com/trust-centre/security/products-and-services/bug-bounty-and-responsible-disclosure/hall-of-fame/
+Acknowledgments: https://app.intigriti.com/programs/visma/visma/leaderboard?alltime=true
+
+Encryption: https://www.visma.com/trust-centre/security/products-and-services/bug-bounty-and-responsible-disclosure/

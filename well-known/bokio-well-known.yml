@@ -1,0 +1,24 @@
+generated: '2026-07-18'
+method: searched
+source: live probes of /.well-known/ on Bokio website + API hosts
+hosts:
+- host: https://www.bokio.se
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    file: bokio-security.txt
+    note: >-
+      RFC 9116. Served by parent company Visma — Contact security@visma.com,
+      Intigriti bug bounty program, Visma trust centre policy.
+- host: https://api.bokio.se
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
