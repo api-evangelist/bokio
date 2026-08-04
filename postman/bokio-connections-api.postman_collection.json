@@ -1,0 +1,496 @@
+{
+  "info": {
+    "_postman_id": "da73eb4f-2a0f-4c7c-926e-700b70ccbd44",
+    "name": "Company authorization connections API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:32.000Z",
+    "updatedAt": "2026-07-28T01:15:32.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-da73eb4f-2a0f-4c7c-926e-700b70ccbd44"
+  },
+  "item": [
+    {
+      "name": "connections",
+      "item": [
+        {
+          "name": "{connectionId}",
+          "item": [
+            {
+              "name": "Get connection by ID",
+              "id": "a85a9fec-1571-4f06-890c-eecf0b0fa054",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connections/:connectionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connections",
+                    ":connectionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "9a12ebe4-0ec4-4598-a585-5e4c5e8aa0a1",
+                      "key": "connectionId",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the connection"
+                    }
+                  ]
+                },
+                "description": "Retrieve a specific connection by its ID"
+              },
+              "response": [
+                {
+                  "id": "90a2ea3b-9f46-44a3-a072-2a321c0e64f8",
+                  "name": "Connection found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connections/:connectionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connections",
+                        ":connectionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connectionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<uuid>\",\n  \"tenantId\": \"<uuid>\",\n  \"tenantName\": \"<string>\",\n  \"type\": \"company\"\n}",
+                  "createdAt": "2026-07-28T01:15:32.000Z",
+                  "updatedAt": "2026-07-28T01:15:32.000Z",
+                  "uid": "35240-90a2ea3b-9f46-44a3-a072-2a321c0e64f8"
+                },
+                {
+                  "id": "2f0b9d0c-0d9b-499d-84ed-7cd0bb0370a2",
+                  "name": "Connection not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connections/:connectionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connections",
+                        ":connectionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connectionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:15:32.000Z",
+                  "updatedAt": "2026-07-28T01:15:32.000Z",
+                  "uid": "35240-2f0b9d0c-0d9b-499d-84ed-7cd0bb0370a2"
+                }
+              ],
+              "createdAt": "2026-07-28T01:15:32.000Z",
+              "updatedAt": "2026-07-28T01:15:32.000Z",
+              "uid": "35240-a85a9fec-1571-4f06-890c-eecf0b0fa054"
+            },
+            {
+              "name": "Delete connection by ID",
+              "id": "1769c2e2-7975-431f-8838-e6455f50cb2b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connections/:connectionId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connections",
+                    ":connectionId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "f1923c9f-f573-429d-94a1-844051238eed",
+                      "key": "connectionId",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the connection"
+                    }
+                  ]
+                },
+                "description": "Delete a specific connection and its associated data. Associated data refers to tokens and company permissions that were allowed. However, it will not delete any data created through the integration."
+              },
+              "response": [
+                {
+                  "id": "54ef438d-430f-4e2d-b0d8-13df8a7b7eed",
+                  "name": "Connection deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connections/:connectionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connections",
+                        ":connectionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connectionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-07-28T01:15:32.000Z",
+                  "updatedAt": "2026-07-28T01:15:32.000Z",
+                  "uid": "35240-54ef438d-430f-4e2d-b0d8-13df8a7b7eed"
+                },
+                {
+                  "id": "b99ee463-7d27-475b-a083-d1e4be0ed225",
+                  "name": "Forbidden - not allowed to delete this connection",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connections/:connectionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connections",
+                        ":connectionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connectionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:15:32.000Z",
+                  "updatedAt": "2026-07-28T01:15:32.000Z",
+                  "uid": "35240-b99ee463-7d27-475b-a083-d1e4be0ed225"
+                },
+                {
+                  "id": "8ba6a5a8-c783-4747-a4d3-67b486fc9943",
+                  "name": "Connection not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connections/:connectionId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connections",
+                        ":connectionId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "connectionId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:15:32.000Z",
+                  "updatedAt": "2026-07-28T01:15:32.000Z",
+                  "uid": "35240-8ba6a5a8-c783-4747-a4d3-67b486fc9943"
+                }
+              ],
+              "createdAt": "2026-07-28T01:15:32.000Z",
+              "updatedAt": "2026-07-28T01:15:32.000Z",
+              "uid": "35240-1769c2e2-7975-431f-8838-e6455f50cb2b"
+            }
+          ],
+          "id": "f058212f-8ccc-4928-bead-ab4bc0c1b5d7",
+          "createdAt": "2026-07-28T01:15:32.000Z",
+          "updatedAt": "2026-07-28T01:15:32.000Z",
+          "uid": "35240-f058212f-8ccc-4928-bead-ab4bc0c1b5d7"
+        },
+        {
+          "name": "Get connections",
+          "id": "e6322c23-8a4e-4aec-be27-13c081f2a8aa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/connections?page=1&pageSize=20&tenantId=<uuid>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connections"
+              ],
+              "query": [
+                {
+                  "description": "Page number (starting from 1)",
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "description": "Number of items per page (max 100)",
+                  "key": "pageSize",
+                  "value": "20"
+                },
+                {
+                  "description": "Filter connections by tenant ID. When provided, returns only the connection for the specified tenant.",
+                  "key": "tenantId",
+                  "value": "<uuid>"
+                }
+              ]
+            },
+            "description": "Retrieve a list of connections for the authenticated client. Use the tenantId query parameter to filter connections for a specific tenant."
+          },
+          "response": [
+            {
+              "id": "95782ecc-c48e-4f21-820f-2cc136b5946d",
+              "name": "Connections found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connections?page=1&pageSize=20&tenantId=<uuid>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connections"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page number (starting from 1)",
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "description": "Number of items per page (max 100)",
+                      "key": "pageSize",
+                      "value": "20"
+                    },
+                    {
+                      "description": "Filter connections by tenant ID. When provided, returns only the connection for the specified tenant.",
+                      "key": "tenantId",
+                      "value": "<uuid>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"id\": \"<uuid>\",\n      \"tenantId\": \"<uuid>\",\n      \"tenantName\": \"<string>\",\n      \"type\": \"company\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"tenantId\": \"<uuid>\",\n      \"tenantName\": \"<string>\",\n      \"type\": \"company\"\n    }\n  ]\n}",
+              "createdAt": "2026-07-28T01:15:32.000Z",
+              "updatedAt": "2026-07-28T01:15:32.000Z",
+              "uid": "35240-95782ecc-c48e-4f21-820f-2cc136b5946d"
+            }
+          ],
+          "createdAt": "2026-07-28T01:15:32.000Z",
+          "updatedAt": "2026-07-28T01:15:32.000Z",
+          "uid": "35240-e6322c23-8a4e-4aec-be27-13c081f2a8aa"
+        }
+      ],
+      "id": "44611c24-2bbe-4bf8-9a50-ae95a6fa87db",
+      "createdAt": "2026-07-28T01:15:32.000Z",
+      "updatedAt": "2026-07-28T01:15:32.000Z",
+      "uid": "35240-44611c24-2bbe-4bf8-9a50-ae95a6fa87db"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

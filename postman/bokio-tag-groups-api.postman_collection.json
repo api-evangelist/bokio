@@ -1,0 +1,2300 @@
+{
+  "info": {
+    "_postman_id": "87a0fca7-bf4d-43d4-96fc-d10dca680c77",
+    "name": "Company authorization tag-groups API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:47.000Z",
+    "updatedAt": "2026-07-28T01:15:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-87a0fca7-bf4d-43d4-96fc-d10dca680c77"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "tag-groups",
+              "item": [
+                {
+                  "name": "{tagGroupId}",
+                  "item": [
+                    {
+                      "name": "tags",
+                      "item": [
+                        {
+                          "name": "{tagId}",
+                          "item": [
+                            {
+                              "name": "[Preview] Update a tag in a tag group",
+                              "id": "bf39374c-224a-44c6-aa63-c51f1270e476",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "PUT",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "tag-groups",
+                                    ":tagGroupId",
+                                    "tags",
+                                    ":tagId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "a088dd25-2e8c-4177-b35c-40ff7ccaff7a",
+                                      "key": "companyId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the company"
+                                    },
+                                    {
+                                      "id": "39639add-5a56-49c0-879b-0bac7d701d94",
+                                      "key": "tagGroupId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the tag group"
+                                    },
+                                    {
+                                      "id": "a6448815-055d-49f1-a247-fb868dd59994",
+                                      "key": "tagId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the tag"
+                                    }
+                                  ]
+                                },
+                                "description": "Update the name of an existing tag within a tag group.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "481f3d17-5f48-43a2-9a94-fa091508b63a",
+                                  "name": "Tag updated",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\"\n}",
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-481f3d17-5f48-43a2-9a94-fa091508b63a"
+                                },
+                                {
+                                  "id": "773b0220-15c9-4d6a-89c3-3b7b9f2f00c5",
+                                  "name": "Validation error. Possible reasons:\n- Missing required fields\n- Duplicate tag name within the tag group\n",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-773b0220-15c9-4d6a-89c3-3b7b9f2f00c5"
+                                },
+                                {
+                                  "id": "f4dd8e4b-6af8-495c-af61-ef9181b92671",
+                                  "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-f4dd8e4b-6af8-495c-af61-ef9181b92671"
+                                },
+                                {
+                                  "id": "c459c7f3-6f71-44fc-99d3-4959cba1af9a",
+                                  "name": "Tag or tag group not found",
+                                  "originalRequest": {
+                                    "method": "PUT",
+                                    "header": [
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"name\": \"<string>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-c459c7f3-6f71-44fc-99d3-4959cba1af9a"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:15:48.000Z",
+                              "updatedAt": "2026-07-28T01:15:48.000Z",
+                              "uid": "35240-bf39374c-224a-44c6-aa63-c51f1270e476"
+                            },
+                            {
+                              "name": "[Preview] Delete a tag from a tag group",
+                              "id": "6684f2b5-4fcf-4fc3-a986-e741ff358046",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "auth": {
+                                  "type": "bearer",
+                                  "bearer": [
+                                    {
+                                      "key": "token",
+                                      "value": "{{bearerToken}}",
+                                      "type": "string"
+                                    }
+                                  ]
+                                },
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "tag-groups",
+                                    ":tagGroupId",
+                                    "tags",
+                                    ":tagId"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "9f37dc80-9189-4d49-8a93-5e56e73417c1",
+                                      "key": "companyId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the company"
+                                    },
+                                    {
+                                      "id": "f27f072d-7043-4c31-818c-4ab31a864d4f",
+                                      "key": "tagGroupId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the tag group"
+                                    },
+                                    {
+                                      "id": "1d063926-8a06-4e51-8218-4be96d93f26a",
+                                      "key": "tagId",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Unique identifier of the tag"
+                                    }
+                                  ]
+                                },
+                                "description": "Delete a specific tag from a tag group.\n\nDeletion will fail if the tag is currently in use on any journal entries.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+                              },
+                              "response": [
+                                {
+                                  "id": "05a385fc-6187-43c5-b21c-07e8e388b82a",
+                                  "name": "Tag deleted successfully",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "No Content",
+                                  "code": 204,
+                                  "_postman_previewlanguage": "text",
+                                  "header": [],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": null,
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-05a385fc-6187-43c5-b21c-07e8e388b82a"
+                                },
+                                {
+                                  "id": "a60c2604-e75f-4ff7-8435-1a53f8f37084",
+                                  "name": "Tag cannot be deleted because it is in use on journal entries.",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-a60c2604-e75f-4ff7-8435-1a53f8f37084"
+                                },
+                                {
+                                  "id": "d2273e30-2b5f-4da4-a67a-4fba55f16ef4",
+                                  "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                                  "originalRequest": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "description": "Added as a part of security scheme: bearer",
+                                        "key": "Authorization",
+                                        "value": "Bearer <token>"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "companies",
+                                        ":companyId",
+                                        "tag-groups",
+                                        ":tagGroupId",
+                                        "tags",
+                                        ":tagId"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "companyId"
+                                        },
+                                        {
+                                          "key": "tagGroupId"
+                                        },
+                                        {
+                                          "key": "tagId"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-07-28T01:15:48.000Z",
+                                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                                  "uid": "35240-d2273e30-2b5f-4da4-a67a-4fba55f16ef4"
+                                }
+                              ],
+                              "createdAt": "2026-07-28T01:15:48.000Z",
+                              "updatedAt": "2026-07-28T01:15:48.000Z",
+                              "uid": "35240-6684f2b5-4fcf-4fc3-a986-e741ff358046"
+                            }
+                          ],
+                          "id": "368f9605-3f51-4a54-90ca-59730f9cc711",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-368f9605-3f51-4a54-90ca-59730f9cc711"
+                        },
+                        {
+                          "name": "[Preview] Create a tag in a tag group",
+                          "id": "6ddda808-2069-4de9-bc09-61c299915ecc",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId",
+                                "tags"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "7987c4f5-063b-468f-87a6-538db1a030ff",
+                                  "key": "companyId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the company"
+                                },
+                                {
+                                  "id": "6cfbfa9b-9454-47a1-9cc8-8c50feea44ff",
+                                  "key": "tagGroupId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the tag group"
+                                }
+                              ]
+                            },
+                            "description": "Creates a new tag (value) within the specified tag group.\n\nTag names must be unique within the tag group.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+                          },
+                          "response": [
+                            {
+                              "id": "ea1a0be8-21db-4c3d-9622-5398ec7acfd2",
+                              "name": "Tag created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "tag-groups",
+                                    ":tagGroupId",
+                                    "tags"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "tagGroupId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\"\n}",
+                              "createdAt": "2026-07-28T01:15:48.000Z",
+                              "updatedAt": "2026-07-28T01:15:48.000Z",
+                              "uid": "35240-ea1a0be8-21db-4c3d-9622-5398ec7acfd2"
+                            },
+                            {
+                              "id": "4b0a2efb-24b5-4211-ac35-8b77f546c52f",
+                              "name": "Validation error. Possible reasons:\n- Missing required fields\n- Duplicate tag name within the tag group\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "tag-groups",
+                                    ":tagGroupId",
+                                    "tags"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "tagGroupId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:48.000Z",
+                              "updatedAt": "2026-07-28T01:15:48.000Z",
+                              "uid": "35240-4b0a2efb-24b5-4211-ac35-8b77f546c52f"
+                            },
+                            {
+                              "id": "6afb4e04-7a12-49e1-b09f-ea7d90b1c249",
+                              "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "tag-groups",
+                                    ":tagGroupId",
+                                    "tags"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "tagGroupId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:48.000Z",
+                              "updatedAt": "2026-07-28T01:15:48.000Z",
+                              "uid": "35240-6afb4e04-7a12-49e1-b09f-ea7d90b1c249"
+                            },
+                            {
+                              "id": "d62cdd23-5aec-49b0-bdec-c203bc6e5e11",
+                              "name": "Tag group not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"name\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId/tags",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "tag-groups",
+                                    ":tagGroupId",
+                                    "tags"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "tagGroupId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:48.000Z",
+                              "updatedAt": "2026-07-28T01:15:48.000Z",
+                              "uid": "35240-d62cdd23-5aec-49b0-bdec-c203bc6e5e11"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-6ddda808-2069-4de9-bc09-61c299915ecc"
+                        }
+                      ],
+                      "id": "206a7a28-2355-41b1-80a2-b12af510de46",
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-206a7a28-2355-41b1-80a2-b12af510de46"
+                    },
+                    {
+                      "name": "[Preview] Get a tag group by ID",
+                      "id": "29138fa5-bcde-44b1-8d7d-0899d7594a51",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups",
+                            ":tagGroupId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "445907d3-22e9-4961-8673-a9ebdea2dbeb",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "657388e7-1664-4049-a743-77676d4f9d1d",
+                              "key": "tagGroupId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the tag group"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a specific tag group by its ID, including all its tags.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "63c6601f-e3c3-4f6c-ac89-5909f3cc0899",
+                          "name": "Tag group found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-63c6601f-e3c3-4f6c-ac89-5909f3cc0899"
+                        },
+                        {
+                          "id": "4c0d4b28-5c42-4a95-acf9-8a836b0e6074",
+                          "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-4c0d4b28-5c42-4a95-acf9-8a836b0e6074"
+                        },
+                        {
+                          "id": "0a03fdd1-0b57-40ef-8201-818e08bba0aa",
+                          "name": "Tag group not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-0a03fdd1-0b57-40ef-8201-818e08bba0aa"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-29138fa5-bcde-44b1-8d7d-0899d7594a51"
+                    },
+                    {
+                      "name": "[Preview] Update a tag group",
+                      "id": "e25bd3d3-c24e-4ba7-9936-d4da3ab8ee7e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups",
+                            ":tagGroupId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "7c320bf2-2885-4f42-90aa-936770078486",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "affd265e-a33f-4365-81d6-3c9b6dc15223",
+                              "key": "tagGroupId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the tag group"
+                            }
+                          ]
+                        },
+                        "description": "Update the details of an existing tag group.\n\nThis only updates the tag group metadata (name, alias).\nThe `dimensionNumber` is set at creation and cannot be changed.\nTo manage tags within the group, use the tag sub-resource endpoints.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "c549f0cd-cdb7-4157-9e98-767044108e0c",
+                          "name": "Tag group updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-c549f0cd-cdb7-4157-9e98-767044108e0c"
+                        },
+                        {
+                          "id": "62854da7-07a4-426c-952c-810aee7e8532",
+                          "name": "Validation error. Possible reasons:\n- Missing required fields\n- Duplicate alias (must be unique per company)\n- Duplicate dimension number (must be unique per company)\n",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-62854da7-07a4-426c-952c-810aee7e8532"
+                        },
+                        {
+                          "id": "7fc04d2e-7796-4cdb-a124-efd6f13f8587",
+                          "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-7fc04d2e-7796-4cdb-a124-efd6f13f8587"
+                        },
+                        {
+                          "id": "dbaf7d52-b5a5-4a12-8279-e0b734abbc8e",
+                          "name": "Tag group not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-dbaf7d52-b5a5-4a12-8279-e0b734abbc8e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-e25bd3d3-c24e-4ba7-9936-d4da3ab8ee7e"
+                    },
+                    {
+                      "name": "[Preview] Delete a tag group",
+                      "id": "90f44e74-76ce-4aec-b4c5-494cd14d89ab",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups",
+                            ":tagGroupId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "900017c0-8133-4cd6-906c-437ca8f776e4",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "8fb0445c-5135-4011-9bfd-09039170c053",
+                              "key": "tagGroupId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the tag group"
+                            }
+                          ]
+                        },
+                        "description": "Delete a tag group and all its tags.\n\nDeletion will fail if any tags in the group are currently in use on journal entries.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "62449c94-4fcd-4201-9d9a-1f7c064bc58d",
+                          "name": "Tag group deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-62449c94-4fcd-4201-9d9a-1f7c064bc58d"
+                        },
+                        {
+                          "id": "21612938-e2a7-4263-8101-a66ad6f64756",
+                          "name": "Tag group cannot be deleted because it or its tags are in use.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-21612938-e2a7-4263-8101-a66ad6f64756"
+                        },
+                        {
+                          "id": "4a54a86e-f810-485d-bdbf-5c7be71c9b07",
+                          "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-4a54a86e-f810-485d-bdbf-5c7be71c9b07"
+                        },
+                        {
+                          "id": "0984b303-f44f-4e49-bb63-3c053ba680dd",
+                          "name": "Tag group not found",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/tag-groups/:tagGroupId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "tag-groups",
+                                ":tagGroupId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "tagGroupId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:48.000Z",
+                          "updatedAt": "2026-07-28T01:15:48.000Z",
+                          "uid": "35240-0984b303-f44f-4e49-bb63-3c053ba680dd"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-90f44e74-76ce-4aec-b4c5-494cd14d89ab"
+                    }
+                  ],
+                  "id": "dfdabe6a-7e08-498d-b5f9-383b956fa843",
+                  "createdAt": "2026-07-28T01:15:48.000Z",
+                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                  "uid": "35240-dfdabe6a-7e08-498d-b5f9-383b956fa843"
+                },
+                {
+                  "name": "[Preview] Create a tag group",
+                  "id": "e71c8d0a-839b-45a8-b180-9dc03e703f77",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "tag-groups"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c851013c-a258-4aed-9877-5eb7b300561a",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Creates a new tag group for the company.\n\nA tag group represents a category or dimension used to classify journal entries,\nsuch as \"Project\", \"Cost center\", or \"Department\".\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "98bc7be0-b412-4565-a427-7a0b464ad3a1",
+                      "name": "Tag group created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\",\n  \"tags\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-98bc7be0-b412-4565-a427-7a0b464ad3a1"
+                    },
+                    {
+                      "id": "b95bbe62-77f6-4007-b32b-464e77fd5468",
+                      "name": "Validation error. Possible reasons:\n- Missing required fields\n- Duplicate alias (must be unique per company)\n- Duplicate dimension number (must be unique per company)\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-b95bbe62-77f6-4007-b32b-464e77fd5468"
+                    },
+                    {
+                      "id": "c5bbd3e6-3d6e-43e0-b270-dbe74ad6a453",
+                      "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"alias\": \"<string>\",\n  \"dimensionNumber\": \"<integer>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-c5bbd3e6-3d6e-43e0-b270-dbe74ad6a453"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:48.000Z",
+                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                  "uid": "35240-e71c8d0a-839b-45a8-b180-9dc03e703f77"
+                },
+                {
+                  "name": "[Preview] Get all tag groups",
+                  "id": "1a78c066-bfd9-4573-a875-0fc9de6326dc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/tag-groups?page=1&pageSize=20&query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "tag-groups"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page for pagination",
+                          "key": "pageSize",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| dimensionNumber      | integer     |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "fa57f198-c284-4f12-a8ed-1f4577246d8e",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve all tag groups for the company, including their tags.\n\nThe company must have the Tags feature enabled in their price plan.\n\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "65fecb1e-28aa-447d-b0ce-37bbfc0f2aa9",
+                      "name": "Tag groups found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups?page=1&pageSize=20&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page for pagination",
+                              "key": "pageSize",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| dimensionNumber      | integer     |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"alias\": \"<string>\",\n      \"dimensionNumber\": \"<integer>\",\n      \"tags\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"alias\": \"<string>\",\n      \"dimensionNumber\": \"<integer>\",\n      \"tags\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-65fecb1e-28aa-447d-b0ce-37bbfc0f2aa9"
+                    },
+                    {
+                      "id": "8d256128-724c-474f-ae04-0260a213ab59",
+                      "name": "Forbidden. The company's price plan does not include API access, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/tag-groups?page=1&pageSize=20&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "tag-groups"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page for pagination",
+                              "key": "pageSize",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| dimensionNumber      | integer     |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:48.000Z",
+                      "updatedAt": "2026-07-28T01:15:48.000Z",
+                      "uid": "35240-8d256128-724c-474f-ae04-0260a213ab59"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:48.000Z",
+                  "updatedAt": "2026-07-28T01:15:48.000Z",
+                  "uid": "35240-1a78c066-bfd9-4573-a875-0fc9de6326dc"
+                }
+              ],
+              "id": "9311f968-46de-4c15-9934-2924d37c38ff",
+              "createdAt": "2026-07-28T01:15:48.000Z",
+              "updatedAt": "2026-07-28T01:15:48.000Z",
+              "uid": "35240-9311f968-46de-4c15-9934-2924d37c38ff"
+            }
+          ],
+          "id": "34345dc3-6068-4df8-87c9-25f8bf0cb32d",
+          "createdAt": "2026-07-28T01:15:48.000Z",
+          "updatedAt": "2026-07-28T01:15:48.000Z",
+          "uid": "35240-34345dc3-6068-4df8-87c9-25f8bf0cb32d"
+        }
+      ],
+      "id": "5b4f2c73-6c1b-4891-a93f-ab1abcf185ea",
+      "createdAt": "2026-07-28T01:15:48.000Z",
+      "updatedAt": "2026-07-28T01:15:48.000Z",
+      "uid": "35240-5b4f2c73-6c1b-4891-a93f-ab1abcf185ea"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

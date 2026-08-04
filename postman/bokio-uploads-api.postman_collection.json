@@ -1,0 +1,768 @@
+{
+  "info": {
+    "_postman_id": "7a495248-0622-4ffe-8a83-955d0e6ea979",
+    "name": "Company authorization uploads API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:49.000Z",
+    "updatedAt": "2026-07-28T01:15:49.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7a495248-0622-4ffe-8a83-955d0e6ea979"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "uploads",
+              "item": [
+                {
+                  "name": "{uploadId}",
+                  "item": [
+                    {
+                      "name": "download",
+                      "item": [
+                        {
+                          "name": "Download file data for an upload",
+                          "id": "dd0ab11e-311c-443b-a0ae-821d2224ca07",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/octet-stream"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/uploads/:uploadId/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "uploads",
+                                ":uploadId",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "23ac5598-6c2d-4f84-90bb-7046b29f4de5",
+                                  "key": "companyId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the company"
+                                },
+                                {
+                                  "id": "58a9b825-79fc-499b-9850-379e25643d1b",
+                                  "key": "uploadId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the upload"
+                                }
+                              ]
+                            },
+                            "description": "Retrieve the file data of the upload with the matching uploadId.\n\n**Scope:** `uploads:read`\n"
+                          },
+                          "response": [
+                            {
+                              "id": "ec42d1b3-1819-4f41-a723-e155a223e1cc",
+                              "name": "Upload file found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/uploads/:uploadId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "uploads",
+                                    ":uploadId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "uploadId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/octet-stream"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T01:15:49.000Z",
+                              "updatedAt": "2026-07-28T01:15:49.000Z",
+                              "uid": "35240-ec42d1b3-1819-4f41-a723-e155a223e1cc"
+                            },
+                            {
+                              "id": "9ac04d61-552a-4d97-8301-1eff0b73c669",
+                              "name": "Upload not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/uploads/:uploadId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "uploads",
+                                    ":uploadId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "uploadId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:49.000Z",
+                              "updatedAt": "2026-07-28T01:15:49.000Z",
+                              "uid": "35240-9ac04d61-552a-4d97-8301-1eff0b73c669"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:49.000Z",
+                          "updatedAt": "2026-07-28T01:15:49.000Z",
+                          "uid": "35240-dd0ab11e-311c-443b-a0ae-821d2224ca07"
+                        }
+                      ],
+                      "id": "73740bc0-e12f-4106-a40f-ac53a7743d73",
+                      "createdAt": "2026-07-28T01:15:49.000Z",
+                      "updatedAt": "2026-07-28T01:15:49.000Z",
+                      "uid": "35240-73740bc0-e12f-4106-a40f-ac53a7743d73"
+                    },
+                    {
+                      "name": "Get an upload",
+                      "id": "400ff286-28b7-4edc-9ff2-62411052314c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/uploads/:uploadId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "uploads",
+                            ":uploadId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "10437f15-3c84-4ffe-ad2d-dcafc67ce0ab",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "82341eac-657c-49af-abf4-72336c6fe38e",
+                              "key": "uploadId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the upload"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the information of the upload with the matching uploadId.\n\n**Scope:** `uploads:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "42329c05-fb1d-443e-947a-ee152d00e865",
+                          "name": "upload found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/uploads/:uploadId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "uploads",
+                                ":uploadId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "uploadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"contentType\": \"<string>\",\n  \"journalEntryId\": \"<uuid>\"\n}",
+                          "createdAt": "2026-07-28T01:15:49.000Z",
+                          "updatedAt": "2026-07-28T01:15:49.000Z",
+                          "uid": "35240-42329c05-fb1d-443e-947a-ee152d00e865"
+                        },
+                        {
+                          "id": "7a0de908-f224-4d6d-b98c-66c46cf3eab8",
+                          "name": "upload not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/uploads/:uploadId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "uploads",
+                                ":uploadId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "uploadId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:49.000Z",
+                          "updatedAt": "2026-07-28T01:15:49.000Z",
+                          "uid": "35240-7a0de908-f224-4d6d-b98c-66c46cf3eab8"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:49.000Z",
+                      "updatedAt": "2026-07-28T01:15:49.000Z",
+                      "uid": "35240-400ff286-28b7-4edc-9ff2-62411052314c"
+                    }
+                  ],
+                  "id": "97f87048-1cdf-48f5-8d59-b7ab6305ed60",
+                  "createdAt": "2026-07-28T01:15:49.000Z",
+                  "updatedAt": "2026-07-28T01:15:49.000Z",
+                  "uid": "35240-97f87048-1cdf-48f5-8d59-b7ab6305ed60"
+                },
+                {
+                  "name": "Add an upload",
+                  "id": "1a18ac84-e01c-4655-af6a-9fccf62781d5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The file to upload",
+                          "key": "file",
+                          "type": "file",
+                          "value": null
+                        },
+                        {
+                          "description": "Description of the upload. If left empty, the file name will be used.",
+                          "key": "description",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "The journal entry id to attach the upload to",
+                          "key": "journalEntryId",
+                          "value": "<uuid>",
+                          "type": "text"
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/uploads",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "uploads"
+                      ],
+                      "variable": [
+                        {
+                          "id": "c52b2efa-8a67-4cec-9ce1-9f244100932e",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Add an upload to bokio in the form of an image or pdf. One file can be uploaded per request. The request must be **multi-part MIME**.\n\n#### Sample request for uploading a file using multipart MIME\n```\nPOST http://api.bokio.se/companies/{companyId}/uploads\nContent-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW\nAuthorization: Bearer <token>\n\n------FormBoundary7MA4YWxkTrZu0gW\nContent-Disposition: form-data; name=\"File\"; filename=\"receipt.png\"\nContent-Type: image/png\n\n< ./receipt.png\n\n------WebKitFormBoundary7MA4YWxkTrZu0gW\nContent-Disposition: form-data; name=\"journalEntryId\"\n\n835ba700-b306-4bd9-8447-59207b6b0002\n\n------WebKitFormBoundary7MA4YWxkTrZu0gW\nContent-Disposition: form-data; name=\"description\"\n\nDescription for the upload\n\n------FormBoundary7MA4YWxkTrZu0gW--\n```\n\n**Scope:** `uploads:write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "4645a8d6-1264-451c-b8af-87709dfe49da",
+                      "name": "Successfully added",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to upload",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "Description of the upload. If left empty, the file name will be used.",
+                              "key": "description",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The journal entry id to attach the upload to",
+                              "key": "journalEntryId",
+                              "value": "<uuid>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/uploads",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "uploads"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<uuid>\",\n  \"description\": \"<string>\",\n  \"contentType\": \"<string>\",\n  \"journalEntryId\": \"<uuid>\"\n}",
+                      "createdAt": "2026-07-28T01:15:49.000Z",
+                      "updatedAt": "2026-07-28T01:15:49.000Z",
+                      "uid": "35240-4645a8d6-1264-451c-b8af-87709dfe49da"
+                    },
+                    {
+                      "id": "926762d3-95a5-44b7-a466-f0cd896fa747",
+                      "name": "Invalid file data",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The file to upload",
+                              "key": "file",
+                              "type": "file"
+                            },
+                            {
+                              "description": "Description of the upload. If left empty, the file name will be used.",
+                              "key": "description",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "The journal entry id to attach the upload to",
+                              "key": "journalEntryId",
+                              "value": "<uuid>",
+                              "type": "text"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/uploads",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "uploads"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:49.000Z",
+                      "updatedAt": "2026-07-28T01:15:49.000Z",
+                      "uid": "35240-926762d3-95a5-44b7-a466-f0cd896fa747"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:49.000Z",
+                  "updatedAt": "2026-07-28T01:15:49.000Z",
+                  "uid": "35240-1a18ac84-e01c-4655-af6a-9fccf62781d5"
+                },
+                {
+                  "name": "Get uploads",
+                  "id": "607cc0d2-5d57-4bf5-ba3f-70f950e93d43",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/uploads?page=1&pageSize=25&query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "uploads"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "pageSize",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| description               | string      |\n| journalEntryId            | string      |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "1974510e-9fd1-4dac-8eee-2a78f06a343c",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Get all uploads for the company. Use the query parameters to filter and navigate through the results.\n**Scope:** `uploads:read`"
+                  },
+                  "response": [
+                    {
+                      "id": "482ccf82-1bc6-4f70-978f-abe758fc0bde",
+                      "name": "uploads found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/uploads?page=1&pageSize=25&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "uploads"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "pageSize",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| description               | string      |\n| journalEntryId            | string      |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"id\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"journalEntryId\": \"<uuid>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"description\": \"<string>\",\n      \"contentType\": \"<string>\",\n      \"journalEntryId\": \"<uuid>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:49.000Z",
+                      "updatedAt": "2026-07-28T01:15:49.000Z",
+                      "uid": "35240-482ccf82-1bc6-4f70-978f-abe758fc0bde"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:49.000Z",
+                  "updatedAt": "2026-07-28T01:15:49.000Z",
+                  "uid": "35240-607cc0d2-5d57-4bf5-ba3f-70f950e93d43"
+                }
+              ],
+              "id": "69b80acd-2727-4704-a83d-0a92e3fdc0b5",
+              "createdAt": "2026-07-28T01:15:49.000Z",
+              "updatedAt": "2026-07-28T01:15:49.000Z",
+              "uid": "35240-69b80acd-2727-4704-a83d-0a92e3fdc0b5"
+            }
+          ],
+          "id": "cffeb97e-b779-4abc-b17f-bb357d85bdfd",
+          "createdAt": "2026-07-28T01:15:49.000Z",
+          "updatedAt": "2026-07-28T01:15:49.000Z",
+          "uid": "35240-cffeb97e-b779-4abc-b17f-bb357d85bdfd"
+        }
+      ],
+      "id": "302f0eaf-6b3a-45f5-9bf8-bd3e555a88a3",
+      "createdAt": "2026-07-28T01:15:49.000Z",
+      "updatedAt": "2026-07-28T01:15:49.000Z",
+      "uid": "35240-302f0eaf-6b3a-45f5-9bf8-bd3e555a88a3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

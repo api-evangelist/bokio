@@ -1,0 +1,400 @@
+{
+  "info": {
+    "_postman_id": "3830742b-eee9-4b92-8089-f3f779ad2a8b",
+    "name": "Company authorization chart-of-accounts API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:29.000Z",
+    "updatedAt": "2026-07-28T01:15:30.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3830742b-eee9-4b92-8089-f3f779ad2a8b"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "chart-of-accounts",
+              "item": [
+                {
+                  "name": "{account}",
+                  "item": [
+                    {
+                      "name": "Get specific account",
+                      "id": "78998094-a662-4aa2-a714-783563aca601",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/chart-of-accounts/:account",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "chart-of-accounts",
+                            ":account"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ac6d3f79-a000-4b5f-86a3-4dbe718913ff",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "0f5e803a-4e5a-49bf-8433-6d9217f1a28e",
+                              "key": "account",
+                              "value": "<integer>",
+                              "description": "(Required) The number of the account"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves details of a specific account from the chart of accounts using the account number.\n\n**Scope:** `chart-of-accounts:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "43ce1c3f-3833-44fe-b418-1ade6e3ad8af",
+                          "name": "Account retrieved successfully",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/chart-of-accounts/:account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "chart-of-accounts",
+                                ":account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "account"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"account\": \"<integer>\",\n  \"name\": \"<string>\",\n  \"accountType\": \"basePlanAccount\",\n  \"accountBalance\": \"<double>\"\n}",
+                          "createdAt": "2026-07-28T01:15:30.000Z",
+                          "updatedAt": "2026-07-28T01:15:30.000Z",
+                          "uid": "35240-43ce1c3f-3833-44fe-b418-1ade6e3ad8af"
+                        },
+                        {
+                          "id": "52aa0181-916f-44f0-87e9-d67a110e5117",
+                          "name": "Account not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/chart-of-accounts/:account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "chart-of-accounts",
+                                ":account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "account"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:30.000Z",
+                          "updatedAt": "2026-07-28T01:15:30.000Z",
+                          "uid": "35240-52aa0181-916f-44f0-87e9-d67a110e5117"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:30.000Z",
+                      "updatedAt": "2026-07-28T01:15:30.000Z",
+                      "uid": "35240-78998094-a662-4aa2-a714-783563aca601"
+                    }
+                  ],
+                  "id": "316c4d9b-1cbc-4dd5-97f6-96e68d081775",
+                  "createdAt": "2026-07-28T01:15:30.000Z",
+                  "updatedAt": "2026-07-28T01:15:30.000Z",
+                  "uid": "35240-316c4d9b-1cbc-4dd5-97f6-96e68d081775"
+                },
+                {
+                  "name": "Get chart of accounts",
+                  "id": "ba19f68a-fc96-4770-b6ea-32af0f850855",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/chart-of-accounts?query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "chart-of-accounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| account              | number      |\n| name                 | string      |\n| accountType          | string    |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "99862e48-fc97-4979-b321-0003c5079759",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the complete chart of accounts for the company, merging bookkeeping accounts with their associated money account details.\n\n**Scope:** `chart-of-accounts:read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "63e0070b-897b-4c3d-9243-0bd97c9a4605",
+                      "name": "Chart of accounts retrieved successfully",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/chart-of-accounts?query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "chart-of-accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| account              | number      |\n| name                 | string      |\n| accountType          | string    |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"account\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"accountType\": \"basePlanAccount\"\n  },\n  {\n    \"account\": \"<integer>\",\n    \"name\": \"<string>\",\n    \"accountType\": \"basePlanAccount\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:15:30.000Z",
+                      "updatedAt": "2026-07-28T01:15:30.000Z",
+                      "uid": "35240-63e0070b-897b-4c3d-9243-0bd97c9a4605"
+                    },
+                    {
+                      "id": "3319f8c3-5f66-43ae-bc79-2cd25802a458",
+                      "name": "Company not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/chart-of-accounts?query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "chart-of-accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| account              | number      |\n| name                 | string      |\n| accountType          | string    |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:30.000Z",
+                      "updatedAt": "2026-07-28T01:15:30.000Z",
+                      "uid": "35240-3319f8c3-5f66-43ae-bc79-2cd25802a458"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:30.000Z",
+                  "updatedAt": "2026-07-28T01:15:30.000Z",
+                  "uid": "35240-ba19f68a-fc96-4770-b6ea-32af0f850855"
+                }
+              ],
+              "id": "5d49a1c5-6338-4ffc-b95b-e064ff4d08bc",
+              "createdAt": "2026-07-28T01:15:30.000Z",
+              "updatedAt": "2026-07-28T01:15:30.000Z",
+              "uid": "35240-5d49a1c5-6338-4ffc-b95b-e064ff4d08bc"
+            }
+          ],
+          "id": "d568d5a1-3d0b-44a9-9f9c-50b77b3eb8d4",
+          "createdAt": "2026-07-28T01:15:30.000Z",
+          "updatedAt": "2026-07-28T01:15:30.000Z",
+          "uid": "35240-d568d5a1-3d0b-44a9-9f9c-50b77b3eb8d4"
+        }
+      ],
+      "id": "37b1a846-89e3-402e-a01d-c28673f904c3",
+      "createdAt": "2026-07-28T01:15:30.000Z",
+      "updatedAt": "2026-07-28T01:15:30.000Z",
+      "uid": "35240-37b1a846-89e3-402e-a01d-c28673f904c3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

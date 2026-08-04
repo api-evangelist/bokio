@@ -1,0 +1,206 @@
+{
+  "info": {
+    "_postman_id": "25791317-9903-4b50-ba6a-e45be2cb654f",
+    "name": "Company authorization company-information API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:31.000Z",
+    "updatedAt": "2026-07-28T01:15:31.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-25791317-9903-4b50-ba6a-e45be2cb654f"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "company-information",
+              "item": [
+                {
+                  "name": "Retrieve company information",
+                  "id": "5ca19128-92da-4d4d-8dcc-b38eeea2bc9a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/company-information",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "company-information"
+                      ],
+                      "variable": [
+                        {
+                          "id": "92c630cf-2449-4189-b9e4-d82b8a568a19",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier for the company"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve the information of the company.\n\n**Scope:** `company-information:read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "0d9afe02-a322-4451-947d-40433dd8c1f2",
+                      "name": "Company information",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/company-information",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "company-information"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"companyInformation\": {\n    \"id\": \"<uuid>\",\n    \"companyType\": \"proprietorship\",\n    \"name\": \"<string>\",\n    \"organizationNumber\": \"<string>\",\n    \"phone\": \"<string>\",\n    \"email\": \"<string>\",\n    \"hasBBA\": \"<boolean>\",\n    \"address\": {\n      \"line1\": \"<string>\",\n      \"line2\": \"<string>\",\n      \"city\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"country\": \"<string>\"\n    }\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:32.000Z",
+                      "updatedAt": "2026-07-28T01:15:32.000Z",
+                      "uid": "35240-0d9afe02-a322-4451-947d-40433dd8c1f2"
+                    },
+                    {
+                      "id": "dc16bed0-c1d0-47c9-8a7d-d1fda28f5826",
+                      "name": "Company not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/company-information",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "company-information"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:32.000Z",
+                      "updatedAt": "2026-07-28T01:15:32.000Z",
+                      "uid": "35240-dc16bed0-c1d0-47c9-8a7d-d1fda28f5826"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:32.000Z",
+                  "updatedAt": "2026-07-28T01:15:32.000Z",
+                  "uid": "35240-5ca19128-92da-4d4d-8dcc-b38eeea2bc9a"
+                }
+              ],
+              "id": "c9360aa8-eba8-4da7-aab9-7c0bca1e6b70",
+              "createdAt": "2026-07-28T01:15:31.000Z",
+              "updatedAt": "2026-07-28T01:15:31.000Z",
+              "uid": "35240-c9360aa8-eba8-4da7-aab9-7c0bca1e6b70"
+            }
+          ],
+          "id": "3a8aad58-b510-44a0-a104-fcca52c22d94",
+          "createdAt": "2026-07-28T01:15:31.000Z",
+          "updatedAt": "2026-07-28T01:15:31.000Z",
+          "uid": "35240-3a8aad58-b510-44a0-a104-fcca52c22d94"
+        }
+      ],
+      "id": "ab615f30-6d2a-44d3-aef8-c2ccadb28fa9",
+      "createdAt": "2026-07-28T01:15:31.000Z",
+      "updatedAt": "2026-07-28T01:15:31.000Z",
+      "uid": "35240-ab615f30-6d2a-44d3-aef8-c2ccadb28fa9"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

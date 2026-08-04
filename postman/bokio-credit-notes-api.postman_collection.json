@@ -1,0 +1,1482 @@
+{
+  "info": {
+    "_postman_id": "af3cecd1-1029-43c7-b9d5-27a3d5b27c79",
+    "name": "Company authorization credit-notes API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:33.000Z",
+    "updatedAt": "2026-07-28T01:15:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-af3cecd1-1029-43c7-b9d5-27a3d5b27c79"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "credit-notes",
+              "item": [
+                {
+                  "name": "{creditNoteId}",
+                  "item": [
+                    {
+                      "name": "publish",
+                      "item": [
+                        {
+                          "name": "Publish a credit note",
+                          "id": "abe776de-77d7-4966-95e2-b2109d74b815",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/publish",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId",
+                                "publish"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "98524769-16bb-42a2-bf60-14a82c082584",
+                                  "key": "companyId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the company"
+                                },
+                                {
+                                  "id": "3e0165c6-e6ce-415b-b260-2e267667fa8d",
+                                  "key": "creditNoteId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the credit note"
+                                }
+                              ]
+                            },
+                            "description": "Publishes a draft credit note, making it official and immutable.\n\n**Scope:** `credit-notes:write`\n"
+                          },
+                          "response": [
+                            {
+                              "id": "f2e2f4e7-93c1-4d2d-9252-c8a5f95ab03d",
+                              "name": "Credit note published successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-f2e2f4e7-93c1-4d2d-9252-c8a5f95ab03d"
+                            },
+                            {
+                              "id": "68d895d4-ef7c-4ae9-8a73-e6baaafec263",
+                              "name": "Credit note cannot be published",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-68d895d4-ef7c-4ae9-8a73-e6baaafec263"
+                            },
+                            {
+                              "id": "d86c8543-aeb5-440e-8718-a7a0e109571a",
+                              "name": "Credit note not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/publish",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "publish"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-d86c8543-aeb5-440e-8718-a7a0e109571a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-abe776de-77d7-4966-95e2-b2109d74b815"
+                        }
+                      ],
+                      "id": "6b92056e-a231-49f9-bd0a-9b6045f22cf4",
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-6b92056e-a231-49f9-bd0a-9b6045f22cf4"
+                    },
+                    {
+                      "name": "record",
+                      "item": [
+                        {
+                          "name": "Record credit note",
+                          "id": "470d943b-6a92-4527-8514-1c70a40527d2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/record",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId",
+                                "record"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "f588a553-c4b1-41f3-9ab6-d722de244138",
+                                  "key": "companyId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the company"
+                                },
+                                {
+                                  "id": "5d0bf86a-52fc-4671-883b-1c77dee4cf6e",
+                                  "key": "creditNoteId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the credit note"
+                                }
+                              ]
+                            },
+                            "description": "Record a credit note.\n\n**Scope:** `credit-notes:write`\n"
+                          },
+                          "response": [
+                            {
+                              "id": "ff93945e-5a9a-4cb8-9680-1ce386c60477",
+                              "name": "Credit note recorded successfully",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/record",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "record"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-ff93945e-5a9a-4cb8-9680-1ce386c60477"
+                            },
+                            {
+                              "id": "10f6e01a-0e1a-4945-824a-48cfcecd4ffc",
+                              "name": "Invalid request or invoice payment cannot be recorded",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/record",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "record"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-10f6e01a-0e1a-4945-824a-48cfcecd4ffc"
+                            },
+                            {
+                              "id": "5b9d8f04-5152-4d7d-8b4b-a2417d45def9",
+                              "name": "Credit note not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/record",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "record"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-5b9d8f04-5152-4d7d-8b4b-a2417d45def9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-470d943b-6a92-4527-8514-1c70a40527d2"
+                        }
+                      ],
+                      "id": "00ae1602-8185-478b-b307-3994113c6bbf",
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-00ae1602-8185-478b-b307-3994113c6bbf"
+                    },
+                    {
+                      "name": "download",
+                      "item": [
+                        {
+                          "name": "Download a credit note",
+                          "id": "5bb7b28a-8670-43d1-a40f-6d37ce812912",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/pdf"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "99756b8c-d0b0-420c-a049-b62b66acf906",
+                                  "key": "companyId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the company"
+                                },
+                                {
+                                  "id": "d519e87b-b306-44cb-aafe-c1b3c928c967",
+                                  "key": "creditNoteId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Unique identifier of the credit note"
+                                }
+                              ]
+                            },
+                            "description": "Download the credit note PDF with the matching creditNoteId.\n\n**NOTE:** The credit note must be in published status.\n\n**Scope:** `credit-notes:read`\n"
+                          },
+                          "response": [
+                            {
+                              "id": "1aa79743-5525-4b4e-8c0d-d479514597d7",
+                              "name": "Credit note found and downloaded successfully.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/pdf"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/pdf"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-1aa79743-5525-4b4e-8c0d-d479514597d7"
+                            },
+                            {
+                              "id": "cd517b28-c94c-4c70-8ede-fcfb14bed891",
+                              "name": "Credit note is not in published status",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-cd517b28-c94c-4c70-8ede-fcfb14bed891"
+                            },
+                            {
+                              "id": "1282f392-23b9-4483-936b-7c16e5759df3",
+                              "name": "Credit note not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "credit-notes",
+                                    ":creditNoteId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "creditNoteId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:33.000Z",
+                              "updatedAt": "2026-07-28T01:15:33.000Z",
+                              "uid": "35240-1282f392-23b9-4483-936b-7c16e5759df3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-5bb7b28a-8670-43d1-a40f-6d37ce812912"
+                        }
+                      ],
+                      "id": "36adf773-4e3c-427f-ad05-9531bd100adc",
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-36adf773-4e3c-427f-ad05-9531bd100adc"
+                    },
+                    {
+                      "name": "Get a credit note",
+                      "id": "8583b34e-2f67-4c55-ae7a-d618cadd7938",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "credit-notes",
+                            ":creditNoteId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "2a58a155-ead2-4cd0-a9e6-e17373f04eb9",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "7f4d84f4-e9a6-498b-8a31-7cddb93f4361",
+                              "key": "creditNoteId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the credit note"
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a specific credit note by its ID.\n\n**Scope:** `credit-notes:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "c9073d48-005d-4bd4-9c29-b1d8e6effd2c",
+                          "name": "Credit note found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-c9073d48-005d-4bd4-9c29-b1d8e6effd2c"
+                        },
+                        {
+                          "id": "4b1c53d2-57b8-497d-9499-d8aafb7af205",
+                          "name": "Credit note not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-4b1c53d2-57b8-497d-9499-d8aafb7af205"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-8583b34e-2f67-4c55-ae7a-d618cadd7938"
+                    },
+                    {
+                      "name": "Update a credit note",
+                      "id": "d293d705-b36e-4ed8-85d0-a45423d193ea",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "credit-notes",
+                            ":creditNoteId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "6964d264-beeb-41d3-b1f4-0dcee7ab766e",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "895b3dac-99b2-4c77-9dc4-8a46bb765f30",
+                              "key": "creditNoteId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the credit note"
+                            }
+                          ]
+                        },
+                        "description": "Updates an existing credit note. Only draft credit notes can be updated.\n\n**Scope:** `credit-notes:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "88c139b2-726e-452d-861a-1b6be07690e9",
+                          "name": "Credit note updated successfully",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-88c139b2-726e-452d-861a-1b6be07690e9"
+                        },
+                        {
+                          "id": "5cf415cf-39bf-433c-882d-2bb17b609a30",
+                          "name": "Bad request",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-5cf415cf-39bf-433c-882d-2bb17b609a30"
+                        },
+                        {
+                          "id": "08468bc4-5e0b-419f-970d-197dce16082b",
+                          "name": "Credit note not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"id\": \"<uuid>\",\n  \"currency\": \"SEK\",\n  \"creditDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"lineItems\": [\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rot\",\n        \"jobType\": \"rotSoilWork\"\n      }\n    },\n    {\n      \"description\": \"<string>\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"services\",\n      \"quantity\": 1,\n      \"unitPrice\": \"<double>\",\n      \"taxRate\": \"<double>\",\n      \"id\": \"<long>\",\n      \"itemRef\": {\n        \"id\": \"<uuid>\",\n        \"description\": \"<string>\"\n      },\n      \"unitType\": \"unspecified\",\n      \"bookkeepingAccountNumber\": \"<integer>\",\n      \"taxReduction\": {\n        \"taxReductionType\": \"rut\",\n        \"jobType\": \"rutClothingCare\"\n      }\n    }\n  ],\n  \"invoiceRef\": {\n    \"id\": \"<uuid>\",\n    \"invoiceNumber\": \"<string>\"\n  },\n  \"customerRef\": {\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\"\n  },\n  \"contactDetailRef\": {\n    \"id\": \"<uuid>\",\n    \"email\": \"<string>\",\n    \"phone\": \"<string>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"orderNumberReference\": \"<string>\",\n  \"projectReference\": \"<string>\",\n  \"buyerReference\": \"<string>\",\n  \"contractReference\": \"<string>\",\n  \"currencyRate\": 1,\n  \"totalAmount\": \"<double>\",\n  \"totalTax\": \"<double>\",\n  \"paidAmount\": \"<double>\",\n  \"status\": \"published\",\n  \"publishedDateTime\": \"<dateTime>\",\n  \"billingAddress\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"deliveryAddress\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\"\n  },\n  \"attachmentRefs\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\"\n    }\n  ],\n  \"journalEntryRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"metadata\": {\n    \"sed_0\": \"<string>\",\n    \"officiabb5\": \"<string>\",\n    \"consequat__\": \"<string>\",\n    \"velit_17\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-08468bc4-5e0b-419f-970d-197dce16082b"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-d293d705-b36e-4ed8-85d0-a45423d193ea"
+                    },
+                    {
+                      "name": "Delete a credit note",
+                      "id": "85e85e72-7098-4dda-b183-c862a567be51",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "credit-notes",
+                            ":creditNoteId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d8f3ab5f-ae1c-466e-96f4-b4f9e1b4c60d",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "4a8788b5-ff14-46f8-a882-6ce56340ef56",
+                              "key": "creditNoteId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the credit note"
+                            }
+                          ]
+                        },
+                        "description": "Deletes a draft credit note. Only draft credit notes can be deleted.\n\n**Scope:** `credit-notes:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "519ab0cd-08e3-477f-b843-ed99e9263467",
+                          "name": "Credit note deleted successfully",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-519ab0cd-08e3-477f-b843-ed99e9263467"
+                        },
+                        {
+                          "id": "8ae2bf13-5a68-48eb-be1e-2d7d89682894",
+                          "name": "Credit note cannot be deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/credit-notes/:creditNoteId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "credit-notes",
+                                ":creditNoteId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "creditNoteId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:33.000Z",
+                          "updatedAt": "2026-07-28T01:15:33.000Z",
+                          "uid": "35240-8ae2bf13-5a68-48eb-be1e-2d7d89682894"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-85e85e72-7098-4dda-b183-c862a567be51"
+                    }
+                  ],
+                  "id": "8bcd761a-dc40-412c-8379-b6c4061747b5",
+                  "createdAt": "2026-07-28T01:15:33.000Z",
+                  "updatedAt": "2026-07-28T01:15:33.000Z",
+                  "uid": "35240-8bcd761a-dc40-412c-8379-b6c4061747b5"
+                },
+                {
+                  "name": "List credit notes",
+                  "id": "0518d426-b74d-4c36-9755-bcb6ecf942a9",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/credit-notes?page=1&pageSize=20&query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "credit-notes"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "pageSize",
+                          "value": "20"
+                        },
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\nView documentation for filtering on metatdata [here](metadata).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| type                 | string      |\n| customerRef          | string      |\n| orderNumberReference | string      |\n| projectReference     | string      |\n| buyerReference       | string      |\n| contractReference    | string      |\n| currency             | string      |\n| totalAmount          | number      |\n| status               | string      |\n| invoiceDate          | date        |\n| dueDate              | date        |\n| metadata             | string      |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "45bb317c-5be3-45a3-8eef-b4fb5876cf3a",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of credit notes for the company.\n\n**Scope:** `credit-notes:read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "b4b399e8-7eaa-4e0a-951f-f2f3d49ec908",
+                      "name": "List of credit notes",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/credit-notes?page=1&pageSize=20&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "credit-notes"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "pageSize",
+                              "value": "20"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\nView documentation for filtering on metatdata [here](metadata).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| type                 | string      |\n| customerRef          | string      |\n| orderNumberReference | string      |\n| projectReference     | string      |\n| buyerReference       | string      |\n| contractReference    | string      |\n| currency             | string      |\n| totalAmount          | number      |\n| status               | string      |\n| invoiceDate          | date        |\n| dueDate              | date        |\n| metadata             | string      |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"id\": \"<uuid>\",\n      \"currency\": \"SEK\",\n      \"creditDate\": \"<date>\",\n      \"dueDate\": \"<date>\",\n      \"lineItems\": [\n        {\n          \"description\": \"<string>\",\n          \"itemType\": \"salesItem\",\n          \"productType\": \"goods\",\n          \"quantity\": 1,\n          \"unitPrice\": \"<double>\",\n          \"taxRate\": \"<double>\",\n          \"id\": \"<long>\",\n          \"itemRef\": {\n            \"id\": \"<uuid>\",\n            \"description\": \"<string>\"\n          },\n          \"unitType\": \"unspecified\",\n          \"bookkeepingAccountNumber\": \"<integer>\",\n          \"taxReduction\": {\n            \"taxReductionType\": \"rot\",\n            \"jobType\": \"rutClothingCare\"\n          }\n        },\n        {\n          \"description\": \"<string>\",\n          \"itemType\": \"salesItem\",\n          \"productType\": \"goods\",\n          \"quantity\": 1,\n          \"unitPrice\": \"<double>\",\n          \"taxRate\": \"<double>\",\n          \"id\": \"<long>\",\n          \"itemRef\": {\n            \"id\": \"<uuid>\",\n            \"description\": \"<string>\"\n          },\n          \"unitType\": \"unspecified\",\n          \"bookkeepingAccountNumber\": \"<integer>\",\n          \"taxReduction\": {\n            \"taxReductionType\": \"rot\",\n            \"jobType\": \"rutCleaning\"\n          }\n        }\n      ],\n      \"invoiceRef\": {\n        \"id\": \"<uuid>\",\n        \"invoiceNumber\": \"<string>\"\n      },\n      \"customerRef\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\"\n      },\n      \"contactDetailRef\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"invoiceNumber\": \"<string>\",\n      \"orderNumberReference\": \"<string>\",\n      \"projectReference\": \"<string>\",\n      \"buyerReference\": \"<string>\",\n      \"contractReference\": \"<string>\",\n      \"currencyRate\": 1,\n      \"totalAmount\": \"<double>\",\n      \"totalTax\": \"<double>\",\n      \"paidAmount\": \"<double>\",\n      \"status\": \"published\",\n      \"publishedDateTime\": \"<dateTime>\",\n      \"billingAddress\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"countrySubdivision\": \"<string>\"\n      },\n      \"deliveryAddress\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"attachmentRefs\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"journalEntryRef\": {\n        \"id\": \"<uuid>\"\n      },\n      \"metadata\": {\n        \"eiusmod_3\": \"<string>\",\n        \"sunt_d\": \"<string>\",\n        \"cupidatat_b92\": \"<string>\"\n      }\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"currency\": \"SEK\",\n      \"creditDate\": \"<date>\",\n      \"dueDate\": \"<date>\",\n      \"lineItems\": [\n        {\n          \"description\": \"<string>\",\n          \"itemType\": \"salesItem\",\n          \"productType\": \"services\",\n          \"quantity\": 1,\n          \"unitPrice\": \"<double>\",\n          \"taxRate\": \"<double>\",\n          \"id\": \"<long>\",\n          \"itemRef\": {\n            \"id\": \"<uuid>\",\n            \"description\": \"<string>\"\n          },\n          \"unitType\": \"unspecified\",\n          \"bookkeepingAccountNumber\": \"<integer>\",\n          \"taxReduction\": {\n            \"taxReductionType\": \"rut\",\n            \"jobType\": \"rotPainting\"\n          }\n        },\n        {\n          \"description\": \"<string>\",\n          \"itemType\": \"salesItem\",\n          \"productType\": \"goods\",\n          \"quantity\": 1,\n          \"unitPrice\": \"<double>\",\n          \"taxRate\": \"<double>\",\n          \"id\": \"<long>\",\n          \"itemRef\": {\n            \"id\": \"<uuid>\",\n            \"description\": \"<string>\"\n          },\n          \"unitType\": \"unspecified\",\n          \"bookkeepingAccountNumber\": \"<integer>\",\n          \"taxReduction\": {\n            \"taxReductionType\": \"rot\",\n            \"jobType\": \"rutRemovalServices\"\n          }\n        }\n      ],\n      \"invoiceRef\": {\n        \"id\": \"<uuid>\",\n        \"invoiceNumber\": \"<string>\"\n      },\n      \"customerRef\": {\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\"\n      },\n      \"contactDetailRef\": {\n        \"id\": \"<uuid>\",\n        \"email\": \"<string>\",\n        \"phone\": \"<string>\"\n      },\n      \"invoiceNumber\": \"<string>\",\n      \"orderNumberReference\": \"<string>\",\n      \"projectReference\": \"<string>\",\n      \"buyerReference\": \"<string>\",\n      \"contractReference\": \"<string>\",\n      \"currencyRate\": 1,\n      \"totalAmount\": \"<double>\",\n      \"totalTax\": \"<double>\",\n      \"paidAmount\": \"<double>\",\n      \"status\": \"draft\",\n      \"publishedDateTime\": \"<dateTime>\",\n      \"billingAddress\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"countrySubdivision\": \"<string>\"\n      },\n      \"deliveryAddress\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      \"attachmentRefs\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\"\n        }\n      ],\n      \"journalEntryRef\": {\n        \"id\": \"<uuid>\"\n      },\n      \"metadata\": {\n        \"dof7\": \"<string>\",\n        \"deserunt1a\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:33.000Z",
+                      "updatedAt": "2026-07-28T01:15:33.000Z",
+                      "uid": "35240-b4b399e8-7eaa-4e0a-951f-f2f3d49ec908"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:33.000Z",
+                  "updatedAt": "2026-07-28T01:15:33.000Z",
+                  "uid": "35240-0518d426-b74d-4c36-9755-bcb6ecf942a9"
+                }
+              ],
+              "id": "a0e7f256-12c3-4920-b160-f10b331d4826",
+              "createdAt": "2026-07-28T01:15:33.000Z",
+              "updatedAt": "2026-07-28T01:15:33.000Z",
+              "uid": "35240-a0e7f256-12c3-4920-b160-f10b331d4826"
+            }
+          ],
+          "id": "f8364dee-fb15-4d47-9a65-bd1c6717b742",
+          "createdAt": "2026-07-28T01:15:33.000Z",
+          "updatedAt": "2026-07-28T01:15:33.000Z",
+          "uid": "35240-f8364dee-fb15-4d47-9a65-bd1c6717b742"
+        }
+      ],
+      "id": "3b088da5-172a-47b3-a7d9-6b137a87cb3b",
+      "createdAt": "2026-07-28T01:15:33.000Z",
+      "updatedAt": "2026-07-28T01:15:33.000Z",
+      "uid": "35240-3b088da5-172a-47b3-a7d9-6b137a87cb3b"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

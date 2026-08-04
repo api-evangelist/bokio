@@ -1,0 +1,858 @@
+{
+  "info": {
+    "_postman_id": "2b6ebac7-d628-4d65-a2e6-cd10c705976a",
+    "name": "Company authorization customers API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:34.000Z",
+    "updatedAt": "2026-07-28T01:15:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-2b6ebac7-d628-4d65-a2e6-cd10c705976a"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "customers",
+              "item": [
+                {
+                  "name": "{customerId}",
+                  "item": [
+                    {
+                      "name": "Get a customer",
+                      "id": "8ce01854-b9f6-45b0-b0b1-57ccf189b706",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "customers",
+                            ":customerId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "aacfcdf3-378f-4b96-b84b-3a1e2692cf95",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "bd67b720-06f9-4a58-8ae3-5c7a0e586861",
+                              "key": "customerId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the customer"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the information of the customer with the matching customerId.\n\n**Scope:** `customers:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "d3af0cd9-a15d-4594-bec3-ff00bb86ccdf",
+                          "name": "Customer found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "customers",
+                                ":customerId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "customerId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:15:35.000Z",
+                          "updatedAt": "2026-07-28T01:15:35.000Z",
+                          "uid": "35240-d3af0cd9-a15d-4594-bec3-ff00bb86ccdf"
+                        },
+                        {
+                          "id": "2eb99ae6-ac87-4add-a754-9c86f687f9c6",
+                          "name": "Customer not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "customers",
+                                ":customerId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "customerId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:35.000Z",
+                          "updatedAt": "2026-07-28T01:15:35.000Z",
+                          "uid": "35240-2eb99ae6-ac87-4add-a754-9c86f687f9c6"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:35.000Z",
+                      "updatedAt": "2026-07-28T01:15:35.000Z",
+                      "uid": "35240-8ce01854-b9f6-45b0-b0b1-57ccf189b706"
+                    },
+                    {
+                      "name": "Update a customer",
+                      "id": "21af3601-f3cd-42e3-95ce-2b0dd8b39375",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "customers",
+                            ":customerId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "d8228f23-5acb-4301-85a7-9c13c4ec7a35",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "fe34d6ac-ca99-4971-a389-f25def93b397",
+                              "key": "customerId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the customer"
+                            }
+                          ]
+                        },
+                        "description": "Update an existing customer for the company.\n\n**Scope:** `customers:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "d8ab9d32-6775-4722-bf3a-2ecbfb9deb95",
+                          "name": "Customer updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "customers",
+                                ":customerId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "customerId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                          "createdAt": "2026-07-28T01:15:35.000Z",
+                          "updatedAt": "2026-07-28T01:15:35.000Z",
+                          "uid": "35240-d8ab9d32-6775-4722-bf3a-2ecbfb9deb95"
+                        },
+                        {
+                          "id": "cf50a505-e7fe-4ae5-8afa-1592049a1106",
+                          "name": "Missing required information",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "customers",
+                                ":customerId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "customerId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:35.000Z",
+                          "updatedAt": "2026-07-28T01:15:35.000Z",
+                          "uid": "35240-cf50a505-e7fe-4ae5-8afa-1592049a1106"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:35.000Z",
+                      "updatedAt": "2026-07-28T01:15:35.000Z",
+                      "uid": "35240-21af3601-f3cd-42e3-95ce-2b0dd8b39375"
+                    },
+                    {
+                      "name": "Delete a customer",
+                      "id": "1557caea-ee0d-4a8d-828f-30ea83adc7e9",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "customers",
+                            ":customerId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "ed0267a5-6fdd-49cc-85f4-c53e8e53563d",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "a9bb2b50-08da-4c57-9b65-2d74195fbf67",
+                              "key": "customerId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the customer"
+                            }
+                          ]
+                        },
+                        "description": "Delete an existing customer for the company.\n\nNOTE: Currently only supports deleting customers that have been added through the API.\n\n**Scope:** `customers:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "6edda17e-bbf2-44a3-aa02-25be4a1e3036",
+                          "name": "Customer deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/customers/:customerId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "customers",
+                                ":customerId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "customerId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:15:35.000Z",
+                          "updatedAt": "2026-07-28T01:15:35.000Z",
+                          "uid": "35240-6edda17e-bbf2-44a3-aa02-25be4a1e3036"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:35.000Z",
+                      "updatedAt": "2026-07-28T01:15:35.000Z",
+                      "uid": "35240-1557caea-ee0d-4a8d-828f-30ea83adc7e9"
+                    }
+                  ],
+                  "id": "0765f002-09c3-4976-8450-c01c08bd2c5e",
+                  "createdAt": "2026-07-28T01:15:35.000Z",
+                  "updatedAt": "2026-07-28T01:15:35.000Z",
+                  "uid": "35240-0765f002-09c3-4976-8450-c01c08bd2c5e"
+                },
+                {
+                  "name": "Create a customer",
+                  "id": "f7a7af53-4a8d-4e5a-91d9-e069537a8a35",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/customers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "customers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "cb91c7f3-42ae-4600-9664-a090fa48945c",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Creates a customer for the company.\n\n**Scope:** `customers:write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "83b2eaf0-1e79-48f9-b376-f0cb9d926fab",
+                      "name": "Customer created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "customers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:15:35.000Z",
+                      "updatedAt": "2026-07-28T01:15:35.000Z",
+                      "uid": "35240-83b2eaf0-1e79-48f9-b376-f0cb9d926fab"
+                    },
+                    {
+                      "id": "2a77244e-6cc9-42d7-bdef-e658eed3b17a",
+                      "name": "Missing required information",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"private\",\n  \"id\": \"<uuid>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"<dateTime>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/customers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "customers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:35.000Z",
+                      "updatedAt": "2026-07-28T01:15:35.000Z",
+                      "uid": "35240-2a77244e-6cc9-42d7-bdef-e658eed3b17a"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:35.000Z",
+                  "updatedAt": "2026-07-28T01:15:35.000Z",
+                  "uid": "35240-f7a7af53-4a8d-4e5a-91d9-e069537a8a35"
+                },
+                {
+                  "name": "Get customers",
+                  "id": "3c1edbc6-4bd1-4dee-9e78-a6e84d265cdc",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/customers?page=1&pageSize=25&query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "customers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "pageSize",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| type                 | string      |\n| vatNumber            | string      |\n| orgNumber            | string      |\n| modifiedDateTime     | date-time   |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "632e500a-16bd-4fb6-87bc-5991a83d581f",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Get all customers for the company. Use the query parameters to filter and navigate through the results.\n**Scope:** `customers:read`"
+                  },
+                  "response": [
+                    {
+                      "id": "4415b03a-3b30-4d90-8aea-6f3511cf75e4",
+                      "name": "Customers found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/customers?page=1&pageSize=25&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "customers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "pageSize",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| type                 | string      |\n| vatNumber            | string      |\n| orgNumber            | string      |\n| modifiedDateTime     | date-time   |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"private\",\n      \"id\": \"<uuid>\",\n      \"vatNumber\": \"<string>\",\n      \"orgNumber\": \"<string>\",\n      \"paymentTerms\": \"<string>\",\n      \"contactsDetails\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        }\n      ],\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"countrySubdivision\": \"<string>\"\n      },\n      \"language\": \"sv\",\n      \"modifiedDateTime\": \"<dateTime>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"company\",\n      \"id\": \"<uuid>\",\n      \"vatNumber\": \"<string>\",\n      \"orgNumber\": \"<string>\",\n      \"paymentTerms\": \"<string>\",\n      \"contactsDetails\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        }\n      ],\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"countrySubdivision\": \"<string>\"\n      },\n      \"language\": \"en\",\n      \"modifiedDateTime\": \"<dateTime>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:35.000Z",
+                      "updatedAt": "2026-07-28T01:15:35.000Z",
+                      "uid": "35240-4415b03a-3b30-4d90-8aea-6f3511cf75e4"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:35.000Z",
+                  "updatedAt": "2026-07-28T01:15:35.000Z",
+                  "uid": "35240-3c1edbc6-4bd1-4dee-9e78-a6e84d265cdc"
+                }
+              ],
+              "id": "73d93022-9075-48b9-a5e1-123ccbc19592",
+              "createdAt": "2026-07-28T01:15:35.000Z",
+              "updatedAt": "2026-07-28T01:15:35.000Z",
+              "uid": "35240-73d93022-9075-48b9-a5e1-123ccbc19592"
+            }
+          ],
+          "id": "b30aaeed-d791-4f07-9c14-d1c9c7aeda82",
+          "createdAt": "2026-07-28T01:15:35.000Z",
+          "updatedAt": "2026-07-28T01:15:35.000Z",
+          "uid": "35240-b30aaeed-d791-4f07-9c14-d1c9c7aeda82"
+        }
+      ],
+      "id": "9372b349-6e90-43eb-a276-e4b98716489c",
+      "createdAt": "2026-07-28T01:15:35.000Z",
+      "updatedAt": "2026-07-28T01:15:35.000Z",
+      "uid": "35240-9372b349-6e90-43eb-a276-e4b98716489c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

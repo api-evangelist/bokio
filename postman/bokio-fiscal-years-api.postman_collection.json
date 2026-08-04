@@ -1,0 +1,364 @@
+{
+  "info": {
+    "_postman_id": "cebceff2-b270-4e9b-899b-9170a8501af8",
+    "name": "Company authorization fiscal-years API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:36.000Z",
+    "updatedAt": "2026-07-28T01:15:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-cebceff2-b270-4e9b-899b-9170a8501af8"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "fiscal-years",
+              "item": [
+                {
+                  "name": "{fiscalYearId}",
+                  "item": [
+                    {
+                      "name": "Get a fiscal year",
+                      "id": "73f7b820-2ed8-475e-b8a0-065c1f18791e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/fiscal-years/:fiscalYearId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "fiscal-years",
+                            ":fiscalYearId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "bb92c42b-4cee-4dc0-9677-6fa7584f3672",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier for the company"
+                            },
+                            {
+                              "id": "b8bb0299-f89d-45ba-83f4-bd0840569369",
+                              "key": "fiscalYearId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier for the fiscal year"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the information of the fiscal year with the matching fiscalYearId\n\n**Scope:** `fiscal-years:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "8b46fb59-7cf9-4c15-a34b-1413536dc69a",
+                          "name": "Successful response with fiscal year information",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/fiscal-years/:fiscalYearId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "fiscal-years",
+                                ":fiscalYearId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "fiscalYearId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"fiscalYear\": {\n    \"id\": \"<uuid>\",\n    \"startDate\": \"<date>\",\n    \"endDate\": \"<date>\",\n    \"accountingMethod\": \"cash\",\n    \"status\": \"open\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:37.000Z",
+                          "updatedAt": "2026-07-28T01:15:37.000Z",
+                          "uid": "35240-8b46fb59-7cf9-4c15-a34b-1413536dc69a"
+                        },
+                        {
+                          "id": "4ced3d9e-4359-4d65-8282-97a335f3e384",
+                          "name": "Fiscal year not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/fiscal-years/:fiscalYearId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "fiscal-years",
+                                ":fiscalYearId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "fiscalYearId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:37.000Z",
+                          "updatedAt": "2026-07-28T01:15:37.000Z",
+                          "uid": "35240-4ced3d9e-4359-4d65-8282-97a335f3e384"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:37.000Z",
+                      "updatedAt": "2026-07-28T01:15:37.000Z",
+                      "uid": "35240-73f7b820-2ed8-475e-b8a0-065c1f18791e"
+                    }
+                  ],
+                  "id": "6703e8b7-b932-4b71-be01-555feca8da29",
+                  "createdAt": "2026-07-28T01:15:37.000Z",
+                  "updatedAt": "2026-07-28T01:15:37.000Z",
+                  "uid": "35240-6703e8b7-b932-4b71-be01-555feca8da29"
+                },
+                {
+                  "name": "Get fiscal years",
+                  "id": "07b477ee-8ac4-4d5a-85c9-948b3ccce591",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/fiscal-years?page=1&pageSize=25&query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "fiscal-years"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "pageSize",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| startDate            | date      |\n| endDate              | date      |\n| accountingMethod     | string      |\n| status               | string      |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "cf196f61-47c0-46df-a4e3-fd44829993fc",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier for the company"
+                        }
+                      ]
+                    },
+                    "description": "Get all fiscal years for the company. Use the query parameters to filter and navigate through the results.\n\n\n**Scope:** `fiscal-years:read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "0eebc442-e5f3-4b2d-b165-82a94dd36c34",
+                      "name": "Successful response with fiscal years",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/fiscal-years?page=1&pageSize=25&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "fiscal-years"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "pageSize",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| startDate            | date      |\n| endDate              | date      |\n| accountingMethod     | string      |\n| status               | string      |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"id\": \"<uuid>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"accountingMethod\": \"cash\",\n      \"status\": \"closed\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"startDate\": \"<date>\",\n      \"endDate\": \"<date>\",\n      \"accountingMethod\": \"cash\",\n      \"status\": \"closed\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:37.000Z",
+                      "updatedAt": "2026-07-28T01:15:37.000Z",
+                      "uid": "35240-0eebc442-e5f3-4b2d-b165-82a94dd36c34"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:37.000Z",
+                  "updatedAt": "2026-07-28T01:15:37.000Z",
+                  "uid": "35240-07b477ee-8ac4-4d5a-85c9-948b3ccce591"
+                }
+              ],
+              "id": "b81b2bea-eeaf-4b0e-af85-ca760919c4e9",
+              "createdAt": "2026-07-28T01:15:37.000Z",
+              "updatedAt": "2026-07-28T01:15:37.000Z",
+              "uid": "35240-b81b2bea-eeaf-4b0e-af85-ca760919c4e9"
+            }
+          ],
+          "id": "8a9e9870-2fde-4d2a-ae24-866a05e81e4a",
+          "createdAt": "2026-07-28T01:15:37.000Z",
+          "updatedAt": "2026-07-28T01:15:37.000Z",
+          "uid": "35240-8a9e9870-2fde-4d2a-ae24-866a05e81e4a"
+        }
+      ],
+      "id": "b3a89736-cee3-4874-83c0-8548c56e96f3",
+      "createdAt": "2026-07-28T01:15:37.000Z",
+      "updatedAt": "2026-07-28T01:15:37.000Z",
+      "uid": "35240-b3a89736-cee3-4874-83c0-8548c56e96f3"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+  "info": {
+    "_postman_id": "30c47ce4-d6c0-4c4a-86ad-3cdc463eda7c",
+    "name": "Company authorization sie-files API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:43.000Z",
+    "updatedAt": "2026-07-28T01:15:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-30c47ce4-d6c0-4c4a-86ad-3cdc463eda7c"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "sie",
+              "item": [
+                {
+                  "name": "{fiscalYearId}",
+                  "item": [
+                    {
+                      "name": "download",
+                      "item": [
+                        {
+                          "name": "Download SIE file for a fiscal year",
+                          "id": "c18f9de0-2272-4fa3-875d-b8c9ed352faa",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/octet-stream"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/sie/:fiscalYearId/download",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "sie",
+                                ":fiscalYearId",
+                                "download"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "4facd77e-1721-457a-be4f-dd66eece75d7",
+                                  "key": "companyId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier for the company"
+                                },
+                                {
+                                  "id": "363515bd-559c-4a62-84b7-66904d52d9f5",
+                                  "key": "fiscalYearId",
+                                  "value": "<uuid>",
+                                  "description": "(Required) The unique identifier for the fiscal year"
+                                }
+                              ]
+                            },
+                            "description": "This endpoint downloads the SIE file for the provided fiscal year.\nThe SIE file is used for accounting purposes in Sweden.\n\n**Scope:** `sie:read`\n"
+                          },
+                          "response": [
+                            {
+                              "id": "e00f2fa9-89f2-4751-abbc-95f59ea76e49",
+                              "name": "Successful response with a SIE file stream",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/octet-stream"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/sie/:fiscalYearId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "sie",
+                                    ":fiscalYearId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "fiscalYearId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "text",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/octet-stream"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "<binary>",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-e00f2fa9-89f2-4751-abbc-95f59ea76e49"
+                            },
+                            {
+                              "id": "0596e5c7-2e01-4ad5-b66f-1ab8b67072b8",
+                              "name": "Fiscal year not found",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/companies/:companyId/sie/:fiscalYearId/download",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "companies",
+                                    ":companyId",
+                                    "sie",
+                                    ":fiscalYearId",
+                                    "download"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "companyId"
+                                    },
+                                    {
+                                      "key": "fiscalYearId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T01:15:43.000Z",
+                              "updatedAt": "2026-07-28T01:15:43.000Z",
+                              "uid": "35240-0596e5c7-2e01-4ad5-b66f-1ab8b67072b8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T01:15:43.000Z",
+                          "updatedAt": "2026-07-28T01:15:43.000Z",
+                          "uid": "35240-c18f9de0-2272-4fa3-875d-b8c9ed352faa"
+                        }
+                      ],
+                      "id": "0311e10a-ed76-4cd5-a38c-6a16399e47b3",
+                      "createdAt": "2026-07-28T01:15:43.000Z",
+                      "updatedAt": "2026-07-28T01:15:43.000Z",
+                      "uid": "35240-0311e10a-ed76-4cd5-a38c-6a16399e47b3"
+                    }
+                  ],
+                  "id": "02bab6d3-638d-43df-9106-3e20e9015e52",
+                  "createdAt": "2026-07-28T01:15:43.000Z",
+                  "updatedAt": "2026-07-28T01:15:43.000Z",
+                  "uid": "35240-02bab6d3-638d-43df-9106-3e20e9015e52"
+                }
+              ],
+              "id": "0d31c794-03da-46c4-b261-f69cd353027c",
+              "createdAt": "2026-07-28T01:15:43.000Z",
+              "updatedAt": "2026-07-28T01:15:43.000Z",
+              "uid": "35240-0d31c794-03da-46c4-b261-f69cd353027c"
+            }
+          ],
+          "id": "dd305500-2a15-4b4f-acf2-b488c896fb7e",
+          "createdAt": "2026-07-28T01:15:43.000Z",
+          "updatedAt": "2026-07-28T01:15:43.000Z",
+          "uid": "35240-dd305500-2a15-4b4f-acf2-b488c896fb7e"
+        }
+      ],
+      "id": "82635bff-8735-462c-ab7e-d7550393e47d",
+      "createdAt": "2026-07-28T01:15:43.000Z",
+      "updatedAt": "2026-07-28T01:15:43.000Z",
+      "uid": "35240-82635bff-8735-462c-ab7e-d7550393e47d"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

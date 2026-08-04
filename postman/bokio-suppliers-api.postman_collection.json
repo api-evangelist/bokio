@@ -1,0 +1,983 @@
+{
+  "info": {
+    "_postman_id": "a738d533-d4a6-41b8-9ac2-4d33d683e6fd",
+    "name": "Company authorization suppliers API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:45.000Z",
+    "updatedAt": "2026-07-28T01:15:45.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a738d533-d4a6-41b8-9ac2-4d33d683e6fd"
+  },
+  "item": [
+    {
+      "name": "companies",
+      "item": [
+        {
+          "name": "{companyId}",
+          "item": [
+            {
+              "name": "suppliers",
+              "item": [
+                {
+                  "name": "{supplierId}",
+                  "item": [
+                    {
+                      "name": "[Preview] Get a supplier",
+                      "id": "f52569b5-48c0-413a-9eb2-7bb4e6b35759",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "suppliers",
+                            ":supplierId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0bb38be3-20cb-4703-a9e9-f156a0172cc7",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "65de27d6-e0d1-4f87-83d8-e2dcc327de41",
+                              "key": "supplierId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the supplier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve the information of the supplier with the matching supplierId.\n\n**Scope:** `suppliers:read`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "0b5bb01e-0638-4066-9544-638778ce746b",
+                          "name": "Supplier found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-0b5bb01e-0638-4066-9544-638778ce746b"
+                        },
+                        {
+                          "id": "7bd9bb4d-85f3-438a-9a83-fa07e4d9d474",
+                          "name": "Supplier not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-7bd9bb4d-85f3-438a-9a83-fa07e4d9d474"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:45.000Z",
+                      "updatedAt": "2026-07-28T01:15:45.000Z",
+                      "uid": "35240-f52569b5-48c0-413a-9eb2-7bb4e6b35759"
+                    },
+                    {
+                      "name": "[Preview] Update a supplier",
+                      "id": "fdbdc932-1f65-40ad-af9b-8a5fdda305cc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "suppliers",
+                            ":supplierId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "4c845e4b-dcc9-416e-b6c7-75f43752ddff",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "8f7cdf42-b0ab-40c0-891a-c6fb3f51c26c",
+                              "key": "supplierId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the supplier"
+                            }
+                          ]
+                        },
+                        "description": "Update an existing supplier for the company.\n\n**Scope:** `suppliers:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "79020edb-3754-4cc3-be64-c721cda2d0de",
+                          "name": "Supplier updated",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-79020edb-3754-4cc3-be64-c721cda2d0de"
+                        },
+                        {
+                          "id": "00c2816b-f727-4519-9bfa-a6425fbc24d0",
+                          "name": "Missing required information",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-00c2816b-f727-4519-9bfa-a6425fbc24d0"
+                        },
+                        {
+                          "id": "a63dc563-9702-4d4e-96a9-17c225addce9",
+                          "name": "Supplier not found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-a63dc563-9702-4d4e-96a9-17c225addce9"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:45.000Z",
+                      "updatedAt": "2026-07-28T01:15:45.000Z",
+                      "uid": "35240-fdbdc932-1f65-40ad-af9b-8a5fdda305cc"
+                    },
+                    {
+                      "name": "[Preview] Delete a supplier",
+                      "id": "db45bb50-d179-4285-9567-97fe4c094c19",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "suppliers",
+                            ":supplierId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "58625c1d-50fa-404c-bfac-987590d471ad",
+                              "key": "companyId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the company"
+                            },
+                            {
+                              "id": "220f3257-6814-45e1-9099-142a6bb1dc53",
+                              "key": "supplierId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier of the supplier"
+                            }
+                          ]
+                        },
+                        "description": "Delete an existing supplier for the company.\n\nNOTE: Currently only supports deleting suppliers that have been added through the API.\n\n**Scope:** `suppliers:write`\n"
+                      },
+                      "response": [
+                        {
+                          "id": "ca4a68a5-c06d-4f08-b624-f2146c98964b",
+                          "name": "Supplier deleted",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-ca4a68a5-c06d-4f08-b624-f2146c98964b"
+                        },
+                        {
+                          "id": "9d677cd5-93a6-4ea8-a4cd-02208e88551e",
+                          "name": "Operation not allowed",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/companies/:companyId/suppliers/:supplierId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "companies",
+                                ":companyId",
+                                "suppliers",
+                                ":supplierId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "companyId"
+                                },
+                                {
+                                  "key": "supplierId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-07-28T01:15:45.000Z",
+                          "updatedAt": "2026-07-28T01:15:45.000Z",
+                          "uid": "35240-9d677cd5-93a6-4ea8-a4cd-02208e88551e"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:15:45.000Z",
+                      "updatedAt": "2026-07-28T01:15:45.000Z",
+                      "uid": "35240-db45bb50-d179-4285-9567-97fe4c094c19"
+                    }
+                  ],
+                  "id": "8576cf8b-8bea-4e9c-83ab-313503544726",
+                  "createdAt": "2026-07-28T01:15:45.000Z",
+                  "updatedAt": "2026-07-28T01:15:45.000Z",
+                  "uid": "35240-8576cf8b-8bea-4e9c-83ab-313503544726"
+                },
+                {
+                  "name": "[Preview] Create a supplier",
+                  "id": "0a78a826-9fa7-43fe-8517-31049829e113",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/suppliers",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "suppliers"
+                      ],
+                      "variable": [
+                        {
+                          "id": "4c165654-6bae-4ca9-966b-d20c9f2fdd5e",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Creates a new supplier for the company.\n\n**Scope:** `suppliers:write`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "a251e3f0-b730-4431-8182-14ff7b8da44d",
+                      "name": "Supplier created",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/suppliers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "suppliers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-07-28T01:15:45.000Z",
+                      "updatedAt": "2026-07-28T01:15:45.000Z",
+                      "uid": "35240-a251e3f0-b730-4431-8182-14ff7b8da44d"
+                    },
+                    {
+                      "id": "d456e47c-1eb9-4966-89f5-2ccc57d833a1",
+                      "name": "Missing required information",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"id\": \"<uuid>\",\n  \"orgNumber\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"currency\": \"SEK\",\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"line2\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"SE\"\n  },\n  \"paymentDetails\": {\n    \"type\": \"bankgiro\",\n    \"bankgiroNumber\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/suppliers",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "suppliers"
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<string>\",\n  \"message\": \"<string>\",\n  \"bokioErrorId\": \"<uuid>\",\n  \"errors\": [\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    {\n      \"field\": \"<string>\",\n      \"message\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:45.000Z",
+                      "updatedAt": "2026-07-28T01:15:45.000Z",
+                      "uid": "35240-d456e47c-1eb9-4966-89f5-2ccc57d833a1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:45.000Z",
+                  "updatedAt": "2026-07-28T01:15:45.000Z",
+                  "uid": "35240-0a78a826-9fa7-43fe-8517-31049829e113"
+                },
+                {
+                  "name": "[Preview] Get suppliers",
+                  "id": "9fb129cf-4568-4d99-8886-119362d3d786",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/companies/:companyId/suppliers?page=1&pageSize=25&query=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "companies",
+                        ":companyId",
+                        "suppliers"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "pageSize",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| vatNumber            | string      |\n| orgNumber            | string      |\n",
+                          "key": "query",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "9f28cc26-7333-41b9-b701-cd537e14e150",
+                          "key": "companyId",
+                          "value": "<uuid>",
+                          "description": "(Required) Unique identifier of the company"
+                        }
+                      ]
+                    },
+                    "description": "Get all suppliers for the company. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `suppliers:read`\n"
+                  },
+                  "response": [
+                    {
+                      "id": "eea5c9b7-f707-4f4a-86d3-ff5a2a53c9f8",
+                      "name": "Suppliers found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/companies/:companyId/suppliers?page=1&pageSize=25&query=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "companies",
+                            ":companyId",
+                            "suppliers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "pageSize",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| vatNumber            | string      |\n| orgNumber            | string      |\n",
+                              "key": "query",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "companyId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"totalItems\": \"<integer>\",\n  \"totalPages\": \"<integer>\",\n  \"currentPage\": \"<integer>\",\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"orgNumber\": \"<string>\",\n      \"vatNumber\": \"<string>\",\n      \"currency\": \"SEK\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"SE\"\n      },\n      \"paymentDetails\": {\n        \"type\": \"bankgiro\",\n        \"bankgiroNumber\": \"<string>\"\n      }\n    },\n    {\n      \"name\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"orgNumber\": \"<string>\",\n      \"vatNumber\": \"<string>\",\n      \"currency\": \"SEK\",\n      \"address\": {\n        \"line1\": \"<string>\",\n        \"line2\": \"<string>\",\n        \"city\": \"<string>\",\n        \"postalCode\": \"<string>\",\n        \"country\": \"SE\"\n      },\n      \"paymentDetails\": {\n        \"type\": \"bankgiro\",\n        \"bankgiroNumber\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:15:45.000Z",
+                      "updatedAt": "2026-07-28T01:15:45.000Z",
+                      "uid": "35240-eea5c9b7-f707-4f4a-86d3-ff5a2a53c9f8"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:15:45.000Z",
+                  "updatedAt": "2026-07-28T01:15:45.000Z",
+                  "uid": "35240-9fb129cf-4568-4d99-8886-119362d3d786"
+                }
+              ],
+              "id": "86170ce6-d020-402e-a786-e48fd5e4a75d",
+              "createdAt": "2026-07-28T01:15:45.000Z",
+              "updatedAt": "2026-07-28T01:15:45.000Z",
+              "uid": "35240-86170ce6-d020-402e-a786-e48fd5e4a75d"
+            }
+          ],
+          "id": "526b2ba8-c63e-4123-8487-98dee3b72f28",
+          "createdAt": "2026-07-28T01:15:45.000Z",
+          "updatedAt": "2026-07-28T01:15:45.000Z",
+          "uid": "35240-526b2ba8-c63e-4123-8487-98dee3b72f28"
+        }
+      ],
+      "id": "5f32cd5e-2879-4c7b-9113-c4b94d07220e",
+      "createdAt": "2026-07-28T01:15:45.000Z",
+      "updatedAt": "2026-07-28T01:15:45.000Z",
+      "uid": "35240-5f32cd5e-2879-4c7b-9113-c4b94d07220e"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}

@@ -1,0 +1,461 @@
+{
+  "info": {
+    "_postman_id": "a388b544-d0be-4448-8eae-cae754d162ea",
+    "name": "Company authorization API",
+    "description": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:15:22.000Z",
+    "updatedAt": "2026-07-28T01:15:22.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a388b544-d0be-4448-8eae-cae754d162ea"
+  },
+  "item": [
+    {
+      "name": "token",
+      "item": [
+        {
+          "name": "Obtain access token",
+          "id": "4b7e8315-4938-495f-b148-b2a65bacfc6b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "basic",
+              "basic": [
+                {
+                  "key": "username",
+                  "value": "{{basicAuthUsername}}",
+                  "type": "string"
+                },
+                {
+                  "key": "password",
+                  "value": "{{basicAuthPassword}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/x-www-form-urlencoded"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "urlencoded",
+              "urlencoded": [
+                {
+                  "description": "(Required) The grant type for the token request",
+                  "key": "grant_type",
+                  "value": "authorization_code"
+                },
+                {
+                  "key": "code",
+                  "value": "<string>"
+                },
+                {
+                  "key": "redirect_uri",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseUrl}}/token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "token"
+              ]
+            },
+            "description": "OAuth 2.0 token endpoint to exchange authorization code for access token, request token with client credentials, or refresh an existing token.\n\n- Use Authorization Code grant to obtain access token for a Company to use with the Company API.\n- Use Refresh Token grant to obtain a new access token using a refresh token.\n- Use Client Credentials grant to obtain access token for the General API.\n"
+          },
+          "response": [
+            {
+              "id": "1d14c2f5-511e-44a7-8ad2-c3de7dc42fa4",
+              "name": "OK",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The grant type for the token request",
+                      "key": "grant_type",
+                      "value": "authorization_code"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"tenant_id\": \"<uuid>\",\n  \"tenant_type\": \"general\",\n  \"access_token\": \"<string>\",\n  \"token_type\": \"<string>\",\n  \"expires_in\": \"<integer>\",\n  \"refresh_token\": \"<string>\",\n  \"connection_id\": \"<uuid>\"\n}",
+              "createdAt": "2026-07-28T01:15:23.000Z",
+              "updatedAt": "2026-07-28T01:15:23.000Z",
+              "uid": "35240-1d14c2f5-511e-44a7-8ad2-c3de7dc42fa4"
+            },
+            {
+              "id": "b251c803-c0e9-48ee-abd0-3e7189b09d31",
+              "name": "Bad Request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: basic",
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "description": "(Required) The grant type for the token request",
+                      "key": "grant_type",
+                      "value": "authorization_code"
+                    },
+                    {
+                      "key": "code",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "redirect_uri",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:15:23.000Z",
+              "updatedAt": "2026-07-28T01:15:23.000Z",
+              "uid": "35240-b251c803-c0e9-48ee-abd0-3e7189b09d31"
+            }
+          ],
+          "createdAt": "2026-07-28T01:15:23.000Z",
+          "updatedAt": "2026-07-28T01:15:23.000Z",
+          "uid": "35240-4b7e8315-4938-495f-b148-b2a65bacfc6b"
+        }
+      ],
+      "id": "0ac10493-5441-47fc-85bd-d6d5a475e1a5",
+      "createdAt": "2026-07-28T01:15:23.000Z",
+      "updatedAt": "2026-07-28T01:15:23.000Z",
+      "uid": "35240-0ac10493-5441-47fc-85bd-d6d5a475e1a5"
+    },
+    {
+      "name": "authorize",
+      "item": [
+        {
+          "name": "Authorize the client",
+          "id": "ceff56d3-5b91-4d62-924d-508e5f3682ed",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/authorize?response_type=code&client_id=<uuid>&redirect_uri=<uri>&scope=<string>&state=<string>&bokio_tenantid=<uuid>&bokio_tenanttype=company",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "authorize"
+              ],
+              "query": [
+                {
+                  "description": "(Required) The response type for the authorization request",
+                  "key": "response_type",
+                  "value": "code"
+                },
+                {
+                  "description": "(Required) The client ID for the authorization request",
+                  "key": "client_id",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "(Required) The URI to redirect the user to after authorization. Must match one of the redirect URIs registered for the client.",
+                  "key": "redirect_uri",
+                  "value": "<uri>"
+                },
+                {
+                  "description": "The scope for the authorization request",
+                  "key": "scope",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) An opaque value used by the client to maintain state between the request and callback. Required as protection against CSRF (cross-site request forgery) attacks.",
+                  "key": "state",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The Bokio tenant ID to authorize the integration to have access. Bokioio company ID will be the teant ID when the tenant_type is `company`.",
+                  "key": "bokio_tenantid",
+                  "value": "<uuid>"
+                },
+                {
+                  "description": "The Bokio tenant type to authorize the integration to have access. Currently support only `company` tenant type.",
+                  "key": "bokio_tenanttype",
+                  "value": "company"
+                }
+              ]
+            },
+            "description": "OAuth 2.0 authorization endpoint to initiate the OAuth 2.0 Authorization Code grant to obtain an authorization code to exchange for an access token.\n\nUse Authorization Code grant to obtain access token for a Company.\n"
+          },
+          "response": [
+            {
+              "id": "2ca7b3f8-3f36-4d7d-aa78-7d282739baed",
+              "name": "Redirects to the client's redirect URI with an authorization code when the user has authorized the client",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/authorize?response_type=code&client_id=<uuid>&redirect_uri=<uri>&scope=<string>&state=<string>&bokio_tenantid=<uuid>&bokio_tenanttype=company",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authorize"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The response type for the authorization request",
+                      "key": "response_type",
+                      "value": "code"
+                    },
+                    {
+                      "description": "(Required) The client ID for the authorization request",
+                      "key": "client_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "(Required) The URI to redirect the user to after authorization. Must match one of the redirect URIs registered for the client.",
+                      "key": "redirect_uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The scope for the authorization request",
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) An opaque value used by the client to maintain state between the request and callback. Required as protection against CSRF (cross-site request forgery) attacks.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The Bokio tenant ID to authorize the integration to have access. Bokioio company ID will be the teant ID when the tenant_type is `company`.",
+                      "key": "bokio_tenantid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "The Bokio tenant type to authorize the integration to have access. Currently support only `company` tenant type.",
+                      "key": "bokio_tenanttype",
+                      "value": "company"
+                    }
+                  ]
+                }
+              },
+              "status": "Found",
+              "code": 302,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-07-28T01:15:23.000Z",
+              "updatedAt": "2026-07-28T01:15:23.000Z",
+              "uid": "35240-2ca7b3f8-3f36-4d7d-aa78-7d282739baed"
+            },
+            {
+              "id": "45870e89-888c-4078-b62d-9a531fea9018",
+              "name": "The request is invalid or missing required parameters",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/authorize?response_type=code&client_id=<uuid>&redirect_uri=<uri>&scope=<string>&state=<string>&bokio_tenantid=<uuid>&bokio_tenanttype=company",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "authorize"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) The response type for the authorization request",
+                      "key": "response_type",
+                      "value": "code"
+                    },
+                    {
+                      "description": "(Required) The client ID for the authorization request",
+                      "key": "client_id",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "(Required) The URI to redirect the user to after authorization. Must match one of the redirect URIs registered for the client.",
+                      "key": "redirect_uri",
+                      "value": "<uri>"
+                    },
+                    {
+                      "description": "The scope for the authorization request",
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) An opaque value used by the client to maintain state between the request and callback. Required as protection against CSRF (cross-site request forgery) attacks.",
+                      "key": "state",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The Bokio tenant ID to authorize the integration to have access. Bokioio company ID will be the teant ID when the tenant_type is `company`.",
+                      "key": "bokio_tenantid",
+                      "value": "<uuid>"
+                    },
+                    {
+                      "description": "The Bokio tenant type to authorize the integration to have access. Currently support only `company` tenant type.",
+                      "key": "bokio_tenanttype",
+                      "value": "company"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"error\": \"<string>\",\n  \"error_description\": \"<string>\"\n}",
+              "createdAt": "2026-07-28T01:15:23.000Z",
+              "updatedAt": "2026-07-28T01:15:23.000Z",
+              "uid": "35240-45870e89-888c-4078-b62d-9a531fea9018"
+            }
+          ],
+          "createdAt": "2026-07-28T01:15:23.000Z",
+          "updatedAt": "2026-07-28T01:15:23.000Z",
+          "uid": "35240-ceff56d3-5b91-4d62-924d-508e5f3682ed"
+        }
+      ],
+      "id": "6b6a81cc-6a21-44ef-a78a-097c61c732f2",
+      "createdAt": "2026-07-28T01:15:23.000Z",
+      "updatedAt": "2026-07-28T01:15:23.000Z",
+      "uid": "35240-6b6a81cc-6a21-44ef-a78a-097c61c732f2"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.bokio.se/v1"
+    }
+  ]
+}
