@@ -214,6 +214,8 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-uploads-api-openapi.yml
 common:
+- type: Overlay
+  url: overlays/bokio-company-api-overlay.yaml
 - type: PostmanWorkspace
   url: https://www.postman.com/kinlaneapi/bokio/overview
 - type: DeveloperPortal
