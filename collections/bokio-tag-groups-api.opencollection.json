@@ -1,0 +1,290 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization tag-groups API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "tag-groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "[Preview] Get all tag groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page for pagination"
+              },
+              {
+                "name": "query",
+                "value": "",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| dimensionNumber      | integer     |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve all tag groups for the company, including their tags.\n\nThe company must have the Tags feature enabled in their price plan.\n\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:read`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Create a tag group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new tag group for the company.\n\nA tag group represents a category or dimension used to classify journal entries,\nsuch as \"Project\", \"Cost center\", or \"Department\".\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Get a tag group by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups/:tagGroupId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "tagGroupId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier of the tag group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a specific tag group by its ID, including all its tags.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:read`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Update a tag group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups/:tagGroupId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "tagGroupId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier of the tag group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the details of an existing tag group.\n\nThis only updates the tag group metadata (name, alias).\nThe `dimensionNumber` is set at creation and cannot be changed.\nTo manage tags within the group, use the tag sub-resource endpoints.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Delete a tag group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups/:tagGroupId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "tagGroupId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier of the tag group"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a tag group and all its tags.\n\nDeletion will fail if any tags in the group are currently in use on journal entries.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Create a tag in a tag group",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups/:tagGroupId/tags",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "tagGroupId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier of the tag group"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new tag (value) within the specified tag group.\n\nTag names must be unique within the tag group.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Update a tag in a tag group",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "tagGroupId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier of the tag group"
+              },
+              {
+                "name": "tagId",
+                "value": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+                "type": "path",
+                "description": "Unique identifier of the tag"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update the name of an existing tag within a tag group.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Delete a tag from a tag group",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/tag-groups/:tagGroupId/tags/:tagId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "tagGroupId",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "path",
+                "description": "Unique identifier of the tag group"
+              },
+              {
+                "name": "tagId",
+                "value": "b2c3d4e5-f6a7-8901-bcde-f12345678901",
+                "type": "path",
+                "description": "Unique identifier of the tag"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific tag from a tag group.\n\nDeletion will fail if the tag is currently in use on any journal entries.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `tags:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

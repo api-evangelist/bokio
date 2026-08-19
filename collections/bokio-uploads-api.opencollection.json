@@ -1,0 +1,172 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization uploads API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "uploads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get uploads",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/uploads",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "description~Receipt for invoice 1234",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| description               | string      |\n| journalEntryId            | string      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all uploads for the company. Use the query parameters to filter and navigate through the results.\n**Scope:** `uploads:read`"
+        },
+        {
+          "info": {
+            "name": "Add an upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/uploads",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "multipart/form-data;boundary=JLQPFBPUP0"
+              }
+            ],
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "description",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "journalEntryId",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add an upload to bokio in the form of an image or pdf. One file can be uploaded per request. The request must be **multi-part MIME**.\n\n#### Sample request for uploading a file using multipart MIME\n```\nPOST http://api.bokio.se/companies/{companyId}/uploads\nContent-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW\nAuthorization: Bearer <token>\n\n------FormBoundary7MA4YWxkTrZu0gW\nContent-Disposition: form-data; name=\"File\"; filename=\"receipt.png\"\nContent-Type: image/png\n\n< ./receip"
+        },
+        {
+          "info": {
+            "name": "Get an upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/uploads/:uploadId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "uploadId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the upload"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the upload with the matching uploadId.\n\n**Scope:** `uploads:read`\n"
+        },
+        {
+          "info": {
+            "name": "Download file data for an upload",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/uploads/:uploadId/download",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "uploadId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the upload"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the file data of the upload with the matching uploadId.\n\n**Scope:** `uploads:read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

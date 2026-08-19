@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization items API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "items",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get items",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/items",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "description~Product 1",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| description          | string      |\n| itemType             | string      |\n| productType          | string      |\n| unitType             | string      |\n| unitPrice            | number      |\n| taxRate              | number      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all items for the company. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `items:read`\n"
+        },
+        {
+          "info": {
+            "name": "Create an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/items",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new item for the company.\n\n**Scope:** `items:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/items/:itemId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "itemId",
+                "value": "83e3d68a-cfbc-46e4-9fe6-f0fc6d739672",
+                "type": "path",
+                "description": "Unique identifier of the item"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the item with the matching itemId.\n\n**Scope:** `items:read`\n"
+        },
+        {
+          "info": {
+            "name": "Update an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/items/:itemId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "itemId",
+                "value": "83e3d68a-cfbc-46e4-9fe6-f0fc6d739672",
+                "type": "path",
+                "description": "Unique identifier of the item"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing item for the company.\n\n**Scope:** `items:write`\n"
+        },
+        {
+          "info": {
+            "name": "Delete an item",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/items/:itemId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "itemId",
+                "value": "83e3d68a-cfbc-46e4-9fe6-f0fc6d739672",
+                "type": "path",
+                "description": "Unique identifier of the item"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing item for the company.\n\n**Scope:** `items:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,360 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization journal-entries API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "journal-entries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get journal entries",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "title~invoice 1234",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| title                     | string      |\n| journalEntryNumber        | string      |\n| date                      | date        |\n| reversingJournalEntryId   | string      |\n| reversedByJournalEntryId  | string      |\n"
+              },
+              {
+                "name": "tagId",
+                "value": "",
+                "type": "query",
+                "description": "[Preview] Filter journal entries by tag. Returns only journal entries that have the specified tag applied, either at the journal entry level or at the line item level.\n\nRequires the Tags feature to be enabled in the company's price plan.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get journal entries for the company. Use the query parameters to filter and navigate through the results.\n**Scope:** `journal-entries:read`"
+        },
+        {
+          "info": {
+            "name": "Create a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a journal entry for the company.\n\n**Handling validation errors:**\n\nIf this operations returns a 400 status code, inspect the response body's api error object for more information. There will be additional information in the innerCode if the code=validation-error.\n\n**Scope:** `journal-entries:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the journal with the matching journalEntryId.\n\n**Scope:** `journal-entries:read`\n"
+        },
+        {
+          "info": {
+            "name": "Reverse a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/reverse",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Reverse a journal entry for the company.\n\n### Journal entries possible to reverse\n\n- It's possible to reverse journal entries that have been created through the API. Journal entries that have been created through the Bokio UI can't be reversed through the API.\n- Journal entries that belong to a Bokio invoice or similar cannot be reversed using this endpoint.\n- Journal entries that have been reversed can not be reversed again.\n\n### Handling validation errors:\n\nIf this operation returns a 400 stat"
+        },
+        {
+          "info": {
+            "name": "[Preview] Update journal entry tags",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/tags",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Replaces all tags on a journal entry with the provided tags.\n\nEither set verification-level tags (using `tags`) or transaction-level tags (using `items[*].tags`), not both on the same journal entry.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `journal-entries:write`\n"
+        },
+        {
+          "info": {
+            "name": "List comments on a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/comments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all comments on a journal entry.\n\nComments are returned in chronological order (oldest first).\n\n**Scope:** `journal-entries:read`\n"
+        },
+        {
+          "info": {
+            "name": "Add a comment to a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/comments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds a comment to a journal entry that was created through the API.\n\nComments are plain text only. Rich text, markdown, and HTML are not supported.\n\nThe author name will be set to the integration name of the API user.\n\n**Scope:** `journal-entries:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get a comment on a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/comments/:commentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              },
+              {
+                "name": "commentId",
+                "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "type": "path",
+                "description": "Unique identifier of the comment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a single comment by its ID on a journal entry.\n\n**Scope:** `journal-entries:read`\n"
+        },
+        {
+          "info": {
+            "name": "Update a comment on a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/comments/:commentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              },
+              {
+                "name": "commentId",
+                "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "type": "path",
+                "description": "Unique identifier of the comment"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates a comment on a journal entry. Only comments created by the same integration can be updated.\n\nComments are plain text only. Rich text, markdown, and HTML are not supported.\n\n**Scope:** `journal-entries:write`\n"
+        },
+        {
+          "info": {
+            "name": "Delete a comment on a journal entry",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/journal-entries/:journalEntryId/comments/:commentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "journalEntryId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the journal entry"
+              },
+              {
+                "name": "commentId",
+                "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+                "type": "path",
+                "description": "Unique identifier of the comment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a comment on a journal entry. Only comments created by the same integration can be deleted.\n\n**Scope:** `journal-entries:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

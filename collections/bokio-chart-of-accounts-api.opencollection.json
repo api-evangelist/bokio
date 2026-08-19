@@ -1,0 +1,82 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization chart-of-accounts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "chart-of-accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get chart of accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/chart-of-accounts",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "query",
+                "value": "account==3950",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| account              | number      |\n| name                 | string      |\n| accountType          | string    |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves the complete chart of accounts for the company, merging bookkeeping accounts with their associated money account details.\n\n**Scope:** `chart-of-accounts:read`\n"
+        },
+        {
+          "info": {
+            "name": "Get specific account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/chart-of-accounts/:account",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "account",
+                "value": "",
+                "type": "path",
+                "description": "The number of the account"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves details of a specific account from the chart of accounts using the account number.\n\n**Scope:** `chart-of-accounts:read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

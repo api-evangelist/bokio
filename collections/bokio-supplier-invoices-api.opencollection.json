@@ -1,0 +1,216 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization supplier-invoices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "supplier-invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "[Preview] Get supplier invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/supplier-invoices",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "dueDate==2023-10-15&&currency==SEK",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field             | Type   |\n| ----------------- | ------ |\n| supplierRef.id    | string |\n| invoiceNumber     | string |\n| totalAmount       | number |\n| currency          | string |\n| invoiceDate       | date   |\n| dueDate           | date   |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all supplier invoices for the company. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `supplier-invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Create a supplier invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/supplier-invoices",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new supplier invoice for the company.\n\n**Scope:** `supplier-invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Get a supplier invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/supplier-invoices/:supplierInvoiceId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierInvoiceId",
+                "value": "6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90",
+                "type": "path",
+                "description": "Unique identifier of the supplier invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the supplier invoice with the matching supplierInvoiceId.\n\n**Scope:** `supplier-invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Update a supplier invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/supplier-invoices/:supplierInvoiceId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierInvoiceId",
+                "value": "6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90",
+                "type": "path",
+                "description": "Unique identifier of the supplier invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing supplier invoice for the company.\n\n**Scope:** `supplier-invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Delete a supplier invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/supplier-invoices/:supplierInvoiceId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierInvoiceId",
+                "value": "6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90",
+                "type": "path",
+                "description": "Unique identifier of the supplier invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing supplier invoice for the company.\n\n**Scope:** `supplier-invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Add an upload to a supplier invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/supplier-invoices/:supplierInvoiceId/uploads",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierInvoiceId",
+                "value": "6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90",
+                "type": "path",
+                "description": "Unique identifier of the supplier invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Add an upload to the supplier invoice.\n\n**Scope:** `supplier-invoices:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

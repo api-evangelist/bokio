@@ -1,0 +1,807 @@
+{
+  "item": [
+    {
+      "id": "93a8aaa4-1edb-4930-acf6-9b8700f64082",
+      "name": "bank-payments",
+      "description": {
+        "content": "Operations for creating and reading bank payments",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4c3ba8a-19fc-47ad-9abb-4435c973891e",
+          "name": "Create a bank payment",
+          "request": {
+            "name": "Create a bank payment",
+            "description": {
+              "content": "Creates a new bank payment for the company. Payment will be created in the Bokio system.\nIn order to submit the transaction to the bank, the signatory for the account needs to login to the Bokio application and sign the payment with their BankID.\nThis is different from the transactions imported through a connected bank in Bokio.\n\n**Scope:** `bank-payments:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "bank-payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"amount\": \"<double>\",\n  \"paymentDate\": \"<date>\",\n  \"recipientRef\": {\n    \"kind\": \"<string>\",\n    \"recipientName\": \"<string>\",\n    \"bankgiroNumber\": \"<string>\",\n    \"ocr\": \"<string>\",\n    \"message\": \"<string>\"\n  },\n  \"ownNote\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "455155ae-7b07-4308-88f7-b1bd09a88cd3",
+              "name": "Payment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1200,\n  \"paymentDate\": \"2025-08-25\",\n  \"ownNote\": \"Rent payment\",\n  \"recipientRef\": {\n    \"kind\": \"transfer\",\n    \"recipientName\": \"Property Management Co\",\n    \"recipientReference\": \"RENT-2025-08\",\n    \"clearingNumber\": \"5011\",\n    \"accountNumber\": 379101\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"status\": \"readyToSign\",\n  \"amount\": 1200,\n  \"createdDateTime\": \"2025-08-25 08:15:00+00:00\",\n  \"paymentDate\": \"2025-08-25\",\n  \"ownNote\": \"Rent payment\",\n  \"recipientRef\": {\n    \"kind\": \"transfer\",\n    \"recipientName\": \"Property Management Co\",\n    \"recipientReference\": \"RENT-2025-08\",\n    \"clearingNumber\": \"5011\",\n    \"accountNumber\": 379101\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30508bf1-5d2d-41e3-99ef-e27334bf8ac7",
+              "name": "Missing required information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"amount\": 1200,\n  \"paymentDate\": \"2025-08-25\",\n  \"ownNote\": \"Rent payment\",\n  \"recipientRef\": {\n    \"kind\": \"transfer\",\n    \"recipientName\": \"Property Management Co\",\n    \"recipientReference\": \"RENT-2025-08\",\n    \"clearingNumber\": \"5011\",\n    \"accountNumber\": 379101\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 2 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/amount\",\n      \"message\": \"The amount field is required\"\n    },\n    {\n      \"field\": \"#/recipientRef\",\n      \"message\": \"The recipientRef field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aefb8b56-d427-4af9-9e0e-d8bbdad46b4b",
+          "name": "Get bank payments",
+          "request": {
+            "name": "Get bank payments",
+            "description": {
+              "content": "Get all bank payments for the company that were created by the integration.\n**Scope:** `bank-payments:read-limited`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "bank-payments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| amount               | number      |\n| status               | string      |\n| paymentDate          | date-time   |\n| createdDateTime      | date-time   |\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "184f705c-5e8a-4d75-8c25-1522c2279b6b",
+              "name": "Bank payments found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "query",
+                      "value": "amount==1200.00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalItems\": 1,\n  \"totalPages\": 1,\n  \"currentPage\": 1,\n  \"items\": [\n    {\n      \"amount\": \"<double>\",\n      \"paymentDate\": \"<date>\",\n      \"recipientRef\": {\n        \"kind\": \"<string>\",\n        \"recipientName\": \"<string>\",\n        \"bankgiroNumber\": \"<string>\",\n        \"ocr\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"id\": \"9fa285eb-a933-eec3-b258-a5c5847eaf33\",\n      \"status\": \"onTheWay\",\n      \"createdDateTime\": \"1960-10-09T19:46:24.089Z\",\n      \"ownNote\": \"<string>\"\n    },\n    {\n      \"amount\": \"<double>\",\n      \"paymentDate\": \"<date>\",\n      \"recipientRef\": {\n        \"kind\": \"<string>\",\n        \"recipientName\": \"<string>\",\n        \"bankgiroNumber\": \"<string>\",\n        \"ocr\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"id\": \"64e40801-8a6c-65dd-7678-6245dccf5b76\",\n      \"status\": \"cancelled\",\n      \"createdDateTime\": \"1961-09-19T11:09:44.008Z\",\n      \"ownNote\": \"<string>\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36f87026-792c-4afe-b36a-cfaa4f80f210",
+              "name": "Invalid query filter",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "query",
+                      "value": "amount==1200.00"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"The provided filter 'amount===oops' is not valid. Please check the format of the query parameter\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"query\",\n      \"message\": \"The provided filter 'amount===oops' is not valid. Please check the format of the query parameter\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a99c0f7f-6c17-4114-b9f7-f104bc7f3a7d",
+          "name": "Get a bank payment created by the integration",
+          "request": {
+            "name": "Get a bank payment created by the integration",
+            "description": {
+              "content": "Retrieve the information of the bank payment with the matching bankPaymentId.\n\n**Scope:** `bank-payments:read-limited`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "bank-payments",
+                ":bankPaymentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "bankPaymentId",
+                  "description": "(Required) Unique identifier of the bank payment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "fc3ec5ad-66a2-44ab-9a5d-1f287ccfb1ed",
+              "name": "Bank payment found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments",
+                    ":bankPaymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "bankPaymentId",
+                      "description": "(Required) Unique identifier of the bank payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"status\": \"readyToSign\",\n  \"createdDateTime\": \"2025-08-25 08:15:00+00:00\",\n  \"amount\": 1500,\n  \"paymentDate\": \"2025-08-25\",\n  \"ownNote\": \"Payment for invoice #INV-2025-001\",\n  \"recipientRef\": {\n    \"kind\": \"transfer\",\n    \"recipientName\": \"Property Management Co\",\n    \"recipientReference\": \"RENT-2025-08\",\n    \"clearingNumber\": \"8000\",\n    \"accountNumber\": \"1234567890\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9fec4303-a9cf-455a-8ecc-d65d0a895bb0",
+              "name": "Bank payment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments",
+                    ":bankPaymentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "bankPaymentId",
+                      "description": "(Required) Unique identifier of the bank payment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"Bank payment not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a303e50c-238b-4b41-981d-32f2ac06c487",
+          "name": "Bulk create bank payments",
+          "request": {
+            "name": "Bulk create bank payments",
+            "description": {
+              "content": "Creates multiple bank payments for the company in a single request. Up to 100 payments can be created per request.\n\nThe operation is atomic — if any payment fails validation, no payments are created.\n\n**Scope:** `bank-payments:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "bank-payments",
+                "bulk"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"payments\": [\n    {\n      \"amount\": \"<double>\",\n      \"paymentDate\": \"<date>\",\n      \"recipientRef\": {\n        \"kind\": \"<string>\",\n        \"recipientName\": \"<string>\",\n        \"bankgiroNumber\": \"<string>\",\n        \"ocr\": \"<string>\",\n        \"message\": \"<string>\"\n      },\n      \"ownNote\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "80fc6cb4-9fb2-4ee9-997e-fa74fb77fda7",
+              "name": "All payments created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payments\": [\n    {\n      \"amount\": 1200,\n      \"paymentDate\": \"2025-08-25\",\n      \"ownNote\": \"Rent payment\",\n      \"recipientRef\": {\n        \"kind\": \"transfer\",\n        \"recipientName\": \"Property Management Co\",\n        \"recipientReference\": \"RENT-2025-08\",\n        \"clearingNumber\": \"5011\",\n        \"accountNumber\": 379101\n      }\n    },\n    {\n      \"amount\": 2500.5,\n      \"paymentDate\": \"2025-08-25\",\n      \"ownNote\": \"Service payment\",\n      \"recipientRef\": {\n        \"kind\": \"bankgiro\",\n        \"recipientName\": \"Tech Solutions Ltd\",\n        \"bankgiroNumber\": \"123-4567\",\n        \"ocr\": \"123456789012345\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n    \"status\": \"readyToSign\",\n    \"amount\": 1200,\n    \"createdDateTime\": \"2025-08-25 08:15:00+00:00\",\n    \"paymentDate\": \"2025-08-25\",\n    \"ownNote\": \"Rent payment\",\n    \"recipientRef\": {\n      \"kind\": \"transfer\",\n      \"recipientName\": \"Property Management Co\",\n      \"recipientReference\": \"RENT-2025-08\",\n      \"clearingNumber\": \"5011\",\n      \"accountNumber\": 379101\n    }\n  },\n  {\n    \"id\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n    \"status\": \"readyToSign\",\n    \"amount\": 2500.5,\n    \"createdDateTime\": \"2025-08-25 08:15:00+00:00\",\n    \"paymentDate\": \"2025-08-25\",\n    \"ownNote\": \"Service payment\",\n    \"recipientRef\": {\n      \"kind\": \"bankgiro\",\n      \"recipientName\": \"Tech Solutions Ltd\",\n      \"bankgiroNumber\": \"123-4567\",\n      \"ocr\": \"123456789012345\"\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4400b058-e3cc-40a5-b56c-df481da17107",
+              "name": "Validation failed. No payments were created.\nErrors include the payment index in the field path.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "bank-payments",
+                    "bulk"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"payments\": [\n    {\n      \"amount\": 1200,\n      \"paymentDate\": \"2025-08-25\",\n      \"ownNote\": \"Rent payment\",\n      \"recipientRef\": {\n        \"kind\": \"transfer\",\n        \"recipientName\": \"Property Management Co\",\n        \"recipientReference\": \"RENT-2025-08\",\n        \"clearingNumber\": \"5011\",\n        \"accountNumber\": 379101\n      }\n    },\n    {\n      \"amount\": 2500.5,\n      \"paymentDate\": \"2025-08-25\",\n      \"ownNote\": \"Service payment\",\n      \"recipientRef\": {\n        \"kind\": \"bankgiro\",\n        \"recipientName\": \"Tech Solutions Ltd\",\n        \"bankgiroNumber\": \"123-4567\",\n        \"ocr\": \"123456789012345\"\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 2 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/payments/0/recipientRef/bankgiroNumber\",\n      \"message\": \"The bankgiro number is invalid\"\n    },\n    {\n      \"field\": \"#/payments/1/amount\",\n      \"message\": \"The amount must be greater than 0\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bokio.se/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "d4b6972e-1895-4f43-91ff-5a5bc1a32b7d",
+    "name": "Company authorization bank-payments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,874 @@
+{
+  "item": [
+    {
+      "id": "aee8c450-3374-41ec-b79d-a0946c292e00",
+      "name": "customers",
+      "description": {
+        "content": "Operations for managing customer data",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2aadbbc5-b82b-4488-9cc3-54079c58e2b1",
+          "name": "Create a customer",
+          "request": {
+            "name": "Create a customer",
+            "description": {
+              "content": "Creates a customer for the company.\n\n**Scope:** `customers:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<country>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6da9ff8d-663e-4775-a0dd-711a7b71cd62",
+              "name": "Customer created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"240a4af0-edfd-47b1-b4ab-f30450eaac19\",\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"2024-10-10 00:00:00+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c24204e3-35a7-4bcb-914e-3cb1519cbb6b",
+              "name": "Missing required information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 3 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/name\",\n      \"message\": \"The name field is required\"\n    },\n    {\n      \"field\": \"#/type\",\n      \"message\": \"The type field is required\"\n    },\n    {\n      \"field\": \"#/address/country\",\n      \"message\": \"Invalid country code: XX\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a48140a5-f643-457e-9045-686d23d9b89d",
+          "name": "Get customers",
+          "request": {
+            "name": "Get customers",
+            "description": {
+              "content": "Get all customers for the company. Use the query parameters to filter and navigate through the results.\n**Scope:** `customers:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "customers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| type                 | string      |\n| vatNumber            | string      |\n| orgNumber            | string      |\n| modifiedDateTime     | date-time   |\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "da5d6ae4-ed6a-42a0-a44e-26c6b83cf9a9",
+              "name": "Customers found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "query",
+                      "value": "name==customer 1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalItems\": 1,\n  \"totalPages\": 1,\n  \"currentPage\": 1,\n  \"items\": [\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"id\": \"ed9b6ccd-7981-d856-8514-8e6d1825d59f\",\n      \"vatNumber\": \"<string>\",\n      \"orgNumber\": \"<string>\",\n      \"paymentTerms\": \"<string>\",\n      \"contactsDetails\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        }\n      ],\n      \"address\": {\n        \"line1\": \"10 Downing Street\",\n        \"line2\": null,\n        \"city\": \"London\",\n        \"postalCode\": \"SW1A 2AA\",\n        \"country\": \"GB\",\n        \"countrySubdivision\": \"ENG\"\n      },\n      \"language\": \"<string>\",\n      \"modifiedDateTime\": \"1965-09-28T22:10:52.722Z\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"type\": \"<string>\",\n      \"id\": \"7b22eb0e-06a5-66ca-1385-27684861fb74\",\n      \"vatNumber\": \"<string>\",\n      \"orgNumber\": \"<string>\",\n      \"paymentTerms\": \"<string>\",\n      \"contactsDetails\": [\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        },\n        {\n          \"id\": \"<uuid>\",\n          \"name\": \"<string>\",\n          \"email\": \"<string>\",\n          \"phone\": \"<string>\",\n          \"isDefault\": \"<boolean>\"\n        }\n      ],\n      \"address\": {\n        \"line1\": \"10 Downing Street\",\n        \"line2\": null,\n        \"city\": \"London\",\n        \"postalCode\": \"SW1A 2AA\",\n        \"country\": \"GB\",\n        \"countrySubdivision\": \"ENG\"\n      },\n      \"language\": \"<string>\",\n      \"modifiedDateTime\": \"1949-03-18T01:30:09.535Z\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3af4fd7-8275-4462-8c6a-d07eae0f0775",
+          "name": "Get a customer",
+          "request": {
+            "name": "Get a customer",
+            "description": {
+              "content": "Retrieve the information of the customer with the matching customerId.\n\n**Scope:** `customers:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "beaf8e6c-f183-41c8-ac2b-c5beeef3d96a",
+              "name": "Customer found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"55c899c5-82b2-47fa-9c51-e35fc9b26443\",\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"240a4af0-edfd-47b1-b4ab-f30450eaac19\",\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"2024-10-10 00:00:00+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b49f5a96-87b5-45d5-bb0a-b83afbaae4ac",
+              "name": "Customer not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"Customer not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8d3a792-91ad-4b23-99a2-3aa3abd1816a",
+          "name": "Update a customer",
+          "request": {
+            "name": "Update a customer",
+            "description": {
+              "content": "Update an existing customer for the company.\n\n**Scope:** `customers:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Unique identifier of the customer"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"vatNumber\": \"<string>\",\n  \"orgNumber\": \"<string>\",\n  \"paymentTerms\": \"<string>\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"name\": \"<string>\",\n      \"email\": \"<string>\",\n      \"phone\": \"<string>\",\n      \"isDefault\": \"<boolean>\"\n    }\n  ],\n  \"address\": {\n    \"line1\": \"<string>\",\n    \"city\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"country\": \"<country>\",\n    \"line2\": \"<string>\",\n    \"countrySubdivision\": \"<string>\"\n  },\n  \"language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "864d5888-dfc8-4d26-b393-e8e6dcb1dec2",
+              "name": "Customer updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"55c899c5-82b2-47fa-9c51-e35fc9b26443\",\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"Id\": \"240a4af0-edfd-47b1-b4ab-f30450eaac19\",\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"55c899c5-82b2-47fa-9c51-e35fc9b26443\",\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"id\": \"240a4af0-edfd-47b1-b4ab-f30450eaac19\",\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\",\n  \"modifiedDateTime\": \"2024-10-10 00:00:00+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "48460666-139b-4b17-adf4-fb5745b9301e",
+              "name": "Missing required information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"55c899c5-82b2-47fa-9c51-e35fc9b26443\",\n  \"name\": \"customer 1\",\n  \"type\": \"company\",\n  \"vatNumber\": \"SE1234567890\",\n  \"orgNumber\": \"123456-7890\",\n  \"paymentTerms\": \"30\",\n  \"contactsDetails\": [\n    {\n      \"Id\": \"240a4af0-edfd-47b1-b4ab-f30450eaac19\",\n      \"name\": \"John Doe\",\n      \"email\": \"john@email.com\",\n      \"phone\": \"0927-5631505\",\n      \"isDefault\": true\n    }\n  ],\n  \"address\": {\n    \"line1\": \"Älvsborgsvägen 10\",\n    \"line2\": null,\n    \"city\": \"Göteborg\",\n    \"postalCode\": \"123 45\",\n    \"country\": \"SE\"\n  },\n  \"language\": \"sv\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 3 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/name\",\n      \"message\": \"The name field is required\"\n    },\n    {\n      \"field\": \"#/type\",\n      \"message\": \"The type field is required\"\n    },\n    {\n      \"field\": \"#/address/country\",\n      \"message\": \"Invalid country code: XX\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "75c7bb49-e0ce-48f7-8686-896bddb367d5",
+          "name": "Delete a customer",
+          "request": {
+            "name": "Delete a customer",
+            "description": {
+              "content": "Delete an existing customer for the company.\n\nNOTE: Currently only supports deleting customers that have been added through the API.\n\n**Scope:** `customers:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "customers",
+                ":customerId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "customerId",
+                  "description": "(Required) Unique identifier of the customer"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "8c1eb356-bacb-4991-822b-1d10ac8583ac",
+              "name": "Customer deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "customers",
+                    ":customerId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "customerId",
+                      "description": "(Required) Unique identifier of the customer"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bokio.se/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "de1d346d-f517-41b7-90e4-89d4210bdea1",
+    "name": "Company authorization customers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+      "type": "text/plain"
+    }
+  }
+}

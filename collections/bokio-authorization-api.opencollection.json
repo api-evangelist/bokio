@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Obtain access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/token",
+            "body": {
+              "type": "form-urlencoded",
+              "data": [
+                {
+                  "name": "grant_type",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "basic",
+              "username": "{{username}}",
+              "password": "{{password}}"
+            }
+          },
+          "docs": "OAuth 2.0 token endpoint to exchange authorization code for access token, request token with client credentials, or refresh an existing token.\n\n- Use Authorization Code grant to obtain access token for a Company to use with the Company API.\n- Use Refresh Token grant to obtain a new access token using a refresh token.\n- Use Client Credentials grant to obtain access token for the General API.\n"
+        },
+        {
+          "info": {
+            "name": "Authorize the client",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/authorize",
+            "params": [
+              {
+                "name": "response_type",
+                "value": "",
+                "type": "query",
+                "description": "The response type for the authorization request"
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "The client ID for the authorization request"
+              },
+              {
+                "name": "redirect_uri",
+                "value": "",
+                "type": "query",
+                "description": "The URI to redirect the user to after authorization. Must match one of the redirect URIs registered for the client."
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "The scope for the authorization request"
+              },
+              {
+                "name": "state",
+                "value": "",
+                "type": "query",
+                "description": "An opaque value used by the client to maintain state between the request and callback. Required as protection against CSRF (cross-site request forgery) attacks."
+              },
+              {
+                "name": "bokio_tenantid",
+                "value": "",
+                "type": "query",
+                "description": "The Bokio tenant ID to authorize the integration to have access. Bokioio company ID will be the teant ID when the tenant_type is `company`."
+              },
+              {
+                "name": "bokio_tenanttype",
+                "value": "",
+                "type": "query",
+                "description": "The Bokio tenant type to authorize the integration to have access. Currently support only `company` tenant type."
+              }
+            ]
+          },
+          "docs": "OAuth 2.0 authorization endpoint to initiate the OAuth 2.0 Authorization Code grant to obtain an authorization code to exchange for an access token.\n\nUse Authorization Code grant to obtain access token for a Company.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

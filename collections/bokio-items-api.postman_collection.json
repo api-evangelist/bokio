@@ -1,0 +1,874 @@
+{
+  "item": [
+    {
+      "id": "6ed25303-3281-416f-8f69-a740295e5759",
+      "name": "items",
+      "description": {
+        "content": "Operations for managing inventory items",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c19f103c-7768-4881-8c7a-89f066eb167c",
+          "name": "Create an item",
+          "request": {
+            "name": "Create an item",
+            "description": {
+              "content": "Creates a new item for the company.\n\n**Scope:** `items:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"itemType\": \"<string>\",\n  \"productType\": \"<string>\",\n  \"unitType\": \"<string>\",\n  \"unitPrice\": \"<double>\",\n  \"taxRate\": \"<double>\",\n  \"id\": \"<uuid>\",\n  \"bookkeepingAccountNumber\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "5af9914c-251b-44ed-a486-071dd1fb31b3",
+              "name": "Item created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "49bfad9b-f704-495f-9deb-5efe08ef1738",
+              "name": "Missing Required Information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 3 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/description\",\n      \"message\": \"The description field is required\"\n    },\n    {\n      \"field\": \"#/itemType\",\n      \"message\": \"The item type field is required\"\n    },\n    {\n      \"field\": \"#/unitPrice\",\n      \"message\": \"The unit price field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a12a9fb7-0bdc-42ff-a384-1b46ad98ab4a",
+          "name": "Get items",
+          "request": {
+            "name": "Get items",
+            "description": {
+              "content": "Get all items for the company. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `items:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "items"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| description          | string      |\n| itemType             | string      |\n| productType          | string      |\n| unitType             | string      |\n| unitPrice            | number      |\n| taxRate              | number      |\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "2ce592d6-4743-408f-874c-c68dedbc9cdc",
+              "name": "Items found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "query",
+                      "value": "description~Product 1"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalItems\": 1,\n  \"totalPages\": 1,\n  \"currentPage\": 1,\n  \"items\": [\n    {\n      \"description\": \"Product 1\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"unitType\": \"piece\",\n      \"unitPrice\": 100,\n      \"taxRate\": 25,\n      \"bookkeepingAccountNumber\": 3920\n    },\n    {\n      \"description\": \"Product 1\",\n      \"itemType\": \"salesItem\",\n      \"productType\": \"goods\",\n      \"unitType\": \"piece\",\n      \"unitPrice\": 100,\n      \"taxRate\": 25,\n      \"bookkeepingAccountNumber\": 3920\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e35d2d4f-b1cc-456b-af19-6ce5716e0eb3",
+          "name": "Get an item",
+          "request": {
+            "name": "Get an item",
+            "description": {
+              "content": "Retrieve the information of the item with the matching itemId.\n\n**Scope:** `items:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "itemId",
+                  "description": "(Required) Unique identifier of the item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "df437a42-e174-4551-9145-c0cf007d54f1",
+              "name": "Item found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5619035e-040d-4abe-b735-adca7d699ad4",
+              "name": "Item Not Found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"Item not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10c02a01-2a4d-4e3b-a302-f481ad3bcd0d",
+          "name": "Update an item",
+          "request": {
+            "name": "Update an item",
+            "description": {
+              "content": "Update an existing item for the company.\n\n**Scope:** `items:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "itemId",
+                  "description": "(Required) Unique identifier of the item"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"description\": \"<string>\",\n  \"itemType\": \"<string>\",\n  \"productType\": \"<string>\",\n  \"unitType\": \"<string>\",\n  \"unitPrice\": \"<double>\",\n  \"taxRate\": \"<double>\",\n  \"id\": \"<uuid>\",\n  \"bookkeepingAccountNumber\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "54346232-e03b-4de3-b784-7722a68b4741",
+              "name": "Item updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc7170e0-5f37-40cb-b98a-175cc9874537",
+              "name": "Missing required information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"description\": \"Description of product 1\",\n  \"itemType\": \"salesItem\",\n  \"productType\": \"goods\",\n  \"unitType\": \"piece\",\n  \"unitPrice\": 100,\n  \"taxRate\": 25,\n  \"bookkeepingAccountNumber\": 3920\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 3 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/description\",\n      \"message\": \"The description field is required\"\n    },\n    {\n      \"field\": \"#/unitPrice\",\n      \"message\": \"The unit price field is required\"\n    },\n    {\n      \"field\": \"#/taxRate\",\n      \"message\": \"Invalid tax rate. The tax rate must be one of the following values: 0%, 6%, 12%, or 25%\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ba5a9e28-1088-469f-b37c-18a8a74d0b35",
+          "name": "Delete an item",
+          "request": {
+            "name": "Delete an item",
+            "description": {
+              "content": "Delete an existing item for the company.\n\n**Scope:** `items:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "items",
+                ":itemId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "itemId",
+                  "description": "(Required) Unique identifier of the item"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "79a7f0a8-7e93-48fb-b7c7-3b678ea850f4",
+              "name": "Item deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "items",
+                    ":itemId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "itemId",
+                      "description": "(Required) Unique identifier of the item"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bokio.se/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ab189caf-851b-46e6-af17-cb375922d4cc",
+    "name": "Company authorization items API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+      "type": "text/plain"
+    }
+  }
+}

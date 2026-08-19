@@ -1,0 +1,899 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization invoices API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "invoices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get invoices",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "dueDate==2024-10-10&&currency==SEK",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\nView documentation for filtering on metadata [here](metadata).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| type                 | string      |\n| customerRef          | string      |\n| orderNumberReference | string      |\n| projectReference     | string      |\n| buyerReference       | string      |\n| contractReference    | string      |\n| currency             | string      |\n| totalAmount          | number      |\n| status               | string      |\n| invoiceDate          | date        |\n| dueDate              | date        |\n| metadata             | string      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all invoices for the company. Use the query parameters to filter and navigate through the results.\n\n**Tax reduction:** Personal numbers in `taxReduction.deductionPeople` have the last 4 digits masked when the invoice was created by a different integration. Masked values are returned as `YYYYMMDD-XXXX`.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Create an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new draft invoice for the company.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the invoice with the matching invoiceId.\n\n**Tax reduction:** Personal numbers in `taxReduction.deductionPeople` have the last 4 digits masked when the invoice was created by a different integration. Masked values are returned as `YYYYMMDD-XXXX`.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Update an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing invoice draft for the company.\n\nThis operation will update all fields of the invoice. It's recommended that you perform a GET request\nto the invoice first to get the current state of the invoice and then update the fields you want to change.\n\n**NOTE:** It's only possible to update invoices that are in draft status.\n\n**Tax reduction:** Only the integration that created the invoice can modify tax reduction data. If a different integration includes `taxReduction` changes in the r"
+        },
+        {
+          "info": {
+            "name": "Delete an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes the specified invoice. Only invoices in draft status can be deleted.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get attachments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/attachments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "fileName~faktura",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| fileName                  | string      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the attachments for the invoice. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Add an attachment to an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/attachments",
+            "headers": [
+              {
+                "name": "Content-Type",
+                "value": "multipart/form-data;boundary=JLQPFBPUP0"
+              }
+            ],
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds an attachment to an existing draft invoice. The attachment will be added last in the list of attachments on the invoice.\nAttached files will appear as additional pages in the final invoice\n\nSupported file types: jpeg, png and pdf\n\nShow example of multipart MIME as we do for uploads\n\n**NOTE:** The invoice must be in draft status.\nMaximum file size is 4 MB and all files can't exceed 10 MB.\nDimensions must be less than height of 7016 and width of 4960 in pixels\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get an attachment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/attachments/:attachmentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "attachmentId",
+                "value": "240a4af0-edfd-47b1-b4ab-f30450eaac19",
+                "type": "path",
+                "description": "Unique identifier of the attachment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the attachment with the matching attachmentId.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Delete an attachment from an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/attachments/:attachmentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "attachmentId",
+                "value": "240a4af0-edfd-47b1-b4ab-f30450eaac19",
+                "type": "path",
+                "description": "Unique identifier of the attachment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes an attachment from an existing draft invoice.\n\n**NOTE:** The invoice must be in draft status.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Download an attachment from an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/attachments/:attachmentId/download",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "attachmentId",
+                "value": "240a4af0-edfd-47b1-b4ab-f30450eaac19",
+                "type": "path",
+                "description": "Unique identifier of the attachment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download the attachment with the matching attachmentId.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Create a credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/credit",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a draft credit note for the specified invoice and returns the created credit note draft.\n\n- Use `PUT /credit-notes/{id}` in case the invoice should be partially credited, e.g 3 out of a quantity of 4 for a line item.\n- Use `POST /credit-notes/{id}/publish` to publish the created credit note.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Download an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/download",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download the invoice PDF with the matching invoiceId.\n\n**NOTE:** The invoice must be in published status.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Add a line item to an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/line-items",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Adds a line item to an existing draft invoice. The item will be added last in the list of line items on the invoice.\n\n**NOTE:** The invoice must be in draft status.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get invoice payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/payments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "date>2025-01-01",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| date                      | date        |\n| sumBaseCurrency           | decimal     |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves all payment records for the specified invoice.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Create an invoice payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/payments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new payment record for the specified invoice. Use the bookkeepingAccountNumber field to specify an accounting account other than the default account (1930).\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get an invoice payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/payments/:paymentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "paymentId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the payment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a specific payment record for the invoice.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Delete an invoice payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/payments/:paymentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "paymentId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the payment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a payment record for the invoice.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Record an invoice payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/payments/:paymentId/record",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "paymentId",
+                "value": "f319cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice payment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record an invoice payment.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Publish an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/publish",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Publishes a draft invoice, making it official and ready to be sent to the customer.\nNote that invoice will not be automatically emailed to the customer when published through the API.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Record an invoice",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/record",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record an invoice.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get invoice settlements",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/settlements",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "date>2025-01-01",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| date                      | date        |\n| sumBaseCurrency           | decimal     |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all settlements for the invoice. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Create an invoice settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/settlements",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create a settlement for the invoice that will reduce the outstanding amount of the invoice. A negative amount will increase the outstanding amount. For example, in the case of a currency gain.\n\n> 📘 Settlement types that can be created in Bokio API\n> - `currency`\n> - `bankFee`\n> - `paymentServiceFee`\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get an invoice settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/settlements/:settlementId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "settlementId",
+                "value": "c529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the settlement"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the specific settlement with the matching settlementId.\n\n**Scope:** `invoices:read`\n"
+        },
+        {
+          "info": {
+            "name": "Delete an invoice settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/settlements/:settlementId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "settlementId",
+                "value": "c529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the settlement"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing settlement.\n\n**Scope:** `invoices:write`\n"
+        },
+        {
+          "info": {
+            "name": "Record an invoice settlement",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/invoices/:invoiceId/settlements/:settlementId/record",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "invoiceId",
+                "value": "a419cf69-db6f-4de9-992c-b1a60942a443",
+                "type": "path",
+                "description": "Unique identifier of the invoice"
+              },
+              {
+                "name": "settlementId",
+                "value": "b329df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the invoice settlement"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record an invoice settlement.\n\n**Scope:** `invoices:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

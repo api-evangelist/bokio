@@ -1,0 +1,183 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization suppliers API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "suppliers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "[Preview] Get suppliers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/suppliers",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "name==Supplier ABC",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| name                 | string      |\n| vatNumber            | string      |\n| orgNumber            | string      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all suppliers for the company. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `suppliers:read`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Create a supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/suppliers",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new supplier for the company.\n\n**Scope:** `suppliers:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Get a supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/suppliers/:supplierId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierId",
+                "value": "12345678-abcd-1234-abcd-1234567890ab",
+                "type": "path",
+                "description": "Unique identifier of the supplier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the supplier with the matching supplierId.\n\n**Scope:** `suppliers:read`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Update a supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/suppliers/:supplierId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierId",
+                "value": "12345678-abcd-1234-abcd-1234567890ab",
+                "type": "path",
+                "description": "Unique identifier of the supplier"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing supplier for the company.\n\n**Scope:** `suppliers:write`\n"
+        },
+        {
+          "info": {
+            "name": "[Preview] Delete a supplier",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/suppliers/:supplierId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "supplierId",
+                "value": "12345678-abcd-1234-abcd-1234567890ab",
+                "type": "path",
+                "description": "Unique identifier of the supplier"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete an existing supplier for the company.\n\nNOTE: Currently only supports deleting suppliers that have been added through the API.\n\n**Scope:** `suppliers:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

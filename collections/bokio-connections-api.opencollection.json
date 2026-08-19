@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization connections API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/connections",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (starting from 1)"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page (max 100)"
+              },
+              {
+                "name": "tenantId",
+                "value": "",
+                "type": "query",
+                "description": "Filter connections by tenant ID. When provided, returns only the connection for the specified tenant."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a list of connections for the authenticated client. Use the tenantId query parameter to filter connections for a specific tenant."
+        },
+        {
+          "info": {
+            "name": "Get connection by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the connection"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve a specific connection by its ID"
+        },
+        {
+          "info": {
+            "name": "Delete connection by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/connections/:connectionId",
+            "params": [
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the connection"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Delete a specific connection and its associated data. Associated data refers to tokens and company permissions that were allowed. However, it will not delete any data created through the integration."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

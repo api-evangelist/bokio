@@ -1,0 +1,243 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization credit-notes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "credit-notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List credit notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number for pagination"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "dueDate==2024-10-10&&currency==SEK",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\nView documentation for filtering on metatdata [here](metadata).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| type                 | string      |\n| customerRef          | string      |\n| orderNumberReference | string      |\n| projectReference     | string      |\n| buyerReference       | string      |\n| contractReference    | string      |\n| currency             | string      |\n| totalAmount          | number      |\n| status               | string      |\n| invoiceDate          | date        |\n| dueDate              | date        |\n| metadata             | string      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a list of credit notes for the company.\n\n**Scope:** `credit-notes:read`\n"
+        },
+        {
+          "info": {
+            "name": "Get a credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes/:creditNoteId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "creditNoteId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the credit note"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves a specific credit note by its ID.\n\n**Scope:** `credit-notes:read`\n"
+        },
+        {
+          "info": {
+            "name": "Update a credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes/:creditNoteId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "creditNoteId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the credit note"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing credit note. Only draft credit notes can be updated.\n\n**Scope:** `credit-notes:write`\n"
+        },
+        {
+          "info": {
+            "name": "Delete a credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes/:creditNoteId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "creditNoteId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the credit note"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Deletes a draft credit note. Only draft credit notes can be deleted.\n\n**Scope:** `credit-notes:write`\n"
+        },
+        {
+          "info": {
+            "name": "Publish a credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes/:creditNoteId/publish",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "creditNoteId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the credit note"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Publishes a draft credit note, making it official and immutable.\n\n**Scope:** `credit-notes:write`\n"
+        },
+        {
+          "info": {
+            "name": "Record credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes/:creditNoteId/record",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "creditNoteId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the credit note"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Record a credit note.\n\n**Scope:** `credit-notes:write`\n"
+        },
+        {
+          "info": {
+            "name": "Download a credit note",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/credit-notes/:creditNoteId/download",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "creditNoteId",
+                "value": "b529df79-eb7f-5ef0-a8dc-c2b71f953554",
+                "type": "path",
+                "description": "Unique identifier of the credit note"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Download the credit note PDF with the matching creditNoteId.\n\n**NOTE:** The credit note must be in published status.\n\n**Scope:** `credit-notes:read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

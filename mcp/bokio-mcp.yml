@@ -2,282 +2,287 @@ generated: '2026-07-18'
 method: derived
 status: candidate
 source: openapi/bokio-company-api-openapi.yml, openapi/bokio-general-api-openapi.yml
-note: >-
-  No official hosted/remote Bokio MCP server was found as of the generated date.
-  This is a candidate tool list derived one-to-one from the Company API and
-  General API OpenAPI operations, to seed an MCP server for the Bokio API.
+note: No official hosted/remote Bokio MCP server was found as of the generated date. This is a candidate
+  tool list derived one-to-one from the Company API and General API OpenAPI operations, to seed an MCP
+  server for the Bokio API.
 server:
   name: bokio
   transport: http
   base_url: https://api.bokio.se/v1
 tools:
 - name: post-bank-payment
-  description: "Create a bank payment"
+  description: Create a bank payment
   source_operation: openapi/bokio-company-api-openapi.yml#post-bank-payment
 - name: get-bank-payments-limited
-  description: "Get bank payments"
+  description: Get bank payments
   source_operation: openapi/bokio-company-api-openapi.yml#get-bank-payments-limited
 - name: get-bank-payments-bank-payment-id
-  description: "Get a bank payment created by the integration"
+  description: Get a bank payment created by the integration
   source_operation: openapi/bokio-company-api-openapi.yml#get-bank-payments-bank-payment-id
 - name: post-bank-payments-bulk
-  description: "Bulk create bank payments"
+  description: Bulk create bank payments
   source_operation: openapi/bokio-company-api-openapi.yml#post-bank-payments-bulk
 - name: get-chart-of-accounts
-  description: "Get chart of accounts"
+  description: Get chart of accounts
   source_operation: openapi/bokio-company-api-openapi.yml#get-chart-of-accounts
 - name: get-account-with-number
-  description: "Get specific account"
+  description: Get specific account
   source_operation: openapi/bokio-company-api-openapi.yml#get-account-with-number
 - name: get-company-information-with-id
-  description: "Retrieve company information"
+  description: Retrieve company information
   source_operation: openapi/bokio-company-api-openapi.yml#get-company-information-with-id
 - name: list-credit-notes-v1
-  description: "List credit notes"
+  description: List credit notes
   source_operation: openapi/bokio-company-api-openapi.yml#list-credit-notes-v1
 - name: get-credit-note-v1
-  description: "Get a credit note"
+  description: Get a credit note
   source_operation: openapi/bokio-company-api-openapi.yml#get-credit-note-v1
 - name: update-credit-note-v1
-  description: "Update a credit note"
+  description: Update a credit note
   source_operation: openapi/bokio-company-api-openapi.yml#update-credit-note-v1
 - name: delete-credit-note-with-id
-  description: "Delete a credit note"
+  description: Delete a credit note
   source_operation: openapi/bokio-company-api-openapi.yml#delete-credit-note-with-id
 - name: publish-credit-note-v1
-  description: "Publish a credit note"
+  description: Publish a credit note
   source_operation: openapi/bokio-company-api-openapi.yml#publish-credit-note-v1
 - name: record-credit-note-with-id
-  description: "Record credit note"
+  description: Record credit note
   source_operation: openapi/bokio-company-api-openapi.yml#record-credit-note-with-id
 - name: download-credit-note
-  description: "Download a credit note"
+  description: Download a credit note
   source_operation: openapi/bokio-company-api-openapi.yml#download-credit-note
 - name: post-customer
-  description: "Create a customer"
+  description: Create a customer
   source_operation: openapi/bokio-company-api-openapi.yml#post-customer
 - name: get-customer
-  description: "Get customers"
+  description: Get customers
   source_operation: openapi/bokio-company-api-openapi.yml#get-customer
 - name: get-customers-customerId
-  description: "Get a customer"
+  description: Get a customer
   source_operation: openapi/bokio-company-api-openapi.yml#get-customers-customerId
 - name: put-customer
-  description: "Update a customer"
+  description: Update a customer
   source_operation: openapi/bokio-company-api-openapi.yml#put-customer
 - name: delete-customer
-  description: "Delete a customer"
+  description: Delete a customer
   source_operation: openapi/bokio-company-api-openapi.yml#delete-customer
 - name: get-fiscal-years
-  description: "Get fiscal years"
+  description: Get fiscal years
   source_operation: openapi/bokio-company-api-openapi.yml#get-fiscal-years
 - name: get-fiscal-year-with-id
-  description: "Get a fiscal year"
+  description: Get a fiscal year
   source_operation: openapi/bokio-company-api-openapi.yml#get-fiscal-year-with-id
 - name: post-invoice
-  description: "Create an invoice"
+  description: Create an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoice
 - name: get-invoice
-  description: "Get invoices"
+  description: Get invoices
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice
 - name: get-invoices-invoiceId
-  description: "Get an invoice"
+  description: Get an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoices-invoiceId
 - name: put-invoice
-  description: "Update an invoice"
+  description: Update an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#put-invoice
 - name: delete-invoice-with-id
-  description: "Delete an invoice"
+  description: Delete an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#delete-invoice-with-id
 - name: post-invoice-attachment
-  description: "Add an attachment to an invoice"
+  description: Add an attachment to an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoice-attachment
 - name: get-invoice-attachments
-  description: "Get attachments"
+  description: Get attachments
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice-attachments
 - name: get-invoice-attachment
-  description: "Get an attachment"
+  description: Get an attachment
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice-attachment
 - name: delete-invoice-attachment
-  description: "Delete an attachment from an invoice"
+  description: Delete an attachment from an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#delete-invoice-attachment
 - name: download-invoice-attachment
-  description: "Download an attachment from an invoice"
+  description: Download an attachment from an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#download-invoice-attachment
 - name: post-invoices-invoiceId-credit
-  description: "Create a credit note"
+  description: Create a credit note
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoices-invoiceId-credit
 - name: download-invoice
-  description: "Download an invoice"
+  description: Download an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#download-invoice
 - name: post-invoice-lineItem
-  description: "Add a line item to an invoice"
+  description: Add a line item to an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoice-lineItem
 - name: post-invoice-payment
-  description: "Create an invoice payment"
+  description: Create an invoice payment
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoice-payment
 - name: get-invoice-payments
-  description: "Get invoice payments"
+  description: Get invoice payments
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice-payments
 - name: get-invoice-payment
-  description: "Get an invoice payment"
+  description: Get an invoice payment
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice-payment
 - name: delete-invoice-payment
-  description: "Delete an invoice payment"
+  description: Delete an invoice payment
   source_operation: openapi/bokio-company-api-openapi.yml#delete-invoice-payment
 - name: record-invoice-payment-with-id
-  description: "Record an invoice payment"
+  description: Record an invoice payment
   source_operation: openapi/bokio-company-api-openapi.yml#record-invoice-payment-with-id
 - name: post-invoices-invoiceId-publish
-  description: "Publish an invoice"
+  description: Publish an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoices-invoiceId-publish
 - name: record-invoice-with-id
-  description: "Record an invoice"
+  description: Record an invoice
   source_operation: openapi/bokio-company-api-openapi.yml#record-invoice-with-id
 - name: post-invoice-settlement
-  description: "Create an invoice settlement"
+  description: Create an invoice settlement
   source_operation: openapi/bokio-company-api-openapi.yml#post-invoice-settlement
 - name: get-invoice-settlements
-  description: "Get invoice settlements"
+  description: Get invoice settlements
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice-settlements
 - name: get-invoice-settlement
-  description: "Get an invoice settlement"
+  description: Get an invoice settlement
   source_operation: openapi/bokio-company-api-openapi.yml#get-invoice-settlement
 - name: delete-invoice-settlement
-  description: "Delete an invoice settlement"
+  description: Delete an invoice settlement
   source_operation: openapi/bokio-company-api-openapi.yml#delete-invoice-settlement
 - name: record-invoice-settlement-with-id
-  description: "Record an invoice settlement"
+  description: Record an invoice settlement
   source_operation: openapi/bokio-company-api-openapi.yml#record-invoice-settlement-with-id
 - name: post-item
-  description: "Create an item"
+  description: Create an item
   source_operation: openapi/bokio-company-api-openapi.yml#post-item
 - name: get-items
-  description: "Get items"
+  description: Get items
   source_operation: openapi/bokio-company-api-openapi.yml#get-items
 - name: get-items-itemId
-  description: "Get an item"
+  description: Get an item
   source_operation: openapi/bokio-company-api-openapi.yml#get-items-itemId
 - name: put-item
-  description: "Update an item"
+  description: Update an item
   source_operation: openapi/bokio-company-api-openapi.yml#put-item
 - name: delete-item
-  description: "Delete an item"
+  description: Delete an item
   source_operation: openapi/bokio-company-api-openapi.yml#delete-item
 - name: post-journalentry
-  description: "Create a journal entry"
+  description: Create a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#post-journalentry
 - name: get-journalentry
-  description: "Get journal entries"
+  description: Get journal entries
   source_operation: openapi/bokio-company-api-openapi.yml#get-journalentry
 - name: get-journalentries-journalId
-  description: "Get a journal entry"
+  description: Get a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#get-journalentries-journalId
 - name: reverse-journalentry
-  description: "Reverse a journal entry"
+  description: Reverse a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#reverse-journalentry
 - name: put-journalentry-tags
-  description: "Update journal entry tags"
+  description: Update journal entry tags
   source_operation: openapi/bokio-company-api-openapi.yml#put-journalentry-tags
 - name: post-journal-entry-comment
-  description: "Add a comment to a journal entry"
+  description: Add a comment to a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#post-journal-entry-comment
 - name: get-journal-entry-comments
-  description: "List comments on a journal entry"
+  description: List comments on a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#get-journal-entry-comments
 - name: get-journal-entry-comment
-  description: "Get a comment on a journal entry"
+  description: Get a comment on a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#get-journal-entry-comment
 - name: put-journal-entry-comment
-  description: "Update a comment on a journal entry"
+  description: Update a comment on a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#put-journal-entry-comment
 - name: delete-journal-entry-comment
-  description: "Delete a comment on a journal entry"
+  description: Delete a comment on a journal entry
   source_operation: openapi/bokio-company-api-openapi.yml#delete-journal-entry-comment
 - name: download-sie-file
-  description: "Download SIE file for a fiscal year"
+  description: Download SIE file for a fiscal year
   source_operation: openapi/bokio-company-api-openapi.yml#download-sie-file
 - name: post-supplier-invoice
-  description: "Create a supplier invoice"
+  description: Create a supplier invoice
   source_operation: openapi/bokio-company-api-openapi.yml#post-supplier-invoice
 - name: get-supplier-invoices
-  description: "Get supplier invoices"
+  description: Get supplier invoices
   source_operation: openapi/bokio-company-api-openapi.yml#get-supplier-invoices
 - name: get-supplier-invoice-by-id
-  description: "Get a supplier invoice"
+  description: Get a supplier invoice
   source_operation: openapi/bokio-company-api-openapi.yml#get-supplier-invoice-by-id
 - name: put-supplier-invoice
-  description: "Update a supplier invoice"
+  description: Update a supplier invoice
   source_operation: openapi/bokio-company-api-openapi.yml#put-supplier-invoice
 - name: delete-supplier-invoice
-  description: "Delete a supplier invoice"
+  description: Delete a supplier invoice
   source_operation: openapi/bokio-company-api-openapi.yml#delete-supplier-invoice
 - name: post-supplier-invoice-upload
-  description: "Add an upload to a supplier invoice"
+  description: Add an upload to a supplier invoice
   source_operation: openapi/bokio-company-api-openapi.yml#post-supplier-invoice-upload
 - name: post-tag-group
-  description: "Create a tag group"
+  description: Create a tag group
   source_operation: openapi/bokio-company-api-openapi.yml#post-tag-group
 - name: get-tag-groups
-  description: "Get all tag groups"
+  description: Get all tag groups
   source_operation: openapi/bokio-company-api-openapi.yml#get-tag-groups
 - name: get-tag-group-by-id
-  description: "Get a tag group by ID"
+  description: Get a tag group by ID
   source_operation: openapi/bokio-company-api-openapi.yml#get-tag-group-by-id
 - name: put-tag-group
-  description: "Update a tag group"
+  description: Update a tag group
   source_operation: openapi/bokio-company-api-openapi.yml#put-tag-group
 - name: delete-tag-group
-  description: "Delete a tag group"
+  description: Delete a tag group
   source_operation: openapi/bokio-company-api-openapi.yml#delete-tag-group
 - name: post-supplier
-  description: "Create a supplier"
+  description: Create a supplier
   source_operation: openapi/bokio-company-api-openapi.yml#post-supplier
 - name: get-suppliers
-  description: "Get suppliers"
+  description: Get suppliers
   source_operation: openapi/bokio-company-api-openapi.yml#get-suppliers
 - name: get-supplier-by-id
-  description: "Get a supplier"
+  description: Get a supplier
   source_operation: openapi/bokio-company-api-openapi.yml#get-supplier-by-id
 - name: put-supplier
-  description: "Update a supplier"
+  description: Update a supplier
   source_operation: openapi/bokio-company-api-openapi.yml#put-supplier
 - name: delete-supplier
-  description: "Delete a supplier"
+  description: Delete a supplier
   source_operation: openapi/bokio-company-api-openapi.yml#delete-supplier
 - name: post-tag-group-tag
-  description: "Create a tag in a tag group"
+  description: Create a tag in a tag group
   source_operation: openapi/bokio-company-api-openapi.yml#post-tag-group-tag
 - name: put-tag-group-tag
-  description: "Update a tag in a tag group"
+  description: Update a tag in a tag group
   source_operation: openapi/bokio-company-api-openapi.yml#put-tag-group-tag
 - name: delete-tag-group-tag
-  description: "Delete a tag from a tag group"
+  description: Delete a tag from a tag group
   source_operation: openapi/bokio-company-api-openapi.yml#delete-tag-group-tag
 - name: add-upload
-  description: "Add an upload"
+  description: Add an upload
   source_operation: openapi/bokio-company-api-openapi.yml#add-upload
 - name: get-uploads
-  description: "Get uploads"
+  description: Get uploads
   source_operation: openapi/bokio-company-api-openapi.yml#get-uploads
 - name: get-upload
-  description: "Get an upload"
+  description: Get an upload
   source_operation: openapi/bokio-company-api-openapi.yml#get-upload
 - name: download-upload
-  description: "Download file data for an upload"
+  description: Download file data for an upload
   source_operation: openapi/bokio-company-api-openapi.yml#download-upload
 - name: request-token
-  description: "Obtain access token"
+  description: Obtain access token
   source_operation: openapi/bokio-general-api-openapi.yml#request-token
 - name: authorize
-  description: "Authorize the client"
+  description: Authorize the client
   source_operation: openapi/bokio-general-api-openapi.yml#authorize
 - name: get-connections
-  description: "Get connections"
+  description: Get connections
   source_operation: openapi/bokio-general-api-openapi.yml#get-connections
 - name: get-connection-by-id
-  description: "Get connection by ID"
+  description: Get connection by ID
   source_operation: openapi/bokio-general-api-openapi.yml#get-connection-by-id
 - name: delete-connection-by-id
-  description: "Delete connection by ID"
+  description: Delete connection by ID
   source_operation: openapi/bokio-general-api-openapi.yml#delete-connection-by-id
+deployment:
+  mode: none
+  verified: derived
+  tools: 90
+  checked: '2026-08-12'
+  source: catalog MCP census

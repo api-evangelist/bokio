@@ -1,0 +1,2367 @@
+{
+  "item": [
+    {
+      "id": "7128c706-f8bf-494c-82bf-7a07694ed0ac",
+      "name": "journal-entries",
+      "description": {
+        "content": "Operations for managing accounting journal entries",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "758a8c08-0580-453d-959c-08ad380eac63",
+          "name": "Create a journal entry",
+          "request": {
+            "name": "Create a journal entry",
+            "description": {
+              "content": "Creates a journal entry for the company.\n\n**Handling validation errors:**\n\nIf this operations returns a 400 status code, inspect the response body's api error object for more information. There will be additional information in the innerCode if the code=validation-error.\n\n**Scope:** `journal-entries:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"items\": [\n    {\n      \"debit\": \"<double>\",\n      \"credit\": \"<double>\",\n      \"account\": \"<integer>\",\n      \"tags\": [\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        },\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        }\n      ]\n    },\n    {\n      \"debit\": \"<double>\",\n      \"credit\": \"<double>\",\n      \"account\": \"<integer>\",\n      \"tags\": [\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        },\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        }\n      ]\n    }\n  ],\n  \"title\": \"<string>\",\n  \"date\": \"<date>\",\n  \"tags\": [\n    {\n      \"tagId\": \"<uuid>\",\n      \"weight\": 1\n    },\n    {\n      \"tagId\": \"<uuid>\",\n      \"weight\": 1\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e1092c63-7e7c-4bd5-b265-6511f0c0a556",
+              "name": "Journal entry created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"invoice 1234\",\n  \"date\": \"2024-10-10\",\n  \"items\": [\n    {\n      \"debit\": 200,\n      \"credit\": 0,\n      \"account\": 1930\n    },\n    {\n      \"debit\": 0,\n      \"credit\": 40,\n      \"account\": 3011\n    },\n    {\n      \"debit\": 0,\n      \"credit\": 160,\n      \"account\": 2611\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a419cf69-db6f-4de9-992c-b1a60942a443\",\n  \"title\": \"invoice 1234\",\n  \"journalEntryNumber\": \"V342\",\n  \"date\": \"2024-10-10\",\n  \"items\": [\n    {\n      \"id\": 1,\n      \"debit\": 200,\n      \"credit\": 0,\n      \"account\": 1930,\n      \"tags\": []\n    },\n    {\n      \"id\": 2,\n      \"debit\": 0,\n      \"credit\": 40,\n      \"account\": 3011,\n      \"tags\": []\n    },\n    {\n      \"id\": 3,\n      \"debit\": 0,\n      \"credit\": 160,\n      \"account\": 2611,\n      \"tags\": []\n    }\n  ],\n  \"tags\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66118524-e534-4f98-ae05-340ae74c04f2",
+              "name": "Missing required information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"title\": \"invoice 1234\",\n  \"date\": \"2024-10-10\",\n  \"items\": [\n    {\n      \"debit\": 200,\n      \"credit\": 0,\n      \"account\": 1930\n    },\n    {\n      \"debit\": 0,\n      \"credit\": 40,\n      \"account\": 3011\n    },\n    {\n      \"debit\": 0,\n      \"credit\": 160,\n      \"account\": 2611\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 2 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/title\",\n      \"message\": \"The title field is required\"\n    },\n    {\n      \"field\": \"#/items/1/account\",\n      \"message\": \"The account field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "09e2e87a-fcfd-4922-981e-53326e2cc167",
+          "name": "Get journal entries",
+          "request": {
+            "name": "Get journal entries",
+            "description": {
+              "content": "Get journal entries for the company. Use the query parameters to filter and navigate through the results.\n**Scope:** `journal-entries:read`",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                     | Type        |\n| ------------------------- | ----------- |\n| title                     | string      |\n| journalEntryNumber        | string      |\n| date                      | date        |\n| reversingJournalEntryId   | string      |\n| reversedByJournalEntryId  | string      |\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "tagId",
+                  "value": "<uuid>",
+                  "description": "[Preview] Filter journal entries by tag. Returns only journal entries that have the specified tag applied, either at the journal entry level or at the line item level.\n\nRequires the Tags feature to be enabled in the company's price plan.\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "b2e0a03d-1dcf-41a6-bfae-e64591228e32",
+              "name": "Journal entries found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "query",
+                      "value": "title~invoice 1234"
+                    },
+                    {
+                      "key": "tagId",
+                      "value": "<uuid>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalItems\": 1,\n  \"totalPages\": 1,\n  \"currentPage\": 1,\n  \"items\": [\n    {\n      \"title\": \"invoice 1234\",\n      \"journalEntryNumber\": \"V342\",\n      \"date\": \"2024-10-10\",\n      \"items\": [\n        {\n          \"id\": 1,\n          \"debit\": 200,\n          \"credit\": 0,\n          \"account\": 1930\n        },\n        {\n          \"id\": 2,\n          \"debit\": 0,\n          \"credit\": 40,\n          \"account\": 3011\n        },\n        {\n          \"id\": 3,\n          \"debit\": 0,\n          \"credit\": 160,\n          \"account\": 2611\n        }\n      ]\n    },\n    {\n      \"title\": \"invoice 1234\",\n      \"journalEntryNumber\": \"V342\",\n      \"date\": \"2024-10-10\",\n      \"items\": [\n        {\n          \"id\": 1,\n          \"debit\": 200,\n          \"credit\": 0,\n          \"account\": 1930\n        },\n        {\n          \"id\": 2,\n          \"debit\": 0,\n          \"credit\": 40,\n          \"account\": 3011\n        },\n        {\n          \"id\": 3,\n          \"debit\": 0,\n          \"credit\": 160,\n          \"account\": 2611\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e739b461-b089-4300-a646-5362e2e3cb00",
+          "name": "Get a journal entry",
+          "request": {
+            "name": "Get a journal entry",
+            "description": {
+              "content": "Retrieve the information of the journal with the matching journalEntryId.\n\n**Scope:** `journal-entries:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a0451229-173b-484a-a52d-a020cbd03a6c",
+              "name": "Journal entry found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a419cf69-db6f-4de9-992c-b1a60942a443\",\n  \"title\": \"invoice 1234\",\n  \"journalEntryNumber\": \"V342\",\n  \"date\": \"2024-10-10\",\n  \"items\": [\n    {\n      \"id\": 1,\n      \"debit\": 200,\n      \"credit\": 0,\n      \"account\": 1930,\n      \"tags\": []\n    },\n    {\n      \"id\": 2,\n      \"debit\": 0,\n      \"credit\": 40,\n      \"account\": 3011,\n      \"tags\": []\n    },\n    {\n      \"id\": 3,\n      \"debit\": 0,\n      \"credit\": 160,\n      \"account\": 2611,\n      \"tags\": []\n    }\n  ],\n  \"tags\": []\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c93e82f-5afe-4a74-ab7b-9e1bf1d91dd0",
+              "name": "Journal entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"journal entry not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aff6f2a4-f1a5-4560-9d1e-d54765425b42",
+          "name": "Reverse a journal entry",
+          "request": {
+            "name": "Reverse a journal entry",
+            "description": {
+              "content": "Reverse a journal entry for the company.\n\n### Journal entries possible to reverse\n\n- It's possible to reverse journal entries that have been created through the API. Journal entries that have been created through the Bokio UI can't be reversed through the API.\n- Journal entries that belong to a Bokio invoice or similar cannot be reversed using this endpoint.\n- Journal entries that have been reversed can not be reversed again.\n\n### Handling validation errors:\n\nIf this operation returns a 400 status code, inspect the response body's apiError object for more information. There will be additional information in the innerCode if the code=validation-error.\n\n**Scope:** `journal-entries:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "reverse"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4e6b1f01-e991-441e-a133-2b4c5ee54423",
+              "name": "Journal entry reversed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"835ba700-b306-4bd9-8447-59207b6b0002\",\n  \"title\": \"invoice 1234\",\n  \"journalEntryNumber\": \"V342\",\n  \"date\": \"2024-10-10\",\n  \"items\": [\n    {\n      \"id\": 1,\n      \"debit\": 0,\n      \"credit\": 200,\n      \"account\": 1930,\n      \"tags\": []\n    },\n    {\n      \"id\": 2,\n      \"debit\": 40,\n      \"credit\": 0,\n      \"account\": 3011,\n      \"tags\": []\n    },\n    {\n      \"id\": 3,\n      \"debit\": 160,\n      \"credit\": 0,\n      \"account\": 2611,\n      \"tags\": []\n    }\n  ],\n  \"tags\": [],\n  \"reversingJournalEntryId\": \"a419cf69-db6f-4de9-992c-b1a60942a443\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7966848f-1c88-4b24-96e3-10fa0ccf0205",
+              "name": "Not allowed to reverse journal entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"No changes can be made in a closed fiscal year.\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "36dfee43-7302-485c-89fc-b6f5d9f9449b",
+              "name": "journal entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "reverse"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"journal entry not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "851dbf41-f257-41c7-83a6-5f777ab1d8bb",
+          "name": "[Preview] Update journal entry tags",
+          "request": {
+            "name": "[Preview] Update journal entry tags",
+            "description": {
+              "content": "Replaces all tags on a journal entry with the provided tags.\n\nEither set verification-level tags (using `tags`) or transaction-level tags (using `items[*].tags`), not both on the same journal entry.\n\nThe company must have the Tags feature enabled in their price plan.\n\n**Preview:** This endpoint is in preview and may change or be removed before general availability.\n[Read the full preview policy](/reference/versioning#preview)\n\n**Scope:** `journal-entries:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tags\": [\n    {\n      \"tagId\": \"<uuid>\",\n      \"weight\": 1\n    },\n    {\n      \"tagId\": \"<uuid>\",\n      \"weight\": 1\n    }\n  ],\n  \"items\": [\n    {\n      \"id\": \"<long>\",\n      \"tags\": [\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        },\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        }\n      ]\n    },\n    {\n      \"id\": \"<long>\",\n      \"tags\": [\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        },\n        {\n          \"tagId\": \"<uuid>\",\n          \"weight\": 1\n        }\n      ]\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4251b660-35fd-4b37-a0fb-d570b8d7e362",
+              "name": "Tags updated, returns the updated journal entry",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    {\n      \"tagId\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"weight\": 0.6\n    },\n    {\n      \"tagId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n      \"weight\": 0.4\n    }\n  ],\n  \"items\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"a419cf69-db6f-4de9-992c-b1a60942a443\",\n  \"title\": \"invoice 1234\",\n  \"journalEntryNumber\": \"V342\",\n  \"date\": \"2024-10-10\",\n  \"items\": [\n    {\n      \"id\": 1,\n      \"debit\": 200,\n      \"credit\": 0,\n      \"account\": 1930,\n      \"tags\": []\n    },\n    {\n      \"id\": 2,\n      \"debit\": 0,\n      \"credit\": 40,\n      \"account\": 3011,\n      \"tags\": []\n    },\n    {\n      \"id\": 3,\n      \"debit\": 0,\n      \"credit\": 160,\n      \"account\": 2611,\n      \"tags\": []\n    }\n  ],\n  \"tags\": [\n    {\n      \"tagId\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"tagGroupId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"tagName\": \"Project Alpha\",\n      \"tagGroupName\": \"Project\",\n      \"weight\": 0.6\n    },\n    {\n      \"tagId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n      \"tagGroupId\": \"a1b2c3d4-e5f6-7890-abcd-ef1234567890\",\n      \"tagName\": \"Project Beta\",\n      \"tagGroupName\": \"Project\",\n      \"weight\": 0.4\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a6772495-e749-4488-bb9f-86808d9c7538",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    {\n      \"tagId\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"weight\": 0.6\n    },\n    {\n      \"tagId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n      \"weight\": 0.4\n    }\n  ],\n  \"items\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"The tags field must be applied at either the verification level or the transaction level, not both\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0a1a0c94-b9ab-4e0e-a8ef-3c523c6b2573",
+              "name": "Forbidden. The company's price plan does not include the Tags feature, or the integration does not have the required scope.\n\nSee [price plan requirements](price-plan-requirements#handling-403-responses) for details on how to handle this response.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    {\n      \"tagId\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"weight\": 0.6\n    },\n    {\n      \"tagId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n      \"weight\": 0.4\n    }\n  ],\n  \"items\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": \"price_plan_feature_required\",\n  \"message\": \"This feature requires the Tags add-on\",\n  \"details\": {\n    \"requiredFeature\": \"Tags\",\n    \"availableIn\": [\n      \"Plus\",\n      \"Business\"\n    ],\n    \"availableAsAddonIn\": [\n      \"Premium\"\n    ],\n    \"isAvailableInTrial\": true,\n    \"isInTrial\": false\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c235305-c8a1-499e-9080-b3fb60f7c7db",
+              "name": "Journal entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "tags"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tags\": [\n    {\n      \"tagId\": \"b2c3d4e5-f6a7-8901-bcde-f12345678901\",\n      \"weight\": 0.6\n    },\n    {\n      \"tagId\": \"c3d4e5f6-a7b8-9012-cdef-123456789012\",\n      \"weight\": 0.4\n    }\n  ],\n  \"items\": []\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"journal entry not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c8d41de9-a8ff-4657-8e65-45eb02953892",
+          "name": "Add a comment to a journal entry",
+          "request": {
+            "name": "Add a comment to a journal entry",
+            "description": {
+              "content": "Adds a comment to a journal entry that was created through the API.\n\nComments are plain text only. Rich text, markdown, and HTML are not supported.\n\nThe author name will be set to the integration name of the API user.\n\n**Scope:** `journal-entries:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4764da8e-b2f4-4523-bc9e-90b7d9baee08",
+              "name": "Comment created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001.\",\n  \"authorName\": \"My Integration App\",\n  \"createdDatetime\": \"2024-10-15 08:30:00+00:00\",\n  \"updatedDatetime\": \"2024-10-15 08:30:00+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0506fc1c-5e22-4ff6-90ea-e925696df0a3",
+              "name": "Validation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 1 error\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/content\",\n      \"message\": \"The content field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a8b0de2-330f-4f6c-9db6-7bd39ab7f26d",
+              "name": "Journal entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001.\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"journal entry not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3a000ae6-0f33-492f-8514-b143ab8f4961",
+          "name": "List comments on a journal entry",
+          "request": {
+            "name": "List comments on a journal entry",
+            "description": {
+              "content": "Returns all comments on a journal entry.\n\nComments are returned in chronological order (oldest first).\n\n**Scope:** `journal-entries:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "comments"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "32fd358f-5a37-41e9-8e4b-608db00ec870",
+              "name": "Comments retrieved",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"content\": \"Synced from external system. Invoice reference: INV-2024-001.\",\n    \"authorName\": \"My Integration App\",\n    \"createdDatetime\": \"2024-10-15 08:30:00+00:00\",\n    \"updatedDatetime\": \"2024-10-15 08:30:00+00:00\"\n  },\n  {\n    \"id\": \"7ca85f64-5717-4562-b3fc-2c963f66afa7\",\n    \"content\": \"Updated amount to match revised invoice.\",\n    \"authorName\": \"My Integration App\",\n    \"createdDatetime\": \"2024-10-16 10:15:00+00:00\",\n    \"updatedDatetime\": \"2024-10-16 10:15:00+00:00\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5ca604b-3d78-4e4e-9bff-61a23c0ef467",
+              "name": "Journal entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"journal entry not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "8f831035-7cdb-4889-97b6-51a97ab11899",
+          "name": "Get a comment on a journal entry",
+          "request": {
+            "name": "Get a comment on a journal entry",
+            "description": {
+              "content": "Retrieve a single comment by its ID on a journal entry.\n\n**Scope:** `journal-entries:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "comments",
+                ":commentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "commentId",
+                  "description": "(Required) Unique identifier of the comment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "0592227e-b50f-421f-b589-ab1086a1f6c1",
+              "name": "Comment found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001.\",\n  \"authorName\": \"My Integration App\",\n  \"createdDatetime\": \"2024-10-15 08:30:00+00:00\",\n  \"updatedDatetime\": \"2024-10-15 08:30:00+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5b6a87af-6db6-4a7a-a204-ab33d5aa87c2",
+              "name": "Journal entry or comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"comment not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e835d234-e105-4570-b85b-74bf824a054d",
+          "name": "Update a comment on a journal entry",
+          "request": {
+            "name": "Update a comment on a journal entry",
+            "description": {
+              "content": "Updates a comment on a journal entry. Only comments created by the same integration can be updated.\n\nComments are plain text only. Rich text, markdown, and HTML are not supported.\n\n**Scope:** `journal-entries:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "comments",
+                ":commentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "commentId",
+                  "description": "(Required) Unique identifier of the comment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2185c624-75ea-4723-982d-fe7afbe9216a",
+              "name": "Comment updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001 (corrected).\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001 (corrected).\",\n  \"authorName\": \"My Integration App\",\n  \"createdDatetime\": \"2024-10-15 08:30:00+00:00\",\n  \"updatedDatetime\": \"2024-10-16 14:20:00+00:00\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "30759798-ae80-4e37-87ab-113df52ad50b",
+              "name": "Validation error or operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001 (corrected).\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 1 error\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/content\",\n      \"message\": \"The content field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "961bf659-862a-484b-bdda-da2b409684ae",
+              "name": "Journal entry or comment not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"content\": \"Synced from external system. Invoice reference: INV-2024-001 (corrected).\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"comment not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c97e118c-cf95-4fc0-bbd9-9c82f3386cf3",
+          "name": "Delete a comment on a journal entry",
+          "request": {
+            "name": "Delete a comment on a journal entry",
+            "description": {
+              "content": "Deletes a comment on a journal entry. Only comments created by the same integration can be deleted.\n\n**Scope:** `journal-entries:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "journal-entries",
+                ":journalEntryId",
+                "comments",
+                ":commentId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "journalEntryId",
+                  "description": "(Required) Unique identifier of the journal entry"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "commentId",
+                  "description": "(Required) Unique identifier of the comment"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "eb84be13-f3ff-482f-9450-0163ef2e9b7a",
+              "name": "Comment deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "c58babfb-3cd7-415e-9c3e-d51e77f9f698",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "journal-entries",
+                    ":journalEntryId",
+                    "comments",
+                    ":commentId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "journalEntryId",
+                      "description": "(Required) Unique identifier of the journal entry"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "commentId",
+                      "description": "(Required) Unique identifier of the comment"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"operation-not-allowed\",\n  \"message\": \"Bokio API only supports deleting comments that have been added through the API by the same integration.\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bokio.se/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "0c444c07-2590-4dcd-b0c8-d80355961d3d",
+    "name": "Company authorization journal-entries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+      "type": "text/plain"
+    }
+  }
+}

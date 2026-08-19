@@ -1,0 +1,148 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization bank-payments API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "bank-payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get bank payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/bank-payments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "amount==1200.00",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| amount               | number      |\n| status               | string      |\n| paymentDate          | date-time   |\n| createdDateTime      | date-time   |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all bank payments for the company that were created by the integration.\n**Scope:** `bank-payments:read-limited`"
+        },
+        {
+          "info": {
+            "name": "Create a bank payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/bank-payments",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new bank payment for the company. Payment will be created in the Bokio system.\nIn order to submit the transaction to the bank, the signatory for the account needs to login to the Bokio application and sign the payment with their BankID.\nThis is different from the transactions imported through a connected bank in Bokio.\n\n**Scope:** `bank-payments:write`\n"
+        },
+        {
+          "info": {
+            "name": "Get a bank payment created by the integration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/bank-payments/:bankPaymentId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              },
+              {
+                "name": "bankPaymentId",
+                "value": "835ba700-b306-4bd9-8447-59207b6b0002",
+                "type": "path",
+                "description": "Unique identifier of the bank payment"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the bank payment with the matching bankPaymentId.\n\n**Scope:** `bank-payments:read-limited`\n"
+        },
+        {
+          "info": {
+            "name": "Bulk create bank payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.bokio.se/v1/companies/:companyId/bank-payments/bulk",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135",
+                "type": "path",
+                "description": "Unique identifier of the company"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates multiple bank payments for the company in a single request. Up to 100 payments can be created per request.\n\nThe operation is atomic — if any payment fails validation, no payments are created.\n\n**Scope:** `bank-payments:write`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

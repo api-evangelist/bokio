@@ -1,0 +1,94 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Company authorization fiscal-years API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "fiscal-years",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get fiscal years",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/fiscal-years",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the company"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Number of items per page"
+              },
+              {
+                "name": "query",
+                "value": "status==open",
+                "type": "query",
+                "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field                | Type        |\n| -------------------- | ----------- |\n| startDate            | date      |\n| endDate              | date      |\n| accountingMethod     | string      |\n| status               | string      |\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Get all fiscal years for the company. Use the query parameters to filter and navigate through the results.\n\n\n**Scope:** `fiscal-years:read`\n"
+        },
+        {
+          "info": {
+            "name": "Get a fiscal year",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.bokio.se/v1/companies/:companyId/fiscal-years/:fiscalYearId",
+            "params": [
+              {
+                "name": "companyId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the company"
+              },
+              {
+                "name": "fiscalYearId",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier for the fiscal year"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieve the information of the fiscal year with the matching fiscalYearId\n\n**Scope:** `fiscal-years:read`\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

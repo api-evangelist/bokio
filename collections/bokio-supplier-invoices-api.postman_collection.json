@@ -1,0 +1,1294 @@
+{
+  "item": [
+    {
+      "id": "28844ceb-e62b-40e4-a0d2-434f7034f49e",
+      "name": "supplier-invoices",
+      "description": {
+        "content": "Operations for managing supplier invoices",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cc77e070-696e-4e14-8b46-18e7c989bd43",
+          "name": "[Preview] Create a supplier invoice",
+          "request": {
+            "name": "[Preview] Create a supplier invoice",
+            "description": {
+              "content": "Creates a new supplier invoice for the company.\n\n**Scope:** `supplier-invoices:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "supplier-invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiceDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"totalAmount\": \"<double>\",\n  \"supplierRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"invoiceNumber\": \"<string>\",\n  \"uploadRef\": {\n    \"id\": \"<uuid>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a01defda-3f22-42be-9f3e-6cdc5490e354",
+              "name": "Supplier invoice created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000,\n  \"uploadRef\": {\n    \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n    \"name\": \"Supplier AB\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000,\n  \"remainingAmount\": 1000,\n  \"currency\": \"SEK\",\n  \"currencyRate\": 1,\n  \"journalEntryRef\": {\n    \"id\": \"2d8ce6b4-1f3a-46a5-8a9d-5b7f2c4e9d10\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c1bc7b9d-39c1-4499-9fd3-47b9e64e1a58",
+              "name": "Validation or operation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000,\n  \"uploadRef\": {\n    \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 4 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/supplierRef/id\",\n      \"message\": \"The supplier id field is required\"\n    },\n    {\n      \"field\": \"#/invoiceDate\",\n      \"message\": \"The invoice date field is required\"\n    },\n    {\n      \"field\": \"#/dueDate\",\n      \"message\": \"The due date field is required\"\n    },\n    {\n      \"field\": \"#/totalAmount\",\n      \"message\": \"The totalAmount field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "022ae77f-123c-45df-ab7a-242329d6f4b5",
+              "name": "Supplier invoice or upload not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000,\n  \"uploadRef\": {\n    \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"No upload found with id 24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0351212a-2f01-42dd-b756-038213bfb02d",
+          "name": "[Preview] Get supplier invoices",
+          "request": {
+            "name": "[Preview] Get supplier invoices",
+            "description": {
+              "content": "Get all supplier invoices for the company. Use the query parameters to filter and navigate through the results.\n\n**Scope:** `supplier-invoices:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "supplier-invoices"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number"
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "25",
+                  "description": "Number of items per page"
+                },
+                {
+                  "disabled": false,
+                  "key": "query",
+                  "value": "<string>",
+                  "description": "Optional query to filter the data set with supported fields listed below and [available operations](filtering).\n\n| Field             | Type   |\n| ----------------- | ------ |\n| supplierRef.id    | string |\n| invoiceNumber     | string |\n| totalAmount       | number |\n| currency          | string |\n| invoiceDate       | date   |\n| dueDate           | date   |\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "75c946c9-359a-4b44-9b6e-1843a03f2ecb",
+              "name": "Supplier invoices found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "25"
+                    },
+                    {
+                      "key": "query",
+                      "value": "dueDate==2023-10-15"
+                    },
+                    {
+                      "key": null,
+                      "value": null
+                    },
+                    {
+                      "key": "currency",
+                      "value": "=SEK"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"totalItems\": 2,\n  \"totalPages\": 1,\n  \"currentPage\": 1,\n  \"items\": [\n    {\n      \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n      \"supplierRef\": {\n        \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n        \"name\": \"Supplier AB\"\n      },\n      \"invoiceNumber\": \"INV-001\",\n      \"invoiceDate\": \"2023-10-01\",\n      \"dueDate\": \"2023-10-15\",\n      \"totalAmount\": 1000,\n      \"remainingAmount\": 1000,\n      \"currency\": \"SEK\",\n      \"currencyRate\": 1,\n      \"journalEntryRef\": {\n        \"id\": \"2d8ce6b4-1f3a-46a5-8a9d-5b7f2c4e9d10\"\n      },\n      \"uploadRefs\": [\n        {\n          \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n        }\n      ]\n    },\n    {\n      \"id\": \"2d8ce6b4-1f3a-46a5-8a9d-5b7f2c4e9d10\",\n      \"supplierRef\": {\n        \"id\": \"2d8ce6b4-1f3a-46a5-8a9d-5b7f2c4e9d10\",\n        \"name\": \"Consulting Nordic AB\"\n      },\n      \"invoiceNumber\": \"INV-002\",\n      \"invoiceDate\": \"2023-10-05\",\n      \"dueDate\": \"2023-10-20\",\n      \"totalAmount\": 2500,\n      \"remainingAmount\": 500,\n      \"currency\": \"SEK\",\n      \"currencyRate\": 1,\n      \"journalEntryRef\": {\n        \"id\": \"3c1a5e7b-9d2f-4b86-ae31-7f4c2d8b6a55\"\n      },\n      \"uploadRefs\": [\n        {\n          \"id\": \"34e1c9a5-7b2d-4f86-8a31-6d2c5f9b7e40\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "681d7b0a-00da-4489-95b5-8f0fc281d9c3",
+          "name": "[Preview] Get a supplier invoice",
+          "request": {
+            "name": "[Preview] Get a supplier invoice",
+            "description": {
+              "content": "Retrieve the information of the supplier invoice with the matching supplierInvoiceId.\n\n**Scope:** `supplier-invoices:read`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "supplier-invoices",
+                ":supplierInvoiceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "supplierInvoiceId",
+                  "description": "(Required) Unique identifier of the supplier invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "1379e146-2b81-4f7f-9f31-e7c7b43929ff",
+              "name": "Supplier invoice found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n    \"name\": \"Supplier AB\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000,\n  \"remainingAmount\": 1000,\n  \"currency\": \"SEK\",\n  \"currencyRate\": 1,\n  \"journalEntryRef\": {\n    \"id\": \"2d8ce6b4-1f3a-46a5-8a9d-5b7f2c4e9d10\"\n  },\n  \"uploadRefs\": [\n    {\n      \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f8479a50-6e14-4fa5-ad3d-c4dcfb6466cf",
+              "name": "Supplier invoice not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"Supplier invoice not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29f1e6f1-919e-4c3c-9fe7-cb3c37c74000",
+          "name": "[Preview] Update a supplier invoice",
+          "request": {
+            "name": "[Preview] Update a supplier invoice",
+            "description": {
+              "content": "Update an existing supplier invoice for the company.\n\n**Scope:** `supplier-invoices:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "supplier-invoices",
+                ":supplierInvoiceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "supplierInvoiceId",
+                  "description": "(Required) Unique identifier of the supplier invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"invoiceDate\": \"<date>\",\n  \"dueDate\": \"<date>\",\n  \"totalAmount\": \"<double>\",\n  \"supplierRef\": {\n    \"id\": \"<uuid>\"\n  },\n  \"invoiceNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "36ed009f-f26c-4689-b2b4-a5267c8d24ef",
+              "name": "Supplier invoice updated",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\",\n    \"name\": \"Supplier AB\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000,\n  \"remainingAmount\": 1000,\n  \"currency\": \"SEK\",\n  \"currencyRate\": 1,\n  \"journalEntryRef\": {\n    \"id\": \"2d8ce6b4-1f3a-46a5-8a9d-5b7f2c4e9d10\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e56c6ba0-e218-44c3-b2af-f7ecbb411fd1",
+              "name": "Missing required information",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Validation failed with 4 errors\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/supplierRef/id\",\n      \"message\": \"The supplier id field is required\"\n    },\n    {\n      \"field\": \"#/invoiceDate\",\n      \"message\": \"The invoice date field is required\"\n    },\n    {\n      \"field\": \"#/dueDate\",\n      \"message\": \"The due date field is required\"\n    },\n    {\n      \"field\": \"#/totalAmount\",\n      \"message\": \"The totalAmount field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d11bd7-a76c-4577-bdc2-f2e719e400ed",
+              "name": "Supplier invoice not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"supplierRef\": {\n    \"id\": \"6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90\"\n  },\n  \"invoiceNumber\": \"INV-001\",\n  \"invoiceDate\": \"2023-10-01\",\n  \"dueDate\": \"2023-10-15\",\n  \"totalAmount\": 1000\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"not-found\",\n  \"message\": \"Supplier invoice not found\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1741c571-a92e-4988-8f23-c5b6222de890",
+          "name": "[Preview] Delete a supplier invoice",
+          "request": {
+            "name": "[Preview] Delete a supplier invoice",
+            "description": {
+              "content": "Delete an existing supplier invoice for the company.\n\n**Scope:** `supplier-invoices:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "supplier-invoices",
+                ":supplierInvoiceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "supplierInvoiceId",
+                  "description": "(Required) Unique identifier of the supplier invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "d0269586-01ea-49a1-9184-a3db0544abb6",
+              "name": "Supplier invoice deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3521fc6b-0dd7-44d0-bbdb-f685648a986f",
+              "name": "Operation not allowed",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"operation-not-allowed\",\n  \"message\": \"Bokio API only supports deleting supplier invoices that have been added through the API by the same integration.\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7f305c44-a671-4d31-9b93-83e4371bcbfa",
+          "name": "[Preview] Add an upload to a supplier invoice",
+          "request": {
+            "name": "[Preview] Add an upload to a supplier invoice",
+            "description": {
+              "content": "Add an upload to the supplier invoice.\n\n**Scope:** `supplier-invoices:write`\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "companies",
+                ":companyId",
+                "supplier-invoices",
+                ":supplierInvoiceId",
+                "uploads"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "companyId",
+                  "description": "(Required) Unique identifier of the company"
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "supplierInvoiceId",
+                  "description": "(Required) Unique identifier of the supplier invoice"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"id\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ea8990eb-b672-46c3-8cd5-6bee89006116",
+              "name": "Upload added to supplier invoice",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "60c9867b-8364-48f1-a293-af3a98372352",
+              "name": "Validation or operation error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "companies",
+                    ":companyId",
+                    "supplier-invoices",
+                    ":supplierInvoiceId",
+                    "uploads"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "companyId",
+                      "description": "(Required) Unique identifier of the company"
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "supplierInvoiceId",
+                      "description": "(Required) Unique identifier of the supplier invoice"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"id\": \"24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": \"validation-error\",\n  \"message\": \"Missing required information\",\n  \"bokioErrorId\": \"9b408943-7a1e-47ac-85a7-ac52b2c210d3\",\n  \"errors\": [\n    {\n      \"field\": \"#/id\",\n      \"message\": \"The upload id field is required\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.bokio.se/v1",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "75661530-1c04-4c03-8dd7-d6961a1269ee",
+    "name": "Company authorization supplier-invoices API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Bokio Company API containing all resources for company tenant.\n\nContact Support:\n Name: Bokio\n Email: support@bokio.se",
+      "type": "text/plain"
+    }
+  }
+}
