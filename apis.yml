@@ -46,6 +46,16 @@ tags:
 - Payments
 - Sweden
 - SMB
+- Authentication
+tags_raw:
+- Company
+- Fintech
+- Accounting
+- Bookkeeping
+- Invoicing
+- Payments
+- Sweden
+- SMB
 - OAuth
 maintainers:
 - FN: Kin Lane
@@ -59,6 +69,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Authorization
+  tags_raw:
   - authorization
   properties:
   - type: OpenAPI
@@ -69,6 +81,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Bank Payments
+  tags_raw:
   - bank-payments
   properties:
   - type: OpenAPI
@@ -79,6 +93,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Chart of Accounts
+  tags_raw:
   - chart-of-accounts
   properties:
   - type: OpenAPI
@@ -89,6 +105,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Company information
+  tags_raw:
   - company-information
   properties:
   - type: OpenAPI
@@ -99,6 +117,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Connections
+  tags_raw:
   - connections
   properties:
   - type: OpenAPI
@@ -109,6 +129,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Credit Notes
+  tags_raw:
   - credit-notes
   properties:
   - type: OpenAPI
@@ -119,6 +141,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Customers
+  tags_raw:
   - customers
   properties:
   - type: OpenAPI
@@ -129,6 +153,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Fiscal Years
+  tags_raw:
   - fiscal-years
   properties:
   - type: OpenAPI
@@ -139,6 +165,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Invoices
+  tags_raw:
   - invoices
   properties:
   - type: OpenAPI
@@ -149,6 +177,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Item
+  tags_raw:
   - items
   properties:
   - type: OpenAPI
@@ -159,6 +189,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Journal Entries
+  tags_raw:
   - journal-entries
   properties:
   - type: OpenAPI
@@ -179,6 +211,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Supplier Invoices
+  tags_raw:
   - supplier-invoices
   properties:
   - type: OpenAPI
@@ -189,6 +223,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Suppliers
+  tags_raw:
   - suppliers
   properties:
   - type: OpenAPI
@@ -199,6 +235,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Tag Groups
+  tags_raw:
   - tag-groups
   properties:
   - type: OpenAPI
@@ -209,6 +247,8 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
+  - Uploads
+  tags_raw:
   - uploads
   properties:
   - type: OpenAPI
