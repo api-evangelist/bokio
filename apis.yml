@@ -93,7 +93,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Bank Payments
+  - bank-payments
   tags_raw:
   - bank-payments
   properties:
@@ -105,7 +105,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Chart of Accounts
+  - chart-of-accounts
   tags_raw:
   - chart-of-accounts
   properties:
@@ -117,7 +117,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Company information
+  - company-information
   tags_raw:
   - company-information
   properties:
@@ -141,7 +141,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Credit Notes
+  - credit-notes
   tags_raw:
   - credit-notes
   properties:
@@ -165,7 +165,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Fiscal Years
+  - fiscal-years
   tags_raw:
   - fiscal-years
   properties:
@@ -201,7 +201,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Journal Entries
+  - journal-entries
   tags_raw:
   - journal-entries
   properties:
@@ -223,7 +223,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Supplier Invoices
+  - supplier-invoices
   tags_raw:
   - supplier-invoices
   properties:
@@ -247,7 +247,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Tag Groups
+  - tag-groups
   tags_raw:
   - tag-groups
   properties:
@@ -259,7 +259,7 @@ apis:
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
   tags:
-  - Uploads
+  - uploads
   tags_raw:
   - uploads
   properties:
