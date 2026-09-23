@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization invoices API
+  title: Company Invoices API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: invoices
+- name: Invoices
   description: Operations for managing invoices
 paths:
   /companies/{companyId}/invoices:
@@ -30,14 +30,12 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Create an invoice
       description: 'Creates a new draft invoice for the company.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoice
       requestBody:
         description: Post the necessary fields for the API to create a new invoice.
@@ -219,7 +217,7 @@ paths:
         - invoices:write
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get invoices
       description: 'Get all invoices for the company. Use the query parameters to filter and navigate through the results.
 
@@ -227,9 +225,7 @@ paths:
         **Tax reduction:** Personal numbers in `taxReduction.deductionPeople` have the last 4 digits masked when the invoice was created by a different integration. Masked values are returned as `YYYYMMDD-XXXX`.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice
       parameters:
       - name: page
@@ -327,7 +323,7 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get an invoice
       description: 'Retrieve the information of the invoice with the matching invoiceId.
 
@@ -335,9 +331,7 @@ paths:
         **Tax reduction:** Personal numbers in `taxReduction.deductionPeople` have the last 4 digits masked when the invoice was created by a different integration. Masked values are returned as `YYYYMMDD-XXXX`.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoices-invoiceId
       responses:
         '200':
@@ -448,7 +442,7 @@ paths:
         - invoices:read
     put:
       tags:
-      - invoices
+      - Invoices
       summary: Update an invoice
       description: 'Update an existing invoice draft for the company.
 
@@ -464,9 +458,7 @@ paths:
         **Tax reduction:** Only the integration that created the invoice can modify tax reduction data. If a different integration includes `taxReduction` changes in the request, the changes will be silently ignored and the existing tax reduction data will be preserved.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: put-invoice
       requestBody:
         description: Post the necessary fields for the API to update an invoice.
@@ -652,14 +644,12 @@ paths:
         - invoices:write
     delete:
       tags:
-      - invoices
+      - Invoices
       summary: Delete an invoice
       description: 'Deletes the specified invoice. Only invoices in draft status can be deleted.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: delete-invoice-with-id
       security:
       - tokenAuth: []
@@ -700,7 +690,7 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Add an attachment to an invoice
       description: 'Adds an attachment to an existing draft invoice. The attachment will be added last in the list of attachments on the invoice.
 
@@ -720,9 +710,7 @@ paths:
         Dimensions must be less than height of 7016 and width of 4960 in pixels
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoice-attachment
       parameters:
       - name: Content-Type
@@ -794,14 +782,12 @@ paths:
         - invoices:read
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get attachments
       description: 'Retrieve the information of the attachments for the invoice. Use the query parameters to filter and navigate through the results.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice-attachments
       parameters:
       - name: page
@@ -908,14 +894,12 @@ paths:
       example: 240a4af0-edfd-47b1-b4ab-f30450eaac19
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get an attachment
       description: 'Retrieve the information of the attachment with the matching attachmentId.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice-attachment
       responses:
         '200':
@@ -953,7 +937,7 @@ paths:
         - invoices:write
     delete:
       tags:
-      - invoices
+      - Invoices
       summary: Delete an attachment from an invoice
       description: 'Deletes an attachment from an existing draft invoice.
 
@@ -961,9 +945,7 @@ paths:
         **NOTE:** The invoice must be in draft status.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: delete-invoice-attachment
       responses:
         '204':
@@ -1000,14 +982,12 @@ paths:
       example: 240a4af0-edfd-47b1-b4ab-f30450eaac19
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Download an attachment from an invoice
       description: 'Download the attachment with the matching attachmentId.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: download-invoice-attachment
       responses:
         '200':
@@ -1061,7 +1041,7 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Create a credit note
       description: 'Creates a draft credit note for the specified invoice and returns the created credit note draft.
 
@@ -1071,9 +1051,7 @@ paths:
         - Use `POST /credit-notes/{id}/publish` to publish the created credit note.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoices-invoiceId-credit
       responses:
         '200':
@@ -1175,7 +1153,7 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Download an invoice
       description: 'Download the invoice PDF with the matching invoiceId.
 
@@ -1183,9 +1161,7 @@ paths:
         **NOTE:** The invoice must be in published status.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: download-invoice
       responses:
         '200':
@@ -1246,7 +1222,7 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Add a line item to an invoice
       description: 'Adds a line item to an existing draft invoice. The item will be added last in the list of line items on the invoice.
 
@@ -1254,9 +1230,7 @@ paths:
         **NOTE:** The invoice must be in draft status.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoice-lineItem
       requestBody:
         description: Post the necessary fields for the API to add a line item to an invoice.
@@ -1361,14 +1335,12 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Create an invoice payment
       description: 'Creates a new payment record for the specified invoice. Use the bookkeepingAccountNumber field to specify an accounting account other than the default account (1930).
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoice-payment
       requestBody:
         description: Payment information
@@ -1407,14 +1379,12 @@ paths:
         - invoices:write
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get invoice payments
       description: 'Retrieves all payment records for the specified invoice.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice-payments
       parameters:
       - name: page
@@ -1504,14 +1474,12 @@ paths:
       example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get an invoice payment
       description: 'Retrieves a specific payment record for the invoice.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice-payment
       responses:
         '200':
@@ -1532,14 +1500,12 @@ paths:
         - invoices:read
     delete:
       tags:
-      - invoices
+      - Invoices
       summary: Delete an invoice payment
       description: 'Deletes a payment record for the invoice.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: delete-invoice-payment
       responses:
         '204':
@@ -1576,14 +1542,12 @@ paths:
       example: f319cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Record an invoice payment
       description: 'Record an invoice payment.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: record-invoice-payment-with-id
       security:
       - tokenAuth: []
@@ -1650,16 +1614,14 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Publish an invoice
       description: 'Publishes a draft invoice, making it official and ready to be sent to the customer.
 
         Note that invoice will not be automatically emailed to the customer when published through the API.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoices-invoiceId-publish
       responses:
         '200':
@@ -1704,14 +1666,12 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Record an invoice
       description: 'Record an invoice.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: record-invoice-with-id
       security:
       - tokenAuth: []
@@ -1847,7 +1807,7 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Create an invoice settlement
       description: 'Create a settlement for the invoice that will reduce the outstanding amount of the invoice. A negative amount will increase the outstanding amount. For example, in the case of a currency gain.
 
@@ -1861,9 +1821,7 @@ paths:
         > - `paymentServiceFee`
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: post-invoice-settlement
       security:
       - tokenAuth: []
@@ -1919,14 +1877,12 @@ paths:
                 $ref: '#/components/schemas/apiError'
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get invoice settlements
       description: 'Get all settlements for the invoice. Use the query parameters to filter and navigate through the results.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice-settlements
       security:
       - tokenAuth: []
@@ -2022,14 +1978,12 @@ paths:
       example: c529df79-eb7f-5ef0-a8dc-c2b71f953554
     get:
       tags:
-      - invoices
+      - Invoices
       summary: Get an invoice settlement
       description: 'Retrieve the information of the specific settlement with the matching settlementId.
 
 
-        **Scope:** `invoices:read`
-
-        '
+        **Scope:** `invoices:read`'
       operationId: get-invoice-settlement
       security:
       - tokenAuth: []
@@ -2061,14 +2015,12 @@ paths:
                     bokioErrorId: 8d408943-7a1e-47ac-85a7-ac52b2c210d3
     delete:
       tags:
-      - invoices
+      - Invoices
       summary: Delete an invoice settlement
       description: 'Delete an existing settlement.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: delete-invoice-settlement
       security:
       - tokenAuth: []
@@ -2105,14 +2057,12 @@ paths:
       example: b329df79-eb7f-5ef0-a8dc-c2b71f953554
     post:
       tags:
-      - invoices
+      - Invoices
       summary: Record an invoice settlement
       description: 'Record an invoice settlement.
 
 
-        **Scope:** `invoices:write`
-
-        '
+        **Scope:** `invoices:write`'
       operationId: record-invoice-settlement-with-id
       security:
       - tokenAuth: []
@@ -2163,6 +2113,592 @@ paths:
                     bokioErrorId: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
 components:
   schemas:
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    salesInvoiceItem:
+      type: object
+      title: salesItem
+      required:
+      - description
+      - itemType
+      - productType
+      - quantity
+      - unitPrice
+      - taxRate
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Should not be set for new items
+        itemRef:
+          type:
+          - object
+          - 'null'
+          title: itemRef
+          description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
+
+            '
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Reference to existing salesItem id
+              example: 869a69a3-632b-4a09-899e-9dc03342b5dc
+            description:
+              type:
+              - string
+              - 'null'
+              readOnly: true
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - salesItem
+        productType:
+          type: string
+          enum:
+          - goods
+          - services
+        unitType:
+          type: string
+          default: unspecified
+          enum:
+          - unspecified
+          - piece
+          - hour
+          - day
+          - month
+          - kilogram
+          - gram
+          - liter
+          - meter
+          - centimeter
+          - millimeter
+          - meterSquared
+          - meterCubic
+          - mile
+          - kilometer
+          - gigabyte
+          - hectar
+          - words
+          - year
+          - week
+          - minute
+          - megabyte
+          - ton
+        quantity:
+          type: number
+          format: double
+          default: 1
+        unitPrice:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
+        taxReduction:
+          type:
+          - object
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/lineItemTaxReduction'
+          description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
+      example:
+        id: 1
+        itemRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          description: Installation work
+        description: Installation work
+        itemType: salesItem
+        productType: services
+        unitType: hour
+        quantity: 10
+        unitPrice: 500
+        taxRate: 25
+        bookkeepingAccountNumber: 3389
+        taxReduction:
+          taxReductionType: rot
+          jobType: rotConstruction
+    invoiceTaxReductionDeductionPerson:
+      type: object
+      title: invoiceTaxReductionDeductionPerson
+      required:
+      - personalNumber
+      - deductionAmount
+      properties:
+        personalNumber:
+          type: string
+          pattern: ^\d{8}-\d{4}$
+          description: 'Swedish personal number in format YYYYMMDD-XXXX.
+
+
+            When the invoice was created by a different integration, the value is fully masked and returned as `YYYYMMDD-XXXX`.
+
+            '
+        deductionAmount:
+          type: number
+          format: double
+          minimum: 0
+          description: The deduction amount for this person. Must be zero or greater.
+      example:
+        personalNumber: 19850101-1234
+        deductionAmount: 1500
+    creditNote:
+      type: object
+      required:
+      - id
+      - currency
+      - creditDate
+      - dueDate
+      - lineItems
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the credit note
+        invoiceRef:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: The unique identifier of the original invoice
+            invoiceNumber:
+              type: string
+              readOnly: true
+              description: The invoice number of the original invoice
+          description: Reference to the original invoice being credited
+        customerRef:
+          type: object
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+            name:
+              type: string
+              readOnly: true
+        contactDetailRef:
+          type:
+          - object
+          - 'null'
+          readOnly: true
+          properties:
+            id:
+              type:
+              - string
+              - 'null'
+              format: uuid
+              readOnly: true
+            email:
+              type:
+              - string
+              - 'null'
+              readOnly: true
+            phone:
+              type:
+              - string
+              - 'null'
+              readOnly: true
+        invoiceNumber:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+          description: The credit note number
+        orderNumberReference:
+          type:
+          - string
+          - 'null'
+          description: The order number associated with the invoice.
+        projectReference:
+          type:
+          - string
+          - 'null'
+          description: The project reference associated with the credit note.
+        buyerReference:
+          type:
+          - string
+          - 'null'
+          description: The buyer reference associated with the credit note.
+        contractReference:
+          type:
+          - string
+          - 'null'
+          description: The contract reference associated with the credit note.
+        currency:
+          description: ISO 4217 currency code
+          type: string
+          default: SEK
+        currencyRate:
+          type: number
+          format: double
+          default: 1
+        totalAmount:
+          type: number
+          format: double
+          readOnly: true
+        totalTax:
+          type: number
+          format: double
+          readOnly: true
+        paidAmount:
+          type: number
+          format: double
+          readOnly: true
+        status:
+          type: string
+          enum:
+          - draft
+          - published
+          description: The status of the credit note
+          readOnly: true
+        creditDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        publishedDateTime:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: The date when the credit note was published (null for draft)
+          readOnly: true
+        lineItems:
+          type: array
+          items:
+            oneOf:
+            - $ref: '#/components/schemas/invoiceItem'
+        billingAddress:
+          readOnly: true
+          oneOf:
+          - $ref: '#/components/schemas/addressWithCountrySubdivision'
+        deliveryAddress:
+          oneOf:
+          - $ref: '#/components/schemas/address'
+        attachmentRefs:
+          type:
+          - array
+          - 'null'
+          readOnly: true
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+                format: uuid
+                readOnly: true
+              name:
+                type: string
+                readOnly: true
+        journalEntryRef:
+          type:
+          - object
+          - 'null'
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+        metadata:
+          type:
+          - object
+          - 'null'
+          description: 'Metadata fields for the invoice as string key-value pairs. These fields can be used for filtering.All metadata keys must
+
+            start with a letter or underscore and contain only alphanumeric characters and underscores.
+
+            '
+          maxProperties: 10
+          additionalProperties:
+            type: string
+          example:
+            project: Website Redesign
+            department: IT
+            externalId: EXT-INV-2024-001
+      example:
+        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+        status: published
+        invoiceNumber: CN-2024-001
+        invoiceRef:
+          id: a419cf69-db6f-4de9-992c-b1a60942a443
+          invoiceNumber: IN-2024-001
+        customerRef:
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          name: customer 1
+        contactDetailRef:
+          id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
+          email: contact@customer1.com
+          phone: '+46701234567'
+        currency: SEK
+        currencyRate: 1
+        totalAmount: 200
+        totalTax: 50
+        paidAmount: 0
+        creditDate: 2024-10-15
+        dueDate: 2024-11-15
+        publishedDateTime: 2024-10-15 12:00:00
+        projectReference: PROJ-001
+        buyerReference: BUYER-123
+        contractReference: CONTRACT-456
+        lineItems:
+        - id: 1
+          itemRef:
+            id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description: Product 1
+          description: Product 1
+          itemType: salesItem
+          productType: goods
+          quantity: 2
+          unitPrice: 100
+          taxRate: 25
+        billingAddress:
+          line1: Älvsborgsvägen 10
+          line2: null
+          city: Göteborg
+          postalCode: 123 45
+          country: SE
+        deliveryAddress:
+          line1: Delivery Street 15
+          line2: Floor 2
+          city: Stockholm
+          postalCode: 111 11
+          country: SE
+        attachmentRefs:
+        - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+          fileName: myfile.pdf
+        - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
+          fileName: myfile2.pdf
+        journalEntryRef:
+          id: 340a4af0-edfd-47b1-b4ab-f30450eaac19
+        metadata:
+          project: Website Redesign
+          department: IT
+          externalId: EXT-INV-2024-001
+    invoicePayment:
+      type: object
+      title: invoicePayment
+      required:
+      - date
+      - sumBaseCurrency
+      - bookkeepingAccountNumber
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        invoiceId:
+          type: string
+          format: uuid
+          readOnly: true
+        date:
+          type: string
+          format: date
+        sumBaseCurrency:
+          description: The amount of the payment in the base currency. Currently the base currency is always SEK.
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          description: The bookkeeping number of the payment account. The value must match a chart of accounts account number that has a payment account details.
+          type: integer
+          format: int32
+        journalEntryRef:
+          type:
+          - object
+          - 'null'
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+      example:
+        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
+        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+        date: 2024-10-15
+        sumBaseCurrency: 200
+        bookkeepingAccountNumber: 1930
+        journalEntryRef:
+          id: 55c899c5-82b2-4a09-899e-9dc03342b5dc
+    invoiceAttachment:
+      type: object
+      title: invoiceAttachment
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+        invoiceId:
+          type: string
+          format: uuid
+          readOnly: true
+        fileName:
+          type: string
+          readOnly: true
+      example:
+        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+        fileName: myfile.pdf
+    paymentServiceFeeSettlementDetails:
+      type: object
+      required:
+      - date
+      - sumBaseCurrency
+      - vatScheme
+      properties:
+        date:
+          type: string
+          format: date
+          description: The date of the settlement
+        sumBaseCurrency:
+          type: number
+          format: decimal
+          description: The settlement amount in base currency. Must be greater than zero.
+        vatScheme:
+          type: string
+          enum:
+          - domestic
+          - eu
+          - nonEu
+          - vatExempt
+          description: 'The VAT scheme for the payment service fee. Determines how VAT is handled in the bookkeeping.
+
+
+            - `domestic` — No reverse charge VAT. The fee is booked as a domestic expense.
+
+
+            - `eu` — EU reverse charge. The fee is booked with reverse charge VAT (output VAT on account 2645, input VAT on account 2614).
+
+
+            - `nonEu` — Non-EU reverse charge. Same VAT treatment as EU but booked to a different expense account.
+
+
+            - `vatExempt` — VAT exempt. The fee is booked as a general administrative expense with no VAT.
+
+            '
+      example:
+        date: 2024-10-15
+        sumBaseCurrency: 25
+        vatScheme: eu
+    standardSettlementDetails:
+      type: object
+      additionalProperties: false
+      required:
+      - date
+      - sumBaseCurrency
+      properties:
+        date:
+          type: string
+          format: date
+          description: The date of the settlement
+        sumBaseCurrency:
+          type: number
+          format: decimal
+          description: The settlement amount in base currency
+      example:
+        date: 2024-10-15
+        sumBaseCurrency: 15.5
+    invoiceSettlementRead:
+      type: object
+      readOnly: true
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The unique identifier of the settlement
+          readOnly: true
+        invoiceId:
+          type: string
+          format: uuid
+          description: The unique identifier of the invoice this settlement belongs to
+          readOnly: true
+        type:
+          type: string
+          readOnly: true
+          enum:
+          - currency
+          - bankFee
+          - badDebt
+          - balanceAdjustment
+          - paymentServiceFee
+          description: 'The type of the settlement.
+
+
+            - Currency adjustments are for changes in exchange rates. Currency gain or currency loss is reflected in `sumBaseCurrency` being positive or negative respectively.
+
+
+            - Bank fees are for charges from banks or payment providers.
+
+
+            - Bad debts are for uncollectible invoices.
+
+
+            - Balance adjustments are for correcting discrepancies on invoices without affecting bookkeeping.
+
+
+            - Payment service fees are for charges from payment service providers (e.g. Stripe). Available for Swedish companies only. Supports different VAT schemes for domestic, EU, non-EU, and VAT-exempt transactions.
+
+            '
+        invoiceSettlementDetails:
+          oneOf:
+          - $ref: '#/components/schemas/standardSettlementDetails'
+          - $ref: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          discriminator:
+            propertyName: reason
+            mapping:
+              currency: '#/components/schemas/standardSettlementDetails'
+              bankFee: '#/components/schemas/standardSettlementDetails'
+              badDebt: '#/components/schemas/standardSettlementDetails'
+              balanceAdjustment: '#/components/schemas/standardSettlementDetails'
+              paymentServiceFee: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          description: The settlement details specific to the settlement type
+        journalEntryRef:
+          type:
+          - object
+          - 'null'
+          readOnly: true
+          properties:
+            id:
+              type: string
+              format: uuid
+              readOnly: true
+      example:
+        id: c529df79-eb7f-5ef0-a8dc-c2b71f953554
+        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
+        type: bankFee
+        invoiceSettlementDetails:
+          date: 2024-10-15
+          sumBaseCurrency: 15.5
+        journalEntryRef:
+          id: 55c899c5-82b2-4a09-899e-9dc03342b5dc
     invoice:
       type: object
       title: invoice
@@ -2191,46 +2727,56 @@ components:
               type: string
               readOnly: true
         contactDetailRef:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           properties:
             id:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uuid
-              nullable: true
             email:
-              type: string
+              type:
+              - string
+              - 'null'
               readOnly: true
-              nullable: true
             phone:
-              type: string
+              type:
+              - string
+              - 'null'
               readOnly: true
-              nullable: true
         invoiceNumber:
-          type: string
+          type:
+          - string
+          - 'null'
           readOnly: true
-          nullable: true
           description: The invoice number will be generated at the time of publishing the invoice.
         paymentReference:
-          type: string
+          type:
+          - string
+          - 'null'
           readOnly: true
-          nullable: true
           description: The payment reference (OCR number) for the invoice. Populated when the invoice is published, null for drafts.
         orderNumberReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The order number associated with the invoice.
         projectReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The project reference associated with the invoice.
         buyerReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The buyer reference associated with the invoice.
         contractReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The contract reference associated with the invoice.
         currency:
           description: ISO 4217 currency code
@@ -2273,10 +2819,11 @@ components:
           format: date
           description: 'The due date for the invoice. Optional — when omitted, it is automatically calculated using the fallback chain: customer payment terms → company payment terms → 30 days from the invoice date.'
         publishedDateTime:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           description: The date when the credit note was published (null for draft)
-          nullable: true
         lineItems:
           type: array
           items:
@@ -2290,8 +2837,9 @@ components:
           oneOf:
           - $ref: '#/components/schemas/address'
         taxReduction:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           allOf:
           - $ref: '#/components/schemas/invoiceTaxReduction'
         attachmentRefs:
@@ -2308,18 +2856,20 @@ components:
                 type: string
                 readOnly: true
         journalEntryRef:
-          type: object
+          type:
+          - object
+          - 'null'
           readOnly: true
-          nullable: true
           properties:
             id:
               type: string
               format: uuid
               readOnly: true
         creditNoteRefs:
-          type: array
+          type:
+          - array
+          - 'null'
           readOnly: true
-          nullable: true
           items:
             type: object
             properties:
@@ -2427,6 +2977,152 @@ components:
           project: Website Redesign
           department: IT
           externalId: EXT-INV-2024-001
+    invoiceTaxReduction:
+      type:
+      - object
+      - 'null'
+      title: invoiceTaxReduction
+      description: 'Tax reduction details for the invoice.
+
+
+        **Ownership restriction:** Only the integration that created the invoice can manage tax reduction data. Other integrations can read tax reduction data, but personal numbers will be masked (see `personalNumber`).
+
+        '
+      required:
+      - type
+      - description
+      - deductionPeople
+      properties:
+        type:
+          type: string
+          enum:
+          - rot
+          - rut
+          description: The tax reduction type.
+        description:
+          type: string
+          description: Description of the tax reduction work performed.
+        propertyType:
+          type:
+          - string
+          - 'null'
+          enum:
+          - realEstate
+          - housingDesignation
+          description: Required when type is `rot`. The type of property where the work is performed.
+        realEstateNumber:
+          type:
+          - string
+          - 'null'
+          description: Required when propertyType is `realEstate`. The real estate designation number.
+        tenantOrgNumber:
+          type:
+          - string
+          - 'null'
+          description: Required when propertyType is `housingDesignation`. The organisational number of the housing association (BRF).
+        apartmentNumber:
+          type:
+          - string
+          - 'null'
+          description: Required when propertyType is `housingDesignation`. The apartment number within the housing association.
+        deductionAmount:
+          type: number
+          format: double
+          readOnly: true
+          description: The total deduction amount calculated from all deduction people.
+        status:
+          type: string
+          readOnly: true
+          enum:
+          - draft
+          - awaitingPayment
+          - readyToSubmit
+          - submitted
+          - removed
+          - completed
+          description: The current status of the tax reduction.
+        deductionPeople:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/invoiceTaxReductionDeductionPerson'
+          description: The people eligible for the tax deduction. At least one person is required.
+      example:
+        type: rot
+        description: Bathroom renovation
+        propertyType: housingDesignation
+        tenantOrgNumber: '7164009068'
+        apartmentNumber: '1001'
+        deductionAmount: 1500
+        status: draft
+        deductionPeople:
+        - personalNumber: 19850101-1234
+          deductionAmount: 1500
+    addressWithCountrySubdivision:
+      type: object
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type:
+          - string
+          - 'null'
+      example:
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
+    invoiceItem:
+      type: object
+      title: lineItem
+      oneOf:
+      - $ref: '#/components/schemas/salesInvoiceItem'
+      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
+    address:
+      type: object
+      title: address
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+      example:
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
     apiError:
       type: object
       title: apiError
@@ -2447,319 +3143,10 @@ components:
                 type: string
               message:
                 type: string
-    addressWithCountrySubdivision:
-      type: object
-      title: addressWithCountrySubdivision
-      required:
-      - line1
-      - city
-      - postalCode
-      - country
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-        countrySubdivision:
-          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
-          type: string
-          nullable: true
-      example:
-        line1: 10 Downing Street
-        line2: null
-        city: London
-        postalCode: SW1A 2AA
-        country: GB
-        countrySubdivision: ENG
-    invoiceSettlementRead:
-      type: object
-      readOnly: true
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier of the settlement
-          readOnly: true
-        invoiceId:
-          type: string
-          format: uuid
-          description: The unique identifier of the invoice this settlement belongs to
-          readOnly: true
-        type:
-          type: string
-          readOnly: true
-          enum:
-          - currency
-          - bankFee
-          - badDebt
-          - balanceAdjustment
-          - paymentServiceFee
-          description: 'The type of the settlement.
-
-
-            - Currency adjustments are for changes in exchange rates. Currency gain or currency loss is reflected in `sumBaseCurrency` being positive or negative respectively.
-
-
-            - Bank fees are for charges from banks or payment providers.
-
-
-            - Bad debts are for uncollectible invoices.
-
-
-            - Balance adjustments are for correcting discrepancies on invoices without affecting bookkeeping.
-
-
-            - Payment service fees are for charges from payment service providers (e.g. Stripe). Available for Swedish companies only. Supports different VAT schemes for domestic, EU, non-EU, and VAT-exempt transactions.
-
-            '
-        invoiceSettlementDetails:
-          oneOf:
-          - $ref: '#/components/schemas/standardSettlementDetails'
-          - $ref: '#/components/schemas/paymentServiceFeeSettlementDetails'
-          discriminator:
-            propertyName: reason
-            mapping:
-              currency: '#/components/schemas/standardSettlementDetails'
-              bankFee: '#/components/schemas/standardSettlementDetails'
-              badDebt: '#/components/schemas/standardSettlementDetails'
-              balanceAdjustment: '#/components/schemas/standardSettlementDetails'
-              paymentServiceFee: '#/components/schemas/paymentServiceFeeSettlementDetails'
-          description: The settlement details specific to the settlement type
-        journalEntryRef:
-          type: object
-          nullable: true
-          readOnly: true
-          properties:
-            id:
-              type: string
-              format: uuid
-              readOnly: true
-      example:
-        id: c529df79-eb7f-5ef0-a8dc-c2b71f953554
-        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
-        type: bankFee
-        invoiceSettlementDetails:
-          date: 2024-10-15
-          sumBaseCurrency: 15.5
-        journalEntryRef:
-          id: 55c899c5-82b2-4a09-899e-9dc03342b5dc
-    paymentServiceFeeSettlementDetails:
-      type: object
-      required:
-      - date
-      - sumBaseCurrency
-      - vatScheme
-      properties:
-        date:
-          type: string
-          format: date
-          description: The date of the settlement
-        sumBaseCurrency:
-          type: number
-          format: decimal
-          description: The settlement amount in base currency. Must be greater than zero.
-        vatScheme:
-          type: string
-          enum:
-          - domestic
-          - eu
-          - nonEu
-          - vatExempt
-          description: 'The VAT scheme for the payment service fee. Determines how VAT is handled in the bookkeeping.
-
-
-            - `domestic` — No reverse charge VAT. The fee is booked as a domestic expense.
-
-
-            - `eu` — EU reverse charge. The fee is booked with reverse charge VAT (output VAT on account 2645, input VAT on account 2614).
-
-
-            - `nonEu` — Non-EU reverse charge. Same VAT treatment as EU but booked to a different expense account.
-
-
-            - `vatExempt` — VAT exempt. The fee is booked as a general administrative expense with no VAT.
-
-            '
-      example:
-        date: 2024-10-15
-        sumBaseCurrency: 25
-        vatScheme: eu
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-    invoiceSettlementWrite:
-      type: object
-      required:
-      - type
-      - invoiceSettlementDetails
-      properties:
-        type:
-          type: string
-          enum:
-          - currency
-          - bankFee
-          - paymentServiceFee
-          description: 'The type of the settlement.
-
-
-            - Currency adjustments are for changes in exchange rates. Currency gain or currency loss is reflected in `sumBaseCurrency` being positive or negative respectively.
-
-
-            - Bank fees are for charges from banks or payment providers.
-
-
-            - Payment service fees are for charges from payment service providers (e.g. Stripe). Available for Swedish companies only. Requires `vatScheme` in the settlement details.
-
-            '
-        invoiceSettlementDetails:
-          oneOf:
-          - $ref: '#/components/schemas/standardSettlementDetails'
-          - $ref: '#/components/schemas/paymentServiceFeeSettlementDetails'
-          discriminator:
-            propertyName: reason
-            mapping:
-              currency: '#/components/schemas/standardSettlementDetails'
-              bankFee: '#/components/schemas/standardSettlementDetails'
-              paymentServiceFee: '#/components/schemas/paymentServiceFeeSettlementDetails'
-          description: The settlement details specific to the settlement type
-      example:
-        type: bankFee
-        invoiceSettlementDetails:
-          date: 2024-10-15
-          sumBaseCurrency: 15.5
-    salesInvoiceItem:
-      type: object
-      title: salesItem
-      required:
-      - description
-      - itemType
-      - productType
-      - quantity
-      - unitPrice
-      - taxRate
-      properties:
-        id:
-          type: integer
-          format: int64
-          nullable: true
-          description: Should not be set for new items
-        itemRef:
-          type: object
-          title: itemRef
-          nullable: true
-          description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
-
-            '
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Reference to existing salesItem id
-              example: 869a69a3-632b-4a09-899e-9dc03342b5dc
-            description:
-              type: string
-              nullable: true
-              readOnly: true
-        description:
-          type: string
-        itemType:
-          type: string
-          enum:
-          - salesItem
-        productType:
-          type: string
-          enum:
-          - goods
-          - services
-        unitType:
-          type: string
-          default: unspecified
-          enum:
-          - unspecified
-          - piece
-          - hour
-          - day
-          - month
-          - kilogram
-          - gram
-          - liter
-          - meter
-          - centimeter
-          - millimeter
-          - meterSquared
-          - meterCubic
-          - mile
-          - kilometer
-          - gigabyte
-          - hectar
-          - words
-          - year
-          - week
-          - minute
-          - megabyte
-          - ton
-        quantity:
-          type: number
-          format: double
-          default: 1
-        unitPrice:
-          type: number
-          format: double
-        taxRate:
-          type: number
-          format: double
-        bookkeepingAccountNumber:
-          type: integer
-          nullable: true
-          format: int32
-          description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
-        taxReduction:
-          type: object
-          nullable: true
-          allOf:
-          - $ref: '#/components/schemas/lineItemTaxReduction'
-          description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
-      example:
-        id: 1
-        itemRef:
-          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
-          description: Installation work
-        description: Installation work
-        itemType: salesItem
-        productType: services
-        unitType: hour
-        quantity: 10
-        unitPrice: 500
-        taxRate: 25
-        bookkeepingAccountNumber: 3389
-        taxReduction:
-          taxReductionType: rot
-          jobType: rotConstruction
     lineItemTaxReduction:
-      type: object
-      nullable: true
+      type:
+      - object
+      - 'null'
       title: lineItemTaxReduction
       description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
 
@@ -2807,230 +3194,6 @@ components:
       example:
         taxReductionType: rot
         jobType: rotConstruction
-    creditNote:
-      type: object
-      required:
-      - id
-      - currency
-      - creditDate
-      - dueDate
-      - lineItems
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: The unique identifier of the credit note
-        invoiceRef:
-          type: object
-          readOnly: true
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: The unique identifier of the original invoice
-            invoiceNumber:
-              type: string
-              readOnly: true
-              description: The invoice number of the original invoice
-          description: Reference to the original invoice being credited
-        customerRef:
-          type: object
-          readOnly: true
-          properties:
-            id:
-              type: string
-              format: uuid
-              readOnly: true
-            name:
-              type: string
-              readOnly: true
-        contactDetailRef:
-          type: object
-          nullable: true
-          readOnly: true
-          properties:
-            id:
-              type: string
-              format: uuid
-              readOnly: true
-              nullable: true
-            email:
-              type: string
-              readOnly: true
-              nullable: true
-            phone:
-              type: string
-              readOnly: true
-              nullable: true
-        invoiceNumber:
-          type: string
-          readOnly: true
-          nullable: true
-          description: The credit note number
-        orderNumberReference:
-          type: string
-          nullable: true
-          description: The order number associated with the invoice.
-        projectReference:
-          type: string
-          nullable: true
-          description: The project reference associated with the credit note.
-        buyerReference:
-          type: string
-          nullable: true
-          description: The buyer reference associated with the credit note.
-        contractReference:
-          type: string
-          nullable: true
-          description: The contract reference associated with the credit note.
-        currency:
-          description: ISO 4217 currency code
-          type: string
-          default: SEK
-        currencyRate:
-          type: number
-          format: double
-          default: 1
-        totalAmount:
-          type: number
-          format: double
-          readOnly: true
-        totalTax:
-          type: number
-          format: double
-          readOnly: true
-        paidAmount:
-          type: number
-          format: double
-          readOnly: true
-        status:
-          type: string
-          enum:
-          - draft
-          - published
-          description: The status of the credit note
-          readOnly: true
-        creditDate:
-          type: string
-          format: date
-        dueDate:
-          type: string
-          format: date
-        publishedDateTime:
-          type: string
-          nullable: true
-          format: date-time
-          description: The date when the credit note was published (null for draft)
-          readOnly: true
-        lineItems:
-          type: array
-          items:
-            oneOf:
-            - $ref: '#/components/schemas/invoiceItem'
-        billingAddress:
-          readOnly: true
-          oneOf:
-          - $ref: '#/components/schemas/addressWithCountrySubdivision'
-        deliveryAddress:
-          oneOf:
-          - $ref: '#/components/schemas/address'
-        attachmentRefs:
-          type: array
-          readOnly: true
-          nullable: true
-          items:
-            type: object
-            properties:
-              id:
-                type: string
-                format: uuid
-                readOnly: true
-              name:
-                type: string
-                readOnly: true
-        journalEntryRef:
-          type: object
-          readOnly: true
-          nullable: true
-          properties:
-            id:
-              type: string
-              format: uuid
-              readOnly: true
-        metadata:
-          type: object
-          nullable: true
-          description: 'Metadata fields for the invoice as string key-value pairs. These fields can be used for filtering.All metadata keys must
-
-            start with a letter or underscore and contain only alphanumeric characters and underscores.
-
-            '
-          maxProperties: 10
-          additionalProperties:
-            type: string
-          example:
-            project: Website Redesign
-            department: IT
-            externalId: EXT-INV-2024-001
-      example:
-        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
-        status: published
-        invoiceNumber: CN-2024-001
-        invoiceRef:
-          id: a419cf69-db6f-4de9-992c-b1a60942a443
-          invoiceNumber: IN-2024-001
-        customerRef:
-          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
-          name: customer 1
-        contactDetailRef:
-          id: d3b07384-d9a0-4c9b-8b3a-6e1f2a5c8d4e
-          email: contact@customer1.com
-          phone: '+46701234567'
-        currency: SEK
-        currencyRate: 1
-        totalAmount: 200
-        totalTax: 50
-        paidAmount: 0
-        creditDate: 2024-10-15
-        dueDate: 2024-11-15
-        publishedDateTime: 2024-10-15 12:00:00
-        projectReference: PROJ-001
-        buyerReference: BUYER-123
-        contractReference: CONTRACT-456
-        lineItems:
-        - id: 1
-          itemRef:
-            id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
-            description: Product 1
-          description: Product 1
-          itemType: salesItem
-          productType: goods
-          quantity: 2
-          unitPrice: 100
-          taxRate: 25
-        billingAddress:
-          line1: Älvsborgsvägen 10
-          line2: null
-          city: Göteborg
-          postalCode: 123 45
-          country: SE
-        deliveryAddress:
-          line1: Delivery Street 15
-          line2: Floor 2
-          city: Stockholm
-          postalCode: 111 11
-          country: SE
-        attachmentRefs:
-        - id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
-          fileName: myfile.pdf
-        - id: 94a8f806-8493-40f6-9d5b-0495c84f8ab9
-          fileName: myfile2.pdf
-        journalEntryRef:
-          id: 340a4af0-edfd-47b1-b4ab-f30450eaac19
-        metadata:
-          project: Website Redesign
-          department: IT
-          externalId: EXT-INV-2024-001
     descriptionOnlyInvoiceItem:
       type: object
       title: descriptionOnlyItem
@@ -3039,13 +3202,15 @@ components:
       - itemType
       properties:
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Should not be set for new items
         itemRef:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
 
             '
@@ -3056,8 +3221,9 @@ components:
               description: Reference to existing descriptionOnlyItem id
               example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
             description:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               readOnly: true
         description:
           type: string
@@ -3072,216 +3238,46 @@ components:
           description: Custom description line
         description: Custom description line
         itemType: descriptionOnlyItem
-    address:
+    invoiceSettlementWrite:
       type: object
-      title: address
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-      example:
-        line1: Delivery Street 15
-        line2: Floor 2
-        city: Stockholm
-        postalCode: 123 45
-        country: SE
-    invoicePayment:
-      type: object
-      title: invoicePayment
-      required:
-      - date
-      - sumBaseCurrency
-      - bookkeepingAccountNumber
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        invoiceId:
-          type: string
-          format: uuid
-          readOnly: true
-        date:
-          type: string
-          format: date
-        sumBaseCurrency:
-          description: The amount of the payment in the base currency. Currently the base currency is always SEK.
-          type: number
-          format: double
-        bookkeepingAccountNumber:
-          description: The bookkeeping number of the payment account. The value must match a chart of accounts account number that has a payment account details.
-          type: integer
-          format: int32
-        journalEntryRef:
-          type: object
-          nullable: true
-          readOnly: true
-          properties:
-            id:
-              type: string
-              format: uuid
-              readOnly: true
-      example:
-        id: b529df79-eb7f-5ef0-a8dc-c2b71f953554
-        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
-        date: 2024-10-15
-        sumBaseCurrency: 200
-        bookkeepingAccountNumber: 1930
-        journalEntryRef:
-          id: 55c899c5-82b2-4a09-899e-9dc03342b5dc
-    invoiceAttachment:
-      type: object
-      title: invoiceAttachment
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-        invoiceId:
-          type: string
-          format: uuid
-          readOnly: true
-        fileName:
-          type: string
-          readOnly: true
-      example:
-        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
-        invoiceId: a419cf69-db6f-4de9-992c-b1a60942a443
-        fileName: myfile.pdf
-    standardSettlementDetails:
-      type: object
-      additionalProperties: false
-      required:
-      - date
-      - sumBaseCurrency
-      properties:
-        date:
-          type: string
-          format: date
-          description: The date of the settlement
-        sumBaseCurrency:
-          type: number
-          format: decimal
-          description: The settlement amount in base currency
-      example:
-        date: 2024-10-15
-        sumBaseCurrency: 15.5
-    invoiceItem:
-      type: object
-      title: lineItem
-      oneOf:
-      - $ref: '#/components/schemas/salesInvoiceItem'
-      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
-    invoiceTaxReduction:
-      type: object
-      nullable: true
-      title: invoiceTaxReduction
-      description: 'Tax reduction details for the invoice.
-
-
-        **Ownership restriction:** Only the integration that created the invoice can manage tax reduction data. Other integrations can read tax reduction data, but personal numbers will be masked (see `personalNumber`).
-
-        '
       required:
       - type
-      - description
-      - deductionPeople
+      - invoiceSettlementDetails
       properties:
         type:
           type: string
           enum:
-          - rot
-          - rut
-          description: The tax reduction type.
-        description:
-          type: string
-          description: Description of the tax reduction work performed.
-        propertyType:
-          type: string
-          nullable: true
-          enum:
-          - realEstate
-          - housingDesignation
-          description: Required when type is `rot`. The type of property where the work is performed.
-        realEstateNumber:
-          type: string
-          nullable: true
-          description: Required when propertyType is `realEstate`. The real estate designation number.
-        tenantOrgNumber:
-          type: string
-          nullable: true
-          description: Required when propertyType is `housingDesignation`. The organisational number of the housing association (BRF).
-        apartmentNumber:
-          type: string
-          nullable: true
-          description: Required when propertyType is `housingDesignation`. The apartment number within the housing association.
-        deductionAmount:
-          type: number
-          format: double
-          readOnly: true
-          description: The total deduction amount calculated from all deduction people.
-        status:
-          type: string
-          readOnly: true
-          enum:
-          - draft
-          - awaitingPayment
-          - readyToSubmit
-          - submitted
-          - removed
-          - completed
-          description: The current status of the tax reduction.
-        deductionPeople:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/invoiceTaxReductionDeductionPerson'
-          description: The people eligible for the tax deduction. At least one person is required.
-      example:
-        type: rot
-        description: Bathroom renovation
-        propertyType: housingDesignation
-        tenantOrgNumber: '7164009068'
-        apartmentNumber: '1001'
-        deductionAmount: 1500
-        status: draft
-        deductionPeople:
-        - personalNumber: 19850101-1234
-          deductionAmount: 1500
-    invoiceTaxReductionDeductionPerson:
-      type: object
-      title: invoiceTaxReductionDeductionPerson
-      required:
-      - personalNumber
-      - deductionAmount
-      properties:
-        personalNumber:
-          type: string
-          pattern: ^\d{8}-\d{4}$
-          description: 'Swedish personal number in format YYYYMMDD-XXXX.
+          - currency
+          - bankFee
+          - paymentServiceFee
+          description: 'The type of the settlement.
 
 
-            When the invoice was created by a different integration, the value is fully masked and returned as `YYYYMMDD-XXXX`.
+            - Currency adjustments are for changes in exchange rates. Currency gain or currency loss is reflected in `sumBaseCurrency` being positive or negative respectively.
+
+
+            - Bank fees are for charges from banks or payment providers.
+
+
+            - Payment service fees are for charges from payment service providers (e.g. Stripe). Available for Swedish companies only. Requires `vatScheme` in the settlement details.
 
             '
-        deductionAmount:
-          type: number
-          format: double
-          minimum: 0
-          description: The deduction amount for this person. Must be zero or greater.
+        invoiceSettlementDetails:
+          oneOf:
+          - $ref: '#/components/schemas/standardSettlementDetails'
+          - $ref: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          discriminator:
+            propertyName: reason
+            mapping:
+              currency: '#/components/schemas/standardSettlementDetails'
+              bankFee: '#/components/schemas/standardSettlementDetails'
+              paymentServiceFee: '#/components/schemas/paymentServiceFeeSettlementDetails'
+          description: The settlement details specific to the settlement type
       example:
-        personalNumber: 19850101-1234
-        deductionAmount: 1500
+        type: bankFee
+        invoiceSettlementDetails:
+          date: 2024-10-15
+          sumBaseCurrency: 15.5
   securitySchemes:
     tokenAuth:
       type: http

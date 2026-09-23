@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization company-information API
+  title: Company Information API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: company-information
+- name: Company Information
   description: Operations for managing company information
 paths:
   /companies/{companyId}/company-information:
@@ -30,14 +30,12 @@ paths:
         example: 9b408943-7a1e-47ac-85a7-ac52b2c210d3
     get:
       tags:
-      - company-information
+      - Company Information
       summary: Retrieve company information
       description: 'Retrieve the information of the company.
 
 
-        **Scope:** `company-information:read`
-
-        '
+        **Scope:** `company-information:read`'
       operationId: get-company-information-with-id
       responses:
         '200':
@@ -63,6 +61,30 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    address:
+      type: object
+      title: address
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+      example:
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
     apiError:
       type: object
       title: apiError
@@ -136,29 +158,6 @@ components:
           city: Göteborg
           postalCode: 123 45
           country: SE
-    address:
-      type: object
-      title: address
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-      example:
-        line1: Delivery Street 15
-        line2: Floor 2
-        city: Stockholm
-        postalCode: 123 45
-        country: SE
   securitySchemes:
     tokenAuth:
       type: http

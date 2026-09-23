@@ -1,29 +1,13 @@
 {
   "provider": "bokio",
   "sources": [
-    "bokio-authorization-api-openapi.yml",
-    "bokio-bank-payments-api-openapi.yml",
-    "bokio-chart-of-accounts-api-openapi.yml",
-    "bokio-company-information-api-openapi.yml",
-    "bokio-connections-api-openapi.yml",
-    "bokio-credit-notes-api-openapi.yml",
-    "bokio-customers-api-openapi.yml",
-    "bokio-fiscal-years-api-openapi.yml",
-    "bokio-invoices-api-openapi.yml",
-    "bokio-items-api-openapi.yml",
-    "bokio-journal-entries-api-openapi.yml",
-    "bokio-sie-files-api-openapi.yml",
-    "bokio-supplier-invoices-api-openapi.yml",
-    "bokio-suppliers-api-openapi.yml",
-    "bokio-tag-groups-api-openapi.yml",
-    "bokio-uploads-api-openapi.yml"
+    "_original/bokio-company-api-openapi.yml",
+    "_original/bokio-general-api-openapi.yml"
   ],
   "outputs": [
-    "bokio-authorization-api-openapi.yml",
     "bokio-bank-payments-api-openapi.yml",
     "bokio-chart-of-accounts-api-openapi.yml",
     "bokio-company-information-api-openapi.yml",
-    "bokio-connections-api-openapi.yml",
     "bokio-credit-notes-api-openapi.yml",
     "bokio-customers-api-openapi.yml",
     "bokio-fiscal-years-api-openapi.yml",
@@ -34,11 +18,35 @@
     "bokio-supplier-invoices-api-openapi.yml",
     "bokio-suppliers-api-openapi.yml",
     "bokio-tag-groups-api-openapi.yml",
-    "bokio-uploads-api-openapi.yml"
+    "bokio-uploads-api-openapi.yml",
+    "bokio-authorization-api-openapi.yml",
+    "bokio-connections-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "bokio-company-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "bokio-general-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "bokio-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-bank-payments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-chart-of-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-company-information-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-credit-notes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-customers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-fiscal-years-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-items-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-journal-entries-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-sie-files-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-supplier-invoices-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-suppliers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-tag-groups-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "bokio-uploads-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

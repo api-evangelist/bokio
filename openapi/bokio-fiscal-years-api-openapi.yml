@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization fiscal-years API
+  title: Company Fiscal Years API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: fiscal-years
+- name: Fiscal Years
   description: Operations for managing fiscal years
 paths:
   /companies/{companyId}/fiscal-years:
@@ -30,15 +30,12 @@ paths:
         example: 123e4567-e89b-12d3-a456-426614174000
     get:
       tags:
-      - fiscal-years
+      - Fiscal Years
       summary: Get fiscal years
       description: 'Get all fiscal years for the company. Use the query parameters to filter and navigate through the results.
 
 
-
-        **Scope:** `fiscal-years:read`
-
-        '
+        **Scope:** `fiscal-years:read`'
       operationId: get-fiscal-years
       parameters:
       - name: page
@@ -117,14 +114,12 @@ paths:
         example: fd5cf0c4-d68f-48d7-b01d-ed478c268d9e
     get:
       tags:
-      - fiscal-years
+      - Fiscal Years
       summary: Get a fiscal year
       description: 'Retrieve the information of the fiscal year with the matching fiscalYearId
 
 
-        **Scope:** `fiscal-years:read`
-
-        '
+        **Scope:** `fiscal-years:read`'
       operationId: get-fiscal-year-with-id
       responses:
         '200':
@@ -150,42 +145,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     fiscalYear:
       title: Fiscal Year
       type: object
@@ -225,6 +184,42 @@ components:
         endDate: 2023-12-31
         accountingMethod: accrual
         status: open
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   securitySchemes:
     tokenAuth:
       type: http

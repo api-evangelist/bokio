@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization items API
+  title: Company Items API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: items
+- name: Items
   description: Operations for managing inventory items
 paths:
   /companies/{companyId}/items:
@@ -30,14 +30,12 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     post:
       tags:
-      - items
+      - Items
       summary: Create an item
       description: 'Creates a new item for the company.
 
 
-        **Scope:** `items:write`
-
-        '
+        **Scope:** `items:write`'
       operationId: post-item
       requestBody:
         description: Post the necessary fields for the API to create a new item.
@@ -98,14 +96,12 @@ paths:
       - tokenAuth: []
     get:
       tags:
-      - items
+      - Items
       summary: Get items
       description: 'Get all items for the company. Use the query parameters to filter and navigate through the results.
 
 
-        **Scope:** `items:read`
-
-        '
+        **Scope:** `items:read`'
       operationId: get-items
       parameters:
       - name: page
@@ -188,14 +184,12 @@ paths:
       example: 83e3d68a-cfbc-46e4-9fe6-f0fc6d739672
     get:
       tags:
-      - items
+      - Items
       summary: Get an item
       description: 'Retrieve the information of the item with the matching itemId.
 
 
-        **Scope:** `items:read`
-
-        '
+        **Scope:** `items:read`'
       operationId: get-items-itemId
       responses:
         '200':
@@ -232,14 +226,12 @@ paths:
       - tokenAuth: []
     put:
       tags:
-      - items
+      - Items
       summary: Update an item
       description: 'Update an existing item for the company.
 
 
-        **Scope:** `items:write`
-
-        '
+        **Scope:** `items:write`'
       operationId: put-item
       requestBody:
         description: Post the necessary fields for the API to update an Item.
@@ -301,14 +293,12 @@ paths:
       - tokenAuth: []
     delete:
       tags:
-      - items
+      - Items
       summary: Delete an item
       description: 'Delete an existing item for the company.
 
 
-        **Scope:** `items:write`
-
-        '
+        **Scope:** `items:write`'
       operationId: delete-item
       responses:
         '204':
@@ -317,26 +307,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     pagedResponse:
       type: object
       title: pagedResponse
@@ -371,9 +341,10 @@ components:
       - taxRate
       properties:
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Should not be set for new items
         description:
           type: string
@@ -421,9 +392,10 @@ components:
           type: number
           format: double
         bookkeepingAccountNumber:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           description: The bookkeeping account number for this item. If not set, the account will be automatically selected based on the item productType, taxRate, customer and company settings.
       example:
         id: fc967153-1f8a-48d0-b773-fe3e61978263
@@ -442,9 +414,10 @@ components:
       - itemType
       properties:
         id:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           description: Should not be set for new items
         description:
           type: string
@@ -456,6 +429,26 @@ components:
         id: bd34bd41-d13b-434d-858e-092231d6228a
         description: Custom description line
         itemType: descriptionOnlyItem
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   securitySchemes:
     tokenAuth:
       type: http

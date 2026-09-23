@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization bank-payments API
+  title: Company Bank Payments API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -39,9 +39,7 @@ paths:
         This is different from the transactions imported through a connected bank in Bokio.
 
 
-        **Scope:** `bank-payments:write`
-
-        '
+        **Scope:** `bank-payments:write`'
       operationId: post-bank-payment
       requestBody:
         description: Post the necessary fields for the API to create a new bank payment.
@@ -216,9 +214,7 @@ paths:
       description: 'Retrieve the information of the bank payment with the matching bankPaymentId.
 
 
-        **Scope:** `bank-payments:read-limited`
-
-        '
+        **Scope:** `bank-payments:read-limited`'
       operationId: get-bank-payments-bank-payment-id
       responses:
         '200':
@@ -276,9 +272,7 @@ paths:
         The operation is atomic — if any payment fails validation, no payments are created.
 
 
-        **Scope:** `bank-payments:write`
-
-        '
+        **Scope:** `bank-payments:write`'
       operationId: post-bank-payments-bulk
       requestBody:
         description: List of bank payments to create.
@@ -375,26 +369,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     pagedResponse:
       type: object
       title: pagedResponse
@@ -411,6 +385,30 @@ components:
           type: integer
           format: int32
           example: 1
+    transferRecipient:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+          - transfer
+        recipientName:
+          type: string
+          description: Name of the payment recipient
+        recipientReference:
+          type: string
+          description: Reference for the payment recipient
+        clearingNumber:
+          type: string
+          description: Clearing number (required for Transfer payments)
+        accountNumber:
+          type: string
+          description: Account number (required for Transfer payments)
+      required:
+      - kind
+      - recipientName
+      - clearingNumber
+      - accountNumber
     bankgiroRecipient:
       type: object
       properties:
@@ -446,30 +444,26 @@ components:
             $ref: '#/components/schemas/bank-payment'
       required:
       - payments
-    transferRecipient:
+    apiError:
       type: object
+      title: apiError
       properties:
-        kind:
+        code:
           type: string
-          enum:
-          - transfer
-        recipientName:
+        message:
           type: string
-          description: Name of the payment recipient
-        recipientReference:
+        bokioErrorId:
           type: string
-          description: Reference for the payment recipient
-        clearingNumber:
-          type: string
-          description: Clearing number (required for Transfer payments)
-        accountNumber:
-          type: string
-          description: Account number (required for Transfer payments)
-      required:
-      - kind
-      - recipientName
-      - clearingNumber
-      - accountNumber
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     bank-payment:
       type: object
       properties:

@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization customers API
+  title: Company Customers API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: customers
+- name: Customers
   description: Operations for managing customer data
 paths:
   /companies/{companyId}/customers:
@@ -30,14 +30,12 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     post:
       tags:
-      - customers
+      - Customers
       summary: Create a customer
       description: 'Creates a customer for the company.
 
 
-        **Scope:** `customers:write`
-
-        '
+        **Scope:** `customers:write`'
       operationId: post-customer
       requestBody:
         description: Post the necessary fields for the API to create a customer.
@@ -117,7 +115,7 @@ paths:
       - tokenAuth: []
     get:
       tags:
-      - customers
+      - Customers
       summary: Get customers
       description: 'Get all customers for the company. Use the query parameters to filter and navigate through the results.
 
@@ -201,14 +199,12 @@ paths:
       description: Unique identifier of the customer
     get:
       tags:
-      - customers
+      - Customers
       summary: Get a customer
       description: 'Retrieve the information of the customer with the matching customerId.
 
 
-        **Scope:** `customers:read`
-
-        '
+        **Scope:** `customers:read`'
       operationId: get-customers-customerId
       responses:
         '200':
@@ -256,14 +252,12 @@ paths:
       - tokenAuth: []
     put:
       tags:
-      - customers
+      - Customers
       summary: Update a customer
       description: 'Update an existing customer for the company.
 
 
-        **Scope:** `customers:write`
-
-        '
+        **Scope:** `customers:write`'
       operationId: put-customer
       requestBody:
         description: Post the necessary fields for the API to update a customer.
@@ -346,7 +340,7 @@ paths:
       - tokenAuth: []
     delete:
       tags:
-      - customers
+      - Customers
       summary: Delete a customer
       description: 'Delete an existing customer for the company.
 
@@ -354,9 +348,7 @@ paths:
         NOTE: Currently only supports deleting customers that have been added through the API.
 
 
-        **Scope:** `customers:write`
-
-        '
+        **Scope:** `customers:write`'
       operationId: delete-customer
       responses:
         '204':
@@ -365,6 +357,42 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     customer:
       type: object
       title: customer
@@ -401,9 +429,10 @@ components:
             type: object
             properties:
               id:
-                type: string
+                type:
+                - string
+                - 'null'
                 format: uuid
-                nullable: true
                 description: Should not be set for new items
               name:
                 type: string
@@ -422,10 +451,11 @@ components:
           - sv
           - en
         modifiedDateTime:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           readOnly: true
-          nullable: true
           description: The date and time the customer was last modified. Returns null for customers that were changed before this field was introduced.
       example:
         id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
@@ -447,22 +477,6 @@ components:
           country: SE
         language: sv
         modifiedDateTime: 2024-10-10 00:00:00+00:00
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     addressWithCountrySubdivision:
       type: object
       title: addressWithCountrySubdivision
@@ -475,8 +489,9 @@ components:
         line1:
           type: string
         line2:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
         city:
           type: string
         postalCode:
@@ -487,8 +502,9 @@ components:
           format: country
         countrySubdivision:
           description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
       example:
         line1: 10 Downing Street
         line2: null
@@ -496,26 +512,6 @@ components:
         postalCode: SW1A 2AA
         country: GB
         countrySubdivision: ENG
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   securitySchemes:
     tokenAuth:
       type: http

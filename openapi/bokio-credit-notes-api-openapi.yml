@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization credit-notes API
+  title: Company Credit Notes API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: credit-notes
+- name: Credit Notes
   description: Operations for managing credit notes
 paths:
   /companies/{companyId}/credit-notes:
@@ -30,14 +30,12 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     get:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: List credit notes
       description: 'Returns a list of credit notes for the company.
 
 
-        **Scope:** `credit-notes:read`
-
-        '
+        **Scope:** `credit-notes:read`'
       operationId: list-credit-notes-v1
       parameters:
       - name: page
@@ -135,14 +133,12 @@ paths:
       example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
     get:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: Get a credit note
       description: 'Retrieves a specific credit note by its ID.
 
 
-        **Scope:** `credit-notes:read`
-
-        '
+        **Scope:** `credit-notes:read`'
       operationId: get-credit-note-v1
       responses:
         '200':
@@ -170,14 +166,12 @@ paths:
         - credit-notes:read
     put:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: Update a credit note
       description: 'Updates an existing credit note. Only draft credit notes can be updated.
 
 
-        **Scope:** `credit-notes:write`
-
-        '
+        **Scope:** `credit-notes:write`'
       operationId: update-credit-note-v1
       requestBody:
         description: Updated credit note information
@@ -249,14 +243,12 @@ paths:
         - credit-notes:write
     delete:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: Delete a credit note
       description: 'Deletes a draft credit note. Only draft credit notes can be deleted.
 
 
-        **Scope:** `credit-notes:write`
-
-        '
+        **Scope:** `credit-notes:write`'
       operationId: delete-credit-note-with-id
       security:
       - tokenAuth: []
@@ -297,14 +289,12 @@ paths:
       example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
     post:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: Publish a credit note
       description: 'Publishes a draft credit note, making it official and immutable.
 
 
-        **Scope:** `credit-notes:write`
-
-        '
+        **Scope:** `credit-notes:write`'
       operationId: publish-credit-note-v1
       responses:
         '200':
@@ -349,14 +339,12 @@ paths:
       example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
     post:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: Record credit note
       description: 'Record a credit note.
 
 
-        **Scope:** `credit-notes:write`
-
-        '
+        **Scope:** `credit-notes:write`'
       operationId: record-credit-note-with-id
       security:
       - tokenAuth: []
@@ -475,7 +463,7 @@ paths:
       example: b529df79-eb7f-5ef0-a8dc-c2b71f953554
     get:
       tags:
-      - credit-notes
+      - Credit Notes
       summary: Download a credit note
       description: 'Download the credit note PDF with the matching creditNoteId.
 
@@ -483,9 +471,7 @@ paths:
         **NOTE:** The credit note must be in published status.
 
 
-        **Scope:** `credit-notes:read`
-
-        '
+        **Scope:** `credit-notes:read`'
       operationId: download-credit-note
       responses:
         '200':
@@ -528,59 +514,6 @@ paths:
         - credit-notes:read
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    addressWithCountrySubdivision:
-      type: object
-      title: addressWithCountrySubdivision
-      required:
-      - line1
-      - city
-      - postalCode
-      - country
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-        countrySubdivision:
-          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
-          type: string
-          nullable: true
-      example:
-        line1: 10 Downing Street
-        line2: null
-        city: London
-        postalCode: SW1A 2AA
-        country: GB
-        countrySubdivision: ENG
     pagedResponse:
       type: object
       title: pagedResponse
@@ -609,14 +542,16 @@ components:
       - taxRate
       properties:
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Should not be set for new items
         itemRef:
-          type: object
+          type:
+          - object
+          - 'null'
           title: itemRef
-          nullable: true
           description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
 
             '
@@ -627,8 +562,9 @@ components:
               description: Reference to existing salesItem id
               example: 869a69a3-632b-4a09-899e-9dc03342b5dc
             description:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               readOnly: true
         description:
           type: string
@@ -679,13 +615,15 @@ components:
           type: number
           format: double
         bookkeepingAccountNumber:
-          type: integer
-          nullable: true
+          type:
+          - integer
+          - 'null'
           format: int32
           description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
         taxReduction:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           allOf:
           - $ref: '#/components/schemas/lineItemTaxReduction'
           description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
@@ -743,43 +681,52 @@ components:
               type: string
               readOnly: true
         contactDetailRef:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           readOnly: true
           properties:
             id:
-              type: string
+              type:
+              - string
+              - 'null'
               format: uuid
               readOnly: true
-              nullable: true
             email:
-              type: string
+              type:
+              - string
+              - 'null'
               readOnly: true
-              nullable: true
             phone:
-              type: string
+              type:
+              - string
+              - 'null'
               readOnly: true
-              nullable: true
         invoiceNumber:
-          type: string
+          type:
+          - string
+          - 'null'
           readOnly: true
-          nullable: true
           description: The credit note number
         orderNumberReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The order number associated with the invoice.
         projectReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The project reference associated with the credit note.
         buyerReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The buyer reference associated with the credit note.
         contractReference:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           description: The contract reference associated with the credit note.
         currency:
           description: ISO 4217 currency code
@@ -815,8 +762,9 @@ components:
           type: string
           format: date
         publishedDateTime:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           format: date-time
           description: The date when the credit note was published (null for draft)
           readOnly: true
@@ -833,9 +781,10 @@ components:
           oneOf:
           - $ref: '#/components/schemas/address'
         attachmentRefs:
-          type: array
+          type:
+          - array
+          - 'null'
           readOnly: true
-          nullable: true
           items:
             type: object
             properties:
@@ -847,17 +796,19 @@ components:
                 type: string
                 readOnly: true
         journalEntryRef:
-          type: object
+          type:
+          - object
+          - 'null'
           readOnly: true
-          nullable: true
           properties:
             id:
               type: string
               format: uuid
               readOnly: true
         metadata:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: 'Metadata fields for the invoice as string key-value pairs. These fields can be used for filtering.All metadata keys must
 
             start with a letter or underscore and contain only alphanumeric characters and underscores.
@@ -929,9 +880,95 @@ components:
           project: Website Redesign
           department: IT
           externalId: EXT-INV-2024-001
-    lineItemTaxReduction:
+    addressWithCountrySubdivision:
       type: object
-      nullable: true
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type:
+          - string
+          - 'null'
+      example:
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
+    invoiceItem:
+      type: object
+      title: lineItem
+      oneOf:
+      - $ref: '#/components/schemas/salesInvoiceItem'
+      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
+    address:
+      type: object
+      title: address
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+      example:
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    lineItemTaxReduction:
+      type:
+      - object
+      - 'null'
       title: lineItemTaxReduction
       description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
 
@@ -987,13 +1024,15 @@ components:
       - itemType
       properties:
         id:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int64
-          nullable: true
           description: Should not be set for new items
         itemRef:
-          type: object
-          nullable: true
+          type:
+          - object
+          - 'null'
           description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
 
             '
@@ -1004,8 +1043,9 @@ components:
               description: Reference to existing descriptionOnlyItem id
               example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
             description:
-              type: string
-              nullable: true
+              type:
+              - string
+              - 'null'
               readOnly: true
         description:
           type: string
@@ -1020,35 +1060,6 @@ components:
           description: Custom description line
         description: Custom description line
         itemType: descriptionOnlyItem
-    address:
-      type: object
-      title: address
-      properties:
-        line1:
-          type: string
-        line2:
-          type: string
-          nullable: true
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-      example:
-        line1: Delivery Street 15
-        line2: Floor 2
-        city: Stockholm
-        postalCode: 123 45
-        country: SE
-    invoiceItem:
-      type: object
-      title: lineItem
-      oneOf:
-      - $ref: '#/components/schemas/salesInvoiceItem'
-      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
   securitySchemes:
     tokenAuth:
       type: http

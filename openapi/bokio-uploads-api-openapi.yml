@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization uploads API
+  title: Company Uploads API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: uploads
+- name: Uploads
   description: Operations for managing file uploads
 paths:
   /companies/{companyId}/uploads:
@@ -30,7 +30,7 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     post:
       tags:
-      - uploads
+      - Uploads
       summary: Add an upload
       description: 'Add an upload to bokio in the form of an image or pdf. One file can be uploaded per request. The request must be **multi-part MIME**.
 
@@ -43,7 +43,7 @@ paths:
 
         Content-Type: multipart/form-data; boundary=----FormBoundary7MA4YWxkTrZu0gW
 
-        Authorization: Bearer <token>
+        Authorization: Bearer
 
 
         ------FormBoundary7MA4YWxkTrZu0gW
@@ -77,9 +77,7 @@ paths:
         ```
 
 
-        **Scope:** `uploads:write`
-
-        '
+        **Scope:** `uploads:write`'
       operationId: add-upload
       parameters:
       - name: Content-Type
@@ -144,7 +142,7 @@ paths:
       - tokenAuth: []
     get:
       tags:
-      - uploads
+      - Uploads
       summary: Get uploads
       description: 'Get all uploads for the company. Use the query parameters to filter and navigate through the results.
 
@@ -221,14 +219,12 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     get:
       tags:
-      - uploads
+      - Uploads
       summary: Get an upload
       description: 'Retrieve the information of the upload with the matching uploadId.
 
 
-        **Scope:** `uploads:read`
-
-        '
+        **Scope:** `uploads:read`'
       operationId: get-upload
       responses:
         '200':
@@ -278,14 +274,12 @@ paths:
       example: a419cf69-db6f-4de9-992c-b1a60942a443
     get:
       tags:
-      - uploads
+      - Uploads
       summary: Download file data for an upload
       description: 'Retrieve the file data of the upload with the matching uploadId.
 
 
-        **Scope:** `uploads:read`
-
-        '
+        **Scope:** `uploads:read`'
       operationId: download-upload
       responses:
         '200':
@@ -311,6 +305,22 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     apiError:
       type: object
       title: apiError
@@ -331,22 +341,6 @@ components:
                 type: string
               message:
                 type: string
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     upload:
       type: object
       title: upload
@@ -360,9 +354,10 @@ components:
         contentType:
           type: string
         journalEntryId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
       example:
         id: a419cf69-db6f-4de9-992c-b1a60942a443
         description: example.png

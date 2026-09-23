@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization sie-files API
+  title: Company Sie Files API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -45,9 +45,7 @@ paths:
         The SIE file is used for accounting purposes in Sweden.
 
 
-        **Scope:** `sie:read`
-
-        '
+        **Scope:** `sie:read`'
       operationId: download-sie-file
       responses:
         '200':

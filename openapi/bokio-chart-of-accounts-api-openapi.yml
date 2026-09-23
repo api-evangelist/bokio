@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization chart-of-accounts API
+  title: Company Chart Of Accounts API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: chart-of-accounts
+- name: Chart Of Accounts
   description: Operations for managing chart of accounts
 paths:
   /companies/{companyId}/chart-of-accounts:
@@ -30,14 +30,12 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     get:
       tags:
-      - chart-of-accounts
+      - Chart Of Accounts
       summary: Get chart of accounts
       description: 'Retrieves the complete chart of accounts for the company, merging bookkeeping accounts with their associated money account details.
 
 
-        **Scope:** `chart-of-accounts:read`
-
-        '
+        **Scope:** `chart-of-accounts:read`'
       operationId: get-chart-of-accounts
       parameters:
       - name: query
@@ -110,14 +108,12 @@ paths:
         format: int32
     get:
       tags:
-      - chart-of-accounts
+      - Chart Of Accounts
       summary: Get specific account
       description: 'Retrieves details of a specific account from the chart of accounts using the account number.
 
 
-        **Scope:** `chart-of-accounts:read`
-
-        '
+        **Scope:** `chart-of-accounts:read`'
       operationId: get-account-with-number
       responses:
         '200':
@@ -172,10 +168,11 @@ components:
         title: accountWithDetails
         properties:
           accountBalance:
-            type: number
+            type:
+            - number
+            - 'null'
             format: double
             description: The current balance of the account
-            nullable: true
         example:
           account: 1930
           name: Företagskonto / Affärskonto

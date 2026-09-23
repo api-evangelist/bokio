@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization suppliers API
+  title: Company Suppliers API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: suppliers
+- name: Suppliers
   description: Operations for managing suppliers
 paths:
   /companies/{companyId}/suppliers:
@@ -30,14 +30,12 @@ paths:
       example: ea9ee4dd-fae3-4aec-a7db-6fc9cc1f8135
     post:
       tags:
-      - suppliers
+      - Suppliers
       summary: '[Preview] Create a supplier'
       description: 'Creates a new supplier for the company.
 
 
-        **Scope:** `suppliers:write`
-
-        '
+        **Scope:** `suppliers:write`'
       operationId: post-supplier
       requestBody:
         description: Post the necessary fields for the API to create a supplier.
@@ -103,14 +101,12 @@ paths:
       - tokenAuth: []
     get:
       tags:
-      - suppliers
+      - Suppliers
       summary: '[Preview] Get suppliers'
       description: 'Get all suppliers for the company. Use the query parameters to filter and navigate through the results.
 
 
-        **Scope:** `suppliers:read`
-
-        '
+        **Scope:** `suppliers:read`'
       operationId: get-suppliers
       parameters:
       - name: page
@@ -186,14 +182,12 @@ paths:
       example: 12345678-abcd-1234-abcd-1234567890ab
     get:
       tags:
-      - suppliers
+      - Suppliers
       summary: '[Preview] Get a supplier'
       description: 'Retrieve the information of the supplier with the matching supplierId.
 
 
-        **Scope:** `suppliers:read`
-
-        '
+        **Scope:** `suppliers:read`'
       operationId: get-supplier-by-id
       responses:
         '200':
@@ -235,14 +229,12 @@ paths:
       - tokenAuth: []
     put:
       tags:
-      - suppliers
+      - Suppliers
       summary: '[Preview] Update a supplier'
       description: 'Update an existing supplier for the company.
 
 
-        **Scope:** `suppliers:write`
-
-        '
+        **Scope:** `suppliers:write`'
       operationId: put-supplier
       requestBody:
         description: Post the necessary fields for the API to update a supplier.
@@ -323,7 +315,7 @@ paths:
       - tokenAuth: []
     delete:
       tags:
-      - suppliers
+      - Suppliers
       summary: '[Preview] Delete a supplier'
       description: 'Delete an existing supplier for the company.
 
@@ -331,9 +323,7 @@ paths:
         NOTE: Currently only supports deleting suppliers that have been added through the API.
 
 
-        **Scope:** `suppliers:write`
-
-        '
+        **Scope:** `suppliers:write`'
       operationId: delete-supplier
       responses:
         '204':
@@ -359,59 +349,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    bankgiroPaymentDetails:
-      type: object
-      title: bankgiroPaymentDetails
-      required:
-      - type
-      - bankgiroNumber
-      properties:
-        type:
-          type: string
-          enum:
-          - bankgiro
-        bankgiroNumber:
-          type: string
-          description: The bankgiro number for the supplier
-      example:
-        type: bankgiro
-        bankgiroNumber: 1234-5678
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     transferPaymentDetails:
       type: object
       title: transferPaymentDetails
@@ -456,6 +393,39 @@ components:
         type: internationalPayment
         iban: SE1234567890123456789012
         bic: SWEDSESS
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    bankgiroPaymentDetails:
+      type: object
+      title: bankgiroPaymentDetails
+      required:
+      - type
+      - bankgiroNumber
+      properties:
+        type:
+          type: string
+          enum:
+          - bankgiro
+        bankgiroNumber:
+          type: string
+          description: The bankgiro number for the supplier
+      example:
+        type: bankgiro
+        bankgiroNumber: 1234-5678
     plusgiroPaymentDetails:
       type: object
       title: plusgiroPaymentDetails
@@ -473,6 +443,31 @@ components:
       example:
         type: plusgiro
         plusgiroNumber: 12345-6
+    supplierAddress:
+      type: object
+      title: supplierAddress
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code. Defaults to SE if not provided.
+          type: string
+          format: country
+          default: SE
+      example:
+        line1: Älvsborgsvägen 10
+        line2: c/o Test
+        city: Gothenburg
+        postalCode: 123 45
+        country: SE
     supplier:
       type: object
       title: supplier
@@ -546,30 +541,26 @@ components:
       - $ref: '#/components/schemas/plusgiroPaymentDetails'
       - $ref: '#/components/schemas/transferPaymentDetails'
       - $ref: '#/components/schemas/internationalPaymentDetails'
-    supplierAddress:
+    apiError:
       type: object
-      title: supplierAddress
+      title: apiError
       properties:
-        line1:
+        code:
           type: string
-        line2:
+        message:
           type: string
-          nullable: true
-        city:
+        bokioErrorId:
           type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code. Defaults to SE if not provided.
-          type: string
-          format: country
-          default: SE
-      example:
-        line1: Älvsborgsvägen 10
-        line2: c/o Test
-        city: Gothenburg
-        postalCode: 123 45
-        country: SE
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   securitySchemes:
     tokenAuth:
       type: http

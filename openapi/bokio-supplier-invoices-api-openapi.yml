@@ -1,7 +1,7 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   version: '1.0'
-  title: Company authorization supplier-invoices API
+  title: Company Supplier Invoices API
   description: The Bokio Company API containing all resources for company tenant.
   termsOfService: https://docs.bokio.se/page/terms/
   contact:
@@ -15,7 +15,7 @@ servers:
 security:
 - tokenAuth: []
 tags:
-- name: supplier-invoices
+- name: Supplier Invoices
   description: Operations for managing supplier invoices
 paths:
   /companies/{companyId}/supplier-invoices:
@@ -30,14 +30,12 @@ paths:
       example: a9d8f1c2-6f34-4e4f-9d8a-2a4d3d5f7b91
     post:
       tags:
-      - supplier-invoices
+      - Supplier Invoices
       summary: '[Preview] Create a supplier invoice'
       description: 'Creates a new supplier invoice for the company.
 
 
-        **Scope:** `supplier-invoices:write`
-
-        '
+        **Scope:** `supplier-invoices:write`'
       operationId: post-supplier-invoice
       requestBody:
         description: Post the necessary fields for the API to create a new supplier invoice.
@@ -132,14 +130,12 @@ paths:
       - tokenAuth: []
     get:
       tags:
-      - supplier-invoices
+      - Supplier Invoices
       summary: '[Preview] Get supplier invoices'
       description: 'Get all supplier invoices for the company. Use the query parameters to filter and navigate through the results.
 
 
-        **Scope:** `supplier-invoices:read`
-
-        '
+        **Scope:** `supplier-invoices:read`'
       operationId: get-supplier-invoices
       parameters:
       - name: page
@@ -258,14 +254,12 @@ paths:
       example: 6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90
     get:
       tags:
-      - supplier-invoices
+      - Supplier Invoices
       summary: '[Preview] Get a supplier invoice'
       description: 'Retrieve the information of the supplier invoice with the matching supplierInvoiceId.
 
 
-        **Scope:** `supplier-invoices:read`
-
-        '
+        **Scope:** `supplier-invoices:read`'
       operationId: get-supplier-invoice-by-id
       responses:
         '200':
@@ -308,14 +302,12 @@ paths:
       - tokenAuth: []
     put:
       tags:
-      - supplier-invoices
+      - Supplier Invoices
       summary: '[Preview] Update a supplier invoice'
       description: 'Update an existing supplier invoice for the company.
 
 
-        **Scope:** `supplier-invoices:write`
-
-        '
+        **Scope:** `supplier-invoices:write`'
       operationId: put-supplier-invoice
       requestBody:
         description: Post the necessary fields for the API to update a supplier invoice.
@@ -397,14 +389,12 @@ paths:
       - tokenAuth: []
     delete:
       tags:
-      - supplier-invoices
+      - Supplier Invoices
       summary: '[Preview] Delete a supplier invoice'
       description: 'Delete an existing supplier invoice for the company.
 
 
-        **Scope:** `supplier-invoices:write`
-
-        '
+        **Scope:** `supplier-invoices:write`'
       operationId: delete-supplier-invoice
       responses:
         '204':
@@ -443,14 +433,12 @@ paths:
       example: 6f6b2f17-3c4a-4a69-9f2d-3f5d7e1b8c90
     post:
       tags:
-      - supplier-invoices
+      - Supplier Invoices
       summary: '[Preview] Add an upload to a supplier invoice'
       description: 'Add an upload to the supplier invoice.
 
 
-        **Scope:** `supplier-invoices:write`
-
-        '
+        **Scope:** `supplier-invoices:write`'
       operationId: post-supplier-invoice-upload
       requestBody:
         description: Post the necessary fields for the API to add an upload to the supplier invoice.
@@ -518,26 +506,16 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
+    uploadRef:
       type: object
-      title: apiError
+      title: UploadRef
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
+        id:
           type: string
           format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+          description: Unique identifier of an existing upload
+      example:
+        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
     pagedResponse:
       type: object
       title: pagedResponse
@@ -554,6 +532,36 @@ components:
           type: integer
           format: int32
           example: 1
+    supplierInvoiceCreate:
+      type: object
+      title: SupplierInvoiceCreate
+      required:
+      - invoiceDate
+      - dueDate
+      - totalAmount
+      - supplierRef
+      properties:
+        supplierRef:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: string
+              format: uuid
+        invoiceNumber:
+          type: string
+        invoiceDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        totalAmount:
+          type: number
+          format: double
+        uploadRef:
+          $ref: '#/components/schemas/uploadRef'
     supplierInvoiceGet:
       type: object
       title: SupplierInvoice
@@ -601,9 +609,10 @@ components:
           format: double
           readOnly: true
         journalEntryRef:
-          type: object
+          type:
+          - object
+          - 'null'
           readOnly: true
-          nullable: true
           properties:
             id:
               type: string
@@ -658,46 +667,26 @@ components:
         totalAmount:
           type: number
           format: double
-    uploadRef:
+    apiError:
       type: object
-      title: UploadRef
+      title: apiError
       properties:
-        id:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
           type: string
           format: uuid
-          description: Unique identifier of an existing upload
-      example:
-        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
-    supplierInvoiceCreate:
-      type: object
-      title: SupplierInvoiceCreate
-      required:
-      - invoiceDate
-      - dueDate
-      - totalAmount
-      - supplierRef
-      properties:
-        supplierRef:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: string
-              format: uuid
-        invoiceNumber:
-          type: string
-        invoiceDate:
-          type: string
-          format: date
-        dueDate:
-          type: string
-          format: date
-        totalAmount:
-          type: number
-          format: double
-        uploadRef:
-          $ref: '#/components/schemas/uploadRef'
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
   securitySchemes:
     tokenAuth:
       type: http
