@@ -305,22 +305,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     apiError:
       type: object
       title: apiError
@@ -341,6 +325,22 @@ components:
                 type: string
               message:
                 type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     upload:
       type: object
       title: upload

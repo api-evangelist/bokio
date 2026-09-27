@@ -909,22 +909,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     journalEntry:
       type: object
       title: journalEntry
@@ -992,51 +976,26 @@ components:
           account: 2611
           tags: []
         tags: []
-    journalEntryCommentWrite:
+    apiError:
       type: object
-      title: journalEntryCommentWrite
-      description: Request body for creating or updating a comment on a journal entry.
+      title: apiError
       properties:
-        content:
+        code:
           type: string
-          description: The plain text content of the comment. Rich text, markdown, and HTML are not supported.
-          minLength: 1
-          example: 'Synced from external system. Invoice reference: INV-2024-001.'
-      required:
-      - content
-    journalEntryComment:
-      type: object
-      title: journalEntryComment
-      description: A comment on a journal entry.
-      properties:
-        id:
+        message:
+          type: string
+        bokioErrorId:
           type: string
           format: uuid
-          readOnly: true
-          description: Unique identifier of the comment
-        content:
-          type: string
-          description: The plain text content of the comment
-        authorName:
-          type: string
-          readOnly: true
-          description: Display name of the comment author (integration name or user name)
-        createdDatetime:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the comment was created (UTC)
-        updatedDatetime:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the comment was last updated (UTC)
-      example:
-        id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        content: 'Synced from external system. Invoice reference: INV-2024-001.'
-        authorName: My Integration App
-        createdDatetime: 2024-10-15 08:30:00+00:00
-        updatedDatetime: 2024-10-15 08:30:00+00:00
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     journalEntryItem:
       type: object
       title: journalEntryItem
@@ -1072,6 +1031,18 @@ components:
         debit: 200
         account: 1930
         tags: []
+    journalEntryCommentWrite:
+      type: object
+      title: journalEntryCommentWrite
+      description: Request body for creating or updating a comment on a journal entry.
+      properties:
+        content:
+          type: string
+          description: The plain text content of the comment. Rich text, markdown, and HTML are not supported.
+          minLength: 1
+          example: 'Synced from external system. Invoice reference: INV-2024-001.'
+      required:
+      - content
     journalEntryTag:
       type: object
       title: journalEntryTag
@@ -1125,26 +1096,22 @@ components:
         tagName: Project Alpha
         tagGroupName: Project
         weight: 1
-    apiError:
+    pagedResponse:
       type: object
-      title: apiError
+      title: pagedResponse
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     journalEntryTags:
       type: object
       title: journalEntryTags
@@ -1195,6 +1162,39 @@ components:
         - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
           weight: 1
         items: []
+    journalEntryComment:
+      type: object
+      title: journalEntryComment
+      description: A comment on a journal entry.
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the comment
+        content:
+          type: string
+          description: The plain text content of the comment
+        authorName:
+          type: string
+          readOnly: true
+          description: Display name of the comment author (integration name or user name)
+        createdDatetime:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the comment was created (UTC)
+        updatedDatetime:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the comment was last updated (UTC)
+      example:
+        id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        content: 'Synced from external system. Invoice reference: INV-2024-001.'
+        authorName: My Integration App
+        createdDatetime: 2024-10-15 08:30:00+00:00
+        updatedDatetime: 2024-10-15 08:30:00+00:00
   securitySchemes:
     tokenAuth:
       type: http

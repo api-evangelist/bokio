@@ -57,7 +57,7 @@ tags:
 - Invoicing
 - Payments
 - Sweden
-- SMB
+- Small Business
 - Authentication
 tags_raw:
 - Company
@@ -76,7 +76,7 @@ maintainers:
   email: info@apis.io
 apis:
 - aid: bokio:bokio-authorization-api
-  name: Bokio authorization API
+  name: Bokio Authorization API
   description: Authorization operations for OAuth 2.0 Grants
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -88,7 +88,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-authorization-api-openapi.yml
 - aid: bokio:bokio-bank-payments-api
-  name: Bokio bank-payments API
+  name: Bokio Bank Payments API
   description: Operations for creating and reading bank payments
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -100,7 +100,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-bank-payments-api-openapi.yml
 - aid: bokio:bokio-chart-of-accounts-api
-  name: Bokio chart-of-accounts API
+  name: Bokio Chart Of Accounts API
   description: Operations for managing chart of accounts
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -112,7 +112,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-chart-of-accounts-api-openapi.yml
 - aid: bokio:bokio-company-information-api
-  name: Bokio company-information API
+  name: Bokio Company Information API
   description: Operations for managing company information
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -124,7 +124,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-company-information-api-openapi.yml
 - aid: bokio:bokio-connections-api
-  name: Bokio connections API
+  name: Bokio Connections API
   description: Connections operations
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -136,7 +136,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-connections-api-openapi.yml
 - aid: bokio:bokio-credit-notes-api
-  name: Bokio credit-notes API
+  name: Bokio Credit Notes API
   description: Operations for managing credit notes
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -148,7 +148,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-credit-notes-api-openapi.yml
 - aid: bokio:bokio-customers-api
-  name: Bokio customers API
+  name: Bokio Customers API
   description: Operations for managing customer data
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -160,7 +160,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-customers-api-openapi.yml
 - aid: bokio:bokio-fiscal-years-api
-  name: Bokio fiscal-years API
+  name: Bokio Fiscal Years API
   description: Operations for managing fiscal years
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -172,7 +172,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-fiscal-years-api-openapi.yml
 - aid: bokio:bokio-invoices-api
-  name: Bokio invoices API
+  name: Bokio Invoices API
   description: Operations for managing invoices
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -184,7 +184,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-invoices-api-openapi.yml
 - aid: bokio:bokio-items-api
-  name: Bokio items API
+  name: Bokio Items API
   description: Operations for managing inventory items
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -196,7 +196,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-items-api-openapi.yml
 - aid: bokio:bokio-journal-entries-api
-  name: Bokio journal-entries API
+  name: Bokio Journal Entries API
   description: Operations for managing accounting journal entries
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -208,7 +208,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-journal-entries-api-openapi.yml
 - aid: bokio:bokio-sie-files-api
-  name: Bokio sie-files API
+  name: Bokio Sie Files API
   description: Operations for managing SIE files
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -218,7 +218,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-sie-files-api-openapi.yml
 - aid: bokio:bokio-supplier-invoices-api
-  name: Bokio supplier-invoices API
+  name: Bokio Supplier Invoices API
   description: Operations for managing supplier invoices
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -230,7 +230,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-supplier-invoices-api-openapi.yml
 - aid: bokio:bokio-suppliers-api
-  name: Bokio suppliers API
+  name: Bokio Suppliers API
   description: Operations for managing suppliers
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -242,7 +242,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-suppliers-api-openapi.yml
 - aid: bokio:bokio-tag-groups-api
-  name: Bokio tag-groups API
+  name: Bokio Tag Groups API
   description: Operations for managing tag groups and tags
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1
@@ -254,7 +254,7 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-tag-groups-api-openapi.yml
 - aid: bokio:bokio-uploads-api
-  name: Bokio uploads API
+  name: Bokio Uploads API
   description: Operations for managing file uploads
   humanURL: https://docs.bokio.se/reference/introduction-to-companyapi
   baseURL: https://api.bokio.se/v1

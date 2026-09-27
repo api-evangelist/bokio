@@ -369,81 +369,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-    transferRecipient:
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-          - transfer
-        recipientName:
-          type: string
-          description: Name of the payment recipient
-        recipientReference:
-          type: string
-          description: Reference for the payment recipient
-        clearingNumber:
-          type: string
-          description: Clearing number (required for Transfer payments)
-        accountNumber:
-          type: string
-          description: Account number (required for Transfer payments)
-      required:
-      - kind
-      - recipientName
-      - clearingNumber
-      - accountNumber
-    bankgiroRecipient:
-      type: object
-      properties:
-        kind:
-          type: string
-          enum:
-          - bankgiro
-        recipientName:
-          type: string
-          description: Name of the payment recipient
-        bankgiroNumber:
-          type: string
-          description: Bankgiro number (required for Bankgiro payments)
-        ocr:
-          type: string
-          description: OCR reference for the payment. Either `ocr` or `message` must be provided, but not both.
-        message:
-          type: string
-          description: Message for the payment. Either `message` or `ocr` must be provided, but not both.
-      required:
-      - kind
-      - recipientName
-      - bankgiroNumber
-    bulk-create-bank-payments-request:
-      type: object
-      properties:
-        payments:
-          type: array
-          minItems: 1
-          maxItems: 100
-          description: List of bank payments to create (1-100 items)
-          items:
-            $ref: '#/components/schemas/bank-payment'
-      required:
-      - payments
     apiError:
       type: object
       title: apiError
@@ -527,6 +452,81 @@ components:
       - amount
       - paymentDate
       - recipientRef
+    bankgiroRecipient:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+          - bankgiro
+        recipientName:
+          type: string
+          description: Name of the payment recipient
+        bankgiroNumber:
+          type: string
+          description: Bankgiro number (required for Bankgiro payments)
+        ocr:
+          type: string
+          description: OCR reference for the payment. Either `ocr` or `message` must be provided, but not both.
+        message:
+          type: string
+          description: Message for the payment. Either `message` or `ocr` must be provided, but not both.
+      required:
+      - kind
+      - recipientName
+      - bankgiroNumber
+    transferRecipient:
+      type: object
+      properties:
+        kind:
+          type: string
+          enum:
+          - transfer
+        recipientName:
+          type: string
+          description: Name of the payment recipient
+        recipientReference:
+          type: string
+          description: Reference for the payment recipient
+        clearingNumber:
+          type: string
+          description: Clearing number (required for Transfer payments)
+        accountNumber:
+          type: string
+          description: Account number (required for Transfer payments)
+      required:
+      - kind
+      - recipientName
+      - clearingNumber
+      - accountNumber
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    bulk-create-bank-payments-request:
+      type: object
+      properties:
+        payments:
+          type: array
+          minItems: 1
+          maxItems: 100
+          description: List of bank payments to create (1-100 items)
+          items:
+            $ref: '#/components/schemas/bank-payment'
+      required:
+      - payments
   securitySchemes:
     tokenAuth:
       type: http

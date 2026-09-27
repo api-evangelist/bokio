@@ -132,6 +132,23 @@ paths:
       - access_token: []
 components:
   schemas:
+    connection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenantId:
+          type: string
+          format: uuid
+        tenantName:
+          type: string
+          description: The name of the tenant (company)
+        type:
+          type: string
+          enum:
+          - company
+          description: The type of connection (e.g., company)
     pagedResponse:
       type: object
       title: pagedResponse
@@ -168,23 +185,6 @@ components:
                 type: string
               message:
                 type: string
-    connection:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        tenantId:
-          type: string
-          format: uuid
-        tenantName:
-          type: string
-          description: The name of the tenant (company)
-        type:
-          type: string
-          enum:
-          - company
-          description: The type of connection (e.g., company)
   securitySchemes:
     tokenAuth:
       type: http

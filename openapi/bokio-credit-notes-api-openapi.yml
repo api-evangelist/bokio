@@ -514,32 +514,83 @@ paths:
         - credit-notes:read
 components:
   schemas:
-    pagedResponse:
-      type: object
-      title: pagedResponse
+    lineItemTaxReduction:
+      type:
+      - object
+      - 'null'
+      title: lineItemTaxReduction
+      description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
+
+        '
+      required:
+      - taxReductionType
+      - jobType
       properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-    salesInvoiceItem:
+        taxReductionType:
+          type: string
+          enum:
+          - rot
+          - rut
+          description: The tax reduction type for this line item. Must match the invoice-level taxReduction type.
+        jobType:
+          type: string
+          enum:
+          - rotConstruction
+          - rotElectricity
+          - rotGlassPlate
+          - rotSoilWork
+          - rotSweeping
+          - rotPainting
+          - rotPlumbing
+          - rutChildServices
+          - rutDataITServices
+          - rutRemovalServices
+          - rutClothingCare
+          - rutPersonalHelpCare
+          - rutRepair
+          - rutSnow
+          - rutCleaning
+          - rutGardening
+          - rutWaterWashingOfTextiles
+          - rutFurnishing
+          - rutTransportOfHouseholdGoods
+          - rutHousingSupervision
+          description: 'The job type categorizing the work. The prefix must match the tax reduction type:
+
+            - ROT types: rotConstruction, rotElectricity, rotGlassPlate, rotSoilWork, rotSweeping, rotPainting, rotPlumbing
+
+            - RUT types: rutChildServices, rutDataITServices, rutRemovalServices, rutClothingCare, rutPersonalHelpCare, rutRepair, rutSnow, rutCleaning, rutGardening, rutWaterWashingOfTextiles, rutFurnishing, rutTransportOfHouseholdGoods, rutHousingSupervision
+
+            '
+      example:
+        taxReductionType: rot
+        jobType: rotConstruction
+    apiError:
       type: object
-      title: salesItem
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    descriptionOnlyInvoiceItem:
+      type: object
+      title: descriptionOnlyItem
       required:
       - description
       - itemType
-      - productType
-      - quantity
-      - unitPrice
-      - taxRate
       properties:
         id:
           type:
@@ -551,16 +602,15 @@ components:
           type:
           - object
           - 'null'
-          title: itemRef
-          description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
+          description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
 
             '
           properties:
             id:
               type: string
               format: uuid
-              description: Reference to existing salesItem id
-              example: 869a69a3-632b-4a09-899e-9dc03342b5dc
+              description: Reference to existing descriptionOnlyItem id
+              example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
             description:
               type:
               - string
@@ -571,78 +621,49 @@ components:
         itemType:
           type: string
           enum:
-          - salesItem
-        productType:
-          type: string
-          enum:
-          - goods
-          - services
-        unitType:
-          type: string
-          default: unspecified
-          enum:
-          - unspecified
-          - piece
-          - hour
-          - day
-          - month
-          - kilogram
-          - gram
-          - liter
-          - meter
-          - centimeter
-          - millimeter
-          - meterSquared
-          - meterCubic
-          - mile
-          - kilometer
-          - gigabyte
-          - hectar
-          - words
-          - year
-          - week
-          - minute
-          - megabyte
-          - ton
-        quantity:
-          type: number
-          format: double
-          default: 1
-        unitPrice:
-          type: number
-          format: double
-        taxRate:
-          type: number
-          format: double
-        bookkeepingAccountNumber:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
-        taxReduction:
-          type:
-          - object
-          - 'null'
-          allOf:
-          - $ref: '#/components/schemas/lineItemTaxReduction'
-          description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
+          - descriptionOnlyItem
       example:
-        id: 1
+        id: 2
         itemRef:
-          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
-          description: Installation work
-        description: Installation work
-        itemType: salesItem
-        productType: services
-        unitType: hour
-        quantity: 10
-        unitPrice: 500
-        taxRate: 25
-        bookkeepingAccountNumber: 3389
-        taxReduction:
-          taxReductionType: rot
-          jobType: rotConstruction
+          id: e964435e-50ef-4524-a439-05ff87794952
+          description: Custom description line
+        description: Custom description line
+        itemType: descriptionOnlyItem
+    addressWithCountrySubdivision:
+      type: object
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type:
+          - string
+          - 'null'
+      example:
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
     creditNote:
       type: object
       required:
@@ -880,47 +901,6 @@ components:
           project: Website Redesign
           department: IT
           externalId: EXT-INV-2024-001
-    addressWithCountrySubdivision:
-      type: object
-      title: addressWithCountrySubdivision
-      required:
-      - line1
-      - city
-      - postalCode
-      - country
-      properties:
-        line1:
-          type: string
-        line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-        countrySubdivision:
-          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
-          type:
-          - string
-          - 'null'
-      example:
-        line1: 10 Downing Street
-        line2: null
-        city: London
-        postalCode: SW1A 2AA
-        country: GB
-        countrySubdivision: ENG
-    invoiceItem:
-      type: object
-      title: lineItem
-      oneOf:
-      - $ref: '#/components/schemas/salesInvoiceItem'
-      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
     address:
       type: object
       title: address
@@ -945,83 +925,38 @@ components:
         city: Stockholm
         postalCode: 123 45
         country: SE
-    apiError:
+    pagedResponse:
       type: object
-      title: apiError
+      title: pagedResponse
       properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    lineItemTaxReduction:
-      type:
-      - object
-      - 'null'
-      title: lineItemTaxReduction
-      description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
-
-        '
-      required:
-      - taxReductionType
-      - jobType
-      properties:
-        taxReductionType:
-          type: string
-          enum:
-          - rot
-          - rut
-          description: The tax reduction type for this line item. Must match the invoice-level taxReduction type.
-        jobType:
-          type: string
-          enum:
-          - rotConstruction
-          - rotElectricity
-          - rotGlassPlate
-          - rotSoilWork
-          - rotSweeping
-          - rotPainting
-          - rotPlumbing
-          - rutChildServices
-          - rutDataITServices
-          - rutRemovalServices
-          - rutClothingCare
-          - rutPersonalHelpCare
-          - rutRepair
-          - rutSnow
-          - rutCleaning
-          - rutGardening
-          - rutWaterWashingOfTextiles
-          - rutFurnishing
-          - rutTransportOfHouseholdGoods
-          - rutHousingSupervision
-          description: 'The job type categorizing the work. The prefix must match the tax reduction type:
-
-            - ROT types: rotConstruction, rotElectricity, rotGlassPlate, rotSoilWork, rotSweeping, rotPainting, rotPlumbing
-
-            - RUT types: rutChildServices, rutDataITServices, rutRemovalServices, rutClothingCare, rutPersonalHelpCare, rutRepair, rutSnow, rutCleaning, rutGardening, rutWaterWashingOfTextiles, rutFurnishing, rutTransportOfHouseholdGoods, rutHousingSupervision
-
-            '
-      example:
-        taxReductionType: rot
-        jobType: rotConstruction
-    descriptionOnlyInvoiceItem:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    invoiceItem:
       type: object
-      title: descriptionOnlyItem
+      title: lineItem
+      oneOf:
+      - $ref: '#/components/schemas/salesInvoiceItem'
+      - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
+    salesInvoiceItem:
+      type: object
+      title: salesItem
       required:
       - description
       - itemType
+      - productType
+      - quantity
+      - unitPrice
+      - taxRate
       properties:
         id:
           type:
@@ -1033,15 +968,16 @@ components:
           type:
           - object
           - 'null'
-          description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
+          title: itemRef
+          description: 'Identifier of an existing salesItem to use as a template. Fields itemType and quantity are required. Values in other fields will be overridden by values from this referenced item
 
             '
           properties:
             id:
               type: string
               format: uuid
-              description: Reference to existing descriptionOnlyItem id
-              example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+              description: Reference to existing salesItem id
+              example: 869a69a3-632b-4a09-899e-9dc03342b5dc
             description:
               type:
               - string
@@ -1052,14 +988,78 @@ components:
         itemType:
           type: string
           enum:
-          - descriptionOnlyItem
+          - salesItem
+        productType:
+          type: string
+          enum:
+          - goods
+          - services
+        unitType:
+          type: string
+          default: unspecified
+          enum:
+          - unspecified
+          - piece
+          - hour
+          - day
+          - month
+          - kilogram
+          - gram
+          - liter
+          - meter
+          - centimeter
+          - millimeter
+          - meterSquared
+          - meterCubic
+          - mile
+          - kilometer
+          - gigabyte
+          - hectar
+          - words
+          - year
+          - week
+          - minute
+          - megabyte
+          - ton
+        quantity:
+          type: number
+          format: double
+          default: 1
+        unitPrice:
+          type: number
+          format: double
+        taxRate:
+          type: number
+          format: double
+        bookkeepingAccountNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: Use the `bookkeepingAccountNumber` field in the line items to specify an accounting account other than the account that would be automatically be selected based on the item productType, taxRate, customer and company settings. Accounts that would be automatically selected cannot be set on this field.
+        taxReduction:
+          type:
+          - object
+          - 'null'
+          allOf:
+          - $ref: '#/components/schemas/lineItemTaxReduction'
+          description: tax reduction categorization for this line item. When the invoice has a taxReduction, each service line item should specify its job type. The type must match the invoice-level taxReduction type.
       example:
-        id: 2
+        id: 1
         itemRef:
-          id: e964435e-50ef-4524-a439-05ff87794952
-          description: Custom description line
-        description: Custom description line
-        itemType: descriptionOnlyItem
+          id: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+          description: Installation work
+        description: Installation work
+        itemType: salesItem
+        productType: services
+        unitType: hour
+        quantity: 10
+        unitPrice: 500
+        taxRate: 25
+        bookkeepingAccountNumber: 3389
+        taxReduction:
+          taxReductionType: rot
+          jobType: rotConstruction
   securitySchemes:
     tokenAuth:
       type: http

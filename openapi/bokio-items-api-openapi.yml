@@ -307,6 +307,32 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    item:
+      type: object
+      title: item
+      oneOf:
+      - $ref: '#/components/schemas/salesItem'
+      - $ref: '#/components/schemas/descriptionOnlyItem'
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     pagedResponse:
       type: object
       title: pagedResponse
@@ -323,12 +349,29 @@ components:
           type: integer
           format: int32
           example: 1
-    item:
+    descriptionOnlyItem:
       type: object
-      title: item
-      oneOf:
-      - $ref: '#/components/schemas/salesItem'
-      - $ref: '#/components/schemas/descriptionOnlyItem'
+      title: descriptionOnlyItem
+      required:
+      - description
+      - itemType
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Should not be set for new items
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - descriptionOnlyItem
+      example:
+        id: bd34bd41-d13b-434d-858e-092231d6228a
+        description: Custom description line
+        itemType: descriptionOnlyItem
     salesItem:
       type: object
       title: salesItem
@@ -406,49 +449,6 @@ components:
         unitPrice: 100
         taxRate: 25
         bookkeepingAccountNumber: 3920
-    descriptionOnlyItem:
-      type: object
-      title: descriptionOnlyItem
-      required:
-      - description
-      - itemType
-      properties:
-        id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Should not be set for new items
-        description:
-          type: string
-        itemType:
-          type: string
-          enum:
-          - descriptionOnlyItem
-      example:
-        id: bd34bd41-d13b-434d-858e-092231d6228a
-        description: Custom description line
-        itemType: descriptionOnlyItem
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   securitySchemes:
     tokenAuth:
       type: http
