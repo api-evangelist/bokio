@@ -357,22 +357,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     apiError:
       type: object
       title: apiError
@@ -393,6 +377,57 @@ components:
                 type: string
               message:
                 type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    addressWithCountrySubdivision:
+      type: object
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code
+          type: string
+          format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type:
+          - string
+          - 'null'
+      example:
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
     customer:
       type: object
       title: customer
@@ -477,41 +512,6 @@ components:
           country: SE
         language: sv
         modifiedDateTime: 2024-10-10 00:00:00+00:00
-    addressWithCountrySubdivision:
-      type: object
-      title: addressWithCountrySubdivision
-      required:
-      - line1
-      - city
-      - postalCode
-      - country
-      properties:
-        line1:
-          type: string
-        line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code
-          type: string
-          format: country
-        countrySubdivision:
-          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
-          type:
-          - string
-          - 'null'
-      example:
-        line1: 10 Downing Street
-        line2: null
-        city: London
-        postalCode: SW1A 2AA
-        country: GB
-        countrySubdivision: ENG
   securitySchemes:
     tokenAuth:
       type: http

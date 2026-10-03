@@ -798,107 +798,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    tagGroupWrite:
-      type: object
-      title: tagGroupWrite
-      required:
-      - name
-      - alias
-      properties:
-        name:
-          type: string
-          description: Name of the tag group
-          example: Project
-        alias:
-          type: string
-          description: Short alias for quick tagging (max 3 characters, unique per company)
-          maxLength: 3
-          example: '@'
-        dimensionNumber:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: 'Dimension number for SIE file export/import compatibility.
-
-
-            Reserved numbers per SIE file format:
-
-            1 = Cost center, 2 = Cost carrier, 6 = Project, 7 = Employee,
-
-            8 = Customer, 9 = Supplier, 10 = Invoice, 20+ = Freely available.
-
-            '
-          example: 6
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    tagValue:
-      type: object
-      title: tagValue
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique identifier of the tag
-          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
-        name:
-          type: string
-          description: Name of the tag
-          example: Project Alpha
-      example:
-        id: b2c3d4e5-f6a7-8901-bcde-f12345678901
-        name: Project Alpha
-    tagGroupUpdate:
-      type: object
-      title: tagGroupUpdate
-      required:
-      - name
-      - alias
-      properties:
-        name:
-          type: string
-          description: Name of the tag group
-          example: Updated Project
-        alias:
-          type: string
-          description: Short alias for quick tagging (max 3 characters, unique per company)
-          maxLength: 3
-          example: '#'
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     tagGroup:
       type: object
       title: tagGroup
@@ -949,6 +848,38 @@ components:
           name: Project Alpha
         - id: c3d4e5f6-a7b8-9012-cdef-123456789012
           name: Project Beta
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    tagGroupUpdate:
+      type: object
+      title: tagGroupUpdate
+      required:
+      - name
+      - alias
+      properties:
+        name:
+          type: string
+          description: Name of the tag group
+          example: Updated Project
+        alias:
+          type: string
+          description: Short alias for quick tagging (max 3 characters, unique per company)
+          maxLength: 3
+          example: '#'
     tagValueWrite:
       type: object
       title: tagValueWrite
@@ -959,6 +890,75 @@ components:
           type: string
           description: Name of the tag (must be unique within the tag group)
           example: Project Alpha
+    tagValue:
+      type: object
+      title: tagValue
+      properties:
+        id:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the tag
+          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        name:
+          type: string
+          description: Name of the tag
+          example: Project Alpha
+      example:
+        id: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        name: Project Alpha
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    tagGroupWrite:
+      type: object
+      title: tagGroupWrite
+      required:
+      - name
+      - alias
+      properties:
+        name:
+          type: string
+          description: Name of the tag group
+          example: Project
+        alias:
+          type: string
+          description: Short alias for quick tagging (max 3 characters, unique per company)
+          maxLength: 3
+          example: '@'
+        dimensionNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: 'Dimension number for SIE file export/import compatibility.
+
+
+            Reserved numbers per SIE file format:
+
+            1 = Cost center, 2 = Cost carrier, 6 = Project, 7 = Employee,
+
+            8 = Customer, 9 = Supplier, 10 = Invoice, 20+ = Freely available.
+
+            '
+          example: 6
   securitySchemes:
     tokenAuth:
       type: http

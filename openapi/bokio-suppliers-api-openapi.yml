@@ -349,112 +349,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    supplierAddress:
-      type: object
-      title: supplierAddress
-      properties:
-        line1:
-          type: string
-        line2:
-          type:
-          - string
-          - 'null'
-        city:
-          type: string
-        postalCode:
-          type: string
-        country:
-          description: ISO 3166-1 alpha-2 country code. Defaults to SE if not provided.
-          type: string
-          format: country
-          default: SE
-      example:
-        line1: Älvsborgsvägen 10
-        line2: c/o Test
-        city: Gothenburg
-        postalCode: 123 45
-        country: SE
-    internationalPaymentDetails:
-      type: object
-      title: internationalPaymentDetails
-      required:
-      - type
-      - iban
-      - bic
-      properties:
-        type:
-          type: string
-          enum:
-          - internationalPayment
-        iban:
-          type: string
-          description: International Bank Account Number
-        bic:
-          type: string
-          description: Bank Identifier Code (SWIFT code)
-      example:
-        type: internationalPayment
-        iban: SE1234567890123456789012
-        bic: SWEDSESS
-    transferPaymentDetails:
-      type: object
-      title: transferPaymentDetails
-      required:
-      - type
-      - clearingNumber
-      - accountNumber
-      properties:
-        type:
-          type: string
-          enum:
-          - transfer
-        clearingNumber:
-          type: string
-          description: Bank clearing number
-        accountNumber:
-          type: string
-          description: Bank account number
-      example:
-        type: transfer
-        clearingNumber: '1234'
-        accountNumber: '1234567890'
-    paymentDetails:
-      type: object
-      title: paymentDetails
-      required:
-      - type
-      discriminator:
-        propertyName: type
-        mapping:
-          bankgiro: '#/components/schemas/bankgiroPaymentDetails'
-          plusgiro: '#/components/schemas/plusgiroPaymentDetails'
-          transfer: '#/components/schemas/transferPaymentDetails'
-          internationalPayment: '#/components/schemas/internationalPaymentDetails'
-      oneOf:
-      - $ref: '#/components/schemas/bankgiroPaymentDetails'
-      - $ref: '#/components/schemas/plusgiroPaymentDetails'
-      - $ref: '#/components/schemas/transferPaymentDetails'
-      - $ref: '#/components/schemas/internationalPaymentDetails'
     plusgiroPaymentDetails:
       type: object
       title: plusgiroPaymentDetails
@@ -489,22 +383,23 @@ components:
       example:
         type: bankgiro
         bankgiroNumber: 1234-5678
-    pagedResponse:
+    paymentDetails:
       type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
+      title: paymentDetails
+      required:
+      - type
+      discriminator:
+        propertyName: type
+        mapping:
+          bankgiro: '#/components/schemas/bankgiroPaymentDetails'
+          plusgiro: '#/components/schemas/plusgiroPaymentDetails'
+          transfer: '#/components/schemas/transferPaymentDetails'
+          internationalPayment: '#/components/schemas/internationalPaymentDetails'
+      oneOf:
+      - $ref: '#/components/schemas/bankgiroPaymentDetails'
+      - $ref: '#/components/schemas/plusgiroPaymentDetails'
+      - $ref: '#/components/schemas/transferPaymentDetails'
+      - $ref: '#/components/schemas/internationalPaymentDetails'
     supplier:
       type: object
       title: supplier
@@ -561,6 +456,111 @@ components:
         paymentDetails:
           type: bankgiro
           bankgiroNumber: 1234-5678
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    transferPaymentDetails:
+      type: object
+      title: transferPaymentDetails
+      required:
+      - type
+      - clearingNumber
+      - accountNumber
+      properties:
+        type:
+          type: string
+          enum:
+          - transfer
+        clearingNumber:
+          type: string
+          description: Bank clearing number
+        accountNumber:
+          type: string
+          description: Bank account number
+      example:
+        type: transfer
+        clearingNumber: '1234'
+        accountNumber: '1234567890'
+    internationalPaymentDetails:
+      type: object
+      title: internationalPaymentDetails
+      required:
+      - type
+      - iban
+      - bic
+      properties:
+        type:
+          type: string
+          enum:
+          - internationalPayment
+        iban:
+          type: string
+          description: International Bank Account Number
+        bic:
+          type: string
+          description: Bank Identifier Code (SWIFT code)
+      example:
+        type: internationalPayment
+        iban: SE1234567890123456789012
+        bic: SWEDSESS
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    supplierAddress:
+      type: object
+      title: supplierAddress
+      properties:
+        line1:
+          type: string
+        line2:
+          type:
+          - string
+          - 'null'
+        city:
+          type: string
+        postalCode:
+          type: string
+        country:
+          description: ISO 3166-1 alpha-2 country code. Defaults to SE if not provided.
+          type: string
+          format: country
+          default: SE
+      example:
+        line1: Älvsborgsvägen 10
+        line2: c/o Test
+        city: Gothenburg
+        postalCode: 123 45
+        country: SE
   securitySchemes:
     tokenAuth:
       type: http

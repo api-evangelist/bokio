@@ -506,26 +506,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     supplierInvoiceUpdate:
       type: object
       title: SupplierInvoiceUpdate
@@ -554,6 +534,22 @@ components:
         totalAmount:
           type: number
           format: double
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     supplierInvoiceCreate:
       type: object
       title: SupplierInvoiceCreate
@@ -584,6 +580,36 @@ components:
           format: double
         uploadRef:
           $ref: '#/components/schemas/uploadRef'
+    uploadRef:
+      type: object
+      title: UploadRef
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of an existing upload
+      example:
+        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     supplierInvoiceGet:
       type: object
       title: SupplierInvoice
@@ -661,32 +687,6 @@ components:
         uploadRefs:
         - id: 24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90
         - id: 34e1c9a5-7b2d-4f86-8a31-6d2c5f9b7e40
-    uploadRef:
-      type: object
-      title: UploadRef
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Unique identifier of an existing upload
-      example:
-        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
   securitySchemes:
     tokenAuth:
       type: http

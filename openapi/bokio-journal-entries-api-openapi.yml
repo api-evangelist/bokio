@@ -909,6 +909,144 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    journalEntryItem:
+      type: object
+      title: journalEntryItem
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        debit:
+          type: number
+          format: double
+        credit:
+          type: number
+          format: double
+        account:
+          type: integer
+          format: int32
+          example: 1930
+        tags:
+          type: array
+          description: 'Transaction-level tags applied to this specific line item.
+
+            Tags must be applied either at the transaction level (on individual line items) or at the verification level (on the journal entry), but not both on the same journal entry.
+
+            Within a tag group, weights on the same transaction must sum to at most 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/journalEntryTag'
+      example:
+        id: 1
+        credit: 0
+        debit: 200
+        account: 1930
+        tags: []
+    journalEntryTag:
+      type: object
+      title: journalEntryTag
+      description: 'A tag applied to a journal entry or transaction.
+
+        References a tag value (AllowedTagTypeValue) within a tag group (TagType).
+
+        '
+      properties:
+        tagId:
+          type: string
+          format: uuid
+          description: Unique identifier of the tag (value) within the tag group
+          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        tagGroupId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the tag group this tag belongs to
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        tagName:
+          type: string
+          readOnly: true
+          description: Display name of the tag
+          example: Project Alpha
+        tagGroupName:
+          type: string
+          readOnly: true
+          description: Display name of the tag group
+          example: Project
+        weight:
+          type: number
+          format: double
+          description: 'Allocation weight between 0 (exclusive) and 1 (inclusive).
+
+            Controls how costs/revenues are split in reports.
+
+            Within a tag group, weights on the same journal entry or transaction must sum to at most 1.
+
+            '
+          maximum: 1
+          default: 1
+          example: 0.5
+          exclusiveMinimum: 0
+      required:
+      - tagId
+      - weight
+      example:
+        tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        tagName: Project Alpha
+        tagGroupName: Project
+        weight: 1
+    journalEntryTags:
+      type: object
+      title: journalEntryTags
+      description: 'Model for replacing all tags on a journal entry.
+
+        Either set verification-level tags (using `tags`) or transaction-level tags (using `items[*].tags`), not both.
+
+        To remove all tags, send empty arrays for both fields.
+
+        '
+      properties:
+        tags:
+          type: array
+          description: 'Verification-level tags to apply to the entire journal entry.
+
+            Must be empty if `items` contains entries with tags.
+
+            '
+          items:
+            $ref: '#/components/schemas/journalEntryTag'
+        items:
+          type: array
+          description: 'Transaction-level tags to apply to individual line items.
+
+            Must be empty (or not include any items with tags) if `tags` is non-empty.
+
+            '
+          items:
+            type: object
+            title: journalEntryItemTags
+            description: Tags to apply to a specific line item of a journal entry.
+            properties:
+              id:
+                type: integer
+                format: int64
+                description: ID of the journal entry line item (transaction)
+                example: 1
+              tags:
+                type: array
+                description: Tags to apply to this line item.
+                items:
+                  $ref: '#/components/schemas/journalEntryTag'
+            required:
+            - id
+            - tags
+      example:
+        tags:
+        - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+          weight: 1
+        items: []
     journalEntry:
       type: object
       title: journalEntry
@@ -976,6 +1114,22 @@ components:
           account: 2611
           tags: []
         tags: []
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     apiError:
       type: object
       title: apiError
@@ -996,172 +1150,6 @@ components:
                 type: string
               message:
                 type: string
-    journalEntryItem:
-      type: object
-      title: journalEntryItem
-      properties:
-        id:
-          type: integer
-          format: int64
-          readOnly: true
-        debit:
-          type: number
-          format: double
-        credit:
-          type: number
-          format: double
-        account:
-          type: integer
-          format: int32
-          example: 1930
-        tags:
-          type: array
-          description: 'Transaction-level tags applied to this specific line item.
-
-            Tags must be applied either at the transaction level (on individual line items) or at the verification level (on the journal entry), but not both on the same journal entry.
-
-            Within a tag group, weights on the same transaction must sum to at most 1.
-
-            '
-          items:
-            $ref: '#/components/schemas/journalEntryTag'
-      example:
-        id: 1
-        credit: 0
-        debit: 200
-        account: 1930
-        tags: []
-    journalEntryCommentWrite:
-      type: object
-      title: journalEntryCommentWrite
-      description: Request body for creating or updating a comment on a journal entry.
-      properties:
-        content:
-          type: string
-          description: The plain text content of the comment. Rich text, markdown, and HTML are not supported.
-          minLength: 1
-          example: 'Synced from external system. Invoice reference: INV-2024-001.'
-      required:
-      - content
-    journalEntryTag:
-      type: object
-      title: journalEntryTag
-      description: 'A tag applied to a journal entry or transaction.
-
-        References a tag value (AllowedTagTypeValue) within a tag group (TagType).
-
-        '
-      properties:
-        tagId:
-          type: string
-          format: uuid
-          description: Unique identifier of the tag (value) within the tag group
-          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
-        tagGroupId:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique identifier of the tag group this tag belongs to
-          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        tagName:
-          type: string
-          readOnly: true
-          description: Display name of the tag
-          example: Project Alpha
-        tagGroupName:
-          type: string
-          readOnly: true
-          description: Display name of the tag group
-          example: Project
-        weight:
-          type: number
-          format: double
-          description: 'Allocation weight between 0 (exclusive) and 1 (inclusive).
-
-            Controls how costs/revenues are split in reports.
-
-            Within a tag group, weights on the same journal entry or transaction must sum to at most 1.
-
-            '
-          maximum: 1
-          default: 1
-          example: 0.5
-          exclusiveMinimum: 0
-      required:
-      - tagId
-      - weight
-      example:
-        tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
-        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        tagName: Project Alpha
-        tagGroupName: Project
-        weight: 1
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-    journalEntryTags:
-      type: object
-      title: journalEntryTags
-      description: 'Model for replacing all tags on a journal entry.
-
-        Either set verification-level tags (using `tags`) or transaction-level tags (using `items[*].tags`), not both.
-
-        To remove all tags, send empty arrays for both fields.
-
-        '
-      properties:
-        tags:
-          type: array
-          description: 'Verification-level tags to apply to the entire journal entry.
-
-            Must be empty if `items` contains entries with tags.
-
-            '
-          items:
-            $ref: '#/components/schemas/journalEntryTag'
-        items:
-          type: array
-          description: 'Transaction-level tags to apply to individual line items.
-
-            Must be empty (or not include any items with tags) if `tags` is non-empty.
-
-            '
-          items:
-            type: object
-            title: journalEntryItemTags
-            description: Tags to apply to a specific line item of a journal entry.
-            properties:
-              id:
-                type: integer
-                format: int64
-                description: ID of the journal entry line item (transaction)
-                example: 1
-              tags:
-                type: array
-                description: Tags to apply to this line item.
-                items:
-                  $ref: '#/components/schemas/journalEntryTag'
-            required:
-            - id
-            - tags
-      example:
-        tags:
-        - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
-          weight: 1
-        items: []
     journalEntryComment:
       type: object
       title: journalEntryComment
@@ -1195,6 +1183,18 @@ components:
         authorName: My Integration App
         createdDatetime: 2024-10-15 08:30:00+00:00
         updatedDatetime: 2024-10-15 08:30:00+00:00
+    journalEntryCommentWrite:
+      type: object
+      title: journalEntryCommentWrite
+      description: Request body for creating or updating a comment on a journal entry.
+      properties:
+        content:
+          type: string
+          description: The plain text content of the comment. Rich text, markdown, and HTML are not supported.
+          minLength: 1
+          example: 'Synced from external system. Invoice reference: INV-2024-001.'
+      required:
+      - content
   securitySchemes:
     tokenAuth:
       type: http

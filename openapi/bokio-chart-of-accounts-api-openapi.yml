@@ -141,23 +141,6 @@ paths:
         - chart-of-accounts:read
 components:
   schemas:
-    accountWithDetails:
-      allOf:
-      - $ref: '#/components/schemas/account'
-      - type: object
-        title: accountWithDetails
-        properties:
-          accountBalance:
-            type:
-            - number
-            - 'null'
-            format: double
-            description: The current balance of the account
-        example:
-          account: 1930
-          name: Företagskonto / Affärskonto
-          accountType: basePlanAccount
-          accountBalance: 15000.75
     apiError:
       type: object
       title: apiError
@@ -178,6 +161,23 @@ components:
                 type: string
               message:
                 type: string
+    accountWithDetails:
+      allOf:
+      - $ref: '#/components/schemas/account'
+      - type: object
+        title: accountWithDetails
+        properties:
+          accountBalance:
+            type:
+            - number
+            - 'null'
+            format: double
+            description: The current balance of the account
+        example:
+          account: 1930
+          name: Företagskonto / Affärskonto
+          accountType: basePlanAccount
+          accountBalance: 15000.75
     account:
       type: object
       title: account

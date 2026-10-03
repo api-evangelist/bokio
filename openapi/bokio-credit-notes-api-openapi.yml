@@ -514,129 +514,9 @@ paths:
         - credit-notes:read
 components:
   schemas:
-    lineItemTaxReduction:
-      type:
-      - object
-      - 'null'
-      title: lineItemTaxReduction
-      description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
-
-        '
-      required:
-      - taxReductionType
-      - jobType
-      properties:
-        taxReductionType:
-          type: string
-          enum:
-          - rot
-          - rut
-          description: The tax reduction type for this line item. Must match the invoice-level taxReduction type.
-        jobType:
-          type: string
-          enum:
-          - rotConstruction
-          - rotElectricity
-          - rotGlassPlate
-          - rotSoilWork
-          - rotSweeping
-          - rotPainting
-          - rotPlumbing
-          - rutChildServices
-          - rutDataITServices
-          - rutRemovalServices
-          - rutClothingCare
-          - rutPersonalHelpCare
-          - rutRepair
-          - rutSnow
-          - rutCleaning
-          - rutGardening
-          - rutWaterWashingOfTextiles
-          - rutFurnishing
-          - rutTransportOfHouseholdGoods
-          - rutHousingSupervision
-          description: 'The job type categorizing the work. The prefix must match the tax reduction type:
-
-            - ROT types: rotConstruction, rotElectricity, rotGlassPlate, rotSoilWork, rotSweeping, rotPainting, rotPlumbing
-
-            - RUT types: rutChildServices, rutDataITServices, rutRemovalServices, rutClothingCare, rutPersonalHelpCare, rutRepair, rutSnow, rutCleaning, rutGardening, rutWaterWashingOfTextiles, rutFurnishing, rutTransportOfHouseholdGoods, rutHousingSupervision
-
-            '
-      example:
-        taxReductionType: rot
-        jobType: rotConstruction
-    apiError:
+    address:
       type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    descriptionOnlyInvoiceItem:
-      type: object
-      title: descriptionOnlyItem
-      required:
-      - description
-      - itemType
-      properties:
-        id:
-          type:
-          - integer
-          - 'null'
-          format: int64
-          description: Should not be set for new items
-        itemRef:
-          type:
-          - object
-          - 'null'
-          description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
-
-            '
-          properties:
-            id:
-              type: string
-              format: uuid
-              description: Reference to existing descriptionOnlyItem id
-              example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
-            description:
-              type:
-              - string
-              - 'null'
-              readOnly: true
-        description:
-          type: string
-        itemType:
-          type: string
-          enum:
-          - descriptionOnlyItem
-      example:
-        id: 2
-        itemRef:
-          id: e964435e-50ef-4524-a439-05ff87794952
-          description: Custom description line
-        description: Custom description line
-        itemType: descriptionOnlyItem
-    addressWithCountrySubdivision:
-      type: object
-      title: addressWithCountrySubdivision
-      required:
-      - line1
-      - city
-      - postalCode
-      - country
+      title: address
       properties:
         line1:
           type: string
@@ -652,18 +532,12 @@ components:
           description: ISO 3166-1 alpha-2 country code
           type: string
           format: country
-        countrySubdivision:
-          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
-          type:
-          - string
-          - 'null'
       example:
-        line1: 10 Downing Street
-        line2: null
-        city: London
-        postalCode: SW1A 2AA
-        country: GB
-        countrySubdivision: ENG
+        line1: Delivery Street 15
+        line2: Floor 2
+        city: Stockholm
+        postalCode: 123 45
+        country: SE
     creditNote:
       type: object
       required:
@@ -901,9 +775,14 @@ components:
           project: Website Redesign
           department: IT
           externalId: EXT-INV-2024-001
-    address:
+    addressWithCountrySubdivision:
       type: object
-      title: address
+      title: addressWithCountrySubdivision
+      required:
+      - line1
+      - city
+      - postalCode
+      - country
       properties:
         line1:
           type: string
@@ -919,12 +798,18 @@ components:
           description: ISO 3166-1 alpha-2 country code
           type: string
           format: country
+        countrySubdivision:
+          description: ISO 3166-2 subdivision code (e.g. ENG, SCT, WLS, NIR for GB). Currently required for GB (United kingdom) country.
+          type:
+          - string
+          - 'null'
       example:
-        line1: Delivery Street 15
-        line2: Floor 2
-        city: Stockholm
-        postalCode: 123 45
-        country: SE
+        line1: 10 Downing Street
+        line2: null
+        city: London
+        postalCode: SW1A 2AA
+        country: GB
+        countrySubdivision: ENG
     pagedResponse:
       type: object
       title: pagedResponse
@@ -947,6 +832,70 @@ components:
       oneOf:
       - $ref: '#/components/schemas/salesInvoiceItem'
       - $ref: '#/components/schemas/descriptionOnlyInvoiceItem'
+    descriptionOnlyInvoiceItem:
+      type: object
+      title: descriptionOnlyItem
+      required:
+      - description
+      - itemType
+      properties:
+        id:
+          type:
+          - integer
+          - 'null'
+          format: int64
+          description: Should not be set for new items
+        itemRef:
+          type:
+          - object
+          - 'null'
+          description: 'Identifier of an existing descriptionOnlyItem to use as a template. The field itemType is required.
+
+            '
+          properties:
+            id:
+              type: string
+              format: uuid
+              description: Reference to existing descriptionOnlyItem id
+              example: 55c899c5-82b2-47fa-9c51-e35fc9b26443
+            description:
+              type:
+              - string
+              - 'null'
+              readOnly: true
+        description:
+          type: string
+        itemType:
+          type: string
+          enum:
+          - descriptionOnlyItem
+      example:
+        id: 2
+        itemRef:
+          id: e964435e-50ef-4524-a439-05ff87794952
+          description: Custom description line
+        description: Custom description line
+        itemType: descriptionOnlyItem
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     salesInvoiceItem:
       type: object
       title: salesItem
@@ -1060,6 +1009,57 @@ components:
         taxReduction:
           taxReductionType: rot
           jobType: rotConstruction
+    lineItemTaxReduction:
+      type:
+      - object
+      - 'null'
+      title: lineItemTaxReduction
+      description: 'Tax reduction details for a line item. Only applicable to line items with productType `services` and unitType `hour` or `unspecified`.
+
+        '
+      required:
+      - taxReductionType
+      - jobType
+      properties:
+        taxReductionType:
+          type: string
+          enum:
+          - rot
+          - rut
+          description: The tax reduction type for this line item. Must match the invoice-level taxReduction type.
+        jobType:
+          type: string
+          enum:
+          - rotConstruction
+          - rotElectricity
+          - rotGlassPlate
+          - rotSoilWork
+          - rotSweeping
+          - rotPainting
+          - rotPlumbing
+          - rutChildServices
+          - rutDataITServices
+          - rutRemovalServices
+          - rutClothingCare
+          - rutPersonalHelpCare
+          - rutRepair
+          - rutSnow
+          - rutCleaning
+          - rutGardening
+          - rutWaterWashingOfTextiles
+          - rutFurnishing
+          - rutTransportOfHouseholdGoods
+          - rutHousingSupervision
+          description: 'The job type categorizing the work. The prefix must match the tax reduction type:
+
+            - ROT types: rotConstruction, rotElectricity, rotGlassPlate, rotSoilWork, rotSweeping, rotPainting, rotPlumbing
+
+            - RUT types: rutChildServices, rutDataITServices, rutRemovalServices, rutClothingCare, rutPersonalHelpCare, rutRepair, rutSnow, rutCleaning, rutGardening, rutWaterWashingOfTextiles, rutFurnishing, rutTransportOfHouseholdGoods, rutHousingSupervision
+
+            '
+      example:
+        taxReductionType: rot
+        jobType: rotConstruction
   securitySchemes:
     tokenAuth:
       type: http
