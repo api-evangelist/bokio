@@ -798,6 +798,74 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    tagGroupWrite:
+      type: object
+      title: tagGroupWrite
+      required:
+      - name
+      - alias
+      properties:
+        name:
+          type: string
+          description: Name of the tag group
+          example: Project
+        alias:
+          type: string
+          description: Short alias for quick tagging (max 3 characters, unique per company)
+          maxLength: 3
+          example: '@'
+        dimensionNumber:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          description: 'Dimension number for SIE file export/import compatibility.
+
+
+            Reserved numbers per SIE file format:
+
+            1 = Cost center, 2 = Cost carrier, 6 = Project, 7 = Employee,
+
+            8 = Customer, 9 = Supplier, 10 = Invoice, 20+ = Freely available.
+
+            '
+          example: 6
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     tagGroup:
       type: object
       title: tagGroup
@@ -848,22 +916,16 @@ components:
           name: Project Alpha
         - id: c3d4e5f6-a7b8-9012-cdef-123456789012
           name: Project Beta
-    pagedResponse:
+    tagValueWrite:
       type: object
-      title: pagedResponse
+      title: tagValueWrite
+      required:
+      - name
       properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
+        name:
+          type: string
+          description: Name of the tag (must be unique within the tag group)
+          example: Project Alpha
     tagGroupUpdate:
       type: object
       title: tagGroupUpdate
@@ -880,16 +942,6 @@ components:
           description: Short alias for quick tagging (max 3 characters, unique per company)
           maxLength: 3
           example: '#'
-    tagValueWrite:
-      type: object
-      title: tagValueWrite
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Name of the tag (must be unique within the tag group)
-          example: Project Alpha
     tagValue:
       type: object
       title: tagValue
@@ -907,58 +959,6 @@ components:
       example:
         id: b2c3d4e5-f6a7-8901-bcde-f12345678901
         name: Project Alpha
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    tagGroupWrite:
-      type: object
-      title: tagGroupWrite
-      required:
-      - name
-      - alias
-      properties:
-        name:
-          type: string
-          description: Name of the tag group
-          example: Project
-        alias:
-          type: string
-          description: Short alias for quick tagging (max 3 characters, unique per company)
-          maxLength: 3
-          example: '@'
-        dimensionNumber:
-          type:
-          - integer
-          - 'null'
-          format: int32
-          description: 'Dimension number for SIE file export/import compatibility.
-
-
-            Reserved numbers per SIE file format:
-
-            1 = Cost center, 2 = Cost carrier, 6 = Project, 7 = Employee,
-
-            8 = Customer, 9 = Supplier, 10 = Invoice, 20+ = Freely available.
-
-            '
-          example: 6
   securitySchemes:
     tokenAuth:
       type: http

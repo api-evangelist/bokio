@@ -349,23 +349,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    plusgiroPaymentDetails:
-      type: object
-      title: plusgiroPaymentDetails
-      required:
-      - type
-      - plusgiroNumber
-      properties:
-        type:
-          type: string
-          enum:
-          - plusgiro
-        plusgiroNumber:
-          type: string
-          description: The plusgiro number for the supplier
-      example:
-        type: plusgiro
-        plusgiroNumber: 12345-6
     bankgiroPaymentDetails:
       type: object
       title: bankgiroPaymentDetails
@@ -383,23 +366,6 @@ components:
       example:
         type: bankgiro
         bankgiroNumber: 1234-5678
-    paymentDetails:
-      type: object
-      title: paymentDetails
-      required:
-      - type
-      discriminator:
-        propertyName: type
-        mapping:
-          bankgiro: '#/components/schemas/bankgiroPaymentDetails'
-          plusgiro: '#/components/schemas/plusgiroPaymentDetails'
-          transfer: '#/components/schemas/transferPaymentDetails'
-          internationalPayment: '#/components/schemas/internationalPaymentDetails'
-      oneOf:
-      - $ref: '#/components/schemas/bankgiroPaymentDetails'
-      - $ref: '#/components/schemas/plusgiroPaymentDetails'
-      - $ref: '#/components/schemas/transferPaymentDetails'
-      - $ref: '#/components/schemas/internationalPaymentDetails'
     supplier:
       type: object
       title: supplier
@@ -472,6 +438,60 @@ components:
           type: integer
           format: int32
           example: 1
+    paymentDetails:
+      type: object
+      title: paymentDetails
+      required:
+      - type
+      discriminator:
+        propertyName: type
+        mapping:
+          bankgiro: '#/components/schemas/bankgiroPaymentDetails'
+          plusgiro: '#/components/schemas/plusgiroPaymentDetails'
+          transfer: '#/components/schemas/transferPaymentDetails'
+          internationalPayment: '#/components/schemas/internationalPaymentDetails'
+      oneOf:
+      - $ref: '#/components/schemas/bankgiroPaymentDetails'
+      - $ref: '#/components/schemas/plusgiroPaymentDetails'
+      - $ref: '#/components/schemas/transferPaymentDetails'
+      - $ref: '#/components/schemas/internationalPaymentDetails'
+    plusgiroPaymentDetails:
+      type: object
+      title: plusgiroPaymentDetails
+      required:
+      - type
+      - plusgiroNumber
+      properties:
+        type:
+          type: string
+          enum:
+          - plusgiro
+        plusgiroNumber:
+          type: string
+          description: The plusgiro number for the supplier
+      example:
+        type: plusgiro
+        plusgiroNumber: 12345-6
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     transferPaymentDetails:
       type: object
       title: transferPaymentDetails
@@ -494,48 +514,6 @@ components:
         type: transfer
         clearingNumber: '1234'
         accountNumber: '1234567890'
-    internationalPaymentDetails:
-      type: object
-      title: internationalPaymentDetails
-      required:
-      - type
-      - iban
-      - bic
-      properties:
-        type:
-          type: string
-          enum:
-          - internationalPayment
-        iban:
-          type: string
-          description: International Bank Account Number
-        bic:
-          type: string
-          description: Bank Identifier Code (SWIFT code)
-      example:
-        type: internationalPayment
-        iban: SE1234567890123456789012
-        bic: SWEDSESS
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
     supplierAddress:
       type: object
       title: supplierAddress
@@ -561,6 +539,28 @@ components:
         city: Gothenburg
         postalCode: 123 45
         country: SE
+    internationalPaymentDetails:
+      type: object
+      title: internationalPaymentDetails
+      required:
+      - type
+      - iban
+      - bic
+      properties:
+        type:
+          type: string
+          enum:
+          - internationalPayment
+        iban:
+          type: string
+          description: International Bank Account Number
+        bic:
+          type: string
+          description: Bank Identifier Code (SWIFT code)
+      example:
+        type: internationalPayment
+        iban: SE1234567890123456789012
+        bic: SWEDSESS
   securitySchemes:
     tokenAuth:
       type: http

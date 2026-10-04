@@ -432,6 +432,22 @@ components:
       - amount
       - paymentDate
       - recipientRef
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     transferRecipient:
       type: object
       properties:
@@ -456,34 +472,6 @@ components:
       - recipientName
       - clearingNumber
       - accountNumber
-    bulk-create-bank-payments-request:
-      type: object
-      properties:
-        payments:
-          type: array
-          minItems: 1
-          maxItems: 100
-          description: List of bank payments to create (1-100 items)
-          items:
-            $ref: '#/components/schemas/bank-payment'
-      required:
-      - payments
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     apiError:
       type: object
       title: apiError
@@ -527,6 +515,18 @@ components:
       - kind
       - recipientName
       - bankgiroNumber
+    bulk-create-bank-payments-request:
+      type: object
+      properties:
+        payments:
+          type: array
+          minItems: 1
+          maxItems: 100
+          description: List of bank payments to create (1-100 items)
+          items:
+            $ref: '#/components/schemas/bank-payment'
+      required:
+      - payments
   securitySchemes:
     tokenAuth:
       type: http

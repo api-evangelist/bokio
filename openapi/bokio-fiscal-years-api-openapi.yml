@@ -165,6 +165,22 @@ components:
                 type: string
               message:
                 type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     fiscalYear:
       title: Fiscal Year
       type: object
@@ -204,22 +220,6 @@ components:
         endDate: 2023-12-31
         accountingMethod: accrual
         status: open
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
   securitySchemes:
     tokenAuth:
       type: http

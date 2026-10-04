@@ -506,34 +506,6 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    supplierInvoiceUpdate:
-      type: object
-      title: SupplierInvoiceUpdate
-      required:
-      - invoiceDate
-      - dueDate
-      - totalAmount
-      - supplierRef
-      properties:
-        supplierRef:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: string
-              format: uuid
-        invoiceNumber:
-          type: string
-        invoiceDate:
-          type: string
-          format: date
-        dueDate:
-          type: string
-          format: date
-        totalAmount:
-          type: number
-          format: double
     pagedResponse:
       type: object
       title: pagedResponse
@@ -550,36 +522,6 @@ components:
           type: integer
           format: int32
           example: 1
-    supplierInvoiceCreate:
-      type: object
-      title: SupplierInvoiceCreate
-      required:
-      - invoiceDate
-      - dueDate
-      - totalAmount
-      - supplierRef
-      properties:
-        supplierRef:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: string
-              format: uuid
-        invoiceNumber:
-          type: string
-        invoiceDate:
-          type: string
-          format: date
-        dueDate:
-          type: string
-          format: date
-        totalAmount:
-          type: number
-          format: double
-        uploadRef:
-          $ref: '#/components/schemas/uploadRef'
     uploadRef:
       type: object
       title: UploadRef
@@ -610,6 +552,34 @@ components:
                 type: string
               message:
                 type: string
+    supplierInvoiceUpdate:
+      type: object
+      title: SupplierInvoiceUpdate
+      required:
+      - invoiceDate
+      - dueDate
+      - totalAmount
+      - supplierRef
+      properties:
+        supplierRef:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: string
+              format: uuid
+        invoiceNumber:
+          type: string
+        invoiceDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        totalAmount:
+          type: number
+          format: double
     supplierInvoiceGet:
       type: object
       title: SupplierInvoice
@@ -687,6 +657,36 @@ components:
         uploadRefs:
         - id: 24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90
         - id: 34e1c9a5-7b2d-4f86-8a31-6d2c5f9b7e40
+    supplierInvoiceCreate:
+      type: object
+      title: SupplierInvoiceCreate
+      required:
+      - invoiceDate
+      - dueDate
+      - totalAmount
+      - supplierRef
+      properties:
+        supplierRef:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: string
+              format: uuid
+        invoiceNumber:
+          type: string
+        invoiceDate:
+          type: string
+          format: date
+        dueDate:
+          type: string
+          format: date
+        totalAmount:
+          type: number
+          format: double
+        uploadRef:
+          $ref: '#/components/schemas/uploadRef'
   securitySchemes:
     tokenAuth:
       type: http

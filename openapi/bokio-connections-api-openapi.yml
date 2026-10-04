@@ -132,6 +132,39 @@ paths:
       - access_token: []
 components:
   schemas:
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
+    connection:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        tenantId:
+          type: string
+          format: uuid
+        tenantName:
+          type: string
+          description: The name of the tenant (company)
+        type:
+          type: string
+          enum:
+          - company
+          description: The type of connection (e.g., company)
     apiError:
       type: object
       title: apiError
@@ -152,39 +185,6 @@ components:
                 type: string
               message:
                 type: string
-    connection:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        tenantId:
-          type: string
-          format: uuid
-        tenantName:
-          type: string
-          description: The name of the tenant (company)
-        type:
-          type: string
-          enum:
-          - company
-          description: The type of connection (e.g., company)
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
   securitySchemes:
     tokenAuth:
       type: http
