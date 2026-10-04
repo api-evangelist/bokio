@@ -266,6 +266,9 @@ apis:
   - type: OpenAPI
     url: openapi/bokio-uploads-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/bokio-capability-edges.yml
+  name: Bokio Business Capability Map
 - type: Overlay
   url: overlays/bokio-company-api-overlay.yaml
 - type: PostmanWorkspace
