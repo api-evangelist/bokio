@@ -909,6 +909,94 @@ paths:
       - tokenAuth: []
 components:
   schemas:
+    journalEntryTag:
+      type: object
+      title: journalEntryTag
+      description: 'A tag applied to a journal entry or transaction.
+
+        References a tag value (AllowedTagTypeValue) within a tag group (TagType).
+
+        '
+      properties:
+        tagId:
+          type: string
+          format: uuid
+          description: Unique identifier of the tag (value) within the tag group
+          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        tagGroupId:
+          type: string
+          format: uuid
+          readOnly: true
+          description: Unique identifier of the tag group this tag belongs to
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        tagName:
+          type: string
+          readOnly: true
+          description: Display name of the tag
+          example: Project Alpha
+        tagGroupName:
+          type: string
+          readOnly: true
+          description: Display name of the tag group
+          example: Project
+        weight:
+          type: number
+          format: double
+          description: 'Allocation weight between 0 (exclusive) and 1 (inclusive).
+
+            Controls how costs/revenues are split in reports.
+
+            Within a tag group, weights on the same journal entry or transaction must sum to at most 1.
+
+            '
+          maximum: 1
+          default: 1
+          example: 0.5
+          exclusiveMinimum: 0
+      required:
+      - tagId
+      - weight
+      example:
+        tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
+        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        tagName: Project Alpha
+        tagGroupName: Project
+        weight: 1
+    journalEntryItem:
+      type: object
+      title: journalEntryItem
+      properties:
+        id:
+          type: integer
+          format: int64
+          readOnly: true
+        debit:
+          type: number
+          format: double
+        credit:
+          type: number
+          format: double
+        account:
+          type: integer
+          format: int32
+          example: 1930
+        tags:
+          type: array
+          description: 'Transaction-level tags applied to this specific line item.
+
+            Tags must be applied either at the transaction level (on individual line items) or at the verification level (on the journal entry), but not both on the same journal entry.
+
+            Within a tag group, weights on the same transaction must sum to at most 1.
+
+            '
+          items:
+            $ref: '#/components/schemas/journalEntryTag'
+      example:
+        id: 1
+        credit: 0
+        debit: 200
+        account: 1930
+        tags: []
     journalEntry:
       type: object
       title: journalEntry
@@ -976,110 +1064,6 @@ components:
           account: 2611
           tags: []
         tags: []
-    journalEntryItem:
-      type: object
-      title: journalEntryItem
-      properties:
-        id:
-          type: integer
-          format: int64
-          readOnly: true
-        debit:
-          type: number
-          format: double
-        credit:
-          type: number
-          format: double
-        account:
-          type: integer
-          format: int32
-          example: 1930
-        tags:
-          type: array
-          description: 'Transaction-level tags applied to this specific line item.
-
-            Tags must be applied either at the transaction level (on individual line items) or at the verification level (on the journal entry), but not both on the same journal entry.
-
-            Within a tag group, weights on the same transaction must sum to at most 1.
-
-            '
-          items:
-            $ref: '#/components/schemas/journalEntryTag'
-      example:
-        id: 1
-        credit: 0
-        debit: 200
-        account: 1930
-        tags: []
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
-    journalEntryComment:
-      type: object
-      title: journalEntryComment
-      description: A comment on a journal entry.
-      properties:
-        id:
-          type: string
-          format: uuid
-          readOnly: true
-          description: Unique identifier of the comment
-        content:
-          type: string
-          description: The plain text content of the comment
-        authorName:
-          type: string
-          readOnly: true
-          description: Display name of the comment author (integration name or user name)
-        createdDatetime:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the comment was created (UTC)
-        updatedDatetime:
-          type: string
-          format: date-time
-          readOnly: true
-          description: When the comment was last updated (UTC)
-      example:
-        id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
-        content: 'Synced from external system. Invoice reference: INV-2024-001.'
-        authorName: My Integration App
-        createdDatetime: 2024-10-15 08:30:00+00:00
-        updatedDatetime: 2024-10-15 08:30:00+00:00
     journalEntryTags:
       type: object
       title: journalEntryTags
@@ -1130,59 +1114,75 @@ components:
         - tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
           weight: 1
         items: []
-    journalEntryTag:
+    journalEntryComment:
       type: object
-      title: journalEntryTag
-      description: 'A tag applied to a journal entry or transaction.
-
-        References a tag value (AllowedTagTypeValue) within a tag group (TagType).
-
-        '
+      title: journalEntryComment
+      description: A comment on a journal entry.
       properties:
-        tagId:
-          type: string
-          format: uuid
-          description: Unique identifier of the tag (value) within the tag group
-          example: b2c3d4e5-f6a7-8901-bcde-f12345678901
-        tagGroupId:
+        id:
           type: string
           format: uuid
           readOnly: true
-          description: Unique identifier of the tag group this tag belongs to
-          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        tagName:
+          description: Unique identifier of the comment
+        content:
+          type: string
+          description: The plain text content of the comment
+        authorName:
           type: string
           readOnly: true
-          description: Display name of the tag
-          example: Project Alpha
-        tagGroupName:
+          description: Display name of the comment author (integration name or user name)
+        createdDatetime:
           type: string
+          format: date-time
           readOnly: true
-          description: Display name of the tag group
-          example: Project
-        weight:
-          type: number
-          format: double
-          description: 'Allocation weight between 0 (exclusive) and 1 (inclusive).
-
-            Controls how costs/revenues are split in reports.
-
-            Within a tag group, weights on the same journal entry or transaction must sum to at most 1.
-
-            '
-          maximum: 1
-          default: 1
-          example: 0.5
-          exclusiveMinimum: 0
-      required:
-      - tagId
-      - weight
+          description: When the comment was created (UTC)
+        updatedDatetime:
+          type: string
+          format: date-time
+          readOnly: true
+          description: When the comment was last updated (UTC)
       example:
-        tagId: b2c3d4e5-f6a7-8901-bcde-f12345678901
-        tagGroupId: a1b2c3d4-e5f6-7890-abcd-ef1234567890
-        tagName: Project Alpha
-        tagGroupName: Project
-        weight: 1
+        id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        content: 'Synced from external system. Invoice reference: INV-2024-001.'
+        authorName: My Integration App
+        createdDatetime: 2024-10-15 08:30:00+00:00
+        updatedDatetime: 2024-10-15 08:30:00+00:00
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
     journalEntryCommentWrite:
       type: object
       title: journalEntryCommentWrite

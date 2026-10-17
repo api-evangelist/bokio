@@ -506,52 +506,36 @@ paths:
       - tokenAuth: []
 components:
   schemas:
-    pagedResponse:
+    supplierInvoiceCreate:
       type: object
-      title: pagedResponse
+      title: SupplierInvoiceCreate
+      required:
+      - invoiceDate
+      - dueDate
+      - totalAmount
+      - supplierRef
       properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
-    uploadRef:
-      type: object
-      title: UploadRef
-      properties:
-        id:
+        supplierRef:
+          type: object
+          required:
+          - id
+          properties:
+            id:
+              type: string
+              format: uuid
+        invoiceNumber:
           type: string
-          format: uuid
-          description: Unique identifier of an existing upload
-      example:
-        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
+        invoiceDate:
           type: string
-        message:
+          format: date
+        dueDate:
           type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
+          format: date
+        totalAmount:
+          type: number
+          format: double
+        uploadRef:
+          $ref: '#/components/schemas/uploadRef'
     supplierInvoiceUpdate:
       type: object
       title: SupplierInvoiceUpdate
@@ -657,36 +641,52 @@ components:
         uploadRefs:
         - id: 24f3b7c1-8d6a-4e2f-9b31-5d7c2a8e4f90
         - id: 34e1c9a5-7b2d-4f86-8a31-6d2c5f9b7e40
-    supplierInvoiceCreate:
+    apiError:
       type: object
-      title: SupplierInvoiceCreate
-      required:
-      - invoiceDate
-      - dueDate
-      - totalAmount
-      - supplierRef
+      title: apiError
       properties:
-        supplierRef:
-          type: object
-          required:
-          - id
-          properties:
-            id:
-              type: string
-              format: uuid
-        invoiceNumber:
+        code:
           type: string
-        invoiceDate:
+        message:
           type: string
-          format: date
-        dueDate:
+        bokioErrorId:
           type: string
-          format: date
-        totalAmount:
-          type: number
-          format: double
-        uploadRef:
-          $ref: '#/components/schemas/uploadRef'
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
+    uploadRef:
+      type: object
+      title: UploadRef
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Unique identifier of an existing upload
+      example:
+        id: 240a4af0-edfd-47b1-b4ab-f30450eaac19
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
   securitySchemes:
     tokenAuth:
       type: http

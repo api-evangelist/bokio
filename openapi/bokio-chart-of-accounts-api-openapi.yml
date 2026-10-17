@@ -158,6 +158,26 @@ components:
           name: Företagskonto / Affärskonto
           accountType: basePlanAccount
           accountBalance: 15000.75
+    apiError:
+      type: object
+      title: apiError
+      properties:
+        code:
+          type: string
+        message:
+          type: string
+        bokioErrorId:
+          type: string
+          format: uuid
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field:
+                type: string
+              message:
+                type: string
     account:
       type: object
       title: account
@@ -179,26 +199,6 @@ components:
         account: 2610
         name: Företagskonto / Affärskonto
         accountType: basePlanAccount
-    apiError:
-      type: object
-      title: apiError
-      properties:
-        code:
-          type: string
-        message:
-          type: string
-        bokioErrorId:
-          type: string
-          format: uuid
-        errors:
-          type: array
-          items:
-            type: object
-            properties:
-              field:
-                type: string
-              message:
-                type: string
   securitySchemes:
     tokenAuth:
       type: http

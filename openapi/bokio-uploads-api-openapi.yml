@@ -327,22 +327,6 @@ components:
         description: example.png
         contentType: img/png
         journalEntryId: 835ba700-b306-4bd9-8447-59207b6b0002
-    pagedResponse:
-      type: object
-      title: pagedResponse
-      properties:
-        totalItems:
-          type: integer
-          format: int32
-          example: 1
-        totalPages:
-          type: integer
-          format: int32
-          example: 1
-        currentPage:
-          type: integer
-          format: int32
-          example: 1
     apiError:
       type: object
       title: apiError
@@ -363,6 +347,22 @@ components:
                 type: string
               message:
                 type: string
+    pagedResponse:
+      type: object
+      title: pagedResponse
+      properties:
+        totalItems:
+          type: integer
+          format: int32
+          example: 1
+        totalPages:
+          type: integer
+          format: int32
+          example: 1
+        currentPage:
+          type: integer
+          format: int32
+          example: 1
   securitySchemes:
     tokenAuth:
       type: http
