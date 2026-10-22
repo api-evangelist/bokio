@@ -28,3 +28,75 @@
     builder: unknown (not in the directory record)
   status: not-a-workflow
   arazzo: null
+- slug: bokio-eba-payment-institutions-register-psd2-emd2
+  label: EBA Payment Institutions Register (PSD2 / EMD2)
+  partner_name: EBA Payment Institutions Register (PSD2 / EMD2)
+  category: EU/EEA PSD2 payment / e-money authorisation
+  type: register
+  channel: regulator-register
+  evidence: https://euclid.eba.europa.eu/register/pir/search
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: EBA Payment Institutions Register (PSD2 / EMD2)
+    spec_file: null
+    standard: null
+    role: authorised-payment-or-e-money-institution
+    registrations:
+    - registered_name: Bokio AB (Red Flag AB)
+      licences:
+      - payment institution
+      register_country: SE
+      register_id: SE_FINA!45606
+      matched_domain: null
+      matched_by: register-name
+      authorised: '2019-07-05'
+      competent_authority: SE_FINA
+      national_ref: '45606'
+      home_services:
+      - PS_03A
+      - PS_03B
+      - PS_03C
+      - PS_060
+      - PS_070
+      - PS_080
+      register_name_note: register-name 'bokio' = bokio; wikidata P856 bokio.se agrees or unheld
+    matched_by: register-name
+    signal_note: 'participation only: a regulator authorisation / registration and its PSD2 passports (host countries);
+      no API conformance is published by this register'
+    detected_by: sweep-eu-psd2-payment-institutions.py
+    detected: '2026-10-21'
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  status: not-a-workflow
+  arazzo: null
+- slug: bokio-finansinspektionen-company-register-sweden
+  label: Finansinspektionen company register (Sweden)
+  partner_name: Finansinspektionen company register (Sweden)
+  category: Swedish licensed bank / credit / payment / e-money institution
+  type: register
+  channel: regulator-register
+  evidence: https://www.fi.se/en/our-registers/company-register/
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: Finansinspektionen company register (Sweden)
+    spec_file: null
+    standard: null
+    role: licensed-institution
+    registrations:
+    - registered_name: Bokio AB
+      licences:
+      - Payment institution
+      register_country: SE
+      matched_domain: bokio.se
+      matched_by: domain
+      register_id: 559053-8426
+      identity: wikidata Q137969392 'Bokio' P856 https://www.bokio.se/
+    signal_note: 'participation only: a regulator licence listing; no API conformance is published by this register'
+    detected_by: sweep-nordic-financial-registers.py
+    detected: '2026-10-21'
+    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
+  status: not-a-workflow
+  arazzo: null
