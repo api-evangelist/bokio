@@ -68,35 +68,6 @@ edges:
       P856 not contradicting (Kin 2026-10-20 decision 2)
   detected_by: sweep-eu-psd2-payment-institutions.py
   first_seen: '2026-10-21'
-- partner_name: Finansinspektionen company register (Sweden)
-  partner: null
-  partner_match: register
-  type: register
-  channel: regulator-register
-  relationship: standard-participant
-  direction: partner-built
-  evidence: https://www.fi.se/en/our-registers/company-register/
-  category: Swedish licensed bank / credit / payment / e-money institution
-  contract_reference:
-    register: Finansinspektionen company register (Sweden)
-    spec_file: null
-    standard: null
-    role: licensed-institution
-    registrations:
-    - registered_name: Bokio AB
-      licences:
-      - Payment institution
-      register_country: SE
-      matched_domain: bokio.se
-      matched_by: domain
-      register_id: 559053-8426
-      identity: wikidata Q137969392 'Bokio' P856 https://www.bokio.se/
-    signal_note: 'participation only: a regulator licence listing; no API conformance is published by this register'
-    detected_by: sweep-nordic-financial-registers.py
-    detected: '2026-10-21'
-    identity_source: wikidata P856 (labelled provenance step; Kin 2026-10-15 decision 1)
-  detected_by: sweep-nordic-financial-registers.py
-  first_seen: '2026-10-21'
 method: searched
 checked:
 - https://zapier.com/api/v4/apps/
